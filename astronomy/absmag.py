@@ -1,9 +1,10 @@
 
 #%%imports
-import astroLuSt.physics.photometry as alphphp
+import astroLuSt.physics.photometry as alphph
 import astropy as ap
+import csv
 import numpy as np
-from typings import Union, Literal
+from typing import Union, Literal
 
 #%%definitions
 @np.vectorize
