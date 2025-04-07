@@ -16,3 +16,6 @@ In case you want use the repo inside your own git repo, it is recommended to cre
 
 This allows you to keep your commits separate from this repo.
 You can, of course, `git pull` in the submodule to get the latest changes.
+To do so, navigate inside the directory of where you cloned this submodule to and run `git pull` from there.
+
+If you find this repo useful in your work, I would highly appreciate a brief acknowledgement.

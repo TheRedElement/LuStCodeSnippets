@@ -2,17 +2,15 @@
 #%%imports
 import polars as pl
 import matplotlib.pyplot as plt
-from matplotlib.figure import Figure
 import numpy as np
-from typing import Tuple
 
 #%%definitions
 def plot_gantt(
     df:pl.DataFrame,
-    cmap:str,
-    ax:plt.Axes,
+    cmap:str=None,
+    ax:plt.Axes=None,
     vmin:float=0.0, vmax:float=1.0,
-    ) -> Tuple[Figure,plt.Axes]:
+    ) -> plt.Axes:
     """
         - function to plot a GANTT-chart based on a DataFrame of tasks
 
@@ -27,9 +25,8 @@ def plot_gantt(
                     - `"end"
                     - `"category"
             - `cmap`
-                - `str`
+                - `str`, optional
                 - colormap to use for plotting individual categories
-            
             - `ax`
                 - `plt.Axes`
                 - axes to plot into
@@ -49,11 +46,32 @@ def plot_gantt(
 
         Returns
         -------
+            - `ax`
+                - `plt.Axes`
+                - created axes
+
+        Dependeincies
+        -------------
+            - `plolars`
+            - `matplotlib`
+            - `numpy`
+
+        Comments
+        --------
+            - one could also pass names of people to `"category"` if you prefer to group the tasks that way
 
     """
 
-    colors = plt.get_cmap(cmap)(np.linspace(vmin,vmax,df["category"].n_unique(), endpoint=True))
+    #default values
+    if ax is None:  #create new figure is necessary
+        fig = plt.figure()
+        ax = fig.add_subplot(111)
+    cmap = cmap if cmap is not None else plt.rcParams["image.cmap"]
 
+    #get colors
+    colors = plt.get_cmap(cmap)(np.linspace(vmin,vmax,df["category"].n_unique(), endpoint=True))
+        
+    #plot
     for cat, c in zip(sorted(df["category"].unique()), colors):
         ax.barh(
             df.filter(pl.col("category")==cat)["#"], 
@@ -75,5 +93,5 @@ def plot_gantt(
 
     ax.set_xlabel("Time [YYYY-MM]")
 
-
-    return 
+    return ax
+# %%
