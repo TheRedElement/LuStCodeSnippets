@@ -1,10 +1,9 @@
 
 #%%imports
-import astroLuSt.physics.photometry as alphph
 import astropy as ap
 import csv
 import numpy as np
-from typing import Union, Literal
+from typing import Union
 
 #%%definitions
 @np.vectorize
@@ -12,11 +11,10 @@ def absmag(
     m:float, z:float,
     cosmo:ap.cosmology.Cosmology,
     dm:float=0.0, dz:float=0.0,
-    pb:Literal["g","r","i","z"]=None,
+    pb:str=None,
     fn_confstats:Union[str,bool]=False,
     ):
     """
-        #TODO: error propagation for z?
         - function to convert apparent magnitudes to absolute magnitudes given some redshift
         - considers cosmology to do so
 
@@ -31,17 +29,11 @@ def absmag(
             - `cosmo`
                 - `astropy.cosmology.Cosmology`
                 - cosmological model to consider for the conversion of `z` to a luminosity distance
-            - `dm`
-                - `float`, optional
-                - uncertainty of `m`
-                - the default is `0.0`
-            - `dz`
-                - `float`, optional
-                - uncertainty of `z`
-                - the default is `0.0`
             - `pb`
-                - Literal["g","r","i","z"], optional
+                - str, optional
                 - passband to use for the confidence estimate
+                - has to be present in the `"passband"` column of `fn_confstats`
+                    - will return `np.nan` for `offset` and `std`
                 - the default is `None`
                     - no confidence estimate made
             - `fn_confstats`
@@ -67,19 +59,17 @@ def absmag(
             - `M`
                 - `float`
                 - computed absolute magnitude
-            - `dM`
+            - `std`
                 - `float`
-                - uncertainty estimate of `M`
-                - computed by
-                    - propagating uncertainties
-                    - adding `"std"`/dispersion (if available)
+                - `"std"`/dispersion of `M` at given `z`
+                - if available
             - `offset`
                 - `float`
-                - offset from literature value
+                - offset  of `M` at given `z` from literature value
+                - if available
 
         Dependencies
         ------------
-            - `astroLuSt`
             - `astropy`
             - `csv`
             - `numpy`
@@ -87,40 +77,29 @@ def absmag(
 
         Comments
         --------
-            - confidence estimate
-                - will be added to `dM` if available
 
     """
 
+    #init
+    offset = np.nan
+    std = np.nan
+    
+    #get confidence estimates
     if isinstance(fn_confstats, str):
-        with open(fn_confstats) as f:
+        with open(fn_confstats) as f:   #load lookup table
             pb_errs = [
                 {k: v for k, v in row.items()}
                 for row in csv.DictReader(f, skipinitialspace=True)
             ]
-    else:
-        pb_errs = None
-
-    #compute luminosity distance from redshift
-    d_lum = cosmo.luminosity_distance(z).to("pc").value
-    
-    #compute absolute magnitude by using distance module
-    DM = alphph.DistanceModule(m=m, d=d_lum, dm=dm)
-    M       = DM.M
-
-    #get error for current input (adapt depending on passed value for `fn_confstats`)
-    if pb_errs is not None:
-        pb_err = [d for d in pb_errs if (d["passband"]==pb)]
-        if len(pb_err) > 0:
+        pb_err = [d for d in pb_errs if (d["passband"]==pb)]    #filter for relevant entry in LUT
+        if len(pb_err) > 0: #if passband present in LUT
             pb_err = min(pb_err, key=lambda d: abs(float(d["z_bin"]) - z)) #get correct redshift bin
             offset  = float(pb_err["offset"])
-            dM      = DM.dM + float(pb_err["std"])
-        else:
-            offset  = np.nan
-            dM      = DM.dM
-    else:
-        offset = np.nan
-        dM      = DM.dM
-    
-    return M, dM, offset
+            std      = float(pb_err["std"])
+
+    #compute absolute magnitude by using distance module
+    mu = cosmo.distmod(z).value
+    M = m - mu
+
+    return M, std, offset
 
