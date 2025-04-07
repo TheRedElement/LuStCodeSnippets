@@ -1,3 +1,12 @@
+
+#%%imports
+import polars as pl
+import matplotlib.pyplot as plt
+from matplotlib.figure import Figure
+import numpy as np
+from typing import Tuple
+
+#%%definitions
 def plot_gantt(
     df:pl.DataFrame,
     cmap:str,
