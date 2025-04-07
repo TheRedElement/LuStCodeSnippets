@@ -1,5 +1,5 @@
 #vpn connection
-sudo openconnect --user lust18 vpn.tugraz.at
+sudo openconnect --user <username> vpnaddress
 ssh <user>@your.server.example.com
 
 #backup
@@ -7,7 +7,7 @@ sudo rsync -avhP source dest
 
 #virus scan
 sudo clamscan -i / | grep FOUND >> clamavinfected.txt				#scan current directory
-sudo clamscan !(googledrive) --infected --recursive > clamavinfected.txt	#scan current directory and all subdirectories (excluding ./googledrive/); only output infected
+sudo clamscan !(dir2exclude) --infected --recursive > clamavinfected.txt	#scan current directory and all subdirectories (excluding ./dir2exclude/); only output infected
 
 #file copying
 scp <path-to-local-file> <username>@your.server.example.com:<path-to-remote-directory>      #upload to remote

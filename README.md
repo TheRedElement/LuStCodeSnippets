@@ -18,4 +18,5 @@ This allows you to keep your commits separate from this repo.
 You can, of course, `git pull` in the submodule to get the latest changes.
 To do so, navigate inside the directory of where you cloned this submodule to and run `git pull` from there.
 
-If you find this repo useful in your work, I would highly appreciate a brief acknowledgement.
+> [!IMPORTANT]
+> If you find this repo useful in your work, a brief acknowledgement would be appreciated.
