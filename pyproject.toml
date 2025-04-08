@@ -9,7 +9,7 @@ packages = ["src_py"]
 name = "code_snippets"
 version = "0.0.1"
 authors = [
-  { name="Lukas Steinwender", email="fn.ln@gmail.com" },
+  { name="Lukas Steinwender", email="" },
 ]
 description = "repository of some useful code snippets in various programming languages."
 readme = "README.md"

@@ -10,7 +10,7 @@ import numpy as np
 class Test_absmag:
     
     @pytest.fixture(
-            params=[
+        params=[
             (22.6803, 0.36966, "g", 41.3716),
             (21.333, 0.29686, "Y", 40.8982),
             (24.031, 0.89888, "z", 43.6493),
