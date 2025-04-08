@@ -1,6 +1,7 @@
 
 #%%imports
-import astropy as ap
+# import astropy as ap
+from astropy.cosmology import Cosmology
 import csv
 import numpy as np
 from typing import Union
@@ -9,8 +10,7 @@ from typing import Union
 @np.vectorize
 def absmag(
     m:float, z:float,
-    cosmo:ap.cosmology.Cosmology,
-    dm:float=0.0, dz:float=0.0,
+    cosmo:Cosmology,
     pb:str=None,
     fn_confstats:Union[str,bool]=False,
     ):
