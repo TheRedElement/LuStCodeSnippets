@@ -10,7 +10,6 @@ from typing import Union
 def absmag(
     m:float, z:float,
     cosmo:ap.cosmology.Cosmology,
-    dm:float=0.0, dz:float=0.0,
     pb:str=None,
     fn_confstats:Union[str,bool]=False,
     ):
