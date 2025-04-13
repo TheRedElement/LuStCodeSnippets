@@ -63,7 +63,7 @@ def plot_gantt(
     """
 
     #default values
-    if ax is None:  #create new figure is necessary
+    if ax is None:  #create new figure if necessary
         fig = plt.figure()
         ax = fig.add_subplot(111)
     cmap = cmap if cmap is not None else plt.rcParams["image.cmap"]
