@@ -20,3 +20,30 @@ To do so, navigate inside the directory of where you cloned this submodule to an
 
 > [!IMPORTANT]
 > If you find this repo useful in your work, a brief acknowledgement would be appreciated.
+
+## Development
+
+### Julia
+
+### Python
+To install the package while still enabling development (iteratively changing things, editable mode) use the following:
+
+```shell
+    pip3 install --editable .
+```
+
+## Testing
+
+### Julia
+To run tests for the julia module use the following command in the root directory:
+
+```shell
+    julia --project=. -e 'include("src_jl_tests/runtests.jl")'
+```
+
+### Python
+Given you have some form of the package installed (i.e. in editable mode - [Development](#development)) use the following command in the root directory to run unit tests:
+
+```shell
+    pytest src_py_tests/
+```

@@ -5,6 +5,7 @@ using Random
 
 include(joinpath(@__DIR__,"../src_jl/Colorings.jl"))
 using .Colorings
+
 #%%definitions
 
 #%%demos
