@@ -49,5 +49,5 @@ To run tests for the julia module use the following command in the root director
 Given you have some form of the package installed (i.e. in editable mode - [Development](#development)) use the following command in the root directory to run unit tests:
 
 ```shell
-    pytest src_py_tests/
+    pytest CodeSnippets_py_tests/
 ```
