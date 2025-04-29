@@ -21,6 +21,18 @@ To do so, navigate inside the directory of where you cloned this submodule to an
 > [!IMPORTANT]
 > If you find this repo useful in your work, a brief acknowledgement would be appreciated.
 
+## Installation
+
+### Python
+To install the python package use the following:
+
+```shell
+    pip3 install git+https://github.com/TheRedElement/code_snippets.git
+```
+
+### Julia
+
+
 ## Development
 To install the package while still enabling development (iteratively changing things, editable mode) use the following:
 
