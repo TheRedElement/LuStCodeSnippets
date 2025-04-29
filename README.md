@@ -31,6 +31,11 @@ To install the python package use the following:
 ```
 
 ### Julia
+To install the julia package use the following from within `Pkg`:
+
+```shell
+    add git+https://github.com/TheRedElement/code_snippets.git
+```
 
 
 ## Development
