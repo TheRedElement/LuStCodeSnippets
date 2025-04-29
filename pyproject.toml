@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 packages = ["src_py"]
 
 [project]
-name = "code_snippets"
+name = "CodeSnippets"
 version = "0.0.1"
 authors = [
   { name="Lukas Steinwender", email="" },

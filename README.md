@@ -22,11 +22,15 @@ To do so, navigate inside the directory of where you cloned this submodule to an
 > If you find this repo useful in your work, a brief acknowledgement would be appreciated.
 
 ## Development
+To install the package while still enabling development (iteratively changing things, editable mode) use the following:
 
 ### Julia
 
+<!-- ```shell
+    dev .
+``` -->
+
 ### Python
-To install the package while still enabling development (iteratively changing things, editable mode) use the following:
 
 ```shell
     pip3 install --editable .
