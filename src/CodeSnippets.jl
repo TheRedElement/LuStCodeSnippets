@@ -8,8 +8,8 @@ module CodeSnippets
 using Dates
 
 #metadata
-const __modulename__ = "code_snippets" 
-const __version__ = "1.0.0"
+const __modulename__ = "CodeSnippets" 
+const __version__ = "0.1.0"
 const __author__ = "Lukas Steinwender"
 const __author_email__ = ""
 const __maintainer__ = "Lukas Steinwender"
