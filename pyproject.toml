@@ -3,7 +3,7 @@ requires = [ "hatchling >= 1.26",]
 build-backend = "hatchling.build"
 
 [project]
-name = "CodeSnippets_py"
+name = "LuStCodeSnippets"
 version = "0.0.1"
 description = "repository of some useful code snippets in various programming languages."
 readme = "README.md"
@@ -25,4 +25,4 @@ Homepage = "https://github.com/TheRedElement/code_snippets"
 Issues = "https://github.com/TheRedElement/code_snippets/issues"
 
 [tool.hatch.build.targets.wheel]
-packages = [ "CodeSnippets_py",]
+packages = [ "LuStCodeSnippets",]
