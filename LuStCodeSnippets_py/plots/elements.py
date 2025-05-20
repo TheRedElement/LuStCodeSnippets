@@ -2,14 +2,14 @@
 import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
 import numpy as np
-from typing import Dict, Union
+from typing import Dict, Tuple, Union
 
 
 #%%definitions
 def pcolormesh_text(
     ax:plt.Axes,
     X:np.ndarray,
-    cmap:Union[str,mcolors.Colormap]=None,
+    cmap:Union[str,mcolors.Colormap]=None, nancolor:Union[str,Tuple]=None,
     norm:mcolors.Normalize=None,
     numformat:str=None,
     xoffset:float=0.5, yoffset:float=0.5,
@@ -32,6 +32,11 @@ def pcolormesh_text(
                 - colormap to use when drawing the labels
                 - the default is `None`
                     - will use the reverese of `plt.rcParams["image.cmap"]`
+            - `nancolor`
+                - `str`, `Tuple`, optional
+                - color to use for cells that contain `np.nan`
+                - the default is `None`
+                    - will be set to color in `cmap` corresponding to the lowest value
             - `norm`
                 - `mcolors.Normalize`, optional
                 - norm to apply to `X` for generating the colors
@@ -81,6 +86,7 @@ def pcolormesh_text(
         cmap = plt.get_cmap(cmap)
     else:
         cmap = plt.get_cmap(cmap) if  isinstance(cmap, str) else cmap
+    nancolor = cmap(0) if nancolor is None else nancolor
     norm = mcolors.Normalize() if norm is None else norm
     numformat = "%.1f" if numformat is None else numformat
     text_kwargs = dict(ha="center", va="center") if text_kwargs is None else text_kwargs
@@ -88,7 +94,10 @@ def pcolormesh_text(
     if "va" not in text_kwargs.keys(): text_kwargs["va"] = "center"
 
     #get colors for the text
-    colors = cmap((norm(X)>0.5).astype(np.float64))
+    colorvals = X.copy()
+    colorvals[np.isnan(colorvals)] = np.nanmin(colorvals)
+    colors = cmap((norm(colorvals)>0.5).astype(np.float64))
+    colors[np.isnan(X)] = mcolors.to_rgba(nancolor)
 
     #add text
     for i in range(X.shape[0]):
