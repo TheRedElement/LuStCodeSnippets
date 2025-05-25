@@ -6,6 +6,7 @@
 
 ##ignore
 TIC*.csv
+temp*
 
 ##do NOT ignore
 
