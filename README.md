@@ -20,3 +20,54 @@ To do so, navigate inside the directory of where you cloned this submodule to an
 
 > [!IMPORTANT]
 > If you find this repo useful in your work, a brief acknowledgement would be appreciated.
+
+## Installation
+
+### Python
+To install the python package use the following:
+
+```shell
+    pip3 install git+https://github.com/TheRedElement/code_snippets.git
+```
+
+### Julia
+To install the julia package use the following from within `Pkg`:
+
+```shell
+    add git+https://github.com/TheRedElement/code_snippets.git
+```
+
+
+## Development
+To install the package while still enabling development (iteratively changing things, editable mode) use the following:
+
+### Julia
+
+<!-- ```shell
+    dev .
+``` -->
+
+### Python
+
+```shell
+    pip3 install --editable .
+```
+
+## Testing
+
+### Julia
+To run tests for the julia module use the following command in the root directory:
+
+```shell
+    julia --project=. -e 'include("CodeSnippets_jl_tests/runtests.jl")'
+```
+
+### Python
+Given you have some form of the package installed (i.e. in editable mode - [Development](#development)) use the following command in the root directory to run unit tests:
+
+```shell
+    pytest CodeSnippets_py_tests/
+```
+
+## Comments
+* The [src/CodenSnippets.jl](./src/CodeSnippets.jl) file and directory are necessary for julia to know that the repo is a package.

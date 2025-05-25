@@ -1,7 +1,7 @@
 
 #%%imports
 import pytest
-from src_py.astronomy import absmag
+from LuStCodeSnippets_py.astronomy import absmag
 
 from astropy.cosmology import FlatLambdaCDM
 import numpy as np
