@@ -20,11 +20,14 @@ const __last_changed__ = string(Dates.today())
 
 #add submodules (make visible to parent module)
 include("../LuStCodeSnippets_jl/Colorings.jl")
+include("../LuStCodeSnippets_jl/PlotStyles.jl")
 
 #load submodules (make visible to parent module)
 using .Colorings
+using .PlotStyles
 
 #reexport submodules (make accesible to user)
 export Colorings
+export PlotStyles
 
 end #modle
