@@ -73,7 +73,7 @@
 ```
 
 """
-module PlotStyle
+module PlotStyles
 
 #%%imports
 using Colors
@@ -81,7 +81,6 @@ using FixedPointNumbers
 using Logging
 using Plots
 using PlotThemes
-using Revise
 
 #import for extending
 import Plots: plot, plot!
