@@ -64,9 +64,13 @@ def layout_specs():
     plt.rcParams["lines.markersize"]        = 4
     plt.rcParams["scatter.marker"]          = "o"
 
+    #legend
+    plt.rcParams["legend.framealpha"]       = 0.2                   #:fglegend, :legendbackgroundcolor
+
     #python specific
     plt.rcParams["errorbar.capsize"]        = 3
-    plt.rcParams["savefig.transparent"]     = False
+    plt.rcParams["savefig.transparent"]     = True
+    plt.rcParams["savefig.bbox"]            = "tight"
     plt.rcParams["savefig.dpi"]             = 180
     plt.rcParams["xtick.direction"]         = "in" 
     plt.rcParams["ytick.direction"]         = "in" 
@@ -165,9 +169,8 @@ def tre_light():
     plt.rcParams["ytick.color"]             = (0,0,0,1)         #:fgtext
     plt.rcParams["axes.labelcolor"]         = (0,0,0,1)         #:fgtext
     plt.rcParams["axes.edgecolor"]          = (0,0,0,1)         #:fgguide
-    plt.rcParams["legend.facecolor"]        = (0,0,0,1)         #:fglegend, :legendbackgroundcolor
-    plt.rcParams["legend.framealpha"]       = 0.07              #:fglegend, :legendbackgroundcolor
-    plt.rcParams["legend.edgecolor"]        = (0,0,0,1)         #
+    plt.rcParams["legend.facecolor"]        = "inherit"         #:fglegend, :legendbackgroundcolor
+    plt.rcParams["legend.edgecolor"]        = "inherit"               #
     plt.rcParams["axes.prop_cycle"]         = prop_cycle        #:palette, cycling through :ls
     plt.rcParams["image.cmap"]              = tre_light_cmap    #:colorgradient
     plt.rcParams["axes3d.xaxis.panecolor"]  = (1,1,1,.9)        #
@@ -235,9 +238,8 @@ def tre_dark():
     plt.rcParams["ytick.color"]             = (0.75,0.75,0.75,1)    #:fgtext
     plt.rcParams["axes.labelcolor"]         = (0.75,0.75,0.75,1)    #:fgtext
     plt.rcParams["axes.edgecolor"]          = (0.75,0.75,0.75,1)    #:fgguide
-    plt.rcParams["legend.facecolor"]        = (0.75,0.75,0.75,1)    #:fglegend, :legendbackgroundcolor
-    plt.rcParams["legend.framealpha"]       = 0.07                  #:fglegend, :legendbackgroundcolor
-    plt.rcParams["legend.edgecolor"]        = (0,0,0,1)             #
+    plt.rcParams["legend.facecolor"]        = "inherit"         #:fglegend, :legendbackgroundcolor
+    plt.rcParams["legend.edgecolor"]        = "inherit"               #
     plt.rcParams["axes.prop_cycle"]         = prop_cycle            #:palette, cycling through :ls
     plt.rcParams["image.cmap"]              = tre_dark_cmap         #:colorgradient
     plt.rcParams["axes3d.xaxis.panecolor"]  = (1,1,1,.1)            #
@@ -246,3 +248,143 @@ def tre_dark():
 
 
     return tre_dark_palette, tre_dark_ls, tre_dark_markers, tre_dark_cmap
+
+def lust_light():
+    """
+        - function defining a light style
+
+        Parameters
+        ----------
+
+        Raises
+        ------
+
+        Returns
+        -------
+            - `lust_light_palette`
+                - `np.ndarray`
+                - contains color palette used to cycle through when plotting
+            - `lust_light_ls`
+                - `np.ndarray`
+                - contains linestyles used to cycle through when plotting
+            - `lust_light_markers`
+                - `np.ndarray`
+                - contains markers used to cycle through when plotting
+            - `lust_light_cmap`
+                - `string`
+                - colormap used in the style
+
+        Dependencies
+        ------------
+            - `cycler`
+            - `matplotlib` 
+            - `numpy`
+
+        Comments
+        --------
+    """
+
+    mono_colors, mono_ls, mono_markers = layout_specs()
+
+    lust_light_markers   = [*mono_markers]
+    lust_light_ls        = [*mono_ls]
+    lust_light_palette   = plt.get_cmap("gist_rainbow")(np.linspace(0,1,len(mono_colors)))[::]
+
+    prop_cycle = (
+        cycler(linestyle=lust_light_ls) +
+        cycler(color=lust_light_palette)
+    )
+
+    lust_light_cmap = "hot"
+
+    lust_light_bg = "FFFFFF"
+
+    #color scheme                                               #julia equivalent
+    plt.rcParams["figure.facecolor"]        = lust_light_bg      #:bg
+    # plt.rcParams["figure.edgecolor"]      = (0,0,0,1)     
+    plt.rcParams["axes.facecolor"]          = "FFFFFF"          #:bginside
+    plt.rcParams["text.color"]              = (0,0,0,1)         #:fgtext, :legendfontcolor, :legendtitlefontcolor, :titlefontcolor
+    plt.rcParams["xtick.color"]             = (0,0,0,1)         #:fgtext
+    plt.rcParams["ytick.color"]             = (0,0,0,1)         #:fgtext
+    plt.rcParams["axes.labelcolor"]         = (0,0,0,1)         #:fgtext
+    plt.rcParams["axes.edgecolor"]          = (0,0,0,1)         #:fgguide
+    plt.rcParams["legend.facecolor"]        = "inherit"         #:fglegend, :legendbackgroundcolor
+    plt.rcParams["legend.edgecolor"]        = "inherit"               #
+    plt.rcParams["axes.prop_cycle"]         = prop_cycle        #:palette, cycling through :ls
+    plt.rcParams["image.cmap"]              = lust_light_cmap    #:colorgradient
+    plt.rcParams["axes3d.xaxis.panecolor"]  = (1,1,1,.9)        #
+    plt.rcParams["axes3d.yaxis.panecolor"]  = (1,1,1,.9)        #
+    plt.rcParams["axes3d.zaxis.panecolor"]  = (1,1,1,.9)        #
+
+    return lust_light_palette, lust_light_ls, lust_light_markers, lust_light_cmap
+
+def lust_dark():
+    """
+        - function defining a dark style
+
+        Parameters
+        ----------
+
+        Raises
+        ------
+
+        Returns
+        -------
+            - `lust_dark_palette`
+                - `np.ndarray`
+                - contains color palette used to cycle through when plotting
+            - `lust_dark_ls`
+                - `np.ndarray`
+                - contains linestyles used to cycle through when plotting
+            - `lust_dark_markers`
+                - `np.ndarray`
+                - contains markers used to cycle through when plotting
+            - `lust_dark_cmap`
+                - `string`
+                - colormap used in the style
+
+        Dependencies
+        ------------
+            - `cycler`
+            - `matplotlib` 
+            - `numpy`
+
+        Comments
+        --------
+    """
+
+    mono_colors, mono_ls, mono_markers = layout_specs()
+
+    lust_dark_markers   = [*mono_markers]
+    lust_dark_ls        = [*mono_ls]
+    lust_dark_palette   = plt.get_cmap("gist_rainbow")(np.linspace(0,1,len(mono_colors)))[::]
+
+    prop_cycle = (
+        cycler(linestyle=lust_dark_ls) +
+        cycler(color=lust_dark_palette)
+    )
+
+    lust_dark_cmap = "hot"
+
+    lust_dark_bg = "000000"
+
+    #color scheme                                                   #julia equivalent
+    plt.rcParams["figure.facecolor"]        = lust_dark_bg           #:bg
+    # plt.rcParams["figure.edgecolor"]        = (1,1,1,1)     
+    plt.rcParams["axes.facecolor"]          = "000000"              #:bginside
+    plt.rcParams["text.color"]              = (0.75,0.75,0.75,1)    #:fgtext, :legendfontcolor, :legendtitlefontcolor, :titlefontcolor
+    plt.rcParams["xtick.color"]             = (0.75,0.75,0.75,1)    #:fgtext
+    plt.rcParams["ytick.color"]             = (0.75,0.75,0.75,1)    #:fgtext
+    plt.rcParams["axes.labelcolor"]         = (0.75,0.75,0.75,1)    #:fgtext
+    plt.rcParams["axes.edgecolor"]          = (0.75,0.75,0.75,1)    #:fgguide
+    plt.rcParams["legend.facecolor"]        = "inherit"         #:fglegend, :legendbackgroundcolor
+    plt.rcParams["legend.edgecolor"]        = "inherit"               #
+    plt.rcParams["axes.prop_cycle"]         = prop_cycle            #:palette, cycling through :ls
+    plt.rcParams["image.cmap"]              = lust_dark_cmap         #:colorgradient
+    plt.rcParams["axes3d.xaxis.panecolor"]  = (1,1,1,.1)            #
+    plt.rcParams["axes3d.yaxis.panecolor"]  = (1,1,1,.1)            #
+    plt.rcParams["axes3d.zaxis.panecolor"]  = (1,1,1,.1)            #
+
+
+    return lust_dark_palette, lust_dark_ls, lust_dark_markers, lust_dark_cmap
+

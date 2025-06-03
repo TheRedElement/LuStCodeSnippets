@@ -2,7 +2,7 @@
 #%%imports
 using Plots
 
-include(joinpath(@__DIR__,"../LuStCodeSnippets_jl/PlotStyles.jl"))
+include(joinpath(@__DIR__,"../LuStCodeSnippets_jl/src/PlotStyles.jl"))
 using .PlotStyles
 
 gr()
@@ -19,7 +19,7 @@ theme(:tre_dark)
 #%%demos
 begin
     #lineplot
-    p1 = plot((1:9) .+ (1:10)', xlabel="X", ylabel="Y", seriestype=:line, ls=PlotStyle.mono_ls, alpha=1)#, linecolor=PlotStyle.mono_colors)
+    p1 = plot((1:9) .+ (1:10)', xlabel="X", ylabel="Y", seriestype=:line, ls=PlotStyles.mono_ls, alpha=1)#, linecolor=PlotStyles.mono_colors)
     vline!(p1, [2,4,6]; color=1, alpha=.2, label="")
     plot!(p1, legendtitle="LEGTIT")
 
@@ -34,7 +34,7 @@ begin
 
     #scatter
     s1 = plot(randn(15), randn(15), zcolor=log.(rand(15) .+ 1), seriestype=:scatter, cmap=:coolwarm, colorbar_title="test")
-    plot!(s1, randn(15,6), randn(15,6), seriestype=:scatter, m=PlotStyle.mono_markers)
+    plot!(s1, randn(15,6), randn(15,6), seriestype=:scatter, m=PlotStyles.mono_markers)
 
     #histogram
     x = randn(300)
