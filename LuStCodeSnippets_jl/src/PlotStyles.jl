@@ -78,7 +78,6 @@ module PlotStyles
 #%%imports
 using Colors
 using FixedPointNumbers
-using Logging
 using Plots
 using PlotThemes
 

@@ -1,17 +1,17 @@
-# code_snippets
+# LuStCodeSnippets
 
 repository of some useful code snippets in various programming languages.
 
 If you want to use the code simply clone the repo:
 
 ```shell
-    git clone https://github.com/TheRedElement/code_snippets.git
+    git clone https://github.com/TheRedElement/LuStCodeSnippets.git
 ```
 
 In case you want use the repo inside your own git repo, it is recommended to create a submodule:
 
 ```shell
-    git submodule add https://github.com/TheRedElement/code_snippets.git
+    git submodule add https://github.com/TheRedElement/LuStCodeSnippets.git
 ```
 
 This allows you to keep your commits separate from this repo.
@@ -34,7 +34,7 @@ To do so run the following at the root of your project (`--force` overwrites any
 
 ### Julia
 Julia will take care of all dependencies automatically.
-They will be stored in `Project.toml`.
+They will be stored in [./LuStCodeSnippets_jl/Project.toml](./LuStCodeSnippets_jl/Project.toml).
 
 ## Installation
 
@@ -42,14 +42,14 @@ They will be stored in `Project.toml`.
 To install the python package use the following:
 
 ```shell
-    pip3 install git+https://github.com/TheRedElement/code_snippets.git
+    pip3 install git+https://github.com/TheRedElement/LuStCodeSnippets.git
 ```
 
 ### Julia
 To install the julia package use the following from within `Pkg`:
 
 ```shell
-    add git+https://github.com/TheRedElement/code_snippets.git
+    add git+https://github.com/TheRedElement/LuStCodeSnippets/tree/main/LuStCodeSnippets_jl
 ```
 
 
@@ -58,9 +58,9 @@ To install the package while still enabling development (iteratively changing th
 
 ### Julia
 
-<!-- ```shell
-    dev .
-``` -->
+```shell
+    dev ./LuStCodeSnippets_jl
+```
 
 ### Python
 
@@ -75,6 +75,13 @@ To run tests for the julia module use the following command in the root director
 
 ```shell
     julia --project=. -e 'include("LuStCodeSnippets_jl_tests/runtests.jl")'
+```
+
+On first execution you have to instantiate the environment before running tests:
+
+```shell
+julia --project=. -e "using Pkg; Pkg.instantiate(); Pkg.status()"
+
 ```
 
 ### Python

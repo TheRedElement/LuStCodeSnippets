@@ -3,8 +3,7 @@
 using Colors
 using Random
 
-include(joinpath(@__DIR__, "../src_jl/Colorings.jl"))
-using .Colorings
+using LuStCodeSnippets_jl
 
 #%%tests
 @testset "Colorings" begin
