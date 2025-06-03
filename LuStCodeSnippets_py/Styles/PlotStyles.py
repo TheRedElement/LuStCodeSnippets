@@ -69,7 +69,7 @@ def layout_specs():
 
     #python specific
     plt.rcParams["errorbar.capsize"]        = 3
-    plt.rcParams["savefig.transparent"]     = True
+    plt.rcParams["savefig.transparent"]     = False
     plt.rcParams["savefig.bbox"]            = "tight"
     plt.rcParams["savefig.dpi"]             = 180
     plt.rcParams["xtick.direction"]         = "in" 
