@@ -74,15 +74,15 @@ To install the package while still enabling development (iteratively changing th
 To run tests for the julia module use the following command in the root directory:
 
 ```shell
-    julia --project=. -e 'include("CodeSnippets_jl_tests/runtests.jl")'
+    julia --project=. -e 'include("LuStCodeSnippets_jl_tests/runtests.jl")'
 ```
 
 ### Python
 Given you have some form of the package installed (i.e. in editable mode - [Development](#development)) use the following command in the root directory to run unit tests:
 
 ```shell
-    pytest CodeSnippets_py_tests/
+    pytest LuStCodeSnippets_py_tests/
 ```
 
 ## Comments
-* The [src/CodenSnippets.jl](./src/CodeSnippets.jl) file and directory are necessary for julia to know that the repo is a package.
+* The [src/LuStCodenSnippets.jl](./src/LuStCodeSnippets.jl) file and directory are necessary for julia to know that the repo is a package.

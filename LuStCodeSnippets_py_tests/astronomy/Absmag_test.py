@@ -1,7 +1,7 @@
 
 #%%imports
 import pytest
-from LuStCodeSnippets_py.astronomy import absmag
+from LuStCodeSnippets_py.Astronomy import Absmag
 
 from astropy.cosmology import FlatLambdaCDM
 import numpy as np
@@ -42,7 +42,7 @@ class Test_absmag:
         z  = request.param[1]
         pb = request.param[2]
         mu = request.param[3]
-        M, std, offset = absmag.absmag(m, z, cosmo, pb, "./data/lut_snana_snia.csv")
+        M, std, offset = Absmag.absmag(m, z, cosmo, pb, "./data/lut_snana_snia.csv")
 
         mu_pred = m - M
         return mu_pred, std, offset, mu

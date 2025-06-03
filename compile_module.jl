@@ -4,7 +4,7 @@ using TOML
 using UUIDs
 
 #module
-include("./src/LuStCodeSnippets.jl")
+include("./LuStCodeSnippets_jl/src/LuStCodeSnippets_jl.jl")
 using .LuStCodeSnippets
 
 #%%definitions

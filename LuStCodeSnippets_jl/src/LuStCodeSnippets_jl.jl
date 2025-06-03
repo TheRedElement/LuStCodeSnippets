@@ -2,13 +2,13 @@
 LuStCodeSnippets package
 """
 
-module LuStCodeSnippets
+module LuStCodeSnippets_jl
 
 #%%imports
 using Dates
 
 #metadata
-const __modulename__ = "LuStCodeSnippets" 
+const __modulename__ = "LuStCodeSnippets_jl" 
 const __version__ = "0.1.0"
 const __author__ = "Lukas Steinwender"
 const __author_email__ = ""
@@ -19,8 +19,8 @@ const __credits__ = ""
 const __last_changed__ = string(Dates.today())
 
 #add submodules (make visible to parent module)
-include("../LuStCodeSnippets_jl/Colorings.jl")
-include("../LuStCodeSnippets_jl/PlotStyles.jl")
+include("./Colorings.jl")
+include("./PlotStyles.jl")
 
 #load submodules (make visible to parent module)
 using .Colorings

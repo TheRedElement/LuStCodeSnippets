@@ -1,8 +1,8 @@
 """
-LuStCodeSnippets package
+LuStCodeSnippets_py package
 """
 
-__modulename__ = "LuStCodeSnippets" 
+__modulename__ = "LuStCodeSnippets_py" 
 __version__ = "0.1.0"
 __author__ = "Lukas Steinwender"
 __author_email__ = ""
