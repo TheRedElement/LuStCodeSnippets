@@ -21,6 +21,21 @@ To do so, navigate inside the directory of where you cloned this submodule to an
 > [!IMPORTANT]
 > If you find this repo useful in your work, a brief acknowledgement would be appreciated.
 
+## Dependencies
+
+### Python
+To keep track of dependencies in a clean manner it is recommended to use [pipreqs](https://pypi.org/project/pipreqs/).
+To do so run the following at the root of your project (`--force` overwrites any existing requirements.txt file):
+
+```shell
+    pip3 install pipreqs
+    pipreqs . --force
+```
+
+### Julia
+Julia will take care of all dependencies automatically.
+They will be stored in `Project.toml`.
+
 ## Installation
 
 ### Python
