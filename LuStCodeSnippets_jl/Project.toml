@@ -8,7 +8,7 @@ version = "0.1.0"
 description = "repository of some useful code snippets in various programming languages."
 maintainer_email = ""
 url = "https://github.com/TheRedElement/code_snippets"
-uuid = "30a1ad87-3ac8-4d96-b311-8c0588df261b"
+uuid = "5ce4feec-0dab-4d3b-b1b7-ddb81746bd30"
 
 [compat]
 julia = "1.10.5"

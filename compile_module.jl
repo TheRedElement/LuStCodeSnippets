@@ -4,7 +4,7 @@ using TOML
 using UUIDs
 
 #module
-include("./src/LuStCodeSnippets_jl.jl")
+include("./LuStCodeSnippets_jl/src/LuStCodeSnippets_jl.jl")
 using .LuStCodeSnippets_jl
 
 #%%definitions
@@ -78,5 +78,5 @@ end
 
 #%%main
 build_project_toml(
-    joinpath(@__DIR__,"./Project.toml")
+    "./LuStCodeSnippets_jl/Project.toml"
 )
