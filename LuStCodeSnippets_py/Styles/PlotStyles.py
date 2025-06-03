@@ -288,7 +288,7 @@ def lust_light():
 
     lust_light_markers   = [*mono_markers]
     lust_light_ls        = [*mono_ls]
-    lust_light_palette   = plt.get_cmap("gist_rainbow")(np.linspace(0,1,len(mono_colors)))[::]
+    lust_light_palette   = ["#A10000", "#FF7B00", "#51BFFF", "#CFC100", "#B500BB", "#009E69"]*2
 
     prop_cycle = (
         cycler(linestyle=lust_light_ls) +
@@ -357,7 +357,7 @@ def lust_dark():
 
     lust_dark_markers   = [*mono_markers]
     lust_dark_ls        = [*mono_ls]
-    lust_dark_palette   = plt.get_cmap("gist_rainbow")(np.linspace(0,1,len(mono_colors)))[::]
+    lust_dark_palette   = ["#A10000", "#FF7B00", "#51BFFF", "#FFEE00", "#FA62FF", "#70FFF8"]*2
 
     prop_cycle = (
         cycler(linestyle=lust_dark_ls) +
