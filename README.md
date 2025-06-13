@@ -37,6 +37,13 @@ To install the python package use the following:
 pip3 install git+https://github.com/TheRedElement/LuStCodeSnippets.git
 ```
 
+### Bash
+To install simply clone the repo and call the following from the repository root:
+
+```shell
+source LuStCodeSnippets_sh/*
+```
+
 ## Dependencies
 
 ### Julia
