@@ -26,6 +26,9 @@ def layout_specs():
             - `mono_markers`
                 - `np.ndarray`
                 - markes used in monochromatic styles
+            - `mono_hatches`
+                - `np.ndarray`
+                - hatches used in monochromatic styles
 
         Dependencies
         ------------
@@ -99,6 +102,7 @@ def layout_specs():
     mono_colors_base = plt.get_cmap("gray")(np.linspace(0,1,ncolors_mono+2))[1:-1]
     mono_ls_base        = ["-", "--", ":", "-."]              #linestyles to cycle through when plotting
     mono_markers_base   = ["o", "^", "v", "d", "x"]
+    mono_hatches_base   = ["/","\\","o","*", "|"]
 
     nlinestyles_mono    = len(mono_ls_base)                         #number of defined linestyles
     nmarkers_mono       = len(mono_markers_base)                    #number of defined linestyles
@@ -106,8 +110,9 @@ def layout_specs():
     mono_colors         = np.repeat(mono_colors_base[np.newaxis,:,:], nlinestyles_mono, axis=0).reshape(-1,4)
     mono_ls             = np.repeat(mono_ls_base, ncolors_mono, axis=0)
     mono_markers        = np.repeat(mono_markers_base, ncolors_mono, axis=0)
+    mono_hatches        = np.repeat(mono_hatches_base, ncolors_mono, axis=0)
 
-    return mono_colors, mono_ls, mono_markers
+    return mono_colors, mono_ls, mono_markers, mono_hatches
 
 #%%style definitions
 def tre_light():
@@ -134,6 +139,9 @@ def tre_light():
             - `tre_light_cmap`
                 - `string`
                 - colormap used in the style
+            - `tre_light_hatches`
+                - `np.ndarray`
+                - hatches used in style
 
         Dependencies
         ------------
@@ -145,11 +153,12 @@ def tre_light():
         --------
     """
 
-    mono_colors, mono_ls, mono_markers = layout_specs()
+    mono_colors, mono_ls, mono_markers, mono_hatches = layout_specs()
 
     tre_light_markers   = ["o", *mono_markers]
     tre_light_ls        = ["-", *mono_ls]
     tre_light_palette   = [(161/255,0,0,1), *mono_colors]
+    tre_light_hatches   = mono_hatches
 
     prop_cycle = (
         cycler(linestyle=tre_light_ls) +
@@ -177,7 +186,7 @@ def tre_light():
     plt.rcParams["axes3d.yaxis.panecolor"]  = (1,1,1,.9)        #
     plt.rcParams["axes3d.zaxis.panecolor"]  = (1,1,1,.9)        #
 
-    return tre_light_palette, tre_light_ls, tre_light_markers, tre_light_cmap
+    return tre_light_palette, tre_light_ls, tre_light_markers, tre_light_cmap, tre_light_hatches
 
 def tre_dark():
     """
@@ -203,6 +212,9 @@ def tre_dark():
             - `tre_dark_cmap`
                 - `string`
                 - colormap used in the style
+            - `tre_dark_hatches`
+                - `np.ndarray`
+                - hatches used in style
 
         Dependencies
         ------------
@@ -214,11 +226,12 @@ def tre_dark():
         --------
     """
 
-    mono_colors, mono_ls, mono_markers = layout_specs()
+    mono_colors, mono_ls, mono_markers, mono_hatches = layout_specs()
 
     tre_dark_markers   = ["o", *mono_markers]
     tre_dark_ls        = ["-", *mono_ls]
     tre_dark_palette   = [(161/255,0,0,1), *mono_colors[::-1]]
+    tre_dark_hatches   = mono_hatches
 
     prop_cycle = (
         cycler(linestyle=tre_dark_ls) +
@@ -247,7 +260,7 @@ def tre_dark():
     plt.rcParams["axes3d.zaxis.panecolor"]  = (1,1,1,.1)            #
 
 
-    return tre_dark_palette, tre_dark_ls, tre_dark_markers, tre_dark_cmap
+    return tre_dark_palette, tre_dark_ls, tre_dark_markers, tre_dark_cmap, tre_dark_hatches
 
 def lust_light():
     """
@@ -273,6 +286,9 @@ def lust_light():
             - `lust_light_cmap`
                 - `string`
                 - colormap used in the style
+            - `lust_light_hatches`
+                - `np.ndarray`
+                - hatches used in style
 
         Dependencies
         ------------
@@ -284,11 +300,12 @@ def lust_light():
         --------
     """
 
-    mono_colors, mono_ls, mono_markers = layout_specs()
+    mono_colors, mono_ls, mono_markers, mono_hatches = layout_specs()
 
     lust_light_markers   = [*mono_markers]
     lust_light_ls        = [*mono_ls]
     lust_light_palette   = ["#A10000", "#FF7B00", "#51BFFF", "#CFC100", "#B500BB", "#009E69"]*2
+    lust_light_hatches   = mono_hatches
 
     prop_cycle = (
         cycler(linestyle=lust_light_ls) +
@@ -316,7 +333,7 @@ def lust_light():
     plt.rcParams["axes3d.yaxis.panecolor"]  = (1,1,1,.9)        #
     plt.rcParams["axes3d.zaxis.panecolor"]  = (1,1,1,.9)        #
 
-    return lust_light_palette, lust_light_ls, lust_light_markers, lust_light_cmap
+    return lust_light_palette, lust_light_ls, lust_light_markers, lust_light_cmap, lust_light_hatches
 
 def lust_dark():
     """
@@ -342,6 +359,9 @@ def lust_dark():
             - `lust_dark_cmap`
                 - `string`
                 - colormap used in the style
+            - `lust_dark_hatches`
+                - `np.ndarray`
+                - hatches used in style
 
         Dependencies
         ------------
@@ -353,11 +373,12 @@ def lust_dark():
         --------
     """
 
-    mono_colors, mono_ls, mono_markers = layout_specs()
+    mono_colors, mono_ls, mono_markers, mono_hatches = layout_specs()
 
     lust_dark_markers   = [*mono_markers]
     lust_dark_ls        = [*mono_ls]
     lust_dark_palette   = ["#A10000", "#FF7B00", "#51BFFF", "#FFEE00", "#FA62FF", "#70FFF8"]*2
+    lust_dark_hatches   = mono_hatches
 
     prop_cycle = (
         cycler(linestyle=lust_dark_ls) +
@@ -386,5 +407,5 @@ def lust_dark():
     plt.rcParams["axes3d.zaxis.panecolor"]  = (1,1,1,.1)            #
 
 
-    return lust_dark_palette, lust_dark_ls, lust_dark_markers, lust_dark_cmap
+    return lust_dark_palette, lust_dark_ls, lust_dark_markers, lust_dark_cmap, lust_dark_hatches
 
