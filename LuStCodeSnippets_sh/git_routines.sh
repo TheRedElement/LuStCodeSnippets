@@ -64,3 +64,8 @@ unlink_submodule() {
         echo "Submodule '$submodule_path' has been unlinked. Add and commit manually if needed."
     fi
 }
+
+#prevent direct execution
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    echo "This is a library file. Source it in your scripts: source <path/to/_projectbuildingblocks.sh>"
+fi
