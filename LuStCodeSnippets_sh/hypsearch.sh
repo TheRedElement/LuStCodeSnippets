@@ -113,3 +113,8 @@ get_random_indices() {
     K=$(( K > N ? N : K ))      #make sure `K` os always smaller than `N`
     shuf -i 0-$(($N-1)) -n $K   #randomly shuffle range and select first `K` elements
 }
+
+#prevent direct execution
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    echo "This is a library file. Source it in your scripts: source <path/to/_projectbuildingblocks.sh>"
+fi
