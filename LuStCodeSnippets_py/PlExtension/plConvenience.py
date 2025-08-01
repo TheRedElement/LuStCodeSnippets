@@ -45,7 +45,6 @@ def value_counts(
             - `descending`
                 - `bool`, optional
                 - whether to reverse the sorting (sort descending)
-                - only applies if `sort==True`
                 - the default is `False`
 
 
