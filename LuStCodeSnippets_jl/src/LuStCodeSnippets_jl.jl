@@ -20,14 +20,17 @@ const __last_changed__ = string(Dates.today())
 
 #add submodules (make visible to parent module)
 include("./Colorings.jl")
+include("./DataFramesConvenience.jl")
 include("./PlotStyles.jl")
 
 #load submodules (make visible to parent module)
 using .Colorings
+using .DataFramesConvenience
 using .PlotStyles
 
 #reexport submodules (make accesible to user)
 export Colorings
+export DataFramesConvenience
 export PlotStyles
 
-end #modle
+end #module

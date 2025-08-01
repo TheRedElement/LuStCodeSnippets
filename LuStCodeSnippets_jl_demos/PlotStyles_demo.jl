@@ -2,9 +2,9 @@
 #%%imports
 using Plots
 
-include(joinpath(@__DIR__,"../LuStCodeSnippets_jl/src/PlotStyles.jl"))
-using .PlotStyles
+using LuStCodeSnippets_jl: PlotStyles
 
+PlotStyles.include_themes()
 gr()
 
 theme(:lust_dark)

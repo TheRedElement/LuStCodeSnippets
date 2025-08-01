@@ -3,8 +3,7 @@
 using Plots
 using Random
 
-include(joinpath(@__DIR__,"../LuStCodeSnippets_jl/src/Colorings.jl"))
-using .Colorings
+using LuStCodeSnippets_jl: Colorings
 
 #%%definitions
 

@@ -29,6 +29,7 @@
 
     Functions
     ---------
+        - `include_themes()`
 
     Dependencies
     ------------
@@ -57,8 +58,8 @@
         - loading the styles
 ```julia
     using Plots
-    include(<path_to_PlotStyleLuSt.jl>)
-    using .PlotStyleLuSt
+    using LuStCodeSnippets_jl: PlotStyleLuSt
+    PlotStyleLuSt.include_themes()
 
     #choose your theme
     # theme(:lust_dark)
@@ -82,7 +83,6 @@ using Plots
 using PlotThemes
 
 #import for extending
-import Plots: plot, plot!
 
 #intradependencies
 
@@ -90,6 +90,7 @@ import Plots: plot, plot!
 export mono_ls
 export mono_markers
 export mono_colors
+export include_themes
 
 
 #%%definitions
@@ -392,11 +393,28 @@ end
 
 #######################################
 #include custom styles
-PlotThemes.add_theme(:lust_dark, _lust_dark)
-PlotThemes.add_theme(:lust_light, _lust_light)
-PlotThemes.add_theme(:lust_light_mono, _lust_light_mono)
-PlotThemes.add_theme(:lust_dark_mono, _lust_dark_mono)
-PlotThemes.add_theme(:tre_dark, _tre_dark)
-PlotThemes.add_theme(:tre_light, _tre_light)
+"""
+    - function to make custom themes visible to global scope
+
+    Parameters
+    ----------
+
+    Raises
+    ------
+
+    Returns
+    -------
+
+    Comments
+    --------
+"""
+function include_themes()
+    PlotThemes.add_theme(:lust_dark, _lust_dark)
+    PlotThemes.add_theme(:lust_light, _lust_light)
+    PlotThemes.add_theme(:lust_light_mono, _lust_light_mono)
+    PlotThemes.add_theme(:lust_dark_mono, _lust_dark_mono)
+    PlotThemes.add_theme(:tre_dark, _tre_dark)
+    PlotThemes.add_theme(:tre_light, _tre_light)
+end
 
 end #module
