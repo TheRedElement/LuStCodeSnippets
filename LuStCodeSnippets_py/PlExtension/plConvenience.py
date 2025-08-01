@@ -86,8 +86,8 @@ def value_counts(
         raise ValueError(f"`count` has to be one of `None`, `'frequency'`, `'pdf'` but is {normalize}")
 
     if sort:
-        df_vc.sort(pl.col("count"), descending=descending)
+        df_vc = df_vc.sort(pl.col("count"), descending=descending)
     else:
-        df_vc.sort(subset, descending=descending)
+        df_vc = df_vc.sort(subset, descending=descending)
 
     return df_vc
