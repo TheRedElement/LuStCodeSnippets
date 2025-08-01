@@ -87,5 +87,7 @@ def value_counts(
 
     if sort:
         df_vc.sort(pl.col("count"), descending=descending)
+    else:
+        df_vc.sort(subset, descending=descending)
 
     return df_vc
