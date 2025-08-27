@@ -9,7 +9,6 @@ carthesian_product() {
     #Usage
     #-----
     #   ```bash
-    #   source _projectbuildingblocks.sh
     #   combine "" out_arr arr1[@] arr2[@] arr3[@]
     #   ```
     #
