@@ -40,7 +40,9 @@ def layout_specs():
     """
     
     # for k, v in plt.rcParams.items(): print(k, v)
-    
+    #text
+    plt.rcParams["text.usetex"]             = True
+
     #fontsizes
     plt.rcParams["font.size"]               = 16
     plt.rcParams["figure.titlesize"]        = "large"
