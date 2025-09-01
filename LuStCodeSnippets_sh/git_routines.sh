@@ -1,3 +1,4 @@
+#!/bin/bash
 
 unlink_submodule() {
     #   - function to unlik a git submodule

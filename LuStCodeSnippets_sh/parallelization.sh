@@ -7,7 +7,6 @@ wait_asp(){
     #Usage
     #-----
     #   ```bash
-    #   source _projectbuildingblocks.sh
     #   n_running=0
     #   maxjobs=...
     #   for (...); do
