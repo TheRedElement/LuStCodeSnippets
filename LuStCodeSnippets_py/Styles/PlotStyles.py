@@ -1,8 +1,29 @@
 
 #%%imports
 from cycler import cycler
+import logging
+import matplotlib as mpl
+import matplotlib.colors as mcolors
 import matplotlib.pyplot as plt
+
 import numpy as np
+
+logger = logging.getLogger(__name__)
+#%%custom registered mpl elements
+#fink colormap
+if "fink" in plt.colormaps:
+    logger.info("colormap `fink` was already registered ... overwriting existing")
+
+fink_colors = [
+    [0.0, "#15284F"],
+    # [0.5, "#3C8DFF"],
+    [0.5, "#D5D5D3"],
+    [1.0, "#F5622E"],
+]
+cmap   = mcolors.LinearSegmentedColormap.from_list(name="fink", colors=fink_colors)
+cmap_r = cmap.reversed()
+mpl.colormaps.register(cmap, force=True)
+mpl.colormaps.register(cmap_r, force=True)
 
 #%%global setup
 def layout_specs():
@@ -408,4 +429,157 @@ def lust_dark():
 
 
     return lust_dark_palette, lust_dark_ls, lust_dark_markers, lust_dark_cmap, lust_dark_hatches
+
+def fink_light():
+    """
+        - function defining a style in the corporate colors of the [FINK](https://fink-broker.org/) collaboration
+
+        Parameters
+        ----------
+
+        Raises
+        ------
+
+        Returns
+        -------
+            - `fink_palette`
+                - `np.ndarray`
+                - contains color palette used to cycle through when plotting
+            - `fink_ls`
+                - `np.ndarray`
+                - contains linestyles used to cycle through when plotting
+            - `fink_markers`
+                - `np.ndarray`
+                - contains markers used to cycle through when plotting
+            - `fink_cmap`
+                - `string`
+                - colormap used in the style
+            - `fink_hatches`
+                - `np.ndarray`
+                - hatches used in style
+
+        Dependencies
+        ------------
+            - `cycler`
+            - `matplotlib` 
+            - `numpy`
+
+        Comments
+        --------
+    """
+
+
+
+
+    mono_colors, mono_ls, mono_markers, mono_hatches = layout_specs()
+
+    fink_markers   = ["o", "+", "x", "^"]
+    fink_ls        = ["-", "--", "-.", ":"]
+    fink_palette   = ["#15284F", "#3C8DFF", "#D5D5D3", "#F5622E"]
+    fink_hatches   = ["/","\\","o","*"]
+
+    prop_cycle = (
+        cycler(linestyle=fink_ls) +
+        cycler(color=fink_palette)
+    )
+
+    fink_cmap = "fink"
+
+    fink_bg = "FFFFFF"
+
+    #color scheme                                               #julia equivalent
+    plt.rcParams["figure.facecolor"]        = fink_bg      #:bg
+    # plt.rcParams["figure.edgecolor"]      = (0,0,0,1)     
+    plt.rcParams["axes.facecolor"]          = "FFFFFF"          #:bginside
+    plt.rcParams["text.color"]              = (0,0,0,1)         #:fgtext, :legendfontcolor, :legendtitlefontcolor, :titlefontcolor
+    plt.rcParams["xtick.color"]             = (0,0,0,1)         #:fgtext
+    plt.rcParams["ytick.color"]             = (0,0,0,1)         #:fgtext
+    plt.rcParams["axes.labelcolor"]         = (0,0,0,1)         #:fgtext
+    plt.rcParams["axes.edgecolor"]          = (0,0,0,1)         #:fgguide
+    plt.rcParams["legend.facecolor"]        = "inherit"         #:fglegend, :legendbackgroundcolor
+    plt.rcParams["legend.edgecolor"]        = "inherit"               #
+    plt.rcParams["axes.prop_cycle"]         = prop_cycle        #:palette, cycling through :ls
+    plt.rcParams["image.cmap"]              = fink_cmap    #:colorgradient
+    plt.rcParams["axes3d.xaxis.panecolor"]  = (1,1,1,.9)        #
+    plt.rcParams["axes3d.yaxis.panecolor"]  = (1,1,1,.9)        #
+    plt.rcParams["axes3d.zaxis.panecolor"]  = (1,1,1,.9)        #
+
+    return fink_palette, fink_ls, fink_markers, fink_cmap, fink_hatches
+
+
+def fink_dark():
+    """
+        - function defining a style in the corporate colors of the [FINK](https://fink-broker.org/) collaboration
+
+        Parameters
+        ----------
+
+        Raises
+        ------
+
+        Returns
+        -------
+            - `fink_palette`
+                - `np.ndarray`
+                - contains color palette used to cycle through when plotting
+            - `fink_ls`
+                - `np.ndarray`
+                - contains linestyles used to cycle through when plotting
+            - `fink_markers`
+                - `np.ndarray`
+                - contains markers used to cycle through when plotting
+            - `fink_cmap`
+                - `string`
+                - colormap used in the style
+            - `fink_hatches`
+                - `np.ndarray`
+                - hatches used in style
+
+        Dependencies
+        ------------
+            - `cycler`
+            - `matplotlib` 
+            - `numpy`
+
+        Comments
+        --------
+    """
+
+
+
+
+    mono_colors, mono_ls, mono_markers, mono_hatches = layout_specs()
+
+    fink_markers   = ["o", "+", "x", "^"]
+    fink_ls        = ["-", "--", "-.", ":"][:-1]
+    fink_palette   = ["#15284F", "#3C8DFF", "#D5D5D3", "#F5622E"][1:][::-1]
+    fink_hatches   = ["/","\\","o","*"]
+
+    prop_cycle = (
+        cycler(linestyle=fink_ls) +
+        cycler(color=fink_palette)
+    )
+
+    fink_cmap = "fink_r"
+
+    fink_bg = "000000"
+
+    #color scheme                                               #julia equivalent
+    plt.rcParams["figure.facecolor"]        = fink_bg      #:bg
+    # plt.rcParams["figure.edgecolor"]      = (0,0,0,1)     
+    plt.rcParams["axes.facecolor"]          = "000000"          #:bginside
+    plt.rcParams["text.color"]              = (0.75,0.75,0.75,1)    #:fgtext, :legendfontcolor, :legendtitlefontcolor, :titlefontcolor
+    plt.rcParams["xtick.color"]             = (0.75,0.75,0.75,1)    #:fgtext
+    plt.rcParams["ytick.color"]             = (0.75,0.75,0.75,1)    #:fgtext
+    plt.rcParams["axes.labelcolor"]         = (0.75,0.75,0.75,1)    #:fgtext
+    plt.rcParams["axes.edgecolor"]          = (0.75,0.75,0.75,1)    #:fgguide
+    plt.rcParams["legend.facecolor"]        = "inherit"         #:fglegend, :legendbackgroundcolor
+    plt.rcParams["legend.edgecolor"]        = "inherit"               #
+    plt.rcParams["axes.prop_cycle"]         = prop_cycle        #:palette, cycling through :ls
+    plt.rcParams["image.cmap"]              = fink_cmap    #:colorgradient
+    plt.rcParams["axes3d.xaxis.panecolor"]  = (1,1,1,.1)        #
+    plt.rcParams["axes3d.yaxis.panecolor"]  = (1,1,1,.1)        #
+    plt.rcParams["axes3d.zaxis.panecolor"]  = (1,1,1,.1)        #
+
+    return fink_palette, fink_ls, fink_markers, fink_cmap, fink_hatches
 
