@@ -1,7 +1,0 @@
-astropy==6.1.7
-cycler==0.12.1
-matplotlib==3.10.3
-numpy==2.2.6
-polars==1.30.0
-pytest==8.3.5
-toml==0.10.2
