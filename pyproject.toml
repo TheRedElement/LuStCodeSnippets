@@ -1,28 +1,50 @@
-[build-system]
-requires = [ "hatchling >= 1.26",]
-build-backend = "hatchling.build"
-
 [project]
 name = "LuStCodeSnippets_py"
 version = "0.1.0"
 description = "repository of some useful code snippets in various programming languages."
 readme = "README.md"
-requires-python = ">=3.10"
-classifiers = [ "Programming Language :: Python :: 3", "Operating System :: OS Independent",]
-license = "MIT"
-license-files = [ "LICEN[CS]E*",]
-dependencies = [ "astropy==6.1.7", "cycler==0.12.1", "matplotlib==3.10.3", "numpy==2.2.6", "polars==1.30.0", "pytest==8.3.5", "toml==0.10.2",]
-[[project.authors]]
-name = "Lukas Steinwender"
-email = ""
+authors = [
+    {name="Lukas Steinwender"}
+]
+requires-python = ">=3.11"
+dependencies = [
+    "astropy>=7.1.0",
+    "cycler>=0.12.1",
+    "matplotlib>=3.10.6",
+    "numpy>=2.3.2",
+    "polars>=1.33.0",
+]
 
-[[project.maintaners]]
-name = "Lukas Steinwender"
-email = ""
+maintainers = [
+    {name="Lukas Steinwender"}
+]
+license = {file = "LICENSE"}
+keywords = ["astronomy", "data-science", "snippets", "utilities"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
 
+
+[build-system]
+requires = ["uv_build>=0.8.13,<0.9.0"]
+build-backend = "uv_build"
+
+#custom stuff
 [project.urls]
-Homepage = "https://github.com/TheRedElement/code_snippets"
-Issues = "https://github.com/TheRedElement/code_snippets/issues"
+Homepage = "https://github.com/TheRedElement/LuStCodeSnippets"
+Repository = "https://github.com/TheRedElement/LuStCodeSnippets"
+Issues = "https://github.com/TheRedElement/LuStCodeSnippets/issues"
 
-[tool.hatch.build.targets.wheel]
-packages = [ "LuStCodeSnippets_py",]
+[tool.uv.build-backend]
+module-root = "."                       #Adjusts where UV looks for code modules
+module-name = "LuStCodeSnippets_py"     #Adjusts where UV looks for code modules
+data = ["data"]                         #make sure data is included
+
+[dependency-groups]
+dev = [
+    "ipykernel>=6.30.1",
+    "pytest>=8.4.1",
+]
+
+[project.scripts]
