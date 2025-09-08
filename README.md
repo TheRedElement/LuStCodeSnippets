@@ -2,6 +2,10 @@
 
 repository of some useful code snippets in various programming languages.
 
+Demos on how to use the different snippets and routines can be found in
+* [LuStCodeSnippets_jl_demos](./LuStCodeSnippets_jl_demos/) for Julia
+* [LuStCodeSnippets_py_demos](./LuStCodeSnippets_py_demos/) for Python
+
 If you want to use the code simply clone the repo:
 
 ```shell
