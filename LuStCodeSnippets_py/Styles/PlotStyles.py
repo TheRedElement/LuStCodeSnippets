@@ -122,20 +122,21 @@ def layout_specs():
 
     ncolors_mono        = 3
 
-    mono_colors_base = plt.get_cmap("gray")(np.linspace(0,1,ncolors_mono+2))[1:-1]
+    mono_colors_base = plt.get_cmap("gray")(np.linspace(0,1,ncolors_mono+1))[:]
     mono_ls_base        = ["-", "--", ":", "-."]              #linestyles to cycle through when plotting
-    mono_markers_base   = ["o", "^", "v", "d", "x"]
-    mono_hatches_base   = ["/","\\","o","*", "|"]
+    mono_markers_base   = ["o", "x", "d", "+"]
+    mono_hatches_base   = ["/","\\","o","*"]
 
     nlinestyles_mono    = len(mono_ls_base)                         #number of defined linestyles
     nmarkers_mono       = len(mono_markers_base)                    #number of defined linestyles
 
-    mono_colors         = np.repeat(mono_colors_base[np.newaxis,:,:], nlinestyles_mono, axis=0).reshape(-1,4)
+    mono_colors_light   = np.repeat(mono_colors_base[np.newaxis,:-1,:], nlinestyles_mono, axis=0).reshape(-1,4)
+    mono_colors_dark    = np.repeat(np.flip(mono_colors_base[np.newaxis,1:,:], axis=1), nlinestyles_mono, axis=0).reshape(-1,4)
     mono_ls             = np.repeat(mono_ls_base, ncolors_mono, axis=0)
     mono_markers        = np.repeat(mono_markers_base, ncolors_mono, axis=0)
     mono_hatches        = np.repeat(mono_hatches_base, ncolors_mono, axis=0)
 
-    return mono_colors, mono_ls, mono_markers, mono_hatches
+    return mono_colors_light, mono_colors_dark, mono_ls, mono_markers, mono_hatches
 
 #%%style definitions
 def tre_light():
@@ -176,7 +177,7 @@ def tre_light():
         --------
     """
 
-    mono_colors, mono_ls, mono_markers, mono_hatches = layout_specs()
+    mono_colors, _, mono_ls, mono_markers, mono_hatches = layout_specs()
 
     tre_light_markers   = ["o", *mono_markers]
     tre_light_ls        = ["-", *mono_ls]
@@ -249,11 +250,11 @@ def tre_dark():
         --------
     """
 
-    mono_colors, mono_ls, mono_markers, mono_hatches = layout_specs()
+    _, mono_colors, mono_ls, mono_markers, mono_hatches = layout_specs()
 
-    tre_dark_markers   = ["o", *mono_markers]
-    tre_dark_ls        = ["-", *mono_ls]
-    tre_dark_palette   = [(161/255,0,0,1), *mono_colors[::-1]]
+    tre_dark_markers   = ["o", *mono_markers[:-1]]
+    tre_dark_ls        = ["-", *mono_ls[:-1]]
+    tre_dark_palette   = [(161/255,0,0,1), *mono_colors[:-1]]
     tre_dark_hatches   = mono_hatches
 
     prop_cycle = (
@@ -269,18 +270,18 @@ def tre_dark():
     plt.rcParams["figure.facecolor"]        = tre_dark_bg           #:bg
     # plt.rcParams["figure.edgecolor"]        = (1,1,1,1)     
     plt.rcParams["axes.facecolor"]          = "000000"              #:bginside
-    plt.rcParams["text.color"]              = (0.75,0.75,0.75,1)    #:fgtext, :legendfontcolor, :legendtitlefontcolor, :titlefontcolor
-    plt.rcParams["xtick.color"]             = (0.75,0.75,0.75,1)    #:fgtext
-    plt.rcParams["ytick.color"]             = (0.75,0.75,0.75,1)    #:fgtext
-    plt.rcParams["axes.labelcolor"]         = (0.75,0.75,0.75,1)    #:fgtext
-    plt.rcParams["axes.edgecolor"]          = (0.75,0.75,0.75,1)    #:fgguide
-    plt.rcParams["legend.facecolor"]        = "inherit"         #:fglegend, :legendbackgroundcolor
-    plt.rcParams["legend.edgecolor"]        = "inherit"               #
+    plt.rcParams["text.color"]              = (1.0,1.0,1.0,1)       #:fgtext, :legendfontcolor, :legendtitlefontcolor, :titlefontcolor
+    plt.rcParams["xtick.color"]             = (1.0,1.0,1.0,1)       #:fgtext
+    plt.rcParams["ytick.color"]             = (1.0,1.0,1.0,1)       #:fgtext
+    plt.rcParams["axes.labelcolor"]         = (1.0,1.0,1.0,1)       #:fgtext
+    plt.rcParams["axes.edgecolor"]          = (1.0,1.0,1.0,1)       #:fgguide
+    plt.rcParams["legend.facecolor"]        = "inherit"             #:fglegend, :legendbackgroundcolor
+    plt.rcParams["legend.edgecolor"]        = "inherit"             #
     plt.rcParams["axes.prop_cycle"]         = prop_cycle            #:palette, cycling through :ls
     plt.rcParams["image.cmap"]              = tre_dark_cmap         #:colorgradient
-    plt.rcParams["axes3d.xaxis.panecolor"]  = (1,1,1,.1)            #
-    plt.rcParams["axes3d.yaxis.panecolor"]  = (1,1,1,.1)            #
-    plt.rcParams["axes3d.zaxis.panecolor"]  = (1,1,1,.1)            #
+    plt.rcParams["axes3d.xaxis.panecolor"]  = (1.0,1.0,1.0,.1)      #
+    plt.rcParams["axes3d.yaxis.panecolor"]  = (1.0,1.0,1.0,.1)      #
+    plt.rcParams["axes3d.zaxis.panecolor"]  = (1.0,1.0,1.0,.1)      #
 
 
     return tre_dark_palette, tre_dark_ls, tre_dark_markers, tre_dark_cmap, tre_dark_hatches
@@ -323,7 +324,7 @@ def lust_light():
         --------
     """
 
-    mono_colors, mono_ls, mono_markers, mono_hatches = layout_specs()
+    mono_colors, _, mono_ls, mono_markers, mono_hatches = layout_specs()
 
     lust_light_markers   = [*mono_markers]
     lust_light_ls        = [*mono_ls]
@@ -396,7 +397,7 @@ def lust_dark():
         --------
     """
 
-    mono_colors, mono_ls, mono_markers, mono_hatches = layout_specs()
+    _, mono_colors, mono_ls, mono_markers, mono_hatches = layout_specs()
 
     lust_dark_markers   = [*mono_markers]
     lust_dark_ls        = [*mono_ls]
@@ -416,11 +417,11 @@ def lust_dark():
     plt.rcParams["figure.facecolor"]        = lust_dark_bg           #:bg
     # plt.rcParams["figure.edgecolor"]        = (1,1,1,1)     
     plt.rcParams["axes.facecolor"]          = "000000"              #:bginside
-    plt.rcParams["text.color"]              = (0.75,0.75,0.75,1)    #:fgtext, :legendfontcolor, :legendtitlefontcolor, :titlefontcolor
-    plt.rcParams["xtick.color"]             = (0.75,0.75,0.75,1)    #:fgtext
-    plt.rcParams["ytick.color"]             = (0.75,0.75,0.75,1)    #:fgtext
-    plt.rcParams["axes.labelcolor"]         = (0.75,0.75,0.75,1)    #:fgtext
-    plt.rcParams["axes.edgecolor"]          = (0.75,0.75,0.75,1)    #:fgguide
+    plt.rcParams["text.color"]              = (1.0,1.0,1.0,1.0)    #:fgtext, :legendfontcolor, :legendtitlefontcolor, :titlefontcolor
+    plt.rcParams["xtick.color"]             = (1.0,1.0,1.0,1.0)    #:fgtext
+    plt.rcParams["ytick.color"]             = (1.0,1.0,1.0,1.0)    #:fgtext
+    plt.rcParams["axes.labelcolor"]         = (1.0,1.0,1.0,1.0)    #:fgtext
+    plt.rcParams["axes.edgecolor"]          = (1.0,1.0,1.0,1.0)    #:fgguide
     plt.rcParams["legend.facecolor"]        = "inherit"         #:fglegend, :legendbackgroundcolor
     plt.rcParams["legend.edgecolor"]        = "inherit"               #
     plt.rcParams["axes.prop_cycle"]         = prop_cycle            #:palette, cycling through :ls
@@ -470,10 +471,7 @@ def fink_light():
         --------
     """
 
-
-
-
-    mono_colors, mono_ls, mono_markers, mono_hatches = layout_specs()
+    mono_colors, _, mono_ls, mono_markers, mono_hatches = layout_specs()
 
     fink_markers   = ["o", "+", "x", "^"]
     fink_ls        = ["-", "--", "-.", ":"]
@@ -507,7 +505,6 @@ def fink_light():
     plt.rcParams["axes3d.zaxis.panecolor"]  = (1,1,1,.9)        #
 
     return fink_palette, fink_ls, fink_markers, fink_cmap, fink_hatches
-
 
 def fink_dark():
     """
@@ -547,10 +544,7 @@ def fink_dark():
         --------
     """
 
-
-
-
-    mono_colors, mono_ls, mono_markers, mono_hatches = layout_specs()
+    _, mono_colors, mono_ls, mono_markers, mono_hatches = layout_specs()
 
     fink_markers   = ["o", "+", "x", "^"]
     fink_ls        = ["-", "--", "-.", ":"][:-1]
@@ -570,15 +564,15 @@ def fink_dark():
     plt.rcParams["figure.facecolor"]        = fink_bg      #:bg
     # plt.rcParams["figure.edgecolor"]      = (0,0,0,1)     
     plt.rcParams["axes.facecolor"]          = "000000"          #:bginside
-    plt.rcParams["text.color"]              = (0.75,0.75,0.75,1)    #:fgtext, :legendfontcolor, :legendtitlefontcolor, :titlefontcolor
-    plt.rcParams["xtick.color"]             = (0.75,0.75,0.75,1)    #:fgtext
-    plt.rcParams["ytick.color"]             = (0.75,0.75,0.75,1)    #:fgtext
-    plt.rcParams["axes.labelcolor"]         = (0.75,0.75,0.75,1)    #:fgtext
-    plt.rcParams["axes.edgecolor"]          = (0.75,0.75,0.75,1)    #:fgguide
+    plt.rcParams["text.color"]              = (1.0,1.0,1.0,1.0) #:fgtext, :legendfontcolor, :legendtitlefontcolor, :titlefontcolor
+    plt.rcParams["xtick.color"]             = (1.0,1.0,1.0,1.0) #:fgtext
+    plt.rcParams["ytick.color"]             = (1.0,1.0,1.0,1.0) #:fgtext
+    plt.rcParams["axes.labelcolor"]         = (1.0,1.0,1.0,1.0) #:fgtext
+    plt.rcParams["axes.edgecolor"]          = (1.0,1.0,1.0,1.0) #:fgguide
     plt.rcParams["legend.facecolor"]        = "inherit"         #:fglegend, :legendbackgroundcolor
     plt.rcParams["legend.edgecolor"]        = "inherit"               #
     plt.rcParams["axes.prop_cycle"]         = prop_cycle        #:palette, cycling through :ls
-    plt.rcParams["image.cmap"]              = fink_cmap    #:colorgradient
+    plt.rcParams["image.cmap"]              = fink_cmap         #:colorgradient
     plt.rcParams["axes3d.xaxis.panecolor"]  = (1,1,1,.1)        #
     plt.rcParams["axes3d.yaxis.panecolor"]  = (1,1,1,.1)        #
     plt.rcParams["axes3d.zaxis.panecolor"]  = (1,1,1,.1)        #
