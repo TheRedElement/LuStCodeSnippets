@@ -169,6 +169,7 @@ begin #specify layout, sizes, ...
         # :marker                 => :auto,
         :linewidth              => 2,
         :markersize             => 4,
+        :markerstrokewidth      => 0,
         :ls                     => :solid,
     ])
 
@@ -187,16 +188,17 @@ begin #specify layout, sizes, ...
     """
     ncolors_mono        = 3
 
-    mono_colors_base    = collect(cgrad(:grays, ncolors_mono+2, categorical=true, rev=false))[2:end-1]
+    mono_colors_base    = collect(cgrad(:grays, ncolors_mono+1, categorical=true, rev=false))
     mono_ls_base        = [:solid :dash :dot :dashdot :dashdotdot]              #linestyles to cycle through when plotting
     mono_markers_base   = [:circle :utriangle :dtriangle :diamond :cross]       #markers to cycle through
 
     nlinestyles_mono    = length(mono_ls_base)           #number of defined linestyles
     nmarkers_mono       = length(mono_markers_base)      #number of defined linestyles
     
-    const mono_colors   = reshape(RGB.(reshape(repeat(mono_colors_base, 1,nlinestyles_mono),:)), 1, :)
-    const mono_ls       = hcat(permutedims(reshape(repeat(mono_ls_base, 1, ncolors_mono), :, ncolors_mono), (2,1))...)
-    const mono_markers  = hcat(permutedims(reshape(repeat(mono_markers_base, 1, ncolors_mono), :, ncolors_mono), (2,1))...)
+    const mono_colors_light = reshape(RGB.(reshape(repeat(mono_colors_base[1:end-1], 1,nlinestyles_mono),:)), 1, :)
+    const mono_colors_dark  = reshape(RGB.(reshape(repeat(mono_colors_base[2:end], 1,nlinestyles_mono),:)), 1, :)
+    const mono_ls           = hcat(permutedims(reshape(repeat(mono_ls_base, 1, ncolors_mono), :, ncolors_mono), (2,1))...)
+    const mono_markers      = hcat(permutedims(reshape(repeat(mono_markers_base, 1, ncolors_mono), :, ncolors_mono), (2,1))...)
 
 end
 
@@ -218,14 +220,14 @@ begin #lust_dark
     color_scheme = Dict([
         :bg                     => lust_dark_bg,
         :bginside               => colorant"#000000",
-        :fg                     => colorant"rgba(75%,75%,75%,1)",
-        :fgtext                 => colorant"rgba(75%,75%,75%,1)",
-        :fgguide                => colorant"rgba(75%,75%,75%,1)",
-        :fglegend               => colorant"rgba(75%,75%,75%,1)",
-        :legendfontcolor        => colorant"rgba(75%,75%,75%,1)",
-        :legendtitlefontcolor   => colorant"rgba(75%,75%,75%,1)",
+        :fg                     => colorant"rgba(100%,100%,100%,1)",
+        :fgtext                 => colorant"rgba(100%,100%,100%,1)",
+        :fgguide                => colorant"rgba(100%,100%,100%,1)",
+        :fglegend               => colorant"rgba(100%,100%,100%,1)",
+        :legendfontcolor        => colorant"rgba(100%,100%,100%,1)",
+        :legendtitlefontcolor   => colorant"rgba(100%,100%,100%,1)",
         :legendbackgroundcolor  => colorant"rgba( 0%, 0%, 0%,0.07)",
-        :titlefontcolor         => colorant"rgba(75%,75%,75%,1)",
+        :titlefontcolor         => colorant"rgba(100%,100%,100%,1)",
         :palette                => PlotThemes.expand_palette(lust_dark_bg, lust_dark_palette; lchoices=[57], cchoices=[100]),
         :colorgradient          => :fire,
     ])
@@ -280,20 +282,20 @@ begin #lust_dark_mono (monochromatic)
     # layout_specs_lust_dark_mono[:ls] = :auto
     # layout_specs_lust_dark_mono[:markershape] = markershape_mono
     
-    const lust_dark_mono_palette = mono_colors[end:-1:1]
+    const lust_dark_mono_palette = mono_colors_dark[end:-1:1]
 
 
     color_scheme = Dict([
         :bg                     => lust_dark_bg,
         :bginside               => colorant"#000000",
-        :fg                     => colorant"rgba(75%,75%,75%,1)",
-        :fgtext                 => colorant"rgba(75%,75%,75%,1)",
-        :fgguide                => colorant"rgba(75%,75%,75%,1)",
-        :fglegend               => colorant"rgba(75%,75%,75%,1)",
-        :legendfontcolor        => colorant"rgba(75%,75%,75%,1)",
-        :legendtitlefontcolor   => colorant"rgba(75%,75%,75%,1)",
+        :fg                     => colorant"rgba(100%,100%,100%,1)",
+        :fgtext                 => colorant"rgba(100%,100%,100%,1)",
+        :fgguide                => colorant"rgba(100%,100%,100%,1)",
+        :fglegend               => colorant"rgba(100%,100%,100%,1)",
+        :legendfontcolor        => colorant"rgba(100%,100%,100%,1)",
+        :legendtitlefontcolor   => colorant"rgba(100%,100%,100%,1)",
         :legendbackgroundcolor  => colorant"rgba(0%,  0%, 0%,0.07)",
-        :titlefontcolor         => colorant"rgba(75%,75%,75%,1)",
+        :titlefontcolor         => colorant"rgba(100%,100%,100%,1)",
         :palette                => PlotThemes.expand_palette(lust_dark_bg, lust_dark_mono_palette; lchoices=[57], cchoices=[100]),
         :colorgradient          => :grays,
     ])
@@ -309,7 +311,7 @@ begin #lust_light_mono (monochromatic)
     # layout_specs_lust_light_mono[:ls] = :auto
     # layout_specs_lust_light_mono[:markershape] = markershape_mono
     
-    const lust_light_mono_palette = mono_colors[1:end]
+    const lust_light_mono_palette = mono_colors_light[1:end]
 
     color_scheme = Dict([
         :bg                     => lust_light_bg,
@@ -337,21 +339,21 @@ begin #tre_dark
     # layout_specs_tre_dark[:ls] = :auto
     # layout_specs_tre_dark[:markershape] = markershape_mono
     
-    const tre_dark_palette = [colorant"rgb(161,0,0)", mono_colors[end:-1:1]...]
+    const tre_dark_palette = [colorant"rgb(161,0,0)", mono_colors_dark[end:-1:1]...]
 
     const tre_dark_bg = colorant"#000000"
 
     color_scheme = Dict([
         :bg                     => tre_dark_bg,
         :bginside               => colorant"#000000",
-        :fg                     => colorant"rgba(75%,75%,75%,1)",
-        :fgtext                 => colorant"rgba(75%,75%,75%,1)",
-        :fgguide                => colorant"rgba(75%,75%,75%,1)",
-        :fglegend               => colorant"rgba(75%,75%,75%,1)",
-        :legendfontcolor        => colorant"rgba(75%,75%,75%,1)",
-        :legendtitlefontcolor   => colorant"rgba(75%,75%,75%,1)",
+        :fg                     => colorant"rgba(100%,100%,100%,1)",
+        :fgtext                 => colorant"rgba(100%,100%,100%,1)",
+        :fgguide                => colorant"rgba(100%,100%,100%,1)",
+        :fglegend               => colorant"rgba(100%,100%,100%,1)",
+        :legendfontcolor        => colorant"rgba(100%,100%,100%,1)",
+        :legendtitlefontcolor   => colorant"rgba(100%,100%,100%,1)",
         :legendbackgroundcolor  => colorant"rgba(0%,  0%,  0%,  0.07)",
-        :titlefontcolor         => colorant"rgba(75%,75%,75%,1)",
+        :titlefontcolor         => colorant"rgba(100%,100%,100%,1)",
         :palette                => PlotThemes.expand_palette(tre_dark_bg, tre_dark_palette; lchoices=[57], cchoices=[100]),
         :colorgradient          => :grays,
     ])
@@ -367,7 +369,7 @@ begin #tre_light
     # layout_specs_tre_light[:ls] = :auto
     # layout_specs_tre_light[:markershape] = markershape_mono
     
-    const tre_light_palette = [colorant"rgb(161,0,0)", mono_colors[1:end]...]
+    const tre_light_palette = [colorant"rgb(161,0,0)", mono_colors_light[1:end]...]
 
 
     const tre_light_bg = colorant"#FFFFFF"

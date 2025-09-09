@@ -12,7 +12,7 @@ theme(:lust_light)
 theme(:lust_dark_mono)
 theme(:lust_light_mono)
 theme(:tre_dark)
-# theme(:tre_light)
+theme(:tre_light)
 
 #%%definitions
 
