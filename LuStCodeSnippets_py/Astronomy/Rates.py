@@ -78,37 +78,25 @@ def number_from_rate(
                 - check if you accidentally divided your `rate` by `cosmo.h**3`
     """
 
-    if fov_eff.unit == u.deg**2:
-        V_com_min = cosmo.comoving_volume(z_min)    #observed volume
-        V_com_max = cosmo.comoving_volume(z)        #observed volume
-        
-        #fraction of comoving volume
-        A_sky = 4*np.pi * (180/np.pi)**2 * u.deg**2         #area of entire night-sky (~41253 *u.deg**2)
-        V_com = fov_eff/A_sky * (V_com_max - V_com_min)     #fraction of the sky actually observed (i.e., Strolger2015)
+    #checks
+    assert (fov_eff.unit == u.deg**2), "`fov_eff` has to have one of the following units: `u.deg**2`"
+    
+    
+    #cosmological quantities
+    V_com_min = cosmo.comoving_volume(z_min)    #observed volume
+    V_com_max = cosmo.comoving_volume(z)        #observed volume
+    
+    #fraction of comoving volume
+    A_sky = 4*np.pi * (180/np.pi)**2 * u.deg**2         #area of entire night-sky (~41253 *u.deg**2)
+    V_com = fov_eff/A_sky * (V_com_max - V_com_min)     #fraction of the sky actually observed (i.e., Strolger2015)
 
-        # #alternative: explicit computation of observed volume (equivalent to the above)
-        # d_com_min = cosmo.comoving_distance(z_min)  #observed distance
-        # d_com_max = cosmo.comoving_distance(z)      #observed distance
-        
-        # #computation of observed volume from comoving distance
-        # V_com = fov_eff * (np.pi/(180*u.deg))**2 * (d_com_max**3 - d_com_min**3)/3
-
-    elif fov_eff.unit == u.deg:
-
-        logger.warning("using approximation because `fov_eff.unit` is `u.deg`. If you want no approximation provide `fov_eff` as an area")
-
-        d_angular_min = cosmo.angular_diameter_distance(z_min)  #angular diameter distance
-        d_angular_max = cosmo.angular_diameter_distance(z)      #angular diameter distance
-        d_com_min = cosmo.comoving_distance(z_min)              #observed distance
-        d_com_max = cosmo.comoving_distance(z)                  #observed distance        
-        
-        diam_min = d_angular_min * (fov_eff * np.pi/180).value  #convert angular diameter to actual distance (i.e., Wright CosmoCalc)
-        diam_max = d_angular_max * (fov_eff * np.pi/180).value  #convert angular diameter to actual distance (i.e., Wright CosmoCalc)
-        V_approx_min = np.pi * (diam_min/2)**2 * d_com_min /3   #V = A * h/3
-        V_approx_max = np.pi * (diam_max/2)**2 * d_com_max /3   #V = A * h/3
-        V_com = (V_approx_max - V_approx_min)
-    else:
-        raise ValueError("`fov_eff` has to have one of the following units: `u.deg**2`, `u.deg` (approximation will be used)")
+    """ #alternative: explicit computation of observed volume (equivalent to the above)
+    d_com_min = cosmo.comoving_distance(z_min)  #observed distance
+    d_com_max = cosmo.comoving_distance(z)      #observed distance
+    
+    #computation of observed volume from comoving distance
+    V_com = fov_eff * (np.pi/(180*u.deg))**2 * (d_com_max**3 - d_com_min**3)/3
+    """
     
     #compute number of objects that are observed
     nobj = (rate * V_com * dt_eff).value
