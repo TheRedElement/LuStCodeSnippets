@@ -23,7 +23,7 @@ def observation_limit(
             - `cosmo`
                 - `Cosmology`, optional
                 - cosmology to be used for the computation
-                - the default is `FlatLambdaCDM(H0=70, Om0=0.3, Tcmb0=2.725)`
+                - the default is `FlatLambdaCDM(H0=70, Om0=0.3)`
             - `zmin`
                 - `float`, optional
                 - minimum of search range for `z`
