@@ -72,6 +72,10 @@ def number_from_rate(
         --------
             - in case you have a survey with `N` fields of `fov=d*u.deg`
                 - pass `fov_eff=np.sqrt(N)*fov` to compensate for area computation
+            - if your results are by a factor of about `3` to high compared to observations
+                - make sure you multiplied your `rate` with `cosmo.h**3`
+            - if your results are by a factor of about `10` to high compared to actual observations
+                - check if you accidentally divided your `rate` by `cosmo.h**3`
     """
 
     if fov_eff.unit == u.deg**2:
