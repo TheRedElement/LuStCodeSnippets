@@ -39,6 +39,4 @@ class Test_number_from_rate:
         assert isinstance(n_pred, float)
 
     def test_result(self, action):
-        print(action[0], action[1])
-        True
         assert action[0] == pytest.approx(action[1], rel=0.7)
