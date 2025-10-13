@@ -1,5 +1,5 @@
 [project]
-name = "LuStCodeSnippets_py"
+name = "lust_codesnippets_py"
 version = "0.1.0"
 description = "repository of some useful code snippets in various programming languages."
 readme = "README.md"
@@ -39,7 +39,7 @@ Issues = "https://github.com/TheRedElement/LuStCodeSnippets/issues"
 
 [tool.uv.build-backend]
 module-root = "."                       #Adjusts where UV looks for code modules
-module-name = "LuStCodeSnippets_py"     #Adjusts where UV looks for code modules
+module-name = "lust_codesnippets_py"     #Adjusts where UV looks for code modules
 
 [dependency-groups]
 dev = [

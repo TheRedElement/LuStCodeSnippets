@@ -4,17 +4,17 @@ repository of some useful code snippets in various programming languages.
 
 Demos on how to use the different snippets and routines can be found in
 * [LuStCodeSnippets_jl_demos](./LuStCodeSnippets_jl_demos/) for Julia
-* [LuStCodeSnippets_py_demos](./LuStCodeSnippets_py_demos/) for Python
+* [lust_codesnippets_py_demos](./lust_codesnippets_py_demos) for Python
 
 If you want to use the code simply clone the repo:
 
-```shell
+```bash
 git clone https://github.com/TheRedElement/LuStCodeSnippets.git
 ```
 
 In case you want use the repo inside your own git repo, it is recommended to create a submodule:
 
-```shell
+```bash
 git submodule add https://github.com/TheRedElement/LuStCodeSnippets.git
 ```
 
@@ -30,21 +30,21 @@ To do so, navigate inside the directory of where you cloned this submodule to an
 ### Julia
 To install the julia package use the following from within `Pkg`:
 
-```shell
+```bash
 add https://github.com/TheRedElement/LuStCodeSnippets.git#main:LuStCodeSnippets_jl
 ```
 
 ### Python
 To install the python package use the following:
 
-```shell
+```bash
 pip3 install git+https://github.com/TheRedElement/LuStCodeSnippets.git
 ```
 
 ### Bash
 To install simply clone the repo and call the following from the repository root:
 
-```shell
+```bash
 source LuStCodeSnippets_sh/*
 ```
 
@@ -57,10 +57,15 @@ They will be stored in:
 * [./Project.toml](./Project.toml) for the testing environment
 
 ### Python
-To keep track of dependencies in a clean manner it is recommended to use [pipreqs](https://pypi.org/project/pipreqs/).
+To keep track of dependencies in a clean manner it is recommended to use [uv](https://docs.astral.sh/uv/).
+All the relevant files for [uv](https://docs.astral.sh/uv/) to know what to do are already present in the root directory.
+This way, all the dependencties are manged for you.
+
+#### Not Using [uv](https://docs.astral.sh/uv/)?
+It is recommended to use [pipreqs](https://pypi.org/project/pipreqs/).
 To do so run the following at the root of your project (`--force` overwrites any existing requirements.txt file):
 
-```shell
+```bash
 pip3 install pipreqs
 pipreqs . --force
 ```
@@ -70,13 +75,16 @@ To install the package while still enabling development (iteratively changing th
 
 ### Julia
 
-```shell
+```bash
 dev ./LuStCodeSnippets_jl
 ```
 
 ### Python
+In case you use [uv](https://docs.astral.sh/uv/) there's no need to install the package separately, as [uv](https://docs.astral.sh/uv/) will take care of that when executing scripts (automatic choice of correct environment)
 
-```shell
+#### Not Using [uv](https://docs.astral.sh/uv/)?
+Call the following:
+```bash
 pip3 install --editable .
 ```
 
@@ -85,16 +93,22 @@ pip3 install --editable .
 ### Julia
 To run tests for the julia module use the following command in the root directory:
 
-```shell
+```bash
 julia --project=. -e "using Pkg; Pkg.instantiate(); Pkg.status()"
 julia --project=. -e 'include("LuStCodeSnippets_jl_tests/runtests.jl")'
 ```
 
 ### Python
+When using [uv](https://docs.astral.sh/uv/) testing is as straightforward as calling the following (`uv run` to make sure the correct environment gets used):
+```bash
+uv run pytest lust_codesnippets_py_tests/
+```
+
+#### Not Using [uv](https://docs.astral.sh/uv/)?
 Given you have some form of the package installed (i.e. in editable mode - [Development](#development)) use the following command in the root directory to run unit tests:
 
-```shell
-pytest LuStCodeSnippets_py_tests/
+```bash
+pytest lust_codesnippets_py_tests/
 ```
 
 ## Compiling the Package
@@ -108,10 +122,7 @@ julia --project=./LuStCodeSnippets_jl ./compile_module.jl
 This will update [./LuStCodeSnippets_jl/Project.toml](./LuStCodeSnippets_jl/Project.toml) with the latest information about the module.
 
 ### Python
-Run the following command from the root directory to compile the package:
-```bash
-source venv/bin/activate
-python3 compile_module.py
-```
+In principle, [uv](https://docs.astral.sh/uv/) will take care of the proper formatting of [pyproject.toml](./pyproject.toml) for you.
+You might need to make some minor adjustments though.
 
 ## Comments
