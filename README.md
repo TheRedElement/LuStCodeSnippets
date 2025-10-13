@@ -35,8 +35,13 @@ add https://github.com/TheRedElement/LuStCodeSnippets.git#main:LuStCodeSnippets_
 ```
 
 ### Python
-To install the python package use the following:
+To install the python package with [uv](https://docs.astral.sh/uv/) (recommended) use the following:
 
+```bash
+uv add git+https://github.com/TheRedElement/LuStCodeSnippets.git
+```
+
+To install the python package with [pip](https://pypi.org/project/pip/) use the following:
 ```bash
 pip3 install git+https://github.com/TheRedElement/LuStCodeSnippets.git
 ```
