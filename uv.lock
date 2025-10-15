@@ -308,6 +308,49 @@ wheels = [
 ]
 
 [[package]]
+name = "h5py"
+version = "3.15.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "numpy" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/ae/a7/8629c38785f8772771c2c3674be51a43d07f91121a6c11674d357686333b/h5py-3.15.0.tar.gz", hash = "sha256:ede198dde0c359a3f9dc0af15962707c7195102235cb26b4826e33918789559a", size = 425986, upload-time = "2025-10-13T13:00:36.761Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/84/e3/991f238d129da2d70effb7f565aa9d875d1ed9bddd37b03401a0d8c3cf5a/h5py-3.15.0-cp311-cp311-macosx_14_0_arm64.whl", hash = "sha256:46ae347dd38a3785a6262c29324d445c506b8810fe4e736ca81876e6d81095ac", size = 2897858, upload-time = "2025-10-13T12:58:53.187Z" },
+    { url = "https://files.pythonhosted.org/packages/82/3c/c93d04fd16f3bb49324cb7864cd6cc79206984aa492e91271ba774d25d4b/h5py-3.15.0-cp311-cp311-macosx_15_0_x86_64.whl", hash = "sha256:b8c5622b91aaeaae0db366cc602a001981c9494f0bf72c857b0176683cbce9af", size = 3432123, upload-time = "2025-10-13T12:58:56.015Z" },
+    { url = "https://files.pythonhosted.org/packages/f5/d0/53a988c4d2e1171494e4a753295ba1356159434983666aa2aef912fc50ef/h5py-3.15.0-cp311-cp311-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:c03fec302f7e64345ac4bafcb3611e2606ad05d05d1b098e1199ada4898af794", size = 4504729, upload-time = "2025-10-13T12:59:00.081Z" },
+    { url = "https://files.pythonhosted.org/packages/d3/da/d567f090129e3acf57c2fb9317e1c18b316e1b369af1f18407b006f1a0e7/h5py-3.15.0-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:d455b31c1bc6c0e19dbca3510406adcb4b21b8b0d83c22eb3f600e85d68ea790", size = 4700330, upload-time = "2025-10-13T12:59:03.921Z" },
+    { url = "https://files.pythonhosted.org/packages/83/f1/d3b19d44d255437819a960b433278cdb27d2809f8ee5e161b78cd80a6dac/h5py-3.15.0-cp311-cp311-musllinux_1_2_aarch64.whl", hash = "sha256:4ec5fa4454a89a7ee6ffb2b44e8e52c8b2adf26f12c9e3558c36516b0c6743c8", size = 4152419, upload-time = "2025-10-13T12:59:07.487Z" },
+    { url = "https://files.pythonhosted.org/packages/93/ee/090a426792dcbfaed920cc79d3009ddf04d7b8b5a9b941ca5b3cd31adde3/h5py-3.15.0-cp311-cp311-musllinux_1_2_x86_64.whl", hash = "sha256:2ae93f2986e189dd124a6cff007e22d57eae8e8e1cc9fd3dc580b8d9ebb50f1e", size = 4617230, upload-time = "2025-10-13T12:59:10.726Z" },
+    { url = "https://files.pythonhosted.org/packages/6e/b9/6b72fbcefbe5ce299c5aa6ce2e9ec2d8962ffd5b98357524b7b53798e6c3/h5py-3.15.0-cp311-cp311-win_amd64.whl", hash = "sha256:c7e17b6f7025402521873146bc1069edfff96f9f02e086e1a854c6bfe6ad40e2", size = 2882114, upload-time = "2025-10-13T12:59:13.512Z" },
+    { url = "https://files.pythonhosted.org/packages/57/d2/ad54e92466d51dfdb5032ccbefceefd602a0693a35d7b9cd91c1608a4fd7/h5py-3.15.0-cp311-cp311-win_arm64.whl", hash = "sha256:20a507ce0e3986397e4dff7c46c24a95e400a77c830183c89506dbc471dd14d8", size = 2477114, upload-time = "2025-10-13T12:59:16.27Z" },
+    { url = "https://files.pythonhosted.org/packages/89/e8/a30df797ac4317abc079921f1292083c641a7bc9013aa8eb87758e9983ed/h5py-3.15.0-cp312-cp312-macosx_14_0_arm64.whl", hash = "sha256:1aa93cd3b2542fa4612d9bf29596793be69f93e496d5aeb7fa1ecdbb0ae2f16c", size = 2874710, upload-time = "2025-10-13T12:59:18.857Z" },
+    { url = "https://files.pythonhosted.org/packages/c5/2f/3827ddff18eca0acf3c6f49cc0aab28867ccf6b7554e0ad177d55d8c7a58/h5py-3.15.0-cp312-cp312-macosx_15_0_x86_64.whl", hash = "sha256:98aa28094744780951b934ad5428a4c79422560a7f101dfadb561706b32a13a7", size = 3421728, upload-time = "2025-10-13T12:59:22.618Z" },
+    { url = "https://files.pythonhosted.org/packages/03/0e/d58d8ffa03444fd66f472b6d5d6c46bc2826532a32762f9294c98311d37e/h5py-3.15.0-cp312-cp312-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:d9ac93c83dcd82bc7359b1a0c3650bed8ba9aa1e1b86061a29b171ddc3467275", size = 4914851, upload-time = "2025-10-13T12:59:26.264Z" },
+    { url = "https://files.pythonhosted.org/packages/90/2b/c2e45d26d3d5513c9bf86dec3699596522e45d3be9645d477f9daceb7d28/h5py-3.15.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:c8593bedd2b026b93249b2030c2587b40efd1e3a65e62b47417248a6c36fba83", size = 5109926, upload-time = "2025-10-13T12:59:30.052Z" },
+    { url = "https://files.pythonhosted.org/packages/8b/6c/2f84e7e917c7930383437f99169a704857710934cef4be343de25f82fd53/h5py-3.15.0-cp312-cp312-musllinux_1_2_aarch64.whl", hash = "sha256:2d4645391be6c36eddf5e350bc02a48ef12978232d9b622381ab2af6ee80fb17", size = 4561841, upload-time = "2025-10-13T12:59:34.433Z" },
+    { url = "https://files.pythonhosted.org/packages/ff/9e/f61a7baed1cc30782e2bbce0e3914a01d041fdd0f4ea89b51391488598ca/h5py-3.15.0-cp312-cp312-musllinux_1_2_x86_64.whl", hash = "sha256:68779394935dfe07bc6dfd44d4351c3945455fb9e6ee576f9c9bca730646b67b", size = 5037106, upload-time = "2025-10-13T12:59:37.946Z" },
+    { url = "https://files.pythonhosted.org/packages/3a/f1/834669acfd7ed3586b4a587fa4fab0c47ae1bc24b574882bb225414f393d/h5py-3.15.0-cp312-cp312-win_amd64.whl", hash = "sha256:7949d1981b086a7c155b60d2f41b64f0b70dd2b22bd5e8c3df4278c8581ecab8", size = 2874123, upload-time = "2025-10-13T12:59:40.665Z" },
+    { url = "https://files.pythonhosted.org/packages/28/de/5b1410719816f20f14c0973e1fd0224cba375e1c2022aad2f7f145b60502/h5py-3.15.0-cp312-cp312-win_arm64.whl", hash = "sha256:590d2547c0f174df7e0fa87fcc7ddba37dba8a366959621e9e6b2015e8a26dd7", size = 2458197, upload-time = "2025-10-13T12:59:43.288Z" },
+    { url = "https://files.pythonhosted.org/packages/fb/5f/18cfe7e4dbfda4496ea5760e55f25f3459447a5803590e9558cb0e8c1227/h5py-3.15.0-cp313-cp313-macosx_14_0_arm64.whl", hash = "sha256:597c3a6220f494490cd220ddc2b78ec6054ef65cc09aad73d1666e60eb6832ca", size = 2853060, upload-time = "2025-10-13T12:59:45.9Z" },
+    { url = "https://files.pythonhosted.org/packages/a8/ef/860855df35487717d9823002b811e00cf93b5284ce8a74c41d39d0d8d22c/h5py-3.15.0-cp313-cp313-macosx_15_0_x86_64.whl", hash = "sha256:f2632387ecb95a458a7d4157fddc414393cc3603c01fa10dc04e2dbeae59e545", size = 3398961, upload-time = "2025-10-13T12:59:49.418Z" },
+    { url = "https://files.pythonhosted.org/packages/be/66/5786c51b88fc47b7cf0e25c85782d900eebfbad47581ee97d41d65f16205/h5py-3.15.0-cp313-cp313-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:6865a2a868bacd66404e76f4bdf423c2c23f76aca7a36b2da03558a83ad5ad1d", size = 4908264, upload-time = "2025-10-13T12:59:53.02Z" },
+    { url = "https://files.pythonhosted.org/packages/e1/e8/fd616c74e32dc7cd28866176c29fc4295cfaf79b3664cf880b95f2c81c64/h5py-3.15.0-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:5c38126bd90aaac1ebdbebbfeac0a4a4ab38c0a2de19369b543cecf6e81df0f0", size = 5103676, upload-time = "2025-10-13T12:59:57.053Z" },
+    { url = "https://files.pythonhosted.org/packages/e4/cd/19711fd557cc05d668c5296d0a0151d5faf3a8df2acfc102e53c90dbbbd7/h5py-3.15.0-cp313-cp313-musllinux_1_2_aarch64.whl", hash = "sha256:7adab3d0ec449e97d98a6ced4e108dd141238c1f4d89c40c56671bfd7e10f859", size = 4556004, upload-time = "2025-10-13T13:00:00.569Z" },
+    { url = "https://files.pythonhosted.org/packages/b3/5c/c0fd32a906cd6724fc6f43b6490d65822d612773feff88859c613b42fef3/h5py-3.15.0-cp313-cp313-musllinux_1_2_x86_64.whl", hash = "sha256:57cc5dcaf7159e20f755a2c8c50dd2b7b923066fd08277eec87e4163880dc680", size = 5030617, upload-time = "2025-10-13T13:00:04.384Z" },
+    { url = "https://files.pythonhosted.org/packages/6f/45/498846bd922ac9cc3d0d1858709d7122abe79bfead01d0e322bc02c9a69d/h5py-3.15.0-cp313-cp313-win_amd64.whl", hash = "sha256:0074643938d35806a7325481fe2d0f67f1f9ada6c24965583e57046e7babfac4", size = 2864390, upload-time = "2025-10-13T13:00:07.116Z" },
+    { url = "https://files.pythonhosted.org/packages/fb/1a/22cb64151d419f4eb33d65f8cb7073382090d17c03566a54b3c5e9105358/h5py-3.15.0-cp313-cp313-win_arm64.whl", hash = "sha256:9b423f853a5b8b04822719530410851b86d4c531502c8a98600f05bed28e9b88", size = 2449538, upload-time = "2025-10-13T13:00:09.434Z" },
+    { url = "https://files.pythonhosted.org/packages/4a/d7/bb5dd3f95a541e62cb052dd5083aaf81b509039cda491cdd5431be7806f7/h5py-3.15.0-cp314-cp314-macosx_14_0_arm64.whl", hash = "sha256:6c726122e94e5a3253f3cc998a356d35f35b685a3a664d61b9b5c9a39e3c72ca", size = 2860695, upload-time = "2025-10-13T13:00:12.966Z" },
+    { url = "https://files.pythonhosted.org/packages/ad/e4/4c7f06623df9ef991381bba0d930027146cdaa1ff0b0fc0786d311097342/h5py-3.15.0-cp314-cp314-macosx_15_0_x86_64.whl", hash = "sha256:df6567eb76a496bac8cd71ac18a44cf5e73b7bd9d61633ff084dbd5a7bc829da", size = 3400216, upload-time = "2025-10-13T13:00:15.844Z" },
+    { url = "https://files.pythonhosted.org/packages/a1/df/8878135dc64080ae5cb54d538de72eae3a71edbcbfee65f368a7b0f0ca76/h5py-3.15.0-cp314-cp314-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:7815b3b233784d4a4cdf7fda604216e65474bc5711588bcdcc2746458265b1ab", size = 4903211, upload-time = "2025-10-13T13:00:19.373Z" },
+    { url = "https://files.pythonhosted.org/packages/f6/0c/45d1574b065d362a9cb310080dd2dba93ec1df7b1d1a6d2961679fb63b98/h5py-3.15.0-cp314-cp314-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:ac5f1a76c7927b5d6b2a82337f68775d19f5eb8f79114083ac3cbbb917892e52", size = 5097259, upload-time = "2025-10-13T13:00:23.436Z" },
+    { url = "https://files.pythonhosted.org/packages/b0/d8/45d09adb4e221f0c5c2df309293d6cff16ec6cd5de85940fef8f9bc80b39/h5py-3.15.0-cp314-cp314-musllinux_1_2_aarch64.whl", hash = "sha256:28a52b2c55115642d31efc7c29f680c62408f23b29866c67c9d0260dc51628b9", size = 4551157, upload-time = "2025-10-13T13:00:26.791Z" },
+    { url = "https://files.pythonhosted.org/packages/85/7a/d1158e64c35bcf0f61383b0f1fa1061723e2dc5c14c6bdc0f3d57eebb312/h5py-3.15.0-cp314-cp314-musllinux_1_2_x86_64.whl", hash = "sha256:c163fc56fde3282ba7673a6ea2f7e2620fe0a9829bdf1465cfa7f1ca997ea8a0", size = 5025419, upload-time = "2025-10-13T13:00:30.186Z" },
+    { url = "https://files.pythonhosted.org/packages/ee/d1/b7fa31b8b1d32998ba7d60ad6f06c865ba83a565a5c3d3e0f15c39e8cdc3/h5py-3.15.0-cp314-cp314-win_amd64.whl", hash = "sha256:eb68541aee9bd07e44c36614c14d46ed07e8d8ce90c62b736cb4196c8f34580d", size = 2865672, upload-time = "2025-10-13T13:00:32.932Z" },
+    { url = "https://files.pythonhosted.org/packages/69/7d/c2b16907cfe7d5d069f1d3ee7cb4d8316213e6d57904500b6230cedbef9a/h5py-3.15.0-cp314-cp314-win_arm64.whl", hash = "sha256:6a4c985d2a67178c66e815f7e13da5c77d715324414ced26d0bd794840f37de6", size = 2465552, upload-time = "2025-10-13T13:00:35.185Z" },
+]
+
+[[package]]
 name = "iniconfig"
 version = "2.1.0"
 source = { registry = "https://pypi.org/simple" }
@@ -522,6 +565,7 @@ source = { editable = "." }
 dependencies = [
     { name = "astropy" },
     { name = "cycler" },
+    { name = "h5py" },
     { name = "matplotlib" },
     { name = "numpy" },
     { name = "polars" },
@@ -540,6 +584,7 @@ dev = [
 requires-dist = [
     { name = "astropy", specifier = ">=7.1.0" },
     { name = "cycler", specifier = ">=0.12.1" },
+    { name = "h5py", specifier = ">=3.15.0" },
     { name = "matplotlib", specifier = ">=3.10.6" },
     { name = "numpy", specifier = ">=2.3.2" },
     { name = "polars", specifier = ">=1.33.0" },
