@@ -86,6 +86,8 @@ def layout_specs():
     #marker and line defaults
     plt.rcParams["lines.linewidth"]         = 2
     plt.rcParams["lines.linewidth"]         = 2
+    plt.rcParams["patch.linewidth"]         = 2
+    plt.rcParams["patch.linewidth"]         = 2
     plt.rcParams["lines.linestyle"]         = "-"
     plt.rcParams["lines.markersize"]        = 4
     plt.rcParams["scatter.marker"]          = "o"
