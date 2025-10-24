@@ -76,6 +76,7 @@ def cut(
     col:Union[pl.Expr,str], breaks:Union[List[float],int],
     format:str="%0.2f",
     alias:str=None,
+    include_missing:bool=False,
     **cut_kwargs,
     ) -> Union[pl.DataFrame,pl.LazyFrame]:
     """
@@ -143,13 +144,18 @@ def cut(
 
     #generate labels that make sense and can easily be sorted
     labs = [f"{brackets[0]}-inf,{format}{brackets[1]}"%(breaks[0])]+[f"{brackets[0]}{format},{format}{brackets[1]}"%(breaks[i],breaks[i+1]) for i in range(len(breaks)-1)]+[f"{brackets[0]}{format},+inf{brackets[1]}"%breaks[-1]]
-    # edges = [[-np.inf,breaks[0]]]+[[breaks[i],breaks[i+1]] for i in range(len(breaks)-1)]+[[breaks[-1],np.inf]]
+
     #apply pl.Expr().cut()
     df_cut = (df
         .with_columns(
             col.cut(breaks=breaks, labels=labs, **cut_kwargs).alias(alias),
         )
     )
+
+    #add missing labels if requested
+    if (len(labs) != len(df_cut[alias].unique()))  & include_missing:
+        missing = set(labs) ^ set(df_cut[alias].unique())
+        df_cut = append(df_cut, pl.DataFrame(data=[m for m in missing], schema={alias:pl.Categorical}))
 
     return df_cut
 

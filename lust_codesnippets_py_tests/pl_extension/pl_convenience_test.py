@@ -89,14 +89,15 @@ class Test_cut:
 
     @pytest.fixture(
         params=[
-            (pl.col("column_0"), [0,1,2,3,4,5], "%0.1f", "cut", False, pl.from_dicts([{'cut': '(0.0,1.0]', 'count': 11}, {'cut': '(1.0,2.0]', 'count': 10}, {'cut': '(2.0,3.0]', 'count': 6}, {'cut': '(3.0,4.0]', 'count': 13}])),
-            (pl.col("column_0"), [0,1,2,3,4,5], "%0.2f", "cut", False, pl.from_dicts([{'cut': '(0.00,1.00]', 'count': 11}, {'cut': '(1.00,2.00]', 'count': 10}, {'cut': '(2.00,3.00]', 'count': 6}, {'cut': '(3.00,4.00]', 'count': 13}])),
-            (pl.col("column_0"), [0,1,2,3,4,5], "%0.1f", "cut", True,  pl.from_dicts([{'cut': '[1.0,2.0)', 'count': 11}, {'cut': '[2.0,3.0)', 'count': 10}, {'cut': '[3.0,4.0)', 'count': 6}, {'cut': '[4.0,5.0)', 'count': 13}])),
-            (pl.col("column_0"), [0,1,2,3,4],   "%0.1f", "cut", False, pl.from_dicts([{'cut': '(0.0,1.0]', 'count': 11}, {'cut': '(1.0,2.0]', 'count': 10}, {'cut': '(2.0,3.0]', 'count': 6}, {'cut': '(3.0,4.0]', 'count': 13}])),
-            (pl.col("column_0"), [2,3,4,5],     "%0.1f", "cut", False, pl.from_dicts([{'cut': '(-inf,2.0]', 'count': 21}, {'cut': '(2.0,3.0]', 'count': 6}, {'cut': '(3.0,4.0]', 'count': 13}])),
-            (pl.col("column_0"), [2,3],         "%0.1f", "cut", False, pl.from_dicts([{'cut': '(-inf,2.0]', 'count': 21}, {'cut': '(2.0,3.0]', 'count': 6}, {'cut': '(3.0,+inf]', 'count': 13}])),
-            (pl.col("column_0"), [2,3],         "%0.1f", "cut", False, pl.from_dicts([{'cut': '(-inf,2.0]', 'count': 21}, {'cut': '(2.0,3.0]', 'count': 6}, {'cut': '(3.0,+inf]', 'count': 13}])),
-            (pl.col("column_0"), 5,             "%0.1f", "cut", False, pl.from_dicts([{'cut': '(-inf,1.0]', 'count': 11}, {'cut': '(1.8,2.5]', 'count': 10}, {'cut': '(2.5,3.2]', 'count': 6}, {'cut': '(3.2,4.0]', 'count': 13}])),
+            (pl.col("column_0"), [0,1,2,3,4,5], "%0.1f", "cut", False, False, pl.from_dicts([{'cut': '(0.0,1.0]', 'count': 11}, {'cut': '(1.0,2.0]', 'count': 10}, {'cut': '(2.0,3.0]', 'count': 6}, {'cut': '(3.0,4.0]', 'count': 13}])),
+            (pl.col("column_0"), [0,1,2,3,4,5], "%0.1f", "cut", True,  False, pl.from_dicts([{'cut': '(-inf,0.0]', 'count': 1}, {'cut': '(0.0,1.0]', 'count': 11}, {'cut': '(1.0,2.0]', 'count': 10}, {'cut': '(2.0,3.0]', 'count': 6}, {'cut': '(3.0,4.0]', 'count': 13}, {'cut': '(4.0,5.0]', 'count': 1}, {'cut': '(5.0,+inf]', 'count': 1}])),
+            (pl.col("column_0"), [0,1,2,3,4,5], "%0.2f", "cut", False, False, pl.from_dicts([{'cut': '(0.00,1.00]', 'count': 11}, {'cut': '(1.00,2.00]', 'count': 10}, {'cut': '(2.00,3.00]', 'count': 6}, {'cut': '(3.00,4.00]', 'count': 13}])),
+            (pl.col("column_0"), [0,1,2,3,4,5], "%0.1f", "cut", False, True,  pl.from_dicts([{'cut': '[1.0,2.0)', 'count': 11}, {'cut': '[2.0,3.0)', 'count': 10}, {'cut': '[3.0,4.0)', 'count': 6}, {'cut': '[4.0,5.0)', 'count': 13}])),
+            (pl.col("column_0"), [0,1,2,3,4],   "%0.1f", "cut", False, False, pl.from_dicts([{'cut': '(0.0,1.0]', 'count': 11}, {'cut': '(1.0,2.0]', 'count': 10}, {'cut': '(2.0,3.0]', 'count': 6}, {'cut': '(3.0,4.0]', 'count': 13}])),
+            (pl.col("column_0"), [2,3,4,5],     "%0.1f", "cut", False, False, pl.from_dicts([{'cut': '(-inf,2.0]', 'count': 21}, {'cut': '(2.0,3.0]', 'count': 6}, {'cut': '(3.0,4.0]', 'count': 13}])),
+            (pl.col("column_0"), [2,3],         "%0.1f", "cut", False, False, pl.from_dicts([{'cut': '(-inf,2.0]', 'count': 21}, {'cut': '(2.0,3.0]', 'count': 6}, {'cut': '(3.0,+inf]', 'count': 13}])),
+            (pl.col("column_0"), [2,3],         "%0.1f", "cut", False, False, pl.from_dicts([{'cut': '(-inf,2.0]', 'count': 21}, {'cut': '(2.0,3.0]', 'count': 6}, {'cut': '(3.0,+inf]', 'count': 13}])),
+            (pl.col("column_0"), 5,             "%0.1f", "cut", False, False, pl.from_dicts([{'cut': '(-inf,1.0]', 'count': 11}, {'cut': '(1.8,2.5]', 'count': 10}, {'cut': '(2.5,3.2]', 'count': 6}, {'cut': '(3.2,4.0]', 'count': 13}])),
         ]
     )
     def action(self, request):
@@ -104,8 +105,8 @@ class Test_cut:
         global df
 
         #act
-        col, breaks, format, alias, left_closed, df_cut_true  = request.param
-        df_cut_pred = plc.cut(df, col, breaks, format, alias, left_closed=left_closed)["cut"].value_counts().sort("cut")
+        col, breaks, format, alias, include_missing, left_closed, df_cut_true  = request.param
+        df_cut_pred = plc.cut(df, col, breaks, format, alias, include_missing, left_closed=left_closed)["cut"].value_counts().sort("cut")
 
         return df_cut_pred, df_cut_true
 
