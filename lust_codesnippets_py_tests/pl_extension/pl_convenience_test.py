@@ -79,6 +79,43 @@ class Test_cut:
     def test_cut(self, action):
         assert action[0].equals(action[1])
 
+class Test_get_edges:
+
+    @pytest.fixture(
+        params=[
+            (True, -np.inf, np.inf, np.array([-np.inf,2.0,3.0,np.inf])),
+            (True, 1.0, 4.0, np.array([1.0,2.0,3.0,4.0])),
+            (False, 1.0, 4.0, np.array([1.0,2.0,2.0,3.0,3.0,4.0,2.0,3.0])),
+        ]
+    )
+    def action(self, request):
+        #arrange
+        s = pl.Series("cut", [
+            "(-inf,2.00]",
+            "(2.00,3.00]",
+            "(3.00,+inf]",
+            "(2.00,3.00]",
+        ], dtype=pl.Categorical)
+
+        #act
+        unique, lb, ub, edges_true = request.param
+        edges_pred = plc.get_edges(s, unique=unique, lb=lb, ub=ub)
+
+        return edges_pred, edges_true
+
+    #assert
+    def test_cut(self, action):
+        edges_pred, edges_true = action
+        assert np.all(edges_pred == edges_true)
+
+    def test_intypes(self):
+        with pytest.raises(AssertionError):        
+            plc.get_edges(pl.Series([1,2,3,4,5]))
+
+    def test_outypes(self, action):
+        edges_pred, _ = action
+        assert isinstance(edges_pred, np.ndarray)
+
 class Test_value_counts:
 
     @pytest.fixture(
@@ -101,4 +138,3 @@ class Test_value_counts:
     #assert
     def test_value_counts(self, action):
         assert action[0].equals(action[1])
-
