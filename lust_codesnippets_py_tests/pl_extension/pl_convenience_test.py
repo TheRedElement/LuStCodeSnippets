@@ -51,6 +51,40 @@ df = pl.from_dicts([
     {'column_0': 1, 'column_1': 1, 'column_2': 0.12898291075741067, 'column_3': 'w'},
 ])
 
+class Test_append:
+
+    @pytest.fixture(
+        params=[
+            (
+                pl.from_dicts([{"column_0": 1, "column_1":"a", "column_2":"A"},{"column_0": 3, "column_1":"b", "column_2":"B"},{"column_0": 3, "column_1":"c", "column_2":"C"}]).with_columns(pl.col("column_2").cast(pl.Categorical)),
+                pl.from_dicts([{"column_0": 4, "column_2":"D", "column_3":0.4},{"column_0": 5, "column_2":"E", "column_3":0.5}]).with_columns(pl.col("column_2").cast(pl.Categorical)),
+                pl.from_dicts([{'column_0': 1, 'column_1': 'a', 'column_2':"A", 'column_3': None}, {'column_0': 3, 'column_1': 'b', 'column_2':"B", 'column_3': None}, {'column_0': 3, 'column_1': 'c', 'column_2':"C", 'column_3': None}, {'column_0': 4, 'column_1': None, 'column_2':"D", 'column_3': 0.4}, {'column_0': 5, 'column_1': None, 'column_2':"E", 'column_3': 0.5}]).with_columns(pl.col("column_2").cast(pl.Categorical)),
+            ),
+        ]
+    )
+    def action(self, request):
+        #arrange
+        global df
+
+        #act
+        df1, df2, df_app_true  = request.param
+        df_app_pred = plc.append(df1, df2)
+
+        return df_app_pred, df_app_true
+
+    #assert
+    def test_append(self, action):
+        assert action[0].equals(action[1])
+
+    def test_intypes(self, request):
+        with pytest.raises(AssertionError):        
+            plc.append(pl.DataFrame().lazy(), pl.DataFrame())
+            plc.append(pl.DataFrame(), pl.DataFrame().lazy())
+
+    def test_outypes(self, action):
+        df_app_pred, _ = action
+        assert isinstance(df_app_pred, pl.DataFrame)        
+
 class Test_cut:
 
     @pytest.fixture(

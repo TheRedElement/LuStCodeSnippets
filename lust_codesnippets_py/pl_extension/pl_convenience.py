@@ -6,6 +6,71 @@ import re
 from typing import Union, Literal, List
 
 #%%definitions
+def append(
+    df1:pl.DataFrame,
+    df2:pl.DataFrame
+    ) -> pl.DataFrame:
+    """
+        - function to append `df2` to `df1` even if the columns don't match
+        - useful for i.e. appending values to a single or a subset of columns
+        - will pad all other columns with `None`
+
+        Parameters
+        ----------
+            - `df1`
+                - `pl.DataFrame`
+                - root dataframe
+                    - used as reference for column ordering
+                - `df2` will be appended to `df1`
+            - `df2`
+                - `pl.DataFrame`
+                - extension dataframe
+                - will be appended to `df1`
+
+        Raises
+        ------
+            - `AssertionError`
+                - if the input types are wrong
+
+        Returns
+        -------
+            - `df`
+                - `pl.DataFrame`
+                - `df1` with appended `df2`
+                - columns only present in `df1` will get filled with `None` in the `df2` rows
+                - columns only present in `df2` will get filled with `None` in the `df1` rows
+
+        Dependencies
+        ------------
+            - `numpy`
+            - `polars`
+
+        Comments
+        --------
+    """
+    
+    #checks
+    assert isinstance(df1, pl.DataFrame)&isinstance(df2, pl.DataFrame), "this function does NOT work with `pl.LazyFrame`"
+
+    #determine missing columns
+    missing_df1 = list(set(df1.columns) - set(df2.columns))
+    missing_df2 = list(set(df2.columns) - set(df1.columns))
+
+    #pad dataframes with missing columns
+    df1 = pl.from_dict({**{col:df1[col] for col in df1.columns}, **{col:[None]*df1.height for col in df2.columns if not np.isin(col, df1.columns)}})
+    df2 = pl.from_dict({**{col:df2[col] for col in df2.columns}, **{col:[None]*df2.height for col in df1.columns if not np.isin(col, df2.columns)}})
+
+    #cast to correct dtype
+    df1 = df1.with_columns([pl.col(mc).cast(df2[mc].dtype) for mc in missing_df2])
+    df2 = df2.with_columns([pl.col(mc).cast(df1[mc].dtype) for mc in missing_df1])
+    
+    #sort columns
+    df2 = df2.select(df1.columns)
+    
+    #merge
+    df = pl.concat([df1,df2])
+    return df
+
 def cut(
     df:Union[pl.DataFrame,pl.LazyFrame],
     col:Union[pl.Expr,str], breaks:Union[List[float],int],
@@ -146,6 +211,7 @@ def get_edges(
         Comments
         --------
             - especially useful in combination with `plt.stairs()`
+            - empty bins will lead to a wrong number of edges!
     """
     
     #cehcks
