@@ -105,8 +105,8 @@ class Test_cut:
         global df
 
         #act
-        col, breaks, format, alias, include_missing, left_closed, df_cut_true  = request.param
-        df_cut_pred = plc.cut(df, col, breaks, format, alias, include_missing, left_closed=left_closed)["cut"].value_counts().sort("cut")
+        col, breaks, format, alias, include_empty, left_closed, df_cut_true  = request.param
+        df_cut_pred = plc.cut(df, col, breaks, format, alias, include_empty, left_closed=left_closed)["cut"].value_counts().sort("cut")
 
         return df_cut_pred, df_cut_true
 

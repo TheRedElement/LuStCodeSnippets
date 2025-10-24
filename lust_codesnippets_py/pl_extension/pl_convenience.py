@@ -76,7 +76,7 @@ def cut(
     col:Union[pl.Expr,str], breaks:Union[List[float],int],
     format:str="%0.2f",
     alias:str=None,
-    include_missing:bool=False,
+    include_empty:bool=False,
     **cut_kwargs,
     ) -> Union[pl.DataFrame,pl.LazyFrame]:
     """
@@ -110,6 +110,12 @@ def cut(
                 - passed to `pl.Expr().alias()`
                 - the default is `None`
                     - will be set to `f"{col.meta.root_names()[0]}_cut"
+            - `include_empty`
+                - `bool`, optional
+                - whether to include empty bins
+                    - will be included as rows filled with `None` besides column with name `alias`
+                - the default is `False`
+                    - will drop bins that are empty
             - `**cut_kwargs`
                 - kwargs passed to `pl.Expr(col).cut()`
 
@@ -153,7 +159,7 @@ def cut(
     )
 
     #add missing labels if requested
-    if (len(labs) != len(df_cut[alias].unique()))  & include_missing:
+    if (len(labs) != len(df_cut[alias].unique()))  & include_empty:
         missing = set(labs) ^ set(df_cut[alias].unique())
         df_cut = append(df_cut, pl.DataFrame(data=[m for m in missing], schema={alias:pl.Categorical}))
 
