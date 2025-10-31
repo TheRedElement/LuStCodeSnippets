@@ -25,6 +25,10 @@ To do so, navigate inside the directory of where you cloned this submodule to an
 > [!IMPORTANT]
 > If you find this repo useful in your work, a brief acknowledgement would be appreciated.
 
+## TODO
+- [LuStCodeSnippets_sh](./LuStCodeSnippets_sh/)
+    - [ ] update docstrings to enable calling `--help` 
+
 ## Installation
 
 ### Julia
