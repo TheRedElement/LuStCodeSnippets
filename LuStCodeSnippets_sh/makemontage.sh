@@ -103,6 +103,3 @@ make_montage_pdf () {
     rm -f "${pages[@]}"
     rm -r $tempdir
 }
-
-
-make_montage_pdf "*.jpg" 6 6 montage.pdf 16384 2
