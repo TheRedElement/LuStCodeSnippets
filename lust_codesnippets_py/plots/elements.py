@@ -56,15 +56,15 @@ def get_handles_labels_all(
     """
     
     #init output
-    handels = []
+    handles = []
     labels = []
 
     for ax in fig.axes:
         h, l = ax.get_legend_handles_labels()
-        handels += h
+        handles += h
         labels += l
 
-    return handels, labels
+    return handles, labels
 
 #add elements
 def pcolormesh_text(
@@ -178,7 +178,7 @@ def pcolormesh_text(
 
 def legend_line_map(
     fig:Figure,
-    handels:List[Line2D], labels:List[str],
+    handles:List[Line2D], labels:List[str],
     header:str=None,
     x0:float=0.02, x1:float=0.25, y0:float=1.0,
     vsep:float=1.0, pad:float=0.01,
@@ -196,7 +196,7 @@ def legend_line_map(
             - `fig`
                 - `Figure`
                 - figure to add the legend to
-            - `handels`
+            - `handles`
                 - `List[Line2D]`
                 - handles of the artists
                 - used to define the style of the connecting lines
@@ -283,7 +283,7 @@ def legend_line_map(
     if "fontweight" not in header_kwargs.keys(): header_kwargs["fontweight"] = "bold"
 
     #checks
-    assert len(handels)==len(labels), "`handels` and `labels` have to have the same length"
+    assert len(handles)==len(labels), "`handles` and `labels` have to have the same length"
     assert (0<=x0)&(x0<=1), "`x0` has to be a number between 0` and `1` (relative figure coordinates)"
     assert (0<=x1)&(x1<=1), "`x1` has to be a number between 0` and `1` (relative figure coordinates)"
     assert (0<=y0)&(y0<=1), "`y0` has to be a number between 0` and `1` (relative figure coordinates)"
@@ -294,7 +294,7 @@ def legend_line_map(
     #add new entry for each h-l pair
     ypos = y0           #init ypos
     ypos_header = y0    #init position of the header
-    for (h, l) in zip(handels, labels):
+    for (h, l) in zip(handles, labels):
         #extract legend entries
         labs = re.split(r"\s*->\s*", l)
         
