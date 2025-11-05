@@ -27,7 +27,7 @@ MPL_STYLE_ATTRS:List[str] = [
 
 #%%definitions
 #get elements
-def get_handels_labels_all(
+def get_handles_labels_all(
     fig:Figure
     ) -> Tuple[List[Line2D],List[str]]:
     """
