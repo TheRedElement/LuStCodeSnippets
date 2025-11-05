@@ -26,6 +26,47 @@ MPL_STYLE_ATTRS:List[str] = [
 ]
 
 #%%definitions
+#get elements
+def get_handels_labels_all(
+    fig:Figure
+    ) -> Tuple[List[Line2D],List[str]]:
+    """
+        - function to extract all handles and labels of some figure
+        - extracts and combines from all axes
+
+        Parameters
+        ----------
+            - `fig`
+                - `Figure`
+                - figure to extract information from
+        
+        Raises
+        ------
+
+        Returns
+        -------
+
+        Dependencies
+        ------------
+            - `matplotlib`
+            - `typing`
+        
+        Comments
+        --------
+    """
+    
+    #init output
+    handels = []
+    labels = []
+
+    for ax in fig.axes:
+        h, l = ax.get_legend_handles_labels()
+        handels += h
+        labels += l
+
+    return handels, labels
+
+#add elements
 def pcolormesh_text(
     ax:plt.Axes,
     X:np.ndarray,
