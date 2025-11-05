@@ -181,6 +181,7 @@ def legend_line_map(
     handles:List[Line2D], labels:List[str],
     header:str=None,
     x0:float=0.02, x1:float=0.25, y0:float=1.0,
+    width:float=None,
     vsep:float=1.0, pad:float=0.01,
     topdown:bool=True,
     text_kwargs:Dict=None,
@@ -232,6 +233,12 @@ def legend_line_map(
                 - else
                     - southern anchor point
                 - the default is `0.25`
+            - `width`
+                - `float`, optional
+                - width of the legend (distance between `x0` and `x1`)
+                - if set overwrites `x1` with `x0+width`
+                - the default is `None`
+                    - ignored
             - `vsep`
                 - `float`, optional
                 - vertical separation in units of line-height
@@ -281,6 +288,7 @@ def legend_line_map(
     if text_kwargs is None: text_kwargs = dict()
     if header_kwargs is None: header_kwargs = dict(fontweight="bold")
     if "fontweight" not in header_kwargs.keys(): header_kwargs["fontweight"] = "bold"
+    if width is not None: x1 = x0+width
 
     #checks
     assert len(handles)==len(labels), "`handles` and `labels` have to have the same length"
