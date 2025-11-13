@@ -47,6 +47,7 @@ module-name = "lust_codesnippets_py"     #Adjusts where UV looks for code module
 dev = [
     "ipykernel>=6.30.1",
     "joblib>=1.5.2",
+    "nbformat>=5.10.4",
     "pytest>=8.4.1",
     "scipy>=1.16.1",
 ]
