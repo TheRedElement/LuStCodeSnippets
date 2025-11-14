@@ -55,18 +55,44 @@ function make_cssroot(
     #read style
     style = JSON.parsefile("tre.json")
     
-    #generate css file lines
-    lines = []
-    push!(lines, "$(' '^indent)/* colors */")
-    for color in keys(style["colors"])
-        if check_context(["all","css"], style["colors"][color]["context"])
-            push!(lines, "$(' '^indent)--$(color): $(style["colors"][color][theme]);")
+    #init css file
+    lines = [
+        "/* tre.css */",
+        "/* load via <link rel=\"stylesheet\" href=path2file> */",
+        "\n",
+        "/* css variables (can be overridden in html or other css files) */",
+    ]
+        
+    begin #add global variables
+        push!(lines, ":root {")
+        push!(lines, "$(' '^indent)/* colors */")
+        
+        begin #colors
+            for color in keys(style["colors"])
+                if check_context(["all","css"], style["colors"][color]["context"])
+                    push!(lines, "$(' '^indent)--$(color): $(style["colors"][color][theme]);")
+                end
+            end
         end
+        begin #text styling
+            push!(lines, "$(' '^indent)/* text styling */")
+            
+        end
+        push!(lines, "}\n")
+    end
+
+    begin #define elements
+        push!(lines, "/* ################################################################## */")
+        push!(lines, "/* GLOBAL DEFAULTS */")
+        push!(lines, "html, body {")
+        push!(lines, "    background-color: var(--c_bg);")
+        push!(lines, "    color: var(--c_body_text);")
+        push!(lines, "}")
+
+        
     end
     
     #generate file
-    insert!(lines, 1, ":root {")
-    push!(lines, "}")
     f = open("tre.css", "w")
     write(f, join(lines, "\n"))
     close(f)
