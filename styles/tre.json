@@ -71,13 +71,37 @@
             "dark": "#a10000ff",
             "light": "#c10000ff"
         },
+        "c_tabborder": {
+            "context": [
+                "css",
+                "latex"
+            ],
+            "dark": "#ffffffff",
+            "light": "#000000ff"
+        },
         "c_footnote_text": {
             "context": [
                 "css",
                 "latex"
             ],
-            "dark": "#767676ff",
-            "light": "#767676ff"
+            "dark": "#c0c0c0",
+            "light": "#444444"
+        },
+        "c_footnote_box": {
+            "context": [
+                "css",
+                "latex"
+            ],
+            "dark": "#000000ff",
+            "light": "#ffffffff"
+        },
+        "c_footnote_boxshadow": {
+            "context": [
+                "css",
+                "latex"
+            ],
+            "dark": "#bebebeff",
+            "light": "#2b2b2bff"
         },
         "c_blockquote_border": {
             "context": [
@@ -93,7 +117,7 @@
                 "latex"
             ],
             "dark": "#aaaaaaff",
-            "light": "#aaaaaaff"
+            "light": "#5e5e5eff"
         },
         "c_blockquote_text": {
             "context": [
@@ -101,7 +125,7 @@
                 "latex"
             ],
             "dark": "#000000ff",
-            "light": "#000000ff"
+            "light": "#ffffffff"
         },
         "c_link_text": {
             "context": [
@@ -144,14 +168,6 @@
             "light": "#000000ff"
         },
         "c_list2_text": {
-            "context": [
-                "css",
-                "latex"
-            ],
-            "dark": "#ffffffff",
-            "light": "#000000ff"
-        },
-        "c_list3_text": {
             "context": [
                 "css",
                 "latex"
