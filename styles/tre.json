@@ -1,0 +1,428 @@
+{
+    "naming": {
+        "colors": "<quantity>_<context>_buildingblock"
+    },
+    "colors": {
+        "c_main": {
+            "context": [
+                "all"
+            ],
+            "dark": "#c80000ff",
+            "light": "#a10000ff"
+        },
+        "c_bg": {
+            "context": [
+                "all"
+            ],
+            "dark": "#000000ff",
+            "light": "#ffffffff"
+        },
+        "c_h1": {
+            "context": [
+                "all"
+            ],
+            "dark": "#ffffffff",
+            "light": "#000000ff"
+        },
+        "c_h2": {
+            "context": [
+                "css",
+                "latex"
+            ],
+            "dark": "#ffffffff",
+            "light": "#000000ff"
+        },
+        "c_h3": {
+            "context": [
+                "css",
+                "latex"
+            ],
+            "dark": "#ffffffff",
+            "light": "#000000ff"
+        },
+        "c_h4": {
+            "context": [
+                "css",
+                "latex"
+            ],
+            "dark": "#ffffffff",
+            "light": "#000000ff"
+        },
+        "c_body_text": {
+            "context": [
+                "all"
+            ],
+            "dark": "#ffffffff",
+            "light": "#000000ff"
+        },
+        "c_tabrow_bg": {
+            "context": [
+                "css",
+                "latex"
+            ],
+            "dark": "#5f5f5fff",
+            "light": "#9a9a9aff"
+        },
+        "c_tabrow_hover": {
+            "context": [
+                "css",
+                "latex"
+            ],
+            "dark": "#a10000ff",
+            "light": "#c10000ff"
+        },
+        "c_footnote_text": {
+            "context": [
+                "css",
+                "latex"
+            ],
+            "dark": "#767676ff",
+            "light": "#767676ff"
+        },
+        "c_blockquote_border": {
+            "context": [
+                "css",
+                "latex"
+            ],
+            "dark": "#a10000ff",
+            "light": "#c10000ff"
+        },
+        "c_blockquote_bg": {
+            "context": [
+                "css",
+                "latex"
+            ],
+            "dark": "#aaaaaaff",
+            "light": "#aaaaaaff"
+        },
+        "c_blockquote_text": {
+            "context": [
+                "css",
+                "latex"
+            ],
+            "dark": "#000000ff",
+            "light": "#000000ff"
+        },
+        "c_link_text": {
+            "context": [
+                "css",
+                "latex"
+            ],
+            "dark": "#c80000ff",
+            "light": "#a10000ff"
+        },
+        "c_link_visited": {
+            "context": [
+                "css",
+                "latex"
+            ],
+            "dark": "#a10000ff",
+            "light": "#c10000ff"
+        },
+        "c_link_hover": {
+            "context": [
+                "css",
+                "latex"
+            ],
+            "dark": "#ff0000ff",
+            "light": "#ff0000ff"
+        },
+        "c_link_active": {
+            "context": [
+                "css",
+                "latex"
+            ],
+            "dark": "#ff0000ff",
+            "light": "#ff0000ff"
+        },
+        "c_list1_text": {
+            "context": [
+                "css",
+                "latex"
+            ],
+            "dark": "#ffffffff",
+            "light": "#000000ff"
+        },
+        "c_list2_text": {
+            "context": [
+                "css",
+                "latex"
+            ],
+            "dark": "#ffffffff",
+            "light": "#000000ff"
+        },
+        "c_list3_text": {
+            "context": [
+                "css",
+                "latex"
+            ],
+            "dark": "#ffffffff",
+            "light": "#000000ff"
+        },
+        "c_caption_bg": {
+            "context": [
+                "css",
+                "latex"
+            ],
+            "dark": "#000000ff",
+            "light": "#ffffffff"
+        },
+        "c_caption_text": {
+            "context": [
+                "css",
+                "latex"
+            ],
+            "dark": "#ffffffff",
+            "light": "#000000ff"
+        },
+        "c_commentls": {
+            "context": [
+                "css",
+                "latex"
+            ],
+            "dark": "#ff6969ff",
+            "light": "#8d0000ff"
+        },
+        "c_todols": {
+            "context": [
+                "css",
+                "latex"
+            ],
+            "dark": "#ff9100ff",
+            "light": "#ff9100ff"
+        },
+        "c_plot_pane": {
+            "context": [
+                "matplotlib"
+            ],
+            "dark": "#ffffff44",
+            "light": "#ffffffbb"
+        },
+        "c_plot_legendbg": {
+            "context": [
+                "matplotlib",
+                "julia"
+            ],
+            "dark": "#0000001c",
+            "light": "#ffffff1c"
+        },
+        "c_plot_c0": {
+            "context": [
+                "matplotlib",
+                "julia",
+                "plotly"
+            ],
+            "dark": "#c80000ff",
+            "light": "#a10000ff"
+        },
+        "c_plot_c1": {
+            "context": [
+                "matplotlib",
+                "julia",
+                "plotly"
+            ],
+            "dark": "#ffffff",
+            "light": "#000000"
+        },
+        "c_plot_c2": {
+            "context": [
+                "matplotlib",
+                "julia",
+                "plotly"
+            ],
+            "dark": "#9c9c9c",
+            "light": "#444444"
+        },
+        "c_plot_c3": {
+            "context": [
+                "matplotlib",
+                "julia",
+                "plotly"
+            ],
+            "dark": "#535353",
+            "light": "#929292"
+        },
+        "c_future": {
+            "context": ["latex"],
+            "dark": "#b4b4b4ff",
+            "light": "#b4b4b4ff"
+        },
+        "c_bibcolorls": {
+            "context": ["latex", "css"],
+            "dark": "#a80000ff",
+            "light": "#780000ff"
+        },
+        "c_code_bg": {
+            "context": ["latex", "css"],
+            "dark": "#1e1e1eff",
+            "light": "#d6d6d6ff"
+        },
+        "c_code_constant": {
+            "context": ["latex", "css"],
+            "dark": "#569cd6ff",
+            "light": "#569cd6ff"
+        },
+        "c_code_comment": {
+            "context": ["latex", "css"],
+            "dark": "#6a9955ff",
+            "light": "#6a9955ff"
+        },
+        "c_code_string": {
+            "context": ["latex", "css"],
+            "dark": "#d16969ff",
+            "light": "#d16969ff"
+        },
+        "c_code_numeric": {
+            "context": ["latex", "css"],
+            "dark": "#b5cea8ff",
+            "light": "#b5cea8ff"
+        },
+        "c_code_keyword": {
+            "context": ["latex", "css"],
+            "dark": "#569cd6ff",
+            "light": "#569cd6ff"
+        },
+        "c_tikz_nodeoutline": {
+            "context": ["latex"],
+            "dark": "#333333ff",
+            "light": "#ccccccff"
+        },
+        "c_tikz_nodebg": {
+            "context": ["latex"],
+            "dark": "#000000ff",
+            "light": "#ffffffff"
+        },
+        "c_tikz_arrow": {
+            "context": ["latex"],
+            "dark": "#808080ff",
+            "light": "#808080ff"
+        },
+        "c_poster_sectnode": {
+            "context": ["latex", "css"],
+            "dark": "#e6e6e6ff",
+            "light": "#e6e6e6ff"
+        },
+        "c_poster_mainnode": {
+            "context": ["latex", "css"],
+            "dark": "#c10000ff",
+            "light": "#a10000ff"
+        }
+    },
+    "linestyles": {
+        "cycle": [
+            "solid",
+            "dashed",
+            "dotted",
+            "dashdot",
+            "solid",
+            "dashed",
+            "dotted",
+            "dashdot",
+            "solid",
+            "dashed",
+            "dotted",
+            "dashdot",
+            "solid",
+            "dashed",
+            "dotted",
+            "dashdot"
+        ],
+        "batch": [
+            "solid",
+            "solid",
+            "solid",
+            "solid",
+            "dashed",
+            "dashed",
+            "dashed",
+            "dashed",
+            "dotted",
+            "dotted",
+            "dotted",
+            "dotted",
+            "dashdot",
+            "dashdot",
+            "dashdot",
+            "dashdot"
+        ],
+        "special": "solid"
+    },
+    "markers": {
+        "cycle": [
+            "circle",
+            "square",
+            "triangle_up",
+            "triangle_down",
+            "circle",
+            "square",
+            "triangle_up",
+            "triangle_down",
+            "circle",
+            "square",
+            "triangle_up",
+            "triangle_down",
+            "circle",
+            "square",
+            "triangle_up",
+            "triangle_down"
+        ],
+        "batch": [
+            "circle",
+            "circle",
+            "circle",
+            "circle",
+            "square",
+            "square",
+            "square",
+            "square",
+            "triangle_up",
+            "triangle_up",
+            "triangle_up",
+            "triangle_up",
+            "triangle_down",
+            "triangle_down",
+            "triangle_down",
+            "triangle_down"
+        ],
+        "special": "star"
+    },
+    "hatches": {
+        "cycle": [
+            "/",
+            "\\",
+            "|",
+            "-",
+            "/",
+            "\\",
+            "|",
+            "-",
+            "/",
+            "\\",
+            "|",
+            "-",
+            "/",
+            "\\",
+            "|",
+            "-"
+        ],
+        "block": [
+            "/",
+            "/",
+            "/",
+            "/",
+            "\\",
+            "\\",
+            "\\",
+            "\\",
+            "|",
+            "|",
+            "|",
+            "|",
+            "-",
+            "-",
+            "-",
+            "-"
+        ],
+        "special": "star"
+    }
+}
