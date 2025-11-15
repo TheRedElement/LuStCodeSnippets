@@ -84,8 +84,8 @@
                 "css",
                 "latex"
             ],
-            "dark": "#c0c0c0",
-            "light": "#444444"
+            "dark": "#c0c0c0ff",
+            "light": "#444444ff"
         },
         "c_footnote_box": {
             "context": [
@@ -191,7 +191,7 @@
             "dark": "#ffffffff",
             "light": "#000000ff"
         },
-        "c_commentls": {
+        "c_comment_ls": {
             "context": [
                 "css",
                 "latex"
@@ -199,7 +199,7 @@
             "dark": "#ff6969ff",
             "light": "#8d0000ff"
         },
-        "c_todols": {
+        "c_todo_ls": {
             "context": [
                 "css",
                 "latex"
@@ -237,8 +237,8 @@
                 "julia",
                 "plotly"
             ],
-            "dark": "#ffffff",
-            "light": "#000000"
+            "dark": "#ffffffff",
+            "light": "#000000ff"
         },
         "c_plot_c2": {
             "context": [
@@ -246,8 +246,8 @@
                 "julia",
                 "plotly"
             ],
-            "dark": "#9c9c9c",
-            "light": "#444444"
+            "dark": "#9c9c9cff",
+            "light": "#444444ff"
         },
         "c_plot_c3": {
             "context": [
@@ -255,15 +255,15 @@
                 "julia",
                 "plotly"
             ],
-            "dark": "#535353",
-            "light": "#929292"
+            "dark": "#535353ff",
+            "light": "#929292ff"
         },
         "c_future": {
             "context": ["latex"],
             "dark": "#b4b4b4ff",
             "light": "#b4b4b4ff"
         },
-        "c_bibcolorls": {
+        "c_bibcolor_ls": {
             "context": ["latex", "css"],
             "dark": "#a80000ff",
             "light": "#780000ff"
@@ -322,6 +322,21 @@
             "context": ["latex", "css"],
             "dark": "#c10000ff",
             "light": "#a10000ff"
+        },
+        "c_todo_titlepage": {
+            "context": ["latex"],
+            "dark": "#ffff00ff",
+            "light": "#ffff00ff"
+        },
+        "c_todo_all": {
+            "context": ["latex"],
+            "dark": "#00ffffff",
+            "light": "#00ffffff"
+        },
+        "c_math_minbetween": {
+            "context": ["latex"],
+            "dark": "#b2b2b2ff",
+            "light": "#b2b2b2ff"
         }
     },
     "linestyles": {

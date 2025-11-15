@@ -1,0 +1,126 @@
+%Template by Steinwender Lukas
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%- Package providing user defined colors
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%==============================================================
+%Identification:
+%The package identifies itself and the LaTeX version needed
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{TRE}[2025-11-15 v1.0 Colors for the document following the red element style.]
+
+%==============================================================
+%Require packages and preliminary definitions needed
+\RequirePackage{xcolor}               %for colors
+\RequirePackage{ifthen}               %for if-else
+
+%==============================================================
+%Handle options that might be passed to the package
+
+%option for selecting the theme
+%------------------------------
+\DeclareOption{light}{\newcommand{\usetheme}{light}}
+\DeclareOption{dark}{\newcommand{\usetheme}{dark}}
+\DeclareOption*{\PackageError{TRE}
+                                {Unknown '\CurrentOption'!
+                                Allowed are:
+                                'light' or 'dark'!}
+                                {Consider changing the options you passed to
+                                'light' or 'dark'.}
+                }
+\ProcessOptions\relax
+
+
+%==============================================================
+\ifthenelse{\equal{\usetheme}{light}}
+{%colors for light theme
+    \definecolor{cMain}{HTML}{A10000}
+    \definecolor{cBg}{HTML}{FFFFFF}
+    \definecolor{cH1}{HTML}{000000}
+    \definecolor{cH2}{HTML}{000000}
+    \definecolor{cH3}{HTML}{000000}
+    \definecolor{cH4}{HTML}{000000}
+    \definecolor{cBodyText}{HTML}{000000}
+    \definecolor{cTabrowBg}{HTML}{9A9A9A}
+    \definecolor{cTabrowHover}{HTML}{C10000}
+    \definecolor{cTabborder}{HTML}{000000}
+    \definecolor{cFootnoteText}{HTML}{444444}
+    \definecolor{cFootnoteBox}{HTML}{FFFFFF}
+    \definecolor{cFootnoteBoxshadow}{HTML}{2B2B2B}
+    \definecolor{cBlockquoteBorder}{HTML}{C10000}
+    \definecolor{cBlockquoteBg}{HTML}{5E5E5E}
+    \definecolor{cBlockquoteText}{HTML}{FFFFFF}
+    \definecolor{cLinkText}{HTML}{A10000}
+    \definecolor{cLinkVisited}{HTML}{C10000}
+    \definecolor{cLinkHover}{HTML}{FF0000}
+    \definecolor{cLinkActive}{HTML}{FF0000}
+    \definecolor{cList1Text}{HTML}{000000}
+    \definecolor{cList2Text}{HTML}{000000}
+    \definecolor{cCaptionBg}{HTML}{FFFFFF}
+    \definecolor{cCaptionText}{HTML}{000000}
+    \definecolor{cCommentLs}{HTML}{8D0000}
+    \definecolor{cTodoLs}{HTML}{FF9100}
+    \definecolor{cFuture}{HTML}{B4B4B4}
+    \definecolor{cBibcolorLs}{HTML}{780000}
+    \definecolor{cCodeBg}{HTML}{D6D6D6}
+    \definecolor{cCodeConstant}{HTML}{569CD6}
+    \definecolor{cCodeComment}{HTML}{6A9955}
+    \definecolor{cCodeString}{HTML}{D16969}
+    \definecolor{cCodeNumeric}{HTML}{B5CEA8}
+    \definecolor{cCodeKeyword}{HTML}{569CD6}
+    \definecolor{cTikzNodeoutline}{HTML}{CCCCCC}
+    \definecolor{cTikzNodebg}{HTML}{FFFFFF}
+    \definecolor{cTikzArrow}{HTML}{808080}
+    \definecolor{cPosterSectnode}{HTML}{E6E6E6}
+    \definecolor{cPosterMainnode}{HTML}{A10000}
+    \definecolor{cTodoTitlepage}{HTML}{FFFF00}
+    \definecolor{cTodoAll}{HTML}{00FFFF}
+    \definecolor{cMathMinbetween}{HTML}{B2B2B2}
+}
+{%colors for dark theme
+    \definecolor{cMain}{HTML}{C80000}
+    \definecolor{cBg}{HTML}{000000}
+    \definecolor{cH1}{HTML}{FFFFFF}
+    \definecolor{cH2}{HTML}{FFFFFF}
+    \definecolor{cH3}{HTML}{FFFFFF}
+    \definecolor{cH4}{HTML}{FFFFFF}
+    \definecolor{cBodyText}{HTML}{FFFFFF}
+    \definecolor{cTabrowBg}{HTML}{5F5F5F}
+    \definecolor{cTabrowHover}{HTML}{A10000}
+    \definecolor{cTabborder}{HTML}{FFFFFF}
+    \definecolor{cFootnoteText}{HTML}{C0C0C0}
+    \definecolor{cFootnoteBox}{HTML}{000000}
+    \definecolor{cFootnoteBoxshadow}{HTML}{BEBEBE}
+    \definecolor{cBlockquoteBorder}{HTML}{A10000}
+    \definecolor{cBlockquoteBg}{HTML}{AAAAAA}
+    \definecolor{cBlockquoteText}{HTML}{000000}
+    \definecolor{cLinkText}{HTML}{C80000}
+    \definecolor{cLinkVisited}{HTML}{A10000}
+    \definecolor{cLinkHover}{HTML}{FF0000}
+    \definecolor{cLinkActive}{HTML}{FF0000}
+    \definecolor{cList1Text}{HTML}{FFFFFF}
+    \definecolor{cList2Text}{HTML}{FFFFFF}
+    \definecolor{cCaptionBg}{HTML}{000000}
+    \definecolor{cCaptionText}{HTML}{FFFFFF}
+    \definecolor{cCommentLs}{HTML}{FF6969}
+    \definecolor{cTodoLs}{HTML}{FF9100}
+    \definecolor{cFuture}{HTML}{B4B4B4}
+    \definecolor{cBibcolorLs}{HTML}{A80000}
+    \definecolor{cCodeBg}{HTML}{1E1E1E}
+    \definecolor{cCodeConstant}{HTML}{569CD6}
+    \definecolor{cCodeComment}{HTML}{6A9955}
+    \definecolor{cCodeString}{HTML}{D16969}
+    \definecolor{cCodeNumeric}{HTML}{B5CEA8}
+    \definecolor{cCodeKeyword}{HTML}{569CD6}
+    \definecolor{cTikzNodeoutline}{HTML}{333333}
+    \definecolor{cTikzNodebg}{HTML}{000000}
+    \definecolor{cTikzArrow}{HTML}{808080}
+    \definecolor{cPosterSectnode}{HTML}{E6E6E6}
+    \definecolor{cPosterMainnode}{HTML}{C10000}
+    \definecolor{cTodoTitlepage}{HTML}{FFFF00}
+    \definecolor{cTodoAll}{HTML}{00FFFF}
+    \definecolor{cMathMinbetween}{HTML}{B2B2B2}
+}

@@ -1,5 +1,6 @@
 #%%imports
 using JSON
+using Dates
 
 #%%definitions
 """
@@ -300,7 +301,7 @@ function make_css(
         /* ################################################################## */
         /* ITERATION COMMANDS */
         span.commentLS {
-            color: var(--c_commentls);
+            color: var(--c_comment_ls);
             text-decoration: underline;
             text-decoration-style: wavy;
             font-style: italic;
@@ -312,7 +313,7 @@ function make_css(
         }
 
         span.todoLS {
-            color: var(--c_todols);
+            color: var(--c_todo_ls);
             font-style: italic;
         }
 
@@ -365,25 +366,81 @@ function make_css(
 end
 
 function make_latexcolors(
-    theme::String="dark",
     indent::Int=4,
     )
     
     #read style
     style = JSON.parsefile("tre.json")
     
+    begin #define file head
+        head = """
+        %Template by Steinwender Lukas
+
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        %- Package providing user defined colors
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+        %==============================================================
+        %Identification:
+        %The package identifies itself and the LaTeX version needed
+
+        \\NeedsTeXFormat{LaTeX2e}
+        \\ProvidesPackage{TRE}[$(today()) v1.0 Colors for the document following the red element style.]
+
+        %==============================================================
+        %Require packages and preliminary definitions needed
+        \\RequirePackage{xcolor}               %for colors
+        \\RequirePackage{ifthen}               %for if-else
+
+        %==============================================================
+        %Handle options that might be passed to the package
+
+        %option for selecting the theme
+        %------------------------------
+        \\DeclareOption{light}{\\newcommand{\\usetheme}{light}}
+        \\DeclareOption{dark}{\\newcommand{\\usetheme}{dark}}
+        \\DeclareOption*{\\PackageError{TRE}
+                                        {Unknown '\\CurrentOption'!
+                                        Allowed are:
+                                        'light' or 'dark'!}
+                                        {Consider changing the options you passed to
+                                        'light' or 'dark'.}
+                        }
+        \\ProcessOptions\\relax
+
+
+        %==============================================================
+        \\ifthenelse{\\equal{\\usetheme}{light}}\
+        """        
+    end
+
     #generate css file lines
-    lines = []
-    for color in keys(style["colors"])
-        if check_context(["all","latex"], style["colors"][color]["context"])
-            line2add = "\\definecolor{$(color)}{HTML}{$(style["colors"][color][theme][2:end])}"
-            line2add = snake2camel(line2add)
-            push!(lines, line2add)
+    lines = [head]
+    begin #dark theme
+        push!(lines, "{%colors for light theme")
+        for color in keys(style["colors"])
+            if check_context(["all","latex"], style["colors"][color]["context"])
+                line2add = "$(" "^indent)\\definecolor{$(color)}{HTML}{$(uppercase(style["colors"][color]["light"][2:end-2]))}"
+                line2add = snake2camel(line2add)
+                push!(lines, line2add)
+            end
         end
+        push!(lines, "}")
+    end
+    begin #light theme
+        push!(lines, "{%colors for dark theme")
+        for color in keys(style["colors"])
+            if check_context(["all","latex"], style["colors"][color]["context"])
+                line2add = "$(" "^indent)\\definecolor{$(color)}{HTML}{$(uppercase(style["colors"][color]["dark"][2:end-2]))}"
+                line2add = snake2camel(line2add)
+                push!(lines, line2add)
+            end
+        end
+        push!(lines, "}")
     end
     
-    #generate file
-    f = open("tre.sty", "w")
+    f = open("TRE.sty", "w")
     write(f, join(lines, "\n"))
     close(f)
 end

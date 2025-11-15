@@ -15,7 +15,7 @@
     --c_tabrow_bg: #9a9a9aff;
     --c_tabrow_hover: #c10000ff;
     --c_tabborder: #000000ff;
-    --c_footnote_text: #444444;
+    --c_footnote_text: #444444ff;
     --c_footnote_box: #ffffffff;
     --c_footnote_boxshadow: #2b2b2bff;
     --c_blockquote_border: #c10000ff;
@@ -29,9 +29,9 @@
     --c_list2_text: #000000ff;
     --c_caption_bg: #ffffffff;
     --c_caption_text: #000000ff;
-    --c_commentls: #8d0000ff;
-    --c_todols: #ff9100ff;
-    --c_bibcolorls: #780000ff;
+    --c_comment_ls: #8d0000ff;
+    --c_todo_ls: #ff9100ff;
+    --c_bibcolor_ls: #780000ff;
     --c_code_bg: #d6d6d6ff;
     --c_code_constant: #569cd6ff;
     --c_code_comment: #6a9955ff;
@@ -260,7 +260,7 @@ ol ol {
 /* ################################################################## */
 /* ITERATION COMMANDS */
 span.commentLS {
-    color: var(--c_commentls);
+    color: var(--c_comment_ls);
     text-decoration: underline;
     text-decoration-style: wavy;
     font-style: italic;
@@ -272,7 +272,7 @@ span.commentLS::after {
 }
 
 span.todoLS {
-    color: var(--c_todols);
+    color: var(--c_todo_ls);
     font-style: italic;
 }
 
