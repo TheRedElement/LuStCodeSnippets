@@ -134,4 +134,13 @@ This will update [./LuStCodeSnippets_jl/Project.toml](./LuStCodeSnippets_jl/Proj
 In principle, [uv](https://docs.astral.sh/uv/) will take care of the proper formatting of [pyproject.toml](./pyproject.toml) for you.
 You might need to make some minor adjustments though.
 
+### Styles
+The `TheRedElement` style can be found in [./styles/](./styles/).
+Using the style can be done as follows:
+* $\LaTeX$
+    * copy [TRE.sty](./styles/TRE.sty) in your $\LaTeX$ document and import it via `\usepackage[<dark|light>]{TRE}`
+* html
+    * copy [tre_dark.css](./styles/tre_dark.css) and/or [tre_light.css](./styles/tre_light.css) into your project
+    * import by calling `<link rel="stylesheet" href=path2tre_dark.css>` and `<link rel="stylesheet" href=path2tre_light.css>`
+
 ## Comments
