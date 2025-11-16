@@ -315,8 +315,8 @@
         },
         "c_poster_sectnode": {
             "context": ["latex", "css"],
-            "dark": "#e6e6e6ff",
-            "light": "#e6e6e6ff"
+            "dark": "#4d4d4dff",
+            "light": "#4d4d4dff"
         },
         "c_poster_mainnode": {
             "context": ["latex", "css"],
