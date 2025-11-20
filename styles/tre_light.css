@@ -40,7 +40,15 @@
     --c_code_keyword: #569cd6ff;
     --c_poster_sectnode: #4d4d4dff;
     --c_poster_mainnode: #a10000ff;
-    /* text styling */
+    /* fontsizes */
+    --fs_h1: 1.5rem;
+    --fs_h2: 1.3rem;
+    --fs_h3: 1.1rem;
+    --fs_h4: 1.0rem;
+    --fs_footnote_text: 0.8rem;
+    --fs_blockquote_text: 1.2rem;
+    --fs_list1_text: 1rem;
+    --fs_list2_text: 1rem;
 }
 
 /* ################################################################## */
@@ -54,22 +62,22 @@ html, body {
 /* HEADERS */
 h1 {
     color: var(--c_h1);
-    font-size: 1.5rem;
+    font-size: var(--fs_h1);
     font-weight: bold;
 }
 h2 {
     color: var(--c_h2);
-    font-size: 1.3rem;
+    font-size: var(--fs_h2);
     font-weight: bold
 }
 h3 {
     color: var(--c_h3);
-    font-size: 1.1rem;
+    font-size: var(--fs_h3);
     font-weight: bold
 }
 h4 {
     color: var(--c_h4);
-    font-size: 1.0rem;
+    font-size: var(--fs_h4);
     font-weight: bold
 }
 
@@ -140,7 +148,7 @@ figure figcaption::before{
 /* other buliding blocks */
 span.footnote {
     color: var(--c_footnote_text);
-    font-size: 0.8rem;
+    font-size: var(--fs_footnote_text);
     position: relative;
     cursor: pointer;
     vertical-align: super;
@@ -149,7 +157,7 @@ span.footnote {
 span.footnote::before {
     content: counter(footnotes)" ";
     vertical-align: super;
-    font-size: 0.8rem;
+    font-size: var(--fs_footnote_text);
 }
 span.footnote::after {
     content: attr(data-note);
@@ -175,7 +183,7 @@ span.footnote:hover::after {
 blockquote {
     display: inline-block;
     overflow: hidden;
-    font-size: 1.2rem;
+    font-size: var(--fs_blockquote_text);
     text-align: left;
     width: 95%;
     color: var(--c_blockquote_text);
@@ -220,7 +228,7 @@ a:active {
 /* ---------------------------------------- */
 /* bullet lists */
 ul {
-    font-size: 1rem;
+    font-size: var(--fs_list1_text);
     color: var(--c_list1_text);
 }
 
@@ -230,7 +238,7 @@ ul {
 } */
 
 ul ul {
-    font-size: 1rem;
+    font-size: var(--fs_list2_text);
     color: var(--c_list2_text);
 }
 
@@ -238,6 +246,7 @@ ul ul {
 /* ordered lists */
 /* top level */
 ol {
+    font-size: var(--fs_list1_text);
     counter-reset: item;
     list-style: none;
     padding-left: 1.5rem;
@@ -254,7 +263,7 @@ li > ol {   /* reset counter when new nested element starts */
 }
 
 ol ol {
-    font-size: rem;
+    font-size: var(--fs_list2_text);
     color: var(--c_list2_text);
 }
 /* ################################################################## */

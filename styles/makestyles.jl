@@ -66,18 +66,22 @@ function make_css(
         
     begin #add global variables
         push!(lines, ":root {")
-        push!(lines, "$(' '^indent)/* colors */")
         
         begin #colors
+            push!(lines, "$(' '^indent)/* colors */")
             for color in keys(style["colors"])
                 if check_context(["all","css"], style["colors"][color]["context"])
                     push!(lines, "$(' '^indent)--$(color): $(style["colors"][color][theme]);")
                 end
             end
         end
-        begin #text styling
-            push!(lines, "$(' '^indent)/* text styling */")
-            
+        begin #fontsizes
+            push!(lines, "$(' '^indent)/* fontsizes */")
+            for fs in keys(style["fontsizes"])
+                if check_context(["all","css"], style["fontsizes"][fs]["context"])
+                    push!(lines, "$(' '^indent)--$(fs): $(style["fontsizes"][fs]["value"]);")
+                end
+            end
         end
         push!(lines, "}\n")
     end
@@ -95,22 +99,22 @@ function make_css(
         /* HEADERS */
         h1 {
             color: var(--c_h1);
-            font-size: 1.5rem;
+            font-size: var(--fs_h1);
             font-weight: bold;
         }
         h2 {
             color: var(--c_h2);
-            font-size: 1.3rem;
+            font-size: var(--fs_h2);
             font-weight: bold
         }
         h3 {
             color: var(--c_h3);
-            font-size: 1.1rem;
+            font-size: var(--fs_h3);
             font-weight: bold
         }
         h4 {
             color: var(--c_h4);
-            font-size: 1.0rem;
+            font-size: var(--fs_h4);
             font-weight: bold
         }
 
@@ -181,7 +185,7 @@ function make_css(
         /* other buliding blocks */
         span.footnote {
             color: var(--c_footnote_text);
-            font-size: 0.8rem;
+            font-size: var(--fs_footnote_text);
             position: relative;
             cursor: pointer;
             vertical-align: super;
@@ -190,7 +194,7 @@ function make_css(
         span.footnote::before {
             content: counter(footnotes)" ";
             vertical-align: super;
-            font-size: 0.8rem;
+            font-size: var(--fs_footnote_text);
         }
         span.footnote::after {
             content: attr(data-note);
@@ -216,7 +220,7 @@ function make_css(
         blockquote {
             display: inline-block;
             overflow: hidden;
-            font-size: 1.2rem;
+            font-size: var(--fs_blockquote_text);
             text-align: left;
             width: 95%;
             color: var(--c_blockquote_text);
@@ -261,7 +265,7 @@ function make_css(
         /* ---------------------------------------- */
         /* bullet lists */
         ul {
-            font-size: 1rem;
+            font-size: var(--fs_list1_text);
             color: var(--c_list1_text);
         }
 
@@ -271,7 +275,7 @@ function make_css(
         } */
 
         ul ul {
-            font-size: 1rem;
+            font-size: var(--fs_list2_text);
             color: var(--c_list2_text);
         }
 
@@ -279,6 +283,7 @@ function make_css(
         /* ordered lists */
         /* top level */
         ol {
+            font-size: var(--fs_list1_text);
             counter-reset: item;
             list-style: none;
             padding-left: 1.5rem;
@@ -295,7 +300,7 @@ function make_css(
         }
 
         ol ol {
-            font-size: rem;
+            font-size: var(--fs_list2_text);
             color: var(--c_list2_text);
         }
         /* ################################################################## */

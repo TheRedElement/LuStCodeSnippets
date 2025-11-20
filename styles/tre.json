@@ -1,6 +1,7 @@
 {
     "naming": {
-        "colors": "<quantity>_<context>_buildingblock"
+        "colors": "c_<class>_[parameter]",
+        "fontsizes": "fs_<class>_[parameter]"
     },
     "colors": {
         "c_main": {
@@ -337,6 +338,40 @@
             "context": ["latex"],
             "dark": "#b2b2b2ff",
             "light": "#b2b2b2ff"
+        }
+    },
+    "fontsizes": {
+        "fs_h1": {
+            "context":["css"],
+            "value":"1.5rem"
+        },
+        "fs_h2": {
+            "context":["css"],
+            "value":"1.3rem"
+        },
+        "fs_h3": {
+            "context":["css"],
+            "value":"1.1rem"
+        },
+        "fs_h4": {
+            "context":["css"],
+            "value":"1.0rem"
+        },
+        "fs_footnote_text": {
+            "context":["css"],
+            "value":"0.8rem"
+        },
+        "fs_blockquote_text": {
+            "context":["css"],
+            "value":"1.2rem"
+        },
+        "fs_list1_text": {
+            "context":["css"],
+            "value":"1rem"
+        },
+        "fs_list2_text": {
+            "context":["css"],
+            "value":"1rem"
         }
     },
     "linestyles": {
