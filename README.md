@@ -25,9 +25,43 @@ To do so, navigate inside the directory of where you cloned this submodule to an
 > [!IMPORTANT]
 > If you find this repo useful in your work, a brief acknowledgement would be appreciated.
 
+
 ## TODO
 - [LuStCodeSnippets_sh](./LuStCodeSnippets_sh/)
     - [ ] update docstrings to enable calling `--help` 
+
+## Project Workflow
+* uses `dev-feature` workflow (my simplification of `GitHub Flow`)
+* reason: allows for faster feedback
+    * especially useful since often integrated as `git submodule` in my projects 
+```mermaid
+gitGraph
+    commit id: "v0.1"
+    branch dev
+    checkout dev
+        branch featureA
+        checkout featureA
+            commit id: "devA1"
+            commit id: "devA2"
+        checkout dev
+        merge featureA id: "v0.2"
+		commit id: "release testing 1"
+    checkout main
+    merge dev id: "v1.0"
+    checkout dev
+    commit id: "v1.1"
+        branch featureB
+        checkout featureB
+        commit id: "devB1"
+        commit id: "devB2"
+        commit id: "devB3"
+    checkout dev
+    merge featureB id: "v1.2"
+	    commit id: "release testing 2"
+    checkout main
+    merge dev id: "v2.0"
+    %% rebase featureB
+```
 
 ## Installation
 

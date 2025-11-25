@@ -1,5 +1,120 @@
 #!/bin/bash
 
+git_log() {
+    local help='
+        - function to print a prettified version of git log in the terminal
+            - formatting similar to a git graph
+        
+        Usage
+        -----
+        ```bash
+        git_log
+        ```
+        
+        Parameters
+        ----------
+        
+        Example
+        -------
+        ```bash
+        git_log
+        ```
+        
+        Output
+        ------
+        ```bash
+        ```    
+    '
+
+    ################
+    #DEAL WITH ARGS#
+    ################
+    declare -a args=()  #positional args via array
+    declare -A kwargs=( #emulate named kwargs via associative array
+        #no kwargs
+    )
+    for arg in "$@"; do
+        if [[ "$arg" == *=* ]]; then    #check if arg contains an `=` (kwargs)
+            key="${arg%%=*}"            #name (before `=`)
+            val="${arg#*=}"             #value (after `=`)
+            kwargs[$key]="$val"         #override default
+        else                            #interpret as positional
+            args+=("$arg")
+        fi
+    done
+
+    #default values for positional args
+    if [[ "${args[0]}" == "--help" ]]; then
+        echo "$help"
+    else
+        ###############
+        #FUNCTION BODY#
+        ###############
+
+        echo $"called git_log" \
+            ""
+
+        git log --graph --oneline --decorate --all --color
+    fi
+}
+
+rm_gitignored() {
+    local help='
+        - function to delete all files in the current directory that are gitignored
+        
+        Usage
+        -----
+        ```bash
+        rm_gitignored
+        ```
+        
+        Parameters
+        ----------
+        
+        Example
+        -------
+        ```bash
+        rm_gitignored
+        ```
+        
+        Output
+        ------
+        ```bash
+        ```    
+    '
+
+    ################
+    #DEAL WITH ARGS#
+    ################
+    declare -a args=()  #positional args via array
+    declare -A kwargs=( #emulate named kwargs via associative array
+        #no kwargs
+    )
+    for arg in "$@"; do
+        if [[ "$arg" == *=* ]]; then    #check if arg contains an `=` (kwargs)
+            key="${arg%%=*}"            #name (before `=`)
+            val="${arg#*=}"             #value (after `=`)
+            kwargs[$key]="$val"         #override default
+        else                            #interpret as positional
+            args+=("$arg")
+        fi
+    done
+
+    #default values for positional args
+    if [[ "${args[0]}" == "--help" ]]; then
+        echo "$help"
+    else
+        ###############
+        #FUNCTION BODY#
+        ###############
+
+        echo $"called rm_gitignored" \
+            ""
+
+        git check-ignore *.* | xargs -r rm -v
+    fi
+}
+
 unlink_submodule() {
     local help='
         - function to unlik a git submodule
@@ -98,6 +213,7 @@ unlink_submodule() {
         fi
     fi
 }
+
 
 #prevent direct execution
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
