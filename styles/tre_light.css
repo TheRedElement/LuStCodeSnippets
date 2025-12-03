@@ -41,14 +41,14 @@
     --c_poster_sectnode: #4d4d4dff;
     --c_poster_mainnode: #a10000ff;
     /* fontsizes */
-    --fs_h1: 1.5rem;
-    --fs_h2: 1.3rem;
-    --fs_h3: 1.1rem;
-    --fs_h4: 1.0rem;
-    --fs_footnote_text: 0.8rem;
-    --fs_blockquote_text: 1.2rem;
-    --fs_list1_text: 1rem;
-    --fs_list2_text: 1rem;
+    --fs_h1: 1.5em;
+    --fs_h2: 1.3em;
+    --fs_h3: 1.1em;
+    --fs_h4: 1.0em;
+    --fs_footnote_text: 0.8em;
+    --fs_blockquote_text: 1.2em;
+    --fs_list1_text: 1em;
+    --fs_list2_text: 1em;
 }
 
 /* ################################################################## */

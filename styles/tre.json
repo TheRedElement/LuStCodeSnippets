@@ -1,7 +1,17 @@
 {
-    "naming": {
-        "colors": "c_<class>_[parameter]",
-        "fontsizes": "fs_<class>_[parameter]"
+    "comments": {
+        "colors": {
+            "naming": "c_<class>_[parameter]",
+            "notes": [
+            ]
+        },
+        "fontsizes": {
+            "naming": "fs_<class>_[parameter]",
+            "notes": [
+                "use rem for outer world (top-lever containers)",
+                "use em for inner world (any children i.e., lists, headers, ...)"
+            ]
+        }
     },
     "colors": {
         "c_main": {
@@ -343,35 +353,35 @@
     "fontsizes": {
         "fs_h1": {
             "context":["css"],
-            "value":"1.5rem"
+            "value":"1.5em"
         },
         "fs_h2": {
             "context":["css"],
-            "value":"1.3rem"
+            "value":"1.3em"
         },
         "fs_h3": {
             "context":["css"],
-            "value":"1.1rem"
+            "value":"1.1em"
         },
         "fs_h4": {
             "context":["css"],
-            "value":"1.0rem"
+            "value":"1.0em"
         },
         "fs_footnote_text": {
             "context":["css"],
-            "value":"0.8rem"
+            "value":"0.8em"
         },
         "fs_blockquote_text": {
             "context":["css"],
-            "value":"1.2rem"
+            "value":"1.2em"
         },
         "fs_list1_text": {
             "context":["css"],
-            "value":"1rem"
+            "value":"1em"
         },
         "fs_list2_text": {
             "context":["css"],
-            "value":"1rem"
+            "value":"1em"
         }
     },
     "linestyles": {
