@@ -93,6 +93,8 @@ function make_css(
         html, body {
             background-color: var(--c_bg);
             color: var(--c_body_text);
+            /* init counters */
+            counter-reset: fig 0 tab 0;            
         }
 
         /* ################################################################## */
@@ -267,6 +269,7 @@ function make_css(
         ul {
             font-size: var(--fs_list1_text);
             color: var(--c_list1_text);
+            margin-top: 0.2rem;
         }
 
         /* custom bullet (red button? */
@@ -284,6 +287,7 @@ function make_css(
         /* top level */
         ol {
             font-size: var(--fs_list1_text);
+            margin-top: 0.2rem;
             counter-reset: item;
             list-style: none;
             padding-left: 1.5rem;
@@ -313,7 +317,7 @@ function make_css(
         }
 
         span.commentLS::after {
-            content: " [" attr(data-comment) "]";
+            content: " [LS: " attr(data-comment) "]";
             text-decoration: none;
         }
 
@@ -323,7 +327,7 @@ function make_css(
         }
 
         span.todoLS::before {
-            content: "[TODO: ";
+            content: "[TODO LS: ";
         }
 
         span.todoLS::after {
