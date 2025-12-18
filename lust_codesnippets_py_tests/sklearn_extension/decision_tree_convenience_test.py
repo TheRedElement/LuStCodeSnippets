@@ -36,5 +36,5 @@ class Test_get_nodes:
         return nodes_pred, nodes_true
 
     #assert
-    def test_absmag(self, action):
+    def test_result(self, action):
         assert action[0] == action[1]
