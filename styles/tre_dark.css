@@ -251,10 +251,11 @@ figure {
     overflow: hidden;
     counter-increment: fig;
 }
-figure img {
+figure img,
+figure iframe {
     width: 100%;    /* because always wrapped in figure */
     height: auto;
-    display: block;    
+    display: block;
     margin: 0 auto;
 }
 figure figcaption {
@@ -327,7 +328,7 @@ a.download {
     justify-items: left;
 }
 a.download::before {
-    content: "F847";
+    content: "\1F847";
     font-style: normal;
     border-radius: 5px;
     padding-left: 0.1em;
@@ -337,7 +338,7 @@ a.download::before {
     outline: 1px solid var(--c_link_text);
 }
 a.download:hover::before {
-    content: "F847 Download";
+    content: "\1F847 Download";
 }
 
 /* glossary and bibliography */
@@ -355,6 +356,8 @@ tre-glossary .head {
 tre-glossary .body {
     display: block;
     margin-left: 1em;
+    width: 85vw;
+    overflow-wrap: break-word;
 }
 tre-gls,
 tre-cite {
@@ -498,31 +501,56 @@ span.todoLS::after {
     content: "]";
 }
 
-/* ################################################################## */
-/* LAYOUTING */
-/* n column layout */
-.columns {
-    display: flex;
-    gap: 5%;
-    width: 100%;
-}
-.column {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    /* outline: 10px solid rgba(0, 0, 0, 0); */
-}
 
-/* row layout */
-.rows {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    margin-top: 3%;
-    /* outline: 1px solid rgb(255, 0, 0, 0); */
+/* ################################################################## */
+/* MEDIA QUERIES */
+@media (max-width: 768px) {
+    body {
+        max-width: 100%;
+        display: grid;
+        grid-template-columns: auto;
+        grid-auto-rows: min-content;
+        grid-template-areas: 
+            'header'
+            'nav'
+            'main'
+            'footer';
+        min-height: 100vh;
+        text-align: justify;
+        margin: 1em;
+        gap: 0;
+        overflow-x: hidden; 
+    }
+    nav {
+        height: auto;
+        position: inherit;
+    }
+    .nav-item,
+    .nav-subitem {
+        color: color-mix(in srgb, var(--c_body_text), var(--c_bg) 20%);
+        font-size: 0.8em;
+    }
+    .nav-item .nav-subitem {
+        position: relative;  /* back in layout */
+        opacity: 1;
+        display: block;
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+        transform: translateY(0);
+        visibility: visible;
+    }
+    figure figcaption {
+        text-align: justify;
+    }
+    tre-gls:hover tre-gls-hover,
+    tre-cite:hover tre-bib-hover {
+        position: fixed;
+        bottom: 5%;
+        left: 50vw;
+        transform: translateX(-47vw);
+        width: 90vw;
+        /* height: auto;
+        z-index: 1000; */
+    }    
 }
 
