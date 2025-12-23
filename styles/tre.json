@@ -3,6 +3,9 @@
         "colors": {
             "naming": "c_<class>_[parameter]",
             "notes": [
+                "c_main = accent color",
+                "c_bg = primary color",
+                "c_body_text = secondary color"
             ]
         },
         "fontsizes": {
@@ -27,37 +30,6 @@
             ],
             "dark": "#000000ff",
             "light": "#ffffffff"
-        },
-        "c_h1": {
-            "context": [
-                "all"
-            ],
-            "dark": "#ffffffff",
-            "light": "#000000ff"
-        },
-        "c_h2": {
-            "context": [
-                "css",
-                "latex"
-            ],
-            "dark": "#ffffffff",
-            "light": "#000000ff"
-        },
-        "c_h3": {
-            "context": [
-                "css",
-                "latex"
-            ],
-            "dark": "#ffffffff",
-            "light": "#000000ff"
-        },
-        "c_h4": {
-            "context": [
-                "css",
-                "latex"
-            ],
-            "dark": "#ffffffff",
-            "light": "#000000ff"
         },
         "c_body_text": {
             "context": [

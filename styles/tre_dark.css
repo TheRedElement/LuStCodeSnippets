@@ -1,5 +1,6 @@
-/* tre.css */
+/* tre_dark.css */
 /* load via <link rel="stylesheet" href=path2file> */
+/* contains all things related to style besides `:root {}` => filled by calling makestyles.jl*/
 
 
 /* css variables (can be overridden in html or other css files) */
@@ -7,10 +8,6 @@
     /* colors */
     --c_main: #c80000ff;
     --c_bg: #000000ff;
-    --c_h1: #ffffffff;
-    --c_h2: #ffffffff;
-    --c_h3: #ffffffff;
-    --c_h4: #ffffffff;
     --c_body_text: #ffffffff;
     --c_tabrow_bg: #5f5f5fff;
     --c_tabrow_hover: #a10000ff;
@@ -51,34 +48,158 @@
     --fs_list2_text: 1em;
 }
 
+
 /* ################################################################## */
 /* GLOBAL DEFAULTS */
 html, body {
     background-color: var(--c_bg);
     color: var(--c_body_text);
     /* init counters */
-    counter-reset: fig 0 tab 0;            
+    counter-reset: fig 0 tab 0; 
 }
+body {
+    max-width: 98%;
+    display: grid;
+    grid-template-columns: 150px auto;
+    grid-template-areas: 
+        'header header'
+        'nav main'
+        'nav footer';
+    min-height: 100vh;
+    text-align: justify;
+    gap: 0;
+    overflow-x: hidden;            
+}
+
+
+/* ################################################################## */
+/* HTML AREAS */
+header {
+    grid-area: header;
+    text-align: center;
+    position: relative;
+}
+header h1 {
+    font-size: 3em;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+header h2 {
+    font-size: 1.5em;
+    margin-top: 0;
+}
+/* horizontal line */
+header::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 2px;
+    margin-top: 0.75rem;
+    background: linear-gradient(
+        to right,
+        var(--c_body_text) 0%,
+        var(--c_body_text) calc(50% - 16px),
+        transparent calc(50% - 16px),
+        transparent calc(50% + 16px),
+        var(--c_body_text) calc(50% + 16px),
+        var(--c_body_text) 100%
+    );
+}
+/* red dot */
+header::before {
+    content: "";
+    position: absolute;
+    left: calc(50%);
+    top: 96%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 10px;
+    background: var(--c_main);
+    border-radius: 50%;				
+}
+
+main {
+    grid-area: main;
+}
+footer {
+    grid-area: footer;
+}
+
+/* nav-bar */
+nav {
+    background-color: var(--c_bg);
+    position: sticky;
+    margin-top: 1em;
+    top: 0;
+    left: 0;
+    grid-area: nav;
+    height: 100vh;
+    font-size: 1.5em;
+    text-align: left;
+}
+nav ul a:link,
+nav ul a:visited {
+    font-style: normal;
+    color: var(--c3);
+}
+nav ul {
+    display: block;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.nav-subitem li:not(:last-child) {
+margin-bottom: 0.3em;
+}
+.nav-item .nav-subitem {
+    position: absolute; /* not in layout */
+    top: 100%;
+    left: 0;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(10px);
+    font-size: 0.8em;
+    transition:
+        opacity 200ms ease,
+        transform 200ms ease,
+        visibility 0s linear 200ms;
+}
+.nav-item:hover .nav-subitem,
+.nav-item.active .nav-subitem {
+    position: inherit;  /* back in layout */
+    opacity: 1;
+    display: block;
+    margin-left: 1em;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+    transition:
+        opacity 200ms ease,
+        transform 200ms ease,
+        visibility 0s;    
+}
+
 
 /* ################################################################## */
 /* HEADERS */
 h1 {
-    color: var(--c_h1);
+    color: var(--c_body_text);
     font-size: var(--fs_h1);
     font-weight: bold;
 }
 h2 {
-    color: var(--c_h2);
+    color: var(--c_body_text);
     font-size: var(--fs_h2);
     font-weight: bold
 }
 h3 {
-    color: var(--c_h3);
+    color: var(--c_body_text);
     font-size: var(--fs_h3);
     font-weight: bold
 }
 h4 {
-    color: var(--c_h4);
+    color: var(--c_body_text);
     font-size: var(--fs_h4);
     font-weight: bold
 }
@@ -145,9 +266,12 @@ figure figcaption::before{
     content: "Figure " counter(fig) ": ";
     font-weight: bold;
 }
+figure.nonumber {
+    counter-increment: none;
+}            
 
 /* ################################################################## */
-/* other buliding blocks */
+/* other building blocks */
 span.footnote {
     color: var(--c_footnote_text);
     font-size: var(--fs_footnote_text);
@@ -193,6 +317,83 @@ blockquote {
     border-left: 0.5rem var(--c_blockquote_border) solid;
     background-color: var(--c_blockquote_bg);
 }
+
+/* ################################################################## */
+/* CUSTOM BUILDING BLOCKS */
+/* download button */
+a.download {
+    outline: 0px;
+    padding-left: 0.1em;
+    justify-items: left;
+}
+a.download::before {
+    content: "F847";
+    font-style: normal;
+    border-radius: 5px;
+    padding-left: 0.1em;
+    padding-right: 0.1em;
+    padding-top: 0.1em;
+    padding-bottom: 0.1em;
+    outline: 1px solid var(--c_link_text);
+}
+a.download:hover::before {
+    content: "F847 Download";
+}
+
+/* glossary and bibliography */
+tre-glossary:before {
+    content: "Glossary";
+    display: block;
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+}
+tre-glossary .head {
+    display: block;
+    font-weight: bold;
+}
+tre-glossary .body {
+    display: block;
+    margin-left: 1em;
+}
+tre-gls,
+tre-cite {
+    position: relative;   
+}
+tre-gls-hover,
+tre-bib-hover {
+    color: var(--c_body_text);
+    /* hide info */
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    /* box positioning */
+    z-index: 100;
+    bottom: 125%; /* above the hovered element */
+    left: 50%;
+    transform: translateX(-50%);
+    /* text styling */
+    font-size: 1rem;
+    font-weight: normal;
+    overflow-wrap: break-word;
+    
+    /* box styling */
+    width: max(100%, 15rem);
+    border-radius: 4px;
+    background-color: color-mix(in srgb, var(--c_bg), var(--c_body_text) 20%);
+    padding: 0.4em 0.5em;
+    /* smoothing effects */
+    transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease;
+}
+tre-gls:hover tre-gls-hover,
+tre-cite:hover tre-bib-hover {
+    display: block;
+    visibility: visible;
+    opacity: 0.95;
+}
+
 
 /* ################################################################## */
 /* CROSSREFERENCES */

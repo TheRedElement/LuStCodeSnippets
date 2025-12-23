@@ -1,53 +1,11 @@
-/* tre_light.css */
+/* tre_$(theme).css */
 /* load via <link rel="stylesheet" href=path2file> */
 /* contains all things related to style besides `:root {}` => filled by calling makestyles.jl*/
 
 
 /* css variables (can be overridden in html or other css files) */
 :root {
-    /* colors */
-    --c_main: #a10000ff;
-    --c_bg: #ffffffff;
-    --c_body_text: #000000ff;
-    --c_tabrow_bg: #9a9a9aff;
-    --c_tabrow_hover: #c10000ff;
-    --c_tabborder: #000000ff;
-    --c_footnote_text: #444444ff;
-    --c_footnote_box: #ffffffff;
-    --c_footnote_boxshadow: #2b2b2bff;
-    --c_blockquote_border: #c10000ff;
-    --c_blockquote_bg: #5e5e5eff;
-    --c_blockquote_text: #ffffffff;
-    --c_link_text: #a10000ff;
-    --c_link_visited: #c10000ff;
-    --c_link_hover: #ff0000ff;
-    --c_link_active: #ff0000ff;
-    --c_list1_text: #000000ff;
-    --c_list2_text: #000000ff;
-    --c_caption_bg: #ffffffff;
-    --c_caption_text: #000000ff;
-    --c_comment_ls: #8d0000ff;
-    --c_todo_ls: #ff9100ff;
-    --c_bibcolor_ls: #780000ff;
-    --c_code_bg: #d6d6d6ff;
-    --c_code_constant: #569cd6ff;
-    --c_code_comment: #6a9955ff;
-    --c_code_string: #d16969ff;
-    --c_code_numeric: #b5cea8ff;
-    --c_code_keyword: #569cd6ff;
-    --c_poster_sectnode: #4d4d4dff;
-    --c_poster_mainnode: #a10000ff;
-    /* fontsizes */
-    --fs_h1: 1.5em;
-    --fs_h2: 1.3em;
-    --fs_h3: 1.1em;
-    --fs_h4: 1.0em;
-    --fs_footnote_text: 0.8em;
-    --fs_blockquote_text: 1.2em;
-    --fs_list1_text: 1em;
-    --fs_list2_text: 1em;
 }
-
 
 /* ################################################################## */
 /* GLOBAL DEFAULTS */
