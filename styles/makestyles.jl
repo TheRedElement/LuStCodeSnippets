@@ -286,7 +286,6 @@ function make_plotly(
         open(joinpath(location, "./tre_plotly_$(theme).json"), "w") do f
             JSON.print(f, data, indent)
         end
-
     end
 
 end
