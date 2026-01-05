@@ -1,6 +1,7 @@
 #%%imports
-using JSON
+using Colors
 using Dates
+using JSON
 
 #%%definitions
 """
@@ -35,6 +36,10 @@ function snake2camel(
     s_camel = replace(s, (underscores.=>uppercase.(initials))...)
     return s_camel
 end
+function hex2rgba_string(hex)
+    rgba = parse(RGBA, hex)
+    return "rgba($(float(rgba.r)),$(float(rgba.g)),$(float(rgba.b)),$(float(rgba.alpha)))"
+end
 
 
 function check_context(
@@ -42,6 +47,7 @@ function check_context(
     )::Bool
     return any(in.(contexts, Ref(context_json))) #only use css context
 end
+
 function make_css(
     theme::String="dark",
     indent::Int=4,
@@ -183,7 +189,6 @@ function make_plotly(
     style = JSON.parsefile("tre.json")
 
 
-
     data = Dict(
         "data" => Dict(
             #sorted alphabetically
@@ -214,17 +219,16 @@ function make_plotly(
             "coloraxis" => Dict(
                 "colorbar" => Dict(
                     "outlinewidth" => 5,
-                    )
-                    ),
-                    "colorscale" => Dict(   #not working in js
-                    "continuous" => "Plasma",
-                    "sequential" => "Plasma",
-                    "sequentialminus" => "Plasma",
-                    "diverging" => [
-                        [0, "#000000"],
-                        [0.5, "#f7f7f7"],
+                )
+            ),
+            "colorscale" => Dict(   #not working in js
+                "sequential" => "plasma",
+                "sequentialminus" => "plasma",
+                "diverging" => [
+                    [0, "#000000"],
+                    [0.5, "#f7f7f7"],
                     [1, "#b40426"]
-                    ]
+                ],
             ),
             "colorway" => [
                 style["colors"]["c_plot_c0"][theme],
@@ -238,11 +242,21 @@ function make_plotly(
             ),
             "legend" => Dict(
                 "itemwidth" => 80,
-                "bgcolor" => style["colors"]["c_plot_legendbg"]
+                "bgcolor" => style["colors"]["c_plot_legendbg"][theme],
             ),            
             "margin" => Dict("t" =>0, "b" =>10, "l" =>100, "r" =>0),
             "paper_bgcolor" => style["colors"]["c_bg"][theme],
-            "plot_bgcolor" => style["colors"]["c_plot_pane"][theme],            
+            "plot_bgcolor" => style["colors"]["c_plot_pane"][theme],
+            "scene" => Dict(
+                "zaxis" => Dict(
+                    "visible" => true,
+                    "showline" => true,
+                    "zeroline" => false,
+                    "color" => style["colors"]["c_body_text"][theme],
+                    "linecolor" => style["colors"]["c_body_text"][theme],
+                    "gridcolor" => style["colors"]["c_plot_gridcolor"][theme],
+                ),                  
+            ),
             "xaxis" => Dict(
                 "visible" => true,
                 "showline" => true,
@@ -250,7 +264,7 @@ function make_plotly(
                 "automargin" => true,
                 "color" => style["colors"]["c_body_text"][theme],
                 "linecolor" => style["colors"]["c_body_text"][theme],
-                "gridcolor" => style["colors"]["c_plot_gridcolor"],
+                "gridcolor" => style["colors"]["c_plot_gridcolor"][theme],
             ),
             "yaxis" => Dict(
                 "visible" => true,
@@ -259,16 +273,7 @@ function make_plotly(
                 "automargin" => true,
                 "color" => style["colors"]["c_body_text"][theme],
                 "linecolor" => style["colors"]["c_body_text"][theme],
-                "gridcolor" => style["colors"]["c_plot_gridcolor"],
-            ),
-            "zaxis" => Dict(
-                "visible" => true,
-                "showline" => true,
-                "zeroline" => false,
-                "automargin" => true,
-                "color" => style["colors"]["c_body_text"][theme],
-                "linecolor" => style["colors"]["c_body_text"][theme],
-                "gridcolor" => style["colors"]["c_plot_gridcolor"],
+                "gridcolor" => style["colors"]["c_plot_gridcolor"][theme],
             ),
         )
     )
@@ -283,4 +288,5 @@ end
 # make_css("dark")
 # make_css("light")
 # make_latexcolors()
-make_plotly()
+make_plotly("dark")
+make_plotly("light")

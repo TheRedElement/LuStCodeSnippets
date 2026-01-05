@@ -171,10 +171,22 @@ You might need to make some minor adjustments though.
 ### Styles
 The `TheRedElement` style can be found in [./styles/](./styles/).
 Using the style can be done as follows:
-* $\LaTeX$
-    * copy [TRE.sty](./styles/TRE.sty) in your $\LaTeX$ document and import it via `\usepackage[<dark|light>]{TRE}`
-* html
-    * copy [tre_dark.css](./styles/tre_dark.css) and/or [tre_light.css](./styles/tre_light.css) into your project
-    * import by calling `<link rel="stylesheet" href=path2tre_dark.css>` and `<link rel="stylesheet" href=path2tre_light.css>`
+1. compile the style using [makestyles.jl](./styles/makestyles.jl)
+    1. navigate to [./styles/](./styles/)
+    2. call `julia --project=. makestyles.jl`
+2. copy the generated style files to where you need them
+    * $\LaTeX$
+        * copy [TRE.sty](./styles/TRE.sty) in your $\LaTeX$ document and import it via `\usepackage[<dark|light>]{TRE}`
+    * html
+        * copy [tre_dark.css](./styles/tre_dark.css) and/or [tre_light.css](./styles/tre_light.css) into your project
+        * import by calling `<link rel="stylesheet" href=path2tre_dark.css>` and `<link rel="stylesheet" href=path2tre_light.css>`
+    * [matplotlib](https://matplotlib.org/)
+        * no need to copy anything
+        * simply
+            1. import the plotting style `from lust_codesnippets_py.styles import plot_styles as alstps`
+            2. load the respective style `palette, ls, markers, cmap, hatches = alstps.tre_dark()`
+    * [Plotly (python)](https://plotly.com/python/)
+    * [Plotly (java script)](https://plotly.com/javascript/)
+    * [Plotly (julia script)](https://plotly.com/julia/)
 
 ## Comments

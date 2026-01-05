@@ -407,20 +407,20 @@
         "cycle": [
             "circle",
             "square",
-            "triangle_up",
-            "triangle_down",
+            "triangle-up",
+            "triangle-down",
             "circle",
             "square",
-            "triangle_up",
-            "triangle_down",
+            "triangle-up",
+            "triangle-down",
             "circle",
             "square",
-            "triangle_up",
-            "triangle_down",
+            "triangle-up",
+            "triangle-down",
             "circle",
             "square",
-            "triangle_up",
-            "triangle_down"
+            "triangle-up",
+            "triangle-down"
         ],
         "batch": [
             "circle",

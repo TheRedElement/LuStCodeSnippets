@@ -68,6 +68,11 @@
             //define plot
             const layout = {
                 template: treTemplate,
+                legend: {
+                    title: {
+                        text: "LEGTITLE",
+                    }
+                },                
                 xaxis: {
                     domain: [0, 0.45],
                     anchor: "y1",
@@ -110,20 +115,6 @@
                         text: "y"
                     },
                 },
-                // xaxis4: {
-                //     domain: [0.55, 1.0],
-                //     anchor: "y4",
-                //     title: {
-                //         text: "x"
-                //     }                    
-                // },
-                // yaxis4: {
-                //     domain: [0.3, 0.6],
-                //     anchor: "x4",
-                //     title: {
-                //         text: "y"
-                //     },
-                // },
                 xaxis5: {
                     domain: [0.0, 1.0],
                     anchor: "y5",
@@ -213,7 +204,7 @@
                     name: "(3,1),(3,2)",
                 },
                 {
-                    x: rand(50),
+                    x: rand(100),
                     mode: "lines",
                     type: "histogram",
                     xaxis: "x5",

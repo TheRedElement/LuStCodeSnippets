@@ -283,15 +283,15 @@
       "showline": true,
       "zeroline": false,
       "automargin": true,
-      "gridcolor": "#72727255",
-      "color": "#ffffffff",
-      "linecolor": "#ffffffff"
+      "gridcolor": "#95959554",
+      "color": "#000000ff",
+      "linecolor": "#000000ff"
     },
     "colorway": [
-      "#c80000ff",
-      "#ffffffff",
-      "#9c9c9cff",
-      "#535353ff"
+      "#a10000ff",
+      "#000000ff",
+      "#444444ff",
+      "#929292ff"
     ],
     "colorscale": {
       "sequential": "Plasma",
@@ -312,7 +312,7 @@
       "sequentialminus": "Plasma"
     },
     "font": {
-      "color": "#ffffffff",
+      "color": "#000000ff",
       "size": 16
     },
     "coloraxis": {
@@ -325,9 +325,9 @@
         "visible": true,
         "showline": true,
         "zeroline": false,
-        "gridcolor": "#72727255",
-        "color": "#ffffffff",
-        "linecolor": "#ffffffff"
+        "gridcolor": "#95959554",
+        "color": "#000000ff",
+        "linecolor": "#000000ff"
       }
     },
     "yaxis": {
@@ -335,12 +335,12 @@
       "showline": true,
       "zeroline": false,
       "automargin": true,
-      "gridcolor": "#72727255",
-      "color": "#ffffffff",
-      "linecolor": "#ffffffff"
+      "gridcolor": "#95959554",
+      "color": "#000000ff",
+      "linecolor": "#000000ff"
     },
-    "plot_bgcolor": "#2C2C2C44",
-    "paper_bgcolor": "#000000ff",
+    "plot_bgcolor": "#ffffffbb",
+    "paper_bgcolor": "#ffffffff",
     "margin": {
       "t": 0,
       "b": 10,
@@ -348,7 +348,7 @@
       "l": 100
     },
     "legend": {
-      "bgcolor": "#0000001c",
+      "bgcolor": "#ffffff1c",
       "itemwidth": 80
     }
   }
