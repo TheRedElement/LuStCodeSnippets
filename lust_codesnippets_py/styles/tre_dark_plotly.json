@@ -294,7 +294,7 @@
       "#535353ff"
     ],
     "colorscale": {
-      "sequential": "Plasma",
+      "sequential": "plasma",
       "diverging": [
         [
           0,
@@ -309,7 +309,7 @@
           "#b40426"
         ]
       ],
-      "sequentialminus": "Plasma"
+      "sequentialminus": "plasma"
     },
     "font": {
       "color": "#ffffffff",
