@@ -175,7 +175,112 @@ function make_latexcolors(
     close(f)
 end
 
+function make_plotly(
+    theme::String="dark",
+    indent::Int=2,
+    )
+    #read style
+    style = JSON.parsefile("tre.json")
+
+
+
+    data = Dict(
+        "data" => Dict(
+            #sorted alphabetically
+            "histogram" => [
+                Dict(
+                    "marker" => Dict(
+                        "pattern" => Dict(
+                            "shape" => style["hatches"]["cycle"][i]
+                        )
+                    ),
+                ) for i in range(1, length(style["hatches"]["cycle"]))
+            ],
+            "scatter" => [
+                Dict(
+                    "line" => Dict(
+                        "width" => 5,
+                        "dash" => style["linestyles"]["cycle"][i],
+                    ),
+                    "marker" => Dict(
+                        "size" => 15,
+                        "symbol" => style["markers"]["cycle"][i],
+                    )
+                ) for i in range(1, min(length(style["linestyles"]["cycle"]),length(style["markers"]["cycle"])))
+            ],            
+        ),
+        "layout" => Dict(
+            #sorted alphabetically
+            "coloraxis" => Dict(
+                "colorbar" => Dict(
+                    "outlinewidth" => 5,
+                    )
+                    ),
+                    "colorscale" => Dict(   #not working in js
+                    "continuous" => "Plasma",
+                    "sequential" => "Plasma",
+                    "sequentialminus" => "Plasma",
+                    "diverging" => [
+                        [0, "#000000"],
+                        [0.5, "#f7f7f7"],
+                    [1, "#b40426"]
+                    ]
+            ),
+            "colorway" => [
+                style["colors"]["c_plot_c0"][theme],
+                style["colors"]["c_plot_c1"][theme],
+                style["colors"]["c_plot_c2"][theme],
+                style["colors"]["c_plot_c3"][theme],
+            ],
+            "font" => Dict(
+                "color" => style["colors"]["c_body_text"][theme],
+                "size" => style["fontsizes"]["fs_plot_body"]["value"],
+            ),
+            "legend" => Dict(
+                "itemwidth" => 80,
+                "bgcolor" => style["colors"]["c_plot_legendbg"]
+            ),            
+            "margin" => Dict("t" =>0, "b" =>10, "l" =>100, "r" =>0),
+            "paper_bgcolor" => style["colors"]["c_bg"][theme],
+            "plot_bgcolor" => style["colors"]["c_plot_pane"][theme],            
+            "xaxis" => Dict(
+                "visible" => true,
+                "showline" => true,
+                "zeroline" => false,
+                "automargin" => true,
+                "color" => style["colors"]["c_body_text"][theme],
+                "linecolor" => style["colors"]["c_body_text"][theme],
+                "gridcolor" => style["colors"]["c_plot_gridcolor"],
+            ),
+            "yaxis" => Dict(
+                "visible" => true,
+                "showline" => true,
+                "zeroline" => false,
+                "automargin" => true,
+                "color" => style["colors"]["c_body_text"][theme],
+                "linecolor" => style["colors"]["c_body_text"][theme],
+                "gridcolor" => style["colors"]["c_plot_gridcolor"],
+            ),
+            "zaxis" => Dict(
+                "visible" => true,
+                "showline" => true,
+                "zeroline" => false,
+                "automargin" => true,
+                "color" => style["colors"]["c_body_text"][theme],
+                "linecolor" => style["colors"]["c_body_text"][theme],
+                "gridcolor" => style["colors"]["c_plot_gridcolor"],
+            ),
+        )
+    )
+
+    open("tre_$(theme)_plotly.json", "w") do f
+        JSON.print(f, data, indent)
+    end
+
+end
+
 #%%main
-make_css("dark")
-make_css("light")
-make_latexcolors()
+# make_css("dark")
+# make_css("light")
+# make_latexcolors()
+make_plotly()

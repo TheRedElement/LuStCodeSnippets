@@ -1,50 +1,371 @@
-
 {
-    "data": {
-        "scatter": [{
-            "line": {
-                "width": 5
-            },
-            "marker": {
-                "size": 15
-            }
-        }]
-    },
-    "layout": {
-        "paper_bgcolor": "#000000ff",
-        "plot_bgcolor": "#000000ff",
-        "font": {
-            "color": "#ffffffff",
-            "size": 16
-        },        
-        "colorway": [
-            "#c80000ff",
-            "#ffffffff",
-            "#9c9c9cff",
-            "#535353ff"
-        ],
-        "margin": {"t":0, "b":10, "l":100, "r":0},
-        "xaxis": {
-            "visible": true,
-            "showline": true,
-            "zeroline": false,
-            "automargin": true,
-            "color": "#ffffffff",
-            "linecolor": "#ffffffff",
-            "gridcolor": "#72727255"
-        },
-        "yaxis": {
-            "visible": true,
-            "showline": true,
-            "zeroline": false,
-            "automargin": true,
-            "color": "#ffffffff",
-            "linecolor": "#ffffffff",
-            "gridcolor": "#72727255"
-        },
-        "legend": {
-            "itemwidth": 80,
-            "bgcolor": "#77777733"
+  "data": {
+    "histogram": [
+      {
+        "marker": {
+          "pattern": {
+            "shape": "/"
+          }
         }
+      },
+      {
+        "marker": {
+          "pattern": {
+            "shape": "\\"
+          }
+        }
+      },
+      {
+        "marker": {
+          "pattern": {
+            "shape": "|"
+          }
+        }
+      },
+      {
+        "marker": {
+          "pattern": {
+            "shape": "-"
+          }
+        }
+      },
+      {
+        "marker": {
+          "pattern": {
+            "shape": "/"
+          }
+        }
+      },
+      {
+        "marker": {
+          "pattern": {
+            "shape": "\\"
+          }
+        }
+      },
+      {
+        "marker": {
+          "pattern": {
+            "shape": "|"
+          }
+        }
+      },
+      {
+        "marker": {
+          "pattern": {
+            "shape": "-"
+          }
+        }
+      },
+      {
+        "marker": {
+          "pattern": {
+            "shape": "/"
+          }
+        }
+      },
+      {
+        "marker": {
+          "pattern": {
+            "shape": "\\"
+          }
+        }
+      },
+      {
+        "marker": {
+          "pattern": {
+            "shape": "|"
+          }
+        }
+      },
+      {
+        "marker": {
+          "pattern": {
+            "shape": "-"
+          }
+        }
+      },
+      {
+        "marker": {
+          "pattern": {
+            "shape": "/"
+          }
+        }
+      },
+      {
+        "marker": {
+          "pattern": {
+            "shape": "\\"
+          }
+        }
+      },
+      {
+        "marker": {
+          "pattern": {
+            "shape": "|"
+          }
+        }
+      },
+      {
+        "marker": {
+          "pattern": {
+            "shape": "-"
+          }
+        }
+      }
+    ],
+    "scatter": [
+      {
+        "line": {
+          "width": 5,
+          "dash": "solid"
+        },
+        "marker": {
+          "symbol": "circle",
+          "size": 15
+        }
+      },
+      {
+        "line": {
+          "width": 5,
+          "dash": "dash"
+        },
+        "marker": {
+          "symbol": "square",
+          "size": 15
+        }
+      },
+      {
+        "line": {
+          "width": 5,
+          "dash": "dot"
+        },
+        "marker": {
+          "symbol": "triangle_up",
+          "size": 15
+        }
+      },
+      {
+        "line": {
+          "width": 5,
+          "dash": "dashdot"
+        },
+        "marker": {
+          "symbol": "triangle_down",
+          "size": 15
+        }
+      },
+      {
+        "line": {
+          "width": 5,
+          "dash": "solid"
+        },
+        "marker": {
+          "symbol": "circle",
+          "size": 15
+        }
+      },
+      {
+        "line": {
+          "width": 5,
+          "dash": "dash"
+        },
+        "marker": {
+          "symbol": "square",
+          "size": 15
+        }
+      },
+      {
+        "line": {
+          "width": 5,
+          "dash": "dot"
+        },
+        "marker": {
+          "symbol": "triangle_up",
+          "size": 15
+        }
+      },
+      {
+        "line": {
+          "width": 5,
+          "dash": "dashdot"
+        },
+        "marker": {
+          "symbol": "triangle_down",
+          "size": 15
+        }
+      },
+      {
+        "line": {
+          "width": 5,
+          "dash": "solid"
+        },
+        "marker": {
+          "symbol": "circle",
+          "size": 15
+        }
+      },
+      {
+        "line": {
+          "width": 5,
+          "dash": "dash"
+        },
+        "marker": {
+          "symbol": "square",
+          "size": 15
+        }
+      },
+      {
+        "line": {
+          "width": 5,
+          "dash": "dot"
+        },
+        "marker": {
+          "symbol": "triangle_up",
+          "size": 15
+        }
+      },
+      {
+        "line": {
+          "width": 5,
+          "dash": "dashdot"
+        },
+        "marker": {
+          "symbol": "triangle_down",
+          "size": 15
+        }
+      },
+      {
+        "line": {
+          "width": 5,
+          "dash": "solid"
+        },
+        "marker": {
+          "symbol": "circle",
+          "size": 15
+        }
+      },
+      {
+        "line": {
+          "width": 5,
+          "dash": "dash"
+        },
+        "marker": {
+          "symbol": "square",
+          "size": 15
+        }
+      },
+      {
+        "line": {
+          "width": 5,
+          "dash": "dot"
+        },
+        "marker": {
+          "symbol": "triangle_up",
+          "size": 15
+        }
+      },
+      {
+        "line": {
+          "width": 5,
+          "dash": "dashdot"
+        },
+        "marker": {
+          "symbol": "triangle_down",
+          "size": 15
+        }
+      }
+    ]
+  },
+  "layout": {
+    "xaxis": {
+      "visible": true,
+      "showline": true,
+      "zeroline": false,
+      "automargin": true,
+      "gridcolor": {
+        "dark": "#72727255",
+        "light": "#95959554"
+      },
+      "color": "#ffffffff",
+      "linecolor": "#ffffffff"
+    },
+    "colorway": [
+      "#c80000ff",
+      "#ffffffff",
+      "#9c9c9cff",
+      "#535353ff"
+    ],
+    "colorscale": {
+      "sequential": "Plasma",
+      "diverging": [
+        [
+          0,
+          "#000000"
+        ],
+        [
+          0.5,
+          "#f7f7f7"
+        ],
+        [
+          1,
+          "#b40426"
+        ]
+      ],
+      "sequentialminus": "Plasma",
+      "continuous": "Plasma"
+    },
+    "font": {
+      "color": "#ffffffff",
+      "size": 16
+    },
+    "coloraxis": {
+      "colorbar": {
+        "outlinewidth": 5
+      }
+    },
+    "zaxis": {
+      "visible": true,
+      "showline": true,
+      "zeroline": false,
+      "automargin": true,
+      "gridcolor": {
+        "dark": "#72727255",
+        "light": "#95959554"
+      },
+      "color": "#ffffffff",
+      "linecolor": "#ffffffff"
+    },
+    "yaxis": {
+      "visible": true,
+      "showline": true,
+      "zeroline": false,
+      "automargin": true,
+      "gridcolor": {
+        "dark": "#72727255",
+        "light": "#95959554"
+      },
+      "color": "#ffffffff",
+      "linecolor": "#ffffffff"
+    },
+    "plot_bgcolor": "#2C2C2C44",
+    "paper_bgcolor": "#000000ff",
+    "margin": {
+      "t": 0,
+      "b": 10,
+      "r": 0,
+      "l": 100
+    },
+    "legend": {
+      "bgcolor": {
+        "context": [
+          "matplotlib",
+          "julia"
+        ],
+        "dark": "#0000001c",
+        "light": "#ffffff1c"
+      },
+      "itemwidth": 80
     }
+  }
 }

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plotly JS Test</title>
+
+    <link rel="stylesheet" href="../tre_dark.css">
+    <!-- <link rel="stylesheet" href="../tre_light.css"> -->
+    <style>
+        /* overwrites */
+        :root {
+            --c_css: #444444;
+        }
+    </style>
+    
+</head>
+<body>
+
+    <main>
+        <div id="plotly-test"></div>
+    </main>
+    
+
+    <!-- ################################################################## -->
+    <!-- SCRIPTS -->
+    <!-- plotly -->
+    <script src="https://cdn.plot.ly/plotly-3.3.0.min.js" charset="utf-8"></script>
+
+
+    <!-- scripts to execute when loading the page -->
+
+    <!-- custom -->    
+    <script>
+        function range(start, stop, step=1) {
+            let arr = [];
+            let val = start;
+            while (val < stop) {
+                arr.push(val);
+                val += step;
+            }
+            return arr
+        }
+        function rand(n) {
+            let arr = [];
+            for (let i = 0; i < n; i++) {
+                arr[i] = Math.random();
+            }
+            return arr
+        }
+        function reshape(arr, chunkSize) {
+            const reshaped = [];
+            for (let i = 0; i < arr.length; i+=chunkSize) {
+                reshaped.push(arr.slice(i, i+chunkSize));
+            }
+            return reshaped
+        }
+
+        fetch("../tre_dark_plotly.json")
+            .then(res => res.json())
+            .then(json => {
+            treTemplate = json;
+           
+            // load css style properties
+            const root = document.documentElement;
+            const cCss = getComputedStyle(root).getPropertyValue('--c_ss').trim();  
+            
+            //define plot
+            const layout = {
+                template: treTemplate,
+                xaxis: {
+                    domain: [0, 0.45],
+                    anchor: "y1",
+                    title: {
+                        text: "x"
+                    },
+                },
+                yaxis: {
+                    domain: [0.7, 1.0],
+                    anchor: "x1",
+                    title: {
+                        text: "y"
+                    },
+                },
+                xaxis2: {
+                    domain: [0.55, 1.0],
+                    anchor: "y2",
+                    title: {
+                        text: "x"
+                    }
+                },
+                yaxis2: {
+                    domain: [0.7, 1.0],
+                    anchor: "x2",
+                    title: {
+                        text: "y"
+                    },                    
+                },
+                xaxis3: {
+                    domain: [0.0, 0.45],
+                    anchor: "y3",
+                    title: {
+                        text: "x"
+                    }                    
+                },
+                yaxis3: {
+                    domain: [0.3, 0.6],
+                    anchor: "x3",
+                    title: {
+                        text: "y"
+                    },
+                },
+                // xaxis4: {
+                //     domain: [0.55, 1.0],
+                //     anchor: "y4",
+                //     title: {
+                //         text: "x"
+                //     }                    
+                // },
+                // yaxis4: {
+                //     domain: [0.3, 0.6],
+                //     anchor: "x4",
+                //     title: {
+                //         text: "y"
+                //     },
+                // },
+                xaxis5: {
+                    domain: [0.0, 1.0],
+                    anchor: "y5",
+                    title: {
+                        text: "x"
+                    }                    
+                },
+                yaxis5: {
+                    domain: [0.0, 0.2],
+                    anchor: "x5",
+                    title: {
+                        text: "Counts"
+                    },
+                },
+                scene1: {
+                    xaxis: {
+                        title: {
+                            text: "X"
+                        }
+                    },
+                    yaxis: {
+                        title: {
+                            text: "Y"
+                        }
+                    },
+                    zaxis: {
+                        title: {
+                            text: "Z"
+                        }
+                    },
+                    domain: {
+                        x: [0.55, 1.0],
+                        y: [0.3, 0.6],
+                    },
+                }
+            }
+
+            const traces = [
+                ...range(0,5,1).map(i => {
+                    return {
+                        x: range(-1,1,0.05),
+                        y: range(-1,1,0.05).map(e => e + i),
+                        z: range(-1,1,0.05).map(e => e**2),
+                        mode: "lines",
+                        type: "scatter",
+                        xaxis: "x1",
+                        yaxis: "y1",
+                        name: "(1,1)"
+                    }
+                }),
+                ...range(0,5,1).map(i => {
+                    return {
+                        x: rand(20),
+                        y: rand(20),
+                        z: range(-1,1,0.05).map(e => e**2 + i),
+                        mode: "markers",
+                        type: "scatter",
+                        xaxis: "x2",
+                        yaxis: "y2",
+                        name: "(1,2)"                    
+                    }
+                }),
+                {
+                    z: reshape(rand(50*50), 50),
+                    type: "heatmap",
+                    xaxis: "x3",
+                    yaxis: "y3",
+                    name: "(2,1)",
+                    colorbar: {
+                        len: 0.3,
+                        x: 0.45,
+                    }
+                },
+                {
+                    z: reshape(rand(50*50), 50),
+                    type: "surface",
+                    scene: "scene1",
+                    name: "(2,2)",
+                    showscale: false,
+                },
+                {
+                    x: rand(500),
+                    mode: "lines",
+                    type: "histogram",
+                    xaxis: "x5",
+                    yaxis: "y5",
+                    name: "(3,1),(3,2)",
+                },
+                {
+                    x: rand(50),
+                    mode: "lines",
+                    type: "histogram",
+                    xaxis: "x5",
+                    yaxis: "y5",
+                    name: "(3,1),(3,2) - 2",
+                },
+            ];
+
+            const config = {
+                responsive: true
+            };
+
+            //create plot
+            Plotly.newPlot("plotly-test", traces, layout, config);
+        });
+    </script>
+</body>
+</html>

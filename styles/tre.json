@@ -194,7 +194,7 @@
             "context": [
                 "matplotlib"
             ],
-            "dark": "#ffffff44",
+            "dark": "#2C2C2C44",
             "light": "#ffffffbb"
         },
         "c_plot_legendbg": {
@@ -204,6 +204,10 @@
             ],
             "dark": "#0000001c",
             "light": "#ffffff1c"
+        },
+        "c_plot_gridcolor": {
+            "dark": "#72727255",
+            "light": "#95959554"
         },
         "c_plot_c0": {
             "context": [
@@ -354,25 +358,29 @@
         "fs_list2_text": {
             "context":["css"],
             "value":"1em"
+        },
+        "fs_plot_body": {
+            "context":["matplotlib","plotly"],
+            "value":16
         }
     },
     "linestyles": {
         "cycle": [
             "solid",
-            "dashed",
-            "dotted",
+            "dash",
+            "dot",
             "dashdot",
             "solid",
-            "dashed",
-            "dotted",
+            "dash",
+            "dot",
             "dashdot",
             "solid",
-            "dashed",
-            "dotted",
+            "dash",
+            "dot",
             "dashdot",
             "solid",
-            "dashed",
-            "dotted",
+            "dash",
+            "dot",
             "dashdot"
         ],
         "batch": [
@@ -380,14 +388,14 @@
             "solid",
             "solid",
             "solid",
-            "dashed",
-            "dashed",
-            "dashed",
-            "dashed",
-            "dotted",
-            "dotted",
-            "dotted",
-            "dotted",
+            "dash",
+            "dash",
+            "dash",
+            "dash",
+            "dot",
+            "dot",
+            "dot",
+            "dot",
             "dashdot",
             "dashdot",
             "dashdot",
