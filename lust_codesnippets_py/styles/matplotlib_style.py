@@ -1,17 +1,17 @@
 
 #%%imports
 from cycler import cycler
+import json
 import logging
 import matplotlib as mpl
 import matplotlib.colors as mcolors
 import matplotlib.pyplot as plt
-
 import numpy as np
+import pathlib
+import re
+from typing import Literal
 
 logger = logging.getLogger(__name__)
-
-logger.critical("this module is deprecated and will be discontinued soon. the new module is `lust_codesnippets_py.styles.matplotlib_style!")
-
 #%%custom registered mpl elements
 #fink colormap
 if "fink" in plt.colormaps:
@@ -144,80 +144,7 @@ def layout_specs():
     return mono_colors_light, mono_colors_dark, mono_ls, mono_markers, mono_hatches
 
 #%%style definitions
-def tre_light():
-    """
-        - function defining a monochrome style that contains one red element
-
-        Parameters
-        ----------
-
-        Raises
-        ------
-
-        Returns
-        -------
-            - `tre_light_palette`
-                - `np.ndarray`
-                - contains color palette used to cycle through when plotting
-            - `tre_light_ls`
-                - `np.ndarray`
-                - contains linestyles used to cycle through when plotting
-            - `tre_light_markers`
-                - `np.ndarray`
-                - contains markers used to cycle through when plotting
-            - `tre_light_cmap`
-                - `string`
-                - colormap used in the style
-            - `tre_light_hatches`
-                - `np.ndarray`
-                - hatches used in style
-
-        Dependencies
-        ------------
-            - `cycler`
-            - `matplotlib` 
-            - `numpy`
-
-        Comments
-        --------
-    """
-
-    mono_colors, _, mono_ls, mono_markers, mono_hatches = layout_specs()
-
-    tre_light_markers   = ["o", *mono_markers]
-    tre_light_ls        = ["-", *mono_ls]
-    tre_light_palette   = [(161/255,0,0,1), *mono_colors]
-    tre_light_hatches   = mono_hatches
-
-    prop_cycle = (
-        cycler(linestyle=tre_light_ls) +
-        cycler(color=tre_light_palette)
-    )
-
-    tre_light_cmap = "gray_r"
-
-    tre_light_bg = "FFFFFF"
-
-    #color scheme                                               #julia equivalent
-    plt.rcParams["figure.facecolor"]        = tre_light_bg      #:bg
-    # plt.rcParams["figure.edgecolor"]      = (0,0,0,1)     
-    plt.rcParams["axes.facecolor"]          = "FFFFFF"          #:bginside
-    plt.rcParams["text.color"]              = (0,0,0,1)         #:fgtext, :legendfontcolor, :legendtitlefontcolor, :titlefontcolor
-    plt.rcParams["xtick.color"]             = (0,0,0,1)         #:fgtext
-    plt.rcParams["ytick.color"]             = (0,0,0,1)         #:fgtext
-    plt.rcParams["axes.labelcolor"]         = (0,0,0,1)         #:fgtext
-    plt.rcParams["axes.edgecolor"]          = (0,0,0,1)         #:fgguide
-    plt.rcParams["legend.facecolor"]        = "inherit"         #:fglegend, :legendbackgroundcolor
-    plt.rcParams["legend.edgecolor"]        = "inherit"               #
-    plt.rcParams["axes.prop_cycle"]         = prop_cycle        #:palette, cycling through :ls
-    plt.rcParams["image.cmap"]              = tre_light_cmap    #:colorgradient
-    plt.rcParams["axes3d.xaxis.panecolor"]  = (1,1,1,.9)        #
-    plt.rcParams["axes3d.yaxis.panecolor"]  = (1,1,1,.9)        #
-    plt.rcParams["axes3d.zaxis.panecolor"]  = (1,1,1,.9)        #
-
-    return tre_light_palette, tre_light_ls, tre_light_markers, tre_light_cmap, tre_light_hatches
-
-def tre_dark():
+def tre(theme:Literal["dark","light"]="dark"):
     """
         - function defining a monochrome style that contains one red element
 
@@ -255,38 +182,48 @@ def tre_dark():
         --------
     """
 
-    _, mono_colors, mono_ls, mono_markers, mono_hatches = layout_specs()
+    #to load file at runtime
+    jsonfile = pathlib.Path(__file__).parent / f"../_data/tre_matplotlib_{theme}.json"
 
-    tre_dark_markers   = ["o", *mono_markers[:-1]]
-    tre_dark_ls        = ["-", *mono_ls[:-1]]
-    tre_dark_palette   = [(161/255,0,0,1), *mono_colors[:-1]]
-    tre_dark_hatches   = mono_hatches
+    #load style from json
+    with open(jsonfile, "r", encoding='utf-8') as file:
+            
+            #read plain text for replacements
+            style = file.read()
 
+            #parse json to dict
+            style = json.loads(style)
+
+    _, _, _, _, _ = layout_specs()
+
+    #returned values
+    tre_dark_markers   = style["markers"]
+    tre_dark_ls        = style["linestyles"]
+    tre_dark_palette   = style["colors"]["palette"]
+    tre_dark_hatches   = style["hatches"]
+    tre_dark_cmap      = style["colors"]["c_plot_cmap"]
+
+    #create prop cycle
     prop_cycle = (
         cycler(linestyle=tre_dark_ls) +
         cycler(color=tre_dark_palette)
     )
 
-    tre_dark_cmap = "gray"
-
-    tre_dark_bg = "000000"
-
-    #color scheme                                                   #julia equivalent
-    plt.rcParams["figure.facecolor"]        = tre_dark_bg           #:bg
-    # plt.rcParams["figure.edgecolor"]        = (1,1,1,1)     
-    plt.rcParams["axes.facecolor"]          = "000000"              #:bginside
-    plt.rcParams["text.color"]              = (1.0,1.0,1.0,1)       #:fgtext, :legendfontcolor, :legendtitlefontcolor, :titlefontcolor
-    plt.rcParams["xtick.color"]             = (1.0,1.0,1.0,1)       #:fgtext
-    plt.rcParams["ytick.color"]             = (1.0,1.0,1.0,1)       #:fgtext
-    plt.rcParams["axes.labelcolor"]         = (1.0,1.0,1.0,1)       #:fgtext
-    plt.rcParams["axes.edgecolor"]          = (1.0,1.0,1.0,1)       #:fgguide
-    plt.rcParams["legend.facecolor"]        = "inherit"             #:fglegend, :legendbackgroundcolor
-    plt.rcParams["legend.edgecolor"]        = "inherit"             #
-    plt.rcParams["axes.prop_cycle"]         = prop_cycle            #:palette, cycling through :ls
-    plt.rcParams["image.cmap"]              = tre_dark_cmap         #:colorgradient
-    plt.rcParams["axes3d.xaxis.panecolor"]  = (1.0,1.0,1.0,.1)      #
-    plt.rcParams["axes3d.yaxis.panecolor"]  = (1.0,1.0,1.0,.1)      #
-    plt.rcParams["axes3d.zaxis.panecolor"]  = (1.0,1.0,1.0,.1)      #
+    #color scheme                                                   
+    plt.rcParams["figure.facecolor"]        = style["colors"]["c_bg"]
+    plt.rcParams["axes.facecolor"]          = style["colors"]["c_plot_pane"]
+    plt.rcParams["text.color"]              = style["colors"]["c_body_text"]
+    plt.rcParams["xtick.color"]             = style["colors"]["c_body_text"]
+    plt.rcParams["ytick.color"]             = style["colors"]["c_body_text"]
+    plt.rcParams["axes.labelcolor"]         = style["colors"]["c_body_text"]
+    plt.rcParams["axes.edgecolor"]          = style["colors"]["c_body_text"]
+    plt.rcParams["legend.facecolor"]        = style["colors"]["c_plot_legendbg"]
+    plt.rcParams["legend.edgecolor"]        = style["colors"]["c_plot_legendbg"]
+    plt.rcParams["axes.prop_cycle"]         = prop_cycle
+    plt.rcParams["image.cmap"]              = tre_dark_cmap
+    plt.rcParams["axes3d.xaxis.panecolor"]  = style["colors"]["c_plot_pane"]
+    plt.rcParams["axes3d.yaxis.panecolor"]  = style["colors"]["c_plot_pane"]
+    plt.rcParams["axes3d.zaxis.panecolor"]  = style["colors"]["c_plot_pane"]
 
 
     return tre_dark_palette, tre_dark_ls, tre_dark_markers, tre_dark_cmap, tre_dark_hatches

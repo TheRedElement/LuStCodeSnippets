@@ -205,7 +205,7 @@
             "dark": "#0000001c",
             "light": "#ffffff1c"
         },
-        "c_plot_gridcolor": {
+        "c_plot_grid": {
             "dark": "#72727255",
             "light": "#95959554"
         },
@@ -244,6 +244,15 @@
             ],
             "dark": "#535353ff",
             "light": "#929292ff"
+        },
+        "c_plot_cmap": {
+                        "context": [
+                "matplotlib",
+                "julia",
+                "plotly"
+            ],
+            "dark": "hot",
+            "light": "hot_r"
         },
         "c_future": {
             "context": ["latex"],

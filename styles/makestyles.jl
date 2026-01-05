@@ -222,8 +222,8 @@ function make_plotly(
                 )
             ),
             "colorscale" => Dict(   #not working in js
-                "sequential" => "plasma",
-                "sequentialminus" => "plasma",
+                "sequential" => style["colors"]["c_plot_cmap"][theme],
+                "sequentialminus" => style["colors"]["c_plot_cmap"][theme],
                 "diverging" => [
                     [0, "#000000"],
                     [0.5, "#f7f7f7"],
@@ -254,7 +254,7 @@ function make_plotly(
                     "zeroline" => false,
                     "color" => style["colors"]["c_body_text"][theme],
                     "linecolor" => style["colors"]["c_body_text"][theme],
-                    "gridcolor" => style["colors"]["c_plot_gridcolor"][theme],
+                    "gridcolor" => style["colors"]["c_plot_grid"][theme],
                 ),                  
             ),
             "xaxis" => Dict(
@@ -264,7 +264,7 @@ function make_plotly(
                 "automargin" => true,
                 "color" => style["colors"]["c_body_text"][theme],
                 "linecolor" => style["colors"]["c_body_text"][theme],
-                "gridcolor" => style["colors"]["c_plot_gridcolor"][theme],
+                "gridcolor" => style["colors"]["c_plot_grid"][theme],
             ),
             "yaxis" => Dict(
                 "visible" => true,
@@ -273,7 +273,7 @@ function make_plotly(
                 "automargin" => true,
                 "color" => style["colors"]["c_body_text"][theme],
                 "linecolor" => style["colors"]["c_body_text"][theme],
-                "gridcolor" => style["colors"]["c_plot_gridcolor"][theme],
+                "gridcolor" => style["colors"]["c_plot_grid"][theme],
             ),
         )
     )
@@ -287,12 +287,57 @@ function make_plotly(
             JSON.print(f, data, indent)
         end
     end
+end
 
+function make_matplotlib(
+    theme::String="dark",
+    indent::Int=2,
+    )
+    #read style
+    style = JSON.parsefile("tre.json")
+
+
+    data = Dict(
+        "colors" => Dict(
+            "palette" => [style["colors"]["c_plot_c$(i%4)"][theme] for i in range(1, length(style["linestyles"]["cycle"]))],
+            "c_bg" => style["colors"]["c_bg"][theme],
+            "c_body_text" => style["colors"]["c_body_text"][theme],
+            "c_plot_grid" => style["colors"]["c_plot_grid"][theme],
+            "c_plot_pane" => style["colors"]["c_plot_pane"][theme],
+            "c_plot_legendbg" => style["colors"]["c_plot_legendbg"][theme],
+            "c_plot_cmap" => style["colors"]["c_plot_cmap"][theme],
+        ),
+        "hatches" => style["hatches"]["cycle"],
+        "linestyles" => replace.(style["linestyles"]["cycle"],
+            r"^dash$"=>"dashed", 
+            r"^dot$"=>"dotted", 
+            r"^dasheddotted$"=>"dashdotted"
+        ),
+        "markers" => replace.(style["markers"]["cycle"],
+            r"^circle$"=>"o",
+            r"^square$"=>"s",
+            r"^triangle-up$"=>"^",
+            r"^triangle-down$"=>"v"
+        ),
+
+    )
+
+    #save in style in locations where it is needed to be accessible upon module import
+    for location in [
+            "./",                               #this directory for organization #this directory to be accessible for javascript
+            "../lust_codesnippets_py/_data/"    #python package
+        ]    
+        open(joinpath(location, "./tre_matplotlib_$(theme).json"), "w") do f
+            JSON.print(f, data, indent)
+        end
+    end
 end
 
 #%%main
 # make_css("dark")
 # make_css("light")
 # make_latexcolors()
-make_plotly("dark")
-make_plotly("light")
+# make_plotly("dark")
+# make_plotly("light")
+make_matplotlib("dark")
+make_matplotlib("light")

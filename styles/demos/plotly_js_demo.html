@@ -62,7 +62,7 @@
         const cCss = getComputedStyle(root).getPropertyValue('--c_ss').trim();  
         
         //show demo plot for all styles
-        fetch("./plotly_style_demo.json")
+        fetch("./style_demo.json")
             .then(res2 => res2.json())
             .then(plotjson => {
                 console.log(plotjson)
