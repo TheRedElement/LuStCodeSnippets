@@ -11,21 +11,14 @@
       {
         "marker": {
           "pattern": {
-            "shape": "\\"
+            "shape": "/"
           }
         }
       },
       {
         "marker": {
           "pattern": {
-            "shape": "|"
-          }
-        }
-      },
-      {
-        "marker": {
-          "pattern": {
-            "shape": "-"
+            "shape": "/"
           }
         }
       },
@@ -46,21 +39,14 @@
       {
         "marker": {
           "pattern": {
-            "shape": "|"
+            "shape": "\\"
           }
         }
       },
       {
         "marker": {
           "pattern": {
-            "shape": "-"
-          }
-        }
-      },
-      {
-        "marker": {
-          "pattern": {
-            "shape": "/"
+            "shape": "\\"
           }
         }
       },
@@ -81,21 +67,7 @@
       {
         "marker": {
           "pattern": {
-            "shape": "-"
-          }
-        }
-      },
-      {
-        "marker": {
-          "pattern": {
-            "shape": "/"
-          }
-        }
-      },
-      {
-        "marker": {
-          "pattern": {
-            "shape": "\\"
+            "shape": "|"
           }
         }
       },
@@ -103,6 +75,34 @@
         "marker": {
           "pattern": {
             "shape": "|"
+          }
+        }
+      },
+      {
+        "marker": {
+          "pattern": {
+            "shape": "|"
+          }
+        }
+      },
+      {
+        "marker": {
+          "pattern": {
+            "shape": "-"
+          }
+        }
+      },
+      {
+        "marker": {
+          "pattern": {
+            "shape": "-"
+          }
+        }
+      },
+      {
+        "marker": {
+          "pattern": {
+            "shape": "-"
           }
         }
       },
@@ -128,30 +128,20 @@
       {
         "line": {
           "width": 5,
-          "dash": "dash"
+          "dash": "solid"
         },
         "marker": {
-          "symbol": "square",
+          "symbol": "circle",
           "size": 15
         }
       },
       {
         "line": {
           "width": 5,
-          "dash": "dot"
+          "dash": "solid"
         },
         "marker": {
-          "symbol": "triangle-up",
-          "size": 15
-        }
-      },
-      {
-        "line": {
-          "width": 5,
-          "dash": "dashdot"
-        },
-        "marker": {
-          "symbol": "triangle-down",
+          "symbol": "circle",
           "size": 15
         }
       },
@@ -178,30 +168,20 @@
       {
         "line": {
           "width": 5,
-          "dash": "dot"
+          "dash": "dash"
         },
         "marker": {
-          "symbol": "triangle-up",
+          "symbol": "square",
           "size": 15
         }
       },
       {
         "line": {
           "width": 5,
-          "dash": "dashdot"
+          "dash": "dash"
         },
         "marker": {
-          "symbol": "triangle-down",
-          "size": 15
-        }
-      },
-      {
-        "line": {
-          "width": 5,
-          "dash": "solid"
-        },
-        "marker": {
-          "symbol": "circle",
+          "symbol": "square",
           "size": 15
         }
       },
@@ -228,30 +208,10 @@
       {
         "line": {
           "width": 5,
-          "dash": "dashdot"
+          "dash": "dot"
         },
         "marker": {
-          "symbol": "triangle-down",
-          "size": 15
-        }
-      },
-      {
-        "line": {
-          "width": 5,
-          "dash": "solid"
-        },
-        "marker": {
-          "symbol": "circle",
-          "size": 15
-        }
-      },
-      {
-        "line": {
-          "width": 5,
-          "dash": "dash"
-        },
-        "marker": {
-          "symbol": "square",
+          "symbol": "triangle-up",
           "size": 15
         }
       },
@@ -262,6 +222,46 @@
         },
         "marker": {
           "symbol": "triangle-up",
+          "size": 15
+        }
+      },
+      {
+        "line": {
+          "width": 5,
+          "dash": "dot"
+        },
+        "marker": {
+          "symbol": "triangle-up",
+          "size": 15
+        }
+      },
+      {
+        "line": {
+          "width": 5,
+          "dash": "dashdot"
+        },
+        "marker": {
+          "symbol": "triangle-down",
+          "size": 15
+        }
+      },
+      {
+        "line": {
+          "width": 5,
+          "dash": "dashdot"
+        },
+        "marker": {
+          "symbol": "triangle-down",
+          "size": 15
+        }
+      },
+      {
+        "line": {
+          "width": 5,
+          "dash": "dashdot"
+        },
+        "marker": {
+          "symbol": "triangle-down",
           "size": 15
         }
       },
@@ -288,13 +288,25 @@
       "linecolor": "#000000ff"
     },
     "colorway": [
+      "#000000ff",
+      "#444444ff",
+      "#929292ff",
       "#a10000ff",
       "#000000ff",
       "#444444ff",
-      "#929292ff"
+      "#929292ff",
+      "#a10000ff",
+      "#000000ff",
+      "#444444ff",
+      "#929292ff",
+      "#a10000ff",
+      "#000000ff",
+      "#444444ff",
+      "#929292ff",
+      "#a10000ff"
     ],
     "colorscale": {
-      "sequential": "plasma",
+      "sequential": "hot_r",
       "diverging": [
         [
           0,
@@ -309,7 +321,7 @@
           "#b40426"
         ]
       ],
-      "sequentialminus": "plasma"
+      "sequentialminus": "hot_r"
     },
     "font": {
       "color": "#000000ff",

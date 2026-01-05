@@ -183,6 +183,7 @@ end
 
 function make_plotly(
     theme::String="dark",
+    cycle::String="cycle",
     indent::Int=2,
     )
     #read style
@@ -196,22 +197,22 @@ function make_plotly(
                 Dict(
                     "marker" => Dict(
                         "pattern" => Dict(
-                            "shape" => style["hatches"]["cycle"][i]
+                            "shape" => style["hatches"][cycle][i]
                         )
                     ),
-                ) for i in range(1, length(style["hatches"]["cycle"]))
+                ) for i in range(1, length(style["hatches"][cycle]))
             ],
             "scatter" => [
                 Dict(
                     "line" => Dict(
                         "width" => 5,
-                        "dash" => style["linestyles"]["cycle"][i],
+                        "dash" => style["linestyles"][cycle][i],
                     ),
                     "marker" => Dict(
                         "size" => 15,
-                        "symbol" => style["markers"]["cycle"][i],
+                        "symbol" => style["markers"][cycle][i],
                     )
-                ) for i in range(1, min(length(style["linestyles"]["cycle"]),length(style["markers"]["cycle"])))
+                ) for i in range(1, min(length(style["linestyles"][cycle]),length(style["markers"][cycle])))
             ],            
         ),
         "layout" => Dict(
@@ -230,12 +231,13 @@ function make_plotly(
                     [1, "#b40426"]
                 ],
             ),
-            "colorway" => [
-                style["colors"]["c_plot_c0"][theme],
-                style["colors"]["c_plot_c1"][theme],
-                style["colors"]["c_plot_c2"][theme],
-                style["colors"]["c_plot_c3"][theme],
-            ],
+            "colorway" => style["colors"]["c_plot_colorway"][theme],
+            # [
+            #     style["colors"]["c_plot_c0"][theme],
+            #     style["colors"]["c_plot_c1"][theme],
+            #     style["colors"]["c_plot_c2"][theme],
+            #     style["colors"]["c_plot_c3"][theme],
+            # ],
             "font" => Dict(
                 "color" => style["colors"]["c_body_text"][theme],
                 "size" => style["fontsizes"]["fs_plot_body"]["value"],
@@ -283,43 +285,32 @@ function make_plotly(
             "./",                               #this directory for organization #this directory to be accessible for javascript
             "../lust_codesnippets_py/_data/"    #python package
         ]    
-        open(joinpath(location, "./tre_plotly_$(theme).json"), "w") do f
+        open(joinpath(location, "./tre_plotly_$(theme)_$(cycle).json"), "w") do f
             JSON.print(f, data, indent)
         end
     end
 end
 
 function make_matplotlib(
-    theme::String="dark",
     indent::Int=2,
     )
     #read style
     style = JSON.parsefile("tre.json")
 
-
-    data = Dict(
-        "colors" => Dict(
-            "palette" => [style["colors"]["c_plot_c$(i%4)"][theme] for i in range(1, length(style["linestyles"]["cycle"]))],
-            "c_bg" => style["colors"]["c_bg"][theme],
-            "c_body_text" => style["colors"]["c_body_text"][theme],
-            "c_plot_grid" => style["colors"]["c_plot_grid"][theme],
-            "c_plot_pane" => style["colors"]["c_plot_pane"][theme],
-            "c_plot_legendbg" => style["colors"]["c_plot_legendbg"][theme],
-            "c_plot_cmap" => style["colors"]["c_plot_cmap"][theme],
-        ),
-        "hatches" => style["hatches"]["cycle"],
-        "linestyles" => replace.(style["linestyles"]["cycle"],
-            r"^dash$"=>"dashed", 
-            r"^dot$"=>"dotted", 
-            r"^dasheddotted$"=>"dashdotted"
-        ),
-        "markers" => replace.(style["markers"]["cycle"],
+    #modification to comply with matplotlib names
+    style["linestyles"] = Dict(k => replace.(v,
+        r"^dash$"=>"dashed", 
+        r"^dot$"=>"dotted", 
+        r"^dasheddotted$"=>"dashdotted",
+        ) for (k,v) in style["linestyles"]
+    )
+    style["markers"] = Dict(k => replace.(v,
             r"^circle$"=>"o",
             r"^square$"=>"s",
             r"^triangle-up$"=>"^",
-            r"^triangle-down$"=>"v"
-        ),
-
+            r"^triangle-down$"=>"v",
+            r"^star$"=>"*",
+        ) for (k,v) in style["markers"]
     )
 
     #save in style in locations where it is needed to be accessible upon module import
@@ -327,17 +318,20 @@ function make_matplotlib(
             "./",                               #this directory for organization #this directory to be accessible for javascript
             "../lust_codesnippets_py/_data/"    #python package
         ]    
-        open(joinpath(location, "./tre_matplotlib_$(theme).json"), "w") do f
-            JSON.print(f, data, indent)
+        open(joinpath(location, "./tre_matplotlib.json"), "w") do f
+            JSON.print(f, style, indent)
         end
     end
 end
 
 #%%main
-# make_css("dark")
-# make_css("light")
+themes = ["dark", "light"]
+cycles = ["cycle", "batch"]
 # make_latexcolors()
-# make_plotly("dark")
-# make_plotly("light")
-make_matplotlib("dark")
-make_matplotlib("light")
+make_matplotlib()
+for theme in themes
+    make_css(theme)
+    for cycle in cycles
+        make_plotly(theme, cycle)
+    end
+end

@@ -206,8 +206,54 @@
             "light": "#ffffff1c"
         },
         "c_plot_grid": {
+            "context": [
+                "matplotlib",
+                "plotly"
+            ],
             "dark": "#72727255",
             "light": "#95959554"
+        },
+        "c_plot_colorway": {
+            "context": [
+                "matplotlib",
+                "plotly"
+            ],
+            "dark": [
+                "#ffffffff",
+                "#9c9c9cff",
+                "#535353ff",
+                "#c80000ff",
+                "#ffffffff",
+                "#9c9c9cff",
+                "#535353ff",
+                "#c80000ff",
+                "#ffffffff",
+                "#9c9c9cff",
+                "#535353ff",
+                "#c80000ff",
+                "#ffffffff",
+                "#9c9c9cff",
+                "#535353ff",
+                "#c80000ff"
+            ],
+            "light": [
+                "#000000ff",
+                "#444444ff",
+                "#929292ff",
+                "#a10000ff",
+                "#000000ff",
+                "#444444ff",
+                "#929292ff",
+                "#a10000ff",
+                "#000000ff",
+                "#444444ff",
+                "#929292ff",
+                "#a10000ff",
+                "#000000ff",
+                "#444444ff",
+                "#929292ff",
+                "#a10000ff"                
+            ]
         },
         "c_plot_c0": {
             "context": [
@@ -440,14 +486,14 @@
             "square",
             "square",
             "square",
-            "triangle_up",
-            "triangle_up",
-            "triangle_up",
-            "triangle_up",
-            "triangle_down",
-            "triangle_down",
-            "triangle_down",
-            "triangle_down"
+            "triangle-up",
+            "triangle-up",
+            "triangle-up",
+            "triangle-up",
+            "triangle-down",
+            "triangle-down",
+            "triangle-down",
+            "triangle-down"
         ],
         "special": "star"
     },
@@ -470,7 +516,7 @@
             "|",
             "-"
         ],
-        "block": [
+        "batch": [
             "/",
             "/",
             "/",
