@@ -44,7 +44,7 @@ def tre(theme:Literal["dark","light"]="dark"):
     """
 
     #to load file at runtime
-    jsonfile = pathlib.Path(__file__).parent / f"tre_{theme}_plotly.json"
+    jsonfile = pathlib.Path(__file__).parent / f"../../styles/tre_plotly_{theme}.json"
 
     #load style from json
     with open(jsonfile, "r", encoding='utf-8') as file:

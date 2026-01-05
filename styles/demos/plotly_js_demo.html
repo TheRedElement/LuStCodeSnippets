@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plotly JS Test</title>
+
+    <link rel="stylesheet" href="../tre_dark.css">
+    <!-- <link rel="stylesheet" href="../tre_light.css"> -->
+    <style>
+        /* overwrites */
+        :root {
+            --c_css: #444444;
+        }
+    </style>
+    
+</head>
+<body>
+
+    <main>
+        <div id="plotly-test-dark"></div>
+        <div id="plotly-test-light"></div>
+    </main>
+    
+
+    <!-- ################################################################## -->
+    <!-- SCRIPTS -->
+    <!-- plotly -->
+    <script src="https://cdn.plot.ly/plotly-3.3.0.min.js" charset="utf-8"></script>
+
+
+    <!-- scripts to execute when loading the page -->
+
+    <!-- custom -->    
+    <script>
+        function range(start, stop, step=1) {
+            let arr = [];
+            let val = start;
+            while (val < stop) {
+                arr.push(val);
+                val += step;
+            }
+            return arr
+        }
+        function rand(n) {
+            let arr = [];
+            for (let i = 0; i < n; i++) {
+                arr[i] = Math.random();
+            }
+            return arr
+        }
+        function reshape(arr, chunkSize) {
+            const reshaped = [];
+            for (let i = 0; i < arr.length; i+=chunkSize) {
+                reshaped.push(arr.slice(i, i+chunkSize));
+            }
+            return reshaped
+        }
+        
+        // load css style properties
+        const root = document.documentElement;
+        const cCss = getComputedStyle(root).getPropertyValue('--c_ss').trim();  
+        
+        //show demo plot for all styles
+        fetch("./plotly_style_demo.json")
+            .then(res2 => res2.json())
+            .then(plotjson => {
+                console.log(plotjson)
+                const traces = plotjson["traces"];
+                const layout = plotjson["layout"];
+                
+            for (const style of ["dark","light"]) {
+                fetch(`../tre_plotly_${style}.json`)
+                    .then(res => res.json())
+                    .then(json => {
+                        let treTemplate = json;
+
+                        //specify template
+                        layout["template"] = treTemplate;
+
+                        const config = {
+                            responsive: true
+                        };
+            
+                        //create plot
+                        Plotly.newPlot(`plotly-test-${style}`, traces, layout, config);
+
+                    })
+                }
+        });
+    </script>
+</body>
+</html>
