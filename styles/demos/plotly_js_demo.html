@@ -69,8 +69,9 @@
                 const traces = plotjson["traces"];
                 const layout = plotjson["layout"];
                 
-            for (const style of ["dark","light"]) {
-                fetch(`../tre_plotly_${style}.json`)
+            for (const theme of ["dark","light"]) {
+                // fetch(`../tre_plotly_${theme}.json`)
+                fetch(`https://raw.githubusercontent.com/TheRedElement/LuStCodeSnippets/refs/heads/dev/styles/tre_plotly_${theme}.json`)
                     .then(res => res.json())
                     .then(json => {
                         let treTemplate = json;
@@ -83,7 +84,7 @@
                         };
             
                         //create plot
-                        Plotly.newPlot(`plotly-test-${style}`, traces, layout, config);
+                        Plotly.newPlot(`plotly-test-${theme}`, traces, layout, config);
 
                     })
                 }

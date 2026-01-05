@@ -186,7 +186,16 @@ Using the style can be done as follows:
             1. import the plotting style `from lust_codesnippets_py.styles import plot_styles as alstps`
             2. load the respective style `palette, ls, markers, cmap, hatches = alstps.tre_dark()`
     * [Plotly (python)](https://plotly.com/python/)
+        * no need to copy anything
+        * simply
+            1. [install](#installation) the package
+            2. import the plotting style `from lust_codesnippets_py.styles import plotly_style as alstps`
+            3. load the respective style `alstps.tre("dark")`
     * [Plotly (java script)](https://plotly.com/javascript/)
-    * [Plotly (julia script)](https://plotly.com/julia/)
+        1. you can directly fetch the style from the raw github content: [https://raw.githubusercontent.com/TheRedElement/LuStCodeSnippets/refs/heads/dev/styles/tre_plotly_dark.json](https://raw.githubusercontent.com/TheRedElement/LuStCodeSnippets/refs/heads/dev/styles/tre_plotly_dark.json)
+        2. this can be done via a simple `fetch(...).then(res => res.json()).then(json => {let treTemplate = json; <some other code>})`
+        3. you can use the template by passing it to the layout: `const layout = {template: treTemplate}`
+    * [Plotly (julia)](https://plotly.com/julia/)
+        * **NOT IMPLEMENTED YET**
 
 ## Comments
