@@ -278,10 +278,15 @@ function make_plotly(
         )
     )
 
-    #save in style submodule to have everything in one place upon import
-    # open("../lust_codesnippets_py/styles/tre_$(theme)_plotly.json", "w") do f
-    open("./tre_plotly_$(theme).json", "w") do f
-        JSON.print(f, data, indent)
+    #save in style in locations where it is needed to be accessible upon module import
+    for location in [
+            "./",                               #this directory for organization #this directory to be accessible for javascript
+            "../lust_codesnippets_py/_data/"    #python package
+        ]    
+        open(joinpath(location, "./tre_plotly_$(theme).json"), "w") do f
+            JSON.print(f, data, indent)
+        end
+
     end
 
 end
