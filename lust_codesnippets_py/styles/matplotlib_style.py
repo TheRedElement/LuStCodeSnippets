@@ -6,10 +6,8 @@ import logging
 import matplotlib as mpl
 import matplotlib.colors as mcolors
 import matplotlib.pyplot as plt
-import numpy as np
 import pathlib
-import re
-from typing import Literal
+from typing import List, Literal
 
 logger = logging.getLogger(__name__)
 #%%custom registered mpl elements
@@ -28,46 +26,124 @@ cmap_r = cmap.reversed()
 mpl.colormaps.register(cmap, force=True)
 mpl.colormaps.register(cmap_r, force=True)
 
-#%%global setup
-def layout_specs():
+#%%style definitions
+def tre(
+    theme:Literal["dark","light"]="dark", cycle:Literal["cycle","batch"]="cycle",
+    colorway_override:List[str]=None, cmap_override:str=None,
+    ):
     """
-        - function to set layout specifications that apply to all styles
+        - function applying the RedElement base style
+        - used as template for other style variations
+        - draws from `/lust_code_snippets_py/_data/tre_matplotlib.json` which is defined via `/styles/tre.json`
 
         Parameters
         ----------
+            - `theme`
+                - `Literal`, optional
+                - the theme to use
+                - options are
+                    - `"dark"`
+                    - `"light"`
+                - the default is `"dark"`
+            - `cycle`
+                - `Literal`, optional
+                - mode to use for cycling through linestyles, markers, hatches, etc.
+                - options are
+                    - `"cycle"`
+                        - will cycle through the linestyles 
+                        - every line consecutive line, marker, hatch, etc. will have a unique style
+                    - `"batch"`
+                        - will batch similar linestyles together
+                        - consecutive lines, markes, hatches, etc. will have the same style
+            - `colorway_override`
+                - `List[str]`, optional
+                - override of the default tre colorway (colorway = palette)
+                - elements have to be some valid form of matplotlib color definition
+                    - I recommend hex representation
+                - used to make quick customization to the coloration of a plot
+                - used in downstream style variations (i.e., `lust()`)
+                - the default is `None`
+                    - will use the standard tre colorway
+            - `cmap_override`
+                - `List[str]`, optional
+                - override of the default tre cmap (cmap = colorscale)
+                - used to make quick customization to the coloration of a plot
+                - used in downstream style variations (i.e., `lust()`)
+                - the default is `None`
+                    - will use the standard tre cmap
 
         Raises
         ------
+            - `AssertionError`
+                - if some arguments don't comply with supported options 
 
         Returns
         -------
-            - `mono_colors`
+            - `colorway`
                 - `np.ndarray`
-                - colors used in monochromatic styles
-            - `mono_ls`
+                - contains color palette used to cycle through when plotting
+            - `ls`
                 - `np.ndarray`
-                - linestyles used in monochromatic styles
-            - `mono_markers`
+                - contains linestyles used to cycle through when plotting
+            - `markers`
                 - `np.ndarray`
-                - markes used in monochromatic styles
-            - `mono_hatches`
+                - contains markers used to cycle through when plotting
+            - `cmap`
+                - `string`
+                - colormap used in the style
+            - `hatches`
                 - `np.ndarray`
-                - hatches used in monochromatic styles
+                - contains hatches used to cycle through when plotting
 
         Dependencies
         ------------
-            - `matplotlib`
-            - `numpy`
+            - `cycler`
+            - `json`
+            - `matplotlib` 
+            - `pathlib`
+            - `typing`
 
         Comments
-        -------- 
+        --------
     """
-    
+
+    #preliminary checks
+    assert theme in ["dark","light"], f"`theme` has to be one of `'dark'`, `'light'` but got {theme}" 
+    assert cycle in ["cycle","batch"], f"`cycle` has to be one of `'cycle'`, `'batch'` but got {cycle}" 
+
+    #load style from json
+    jsonfile = pathlib.Path(__file__).parent / f"../_data/tre_matplotlib.json"  #to load file at runtime
+    with open(jsonfile, "r", encoding='utf-8') as file:
+            
+            #read plain text for replacements
+            style = file.read()
+
+            #parse json to dict
+            style = json.loads(style)
+
+    #returned values
+    cmap     = style["colors"]["c_plot_cmap"][theme] if cmap_override is None else cmap_override
+    colorway = style["colors"]["c_plot_colorway"][theme] if colorway_override is None else colorway_override
+    hatches  = style["hatches"][cycle]
+    ls       = style["linestyles"][cycle][:len(colorway)]
+    markers  = style["markers"][cycle]
+
+    #create prop cycle
+    prop_cycle = (
+        cycler(linestyle=ls) +
+        cycler(color=colorway)
+    )
+
+
+    ##############
+    #adjust theme#
+    ##############
     # for k, v in plt.rcParams.items(): print(k, v)
-    #text
+    #layout related
+    ##text
     plt.rcParams["text.usetex"]             = True
 
-    #fontsizes
+    ##fontsizes
     plt.rcParams["font.size"]               = 16
     plt.rcParams["figure.titlesize"]        = "large"
     plt.rcParams["axes.titlesize"]          = "large"
@@ -77,447 +153,189 @@ def layout_specs():
     plt.rcParams["legend.title_fontsize"]   = "small"
     plt.rcParams["legend.fontsize"]         = "small"
 
-    #frame layout
+    ##frame layout
     plt.rcParams["figure.figsize"]          = (9.0,5.0)
     plt.rcParams["figure.dpi"]              = 180
 
-    #grid layout
+    ##grid layout
     plt.rcParams["axes.grid"]               = True
     plt.rcParams["axes.grid.which"]         = "major"
+    plt.rcParams["axes.spines.top"]         = False
+    plt.rcParams["axes.spines.right"]       = False
     plt.rcParams["grid.alpha"]              = 0.3
+    plt.rcParams["xtick.direction"]         = "in" 
+    plt.rcParams["xtick.minor.visible"]     = True
+    plt.rcParams["ytick.direction"]         = "in" 
+    plt.rcParams["ytick.minor.visible"]     = True
 
-    #marker and line defaults
+    ##marker and line defaults
+    plt.rcParams["errorbar.capsize"]        = 3
     plt.rcParams["lines.linewidth"]         = 2
     plt.rcParams["lines.linewidth"]         = 2
-    plt.rcParams["patch.linewidth"]         = 2
-    plt.rcParams["patch.linewidth"]         = 2
     plt.rcParams["lines.linestyle"]         = "-"
     plt.rcParams["lines.markersize"]        = 4
+    plt.rcParams["patch.linewidth"]         = 2
+    plt.rcParams["patch.linewidth"]         = 2
     plt.rcParams["scatter.marker"]          = "o"
 
-    #legend
-    plt.rcParams["legend.framealpha"]       = 0.2                   #:fglegend, :legendbackgroundcolor
+    ##legend
+    plt.rcParams["legend.framealpha"]       = 0.2
 
-    #python specific
-    plt.rcParams["errorbar.capsize"]        = 3
+    ##saving
     plt.rcParams["savefig.transparent"]     = False
     plt.rcParams["savefig.bbox"]            = "tight"
     plt.rcParams["savefig.dpi"]             = 180
-    plt.rcParams["xtick.direction"]         = "in" 
-    plt.rcParams["ytick.direction"]         = "in" 
-    plt.rcParams["xtick.minor.visible"]     = True
-    plt.rcParams["ytick.minor.visible"]     = True
-    plt.rcParams["axes.spines.top"]         = False
-    plt.rcParams["axes.spines.right"]       = False
 
-
-    #options for monochrome plots
-    """
-        - has presets for `ncolors_mono*nlinestyles_mono` lines
-        - has presets for `ncolors_mono*nmarkers_mono` markers
-        - `mono_ls` contains `ncolors_mono*nlinestyles_mono` linestyles.
-            - Each ls gets repeated `ncolors_mono` times
-            - Then the next color is applied
-        - `mono_markers` contains `ncolors_mono*nmarkers_mono` markers.
-            - Each marker gets repeated `ncolors_mono` times
-            - Then the next color is applied
-        - The idea here is that each `mono_ls`/`mono_markers` will be plotted in each color, then plot the proceed to the next  in the next `mono_ls`/`mono_markers` etc.
-            - This way, the lines/scatters will always be distinguishable
-    """
-
-    ncolors_mono        = 3
-
-    mono_colors_base = plt.get_cmap("gray")(np.linspace(0,1,ncolors_mono+1))[:]
-    mono_ls_base        = ["-", "--", ":", "-."]              #linestyles to cycle through when plotting
-    mono_markers_base   = ["o", "x", "d", "+"]
-    mono_hatches_base   = ["/","\\","o","*"]
-
-    nlinestyles_mono    = len(mono_ls_base)                         #number of defined linestyles
-    nmarkers_mono       = len(mono_markers_base)                    #number of defined linestyles
-
-    mono_colors_light   = np.repeat(mono_colors_base[np.newaxis,:-1,:], nlinestyles_mono, axis=0).reshape(-1,4)
-    mono_colors_dark    = np.repeat(np.flip(mono_colors_base[np.newaxis,1:,:], axis=1), nlinestyles_mono, axis=0).reshape(-1,4)
-    mono_ls             = np.repeat(mono_ls_base, ncolors_mono, axis=0)
-    mono_markers        = np.repeat(mono_markers_base, ncolors_mono, axis=0)
-    mono_hatches        = np.repeat(mono_hatches_base, ncolors_mono, axis=0)
-
-    return mono_colors_light, mono_colors_dark, mono_ls, mono_markers, mono_hatches
-
-#%%style definitions
-def tre(theme:Literal["dark","light"]="dark"):
-    """
-        - function defining a monochrome style that contains one red element
-
-        Parameters
-        ----------
-
-        Raises
-        ------
-
-        Returns
-        -------
-            - `tre_dark_palette`
-                - `np.ndarray`
-                - contains color palette used to cycle through when plotting
-            - `tre_dark_ls`
-                - `np.ndarray`
-                - contains linestyles used to cycle through when plotting
-            - `tre_dark_markers`
-                - `np.ndarray`
-                - contains markers used to cycle through when plotting
-            - `tre_dark_cmap`
-                - `string`
-                - colormap used in the style
-            - `tre_dark_hatches`
-                - `np.ndarray`
-                - hatches used in style
-
-        Dependencies
-        ------------
-            - `cycler`
-            - `matplotlib` 
-            - `numpy`
-
-        Comments
-        --------
-    """
-
-    #to load file at runtime
-    jsonfile = pathlib.Path(__file__).parent / f"../_data/tre_matplotlib_{theme}.json"
-
-    #load style from json
-    with open(jsonfile, "r", encoding='utf-8') as file:
-            
-            #read plain text for replacements
-            style = file.read()
-
-            #parse json to dict
-            style = json.loads(style)
-
-    _, _, _, _, _ = layout_specs()
-
-    #returned values
-    tre_dark_markers   = style["markers"]
-    tre_dark_ls        = style["linestyles"]
-    tre_dark_palette   = style["colors"]["palette"]
-    tre_dark_hatches   = style["hatches"]
-    tre_dark_cmap      = style["colors"]["c_plot_cmap"]
-
-    #create prop cycle
-    prop_cycle = (
-        cycler(linestyle=tre_dark_ls) +
-        cycler(color=tre_dark_palette)
-    )
-
-    #color scheme                                                   
-    plt.rcParams["figure.facecolor"]        = style["colors"]["c_bg"]
-    plt.rcParams["axes.facecolor"]          = style["colors"]["c_plot_pane"]
-    plt.rcParams["text.color"]              = style["colors"]["c_body_text"]
-    plt.rcParams["xtick.color"]             = style["colors"]["c_body_text"]
-    plt.rcParams["ytick.color"]             = style["colors"]["c_body_text"]
-    plt.rcParams["axes.labelcolor"]         = style["colors"]["c_body_text"]
-    plt.rcParams["axes.edgecolor"]          = style["colors"]["c_body_text"]
-    plt.rcParams["legend.facecolor"]        = style["colors"]["c_plot_legendbg"]
-    plt.rcParams["legend.edgecolor"]        = style["colors"]["c_plot_legendbg"]
+    ##colors
+    plt.rcParams["figure.facecolor"]        = style["colors"]["c_bg"][theme]
+    plt.rcParams["axes.facecolor"]          = style["colors"]["c_plot_pane"][theme]
+    plt.rcParams["text.color"]              = style["colors"]["c_body_text"][theme]
+    plt.rcParams["xtick.color"]             = style["colors"]["c_body_text"][theme]
+    plt.rcParams["ytick.color"]             = style["colors"]["c_body_text"][theme]
+    plt.rcParams["axes.labelcolor"]         = style["colors"]["c_body_text"][theme]
+    plt.rcParams["axes.edgecolor"]          = style["colors"]["c_body_text"][theme]
+    plt.rcParams["legend.facecolor"]        = style["colors"]["c_plot_legendbg"][theme]
+    plt.rcParams["legend.edgecolor"]        = style["colors"]["c_plot_legendbg"][theme]
     plt.rcParams["axes.prop_cycle"]         = prop_cycle
-    plt.rcParams["image.cmap"]              = tre_dark_cmap
-    plt.rcParams["axes3d.xaxis.panecolor"]  = style["colors"]["c_plot_pane"]
-    plt.rcParams["axes3d.yaxis.panecolor"]  = style["colors"]["c_plot_pane"]
-    plt.rcParams["axes3d.zaxis.panecolor"]  = style["colors"]["c_plot_pane"]
+    plt.rcParams["image.cmap"]              = cmap
+    plt.rcParams["axes3d.xaxis.panecolor"]  = style["colors"]["c_plot_pane"][theme]
+    plt.rcParams["axes3d.yaxis.panecolor"]  = style["colors"]["c_plot_pane"][theme]
+    plt.rcParams["axes3d.zaxis.panecolor"]  = style["colors"]["c_plot_pane"][theme]
 
+    return colorway, ls, markers, cmap, hatches
 
-    return tre_dark_palette, tre_dark_ls, tre_dark_markers, tre_dark_cmap, tre_dark_hatches
-
-def lust_light():
+def lust(theme:Literal["dark","light"]="dark", cycle:Literal["cycle","batch"]="cycle"):
     """
-        - function defining a light style
+        - function defining a colorful variation of `tre()`
 
         Parameters
         ----------
+            - `theme`
+                - `Literal`, optional
+                - the theme to use
+                - options are
+                    - `"dark"`
+                    - `"light"`
+                - the default is `"dark"`
+            - `cycle`
+                - `Literal`, optional
+                - mode to use for cycling through linestyles, markers, hatches, etc.
+                - options are
+                    - `"cycle"`
+                        - will cycle through the linestyles 
+                        - every line consecutive line, marker, hatch, etc. will have a unique style
+                    - `"batch"`
+                        - will batch similar linestyles together
+                        - consecutive lines, markes, hatches, etc. will have the same style
 
         Raises
         ------
 
         Returns
         -------
-            - `lust_light_palette`
+            - `colorway`
                 - `np.ndarray`
                 - contains color palette used to cycle through when plotting
-            - `lust_light_ls`
+            - `ls`
                 - `np.ndarray`
                 - contains linestyles used to cycle through when plotting
-            - `lust_light_markers`
+            - `markers`
                 - `np.ndarray`
                 - contains markers used to cycle through when plotting
-            - `lust_light_cmap`
+            - `cmap`
                 - `string`
                 - colormap used in the style
-            - `lust_light_hatches`
+            - `hatches`
                 - `np.ndarray`
-                - hatches used in style
+                - contains hatches used to cycle through when plotting
 
         Dependencies
         ------------
-            - `cycler`
-            - `matplotlib` 
-            - `numpy`
 
         Comments
         --------
     """
 
-    mono_colors, _, mono_ls, mono_markers, mono_hatches = layout_specs()
+    #override some colors
+    if theme == "dark":
+        cmap        = "hot_r"
+        colorway    = ["#A10000", "#FF7B00", "#51BFFF", "#CFC100", "#B500BB", "#009E69"]*2
+    elif theme == "light":
+        cmap        = "hot"
+        colorway    = ["#A10000", "#FF7B00", "#51BFFF", "#CFC100", "#B500BB", "#009E69"]*2
+    else:
+        raise ValueError("invalid `theme`")
+    
+    
+    #use `tre` as template but override some settings
+    colorway, ls, markers, cmap, hatches = tre(theme, cycle, colorway_override=colorway, cmap_override=cmap)
 
-    lust_light_markers   = [*mono_markers]
-    lust_light_ls        = [*mono_ls]
-    lust_light_palette   = ["#A10000", "#FF7B00", "#51BFFF", "#CFC100", "#B500BB", "#009E69"]*2
-    lust_light_hatches   = mono_hatches
+    return colorway, ls, markers, cmap, hatches
 
-    prop_cycle = (
-        cycler(linestyle=lust_light_ls) +
-        cycler(color=lust_light_palette)
-    )
-
-    lust_light_cmap = "hot"
-
-    lust_light_bg = "FFFFFF"
-
-    #color scheme                                               #julia equivalent
-    plt.rcParams["figure.facecolor"]        = lust_light_bg      #:bg
-    # plt.rcParams["figure.edgecolor"]      = (0,0,0,1)     
-    plt.rcParams["axes.facecolor"]          = "FFFFFF"          #:bginside
-    plt.rcParams["text.color"]              = (0,0,0,1)         #:fgtext, :legendfontcolor, :legendtitlefontcolor, :titlefontcolor
-    plt.rcParams["xtick.color"]             = (0,0,0,1)         #:fgtext
-    plt.rcParams["ytick.color"]             = (0,0,0,1)         #:fgtext
-    plt.rcParams["axes.labelcolor"]         = (0,0,0,1)         #:fgtext
-    plt.rcParams["axes.edgecolor"]          = (0,0,0,1)         #:fgguide
-    plt.rcParams["legend.facecolor"]        = "inherit"         #:fglegend, :legendbackgroundcolor
-    plt.rcParams["legend.edgecolor"]        = "inherit"               #
-    plt.rcParams["axes.prop_cycle"]         = prop_cycle        #:palette, cycling through :ls
-    plt.rcParams["image.cmap"]              = lust_light_cmap    #:colorgradient
-    plt.rcParams["axes3d.xaxis.panecolor"]  = (1,1,1,.9)        #
-    plt.rcParams["axes3d.yaxis.panecolor"]  = (1,1,1,.9)        #
-    plt.rcParams["axes3d.zaxis.panecolor"]  = (1,1,1,.9)        #
-
-    return lust_light_palette, lust_light_ls, lust_light_markers, lust_light_cmap, lust_light_hatches
-
-def lust_dark():
-    """
-        - function defining a dark style
-
-        Parameters
-        ----------
-
-        Raises
-        ------
-
-        Returns
-        -------
-            - `lust_dark_palette`
-                - `np.ndarray`
-                - contains color palette used to cycle through when plotting
-            - `lust_dark_ls`
-                - `np.ndarray`
-                - contains linestyles used to cycle through when plotting
-            - `lust_dark_markers`
-                - `np.ndarray`
-                - contains markers used to cycle through when plotting
-            - `lust_dark_cmap`
-                - `string`
-                - colormap used in the style
-            - `lust_dark_hatches`
-                - `np.ndarray`
-                - hatches used in style
-
-        Dependencies
-        ------------
-            - `cycler`
-            - `matplotlib` 
-            - `numpy`
-
-        Comments
-        --------
-    """
-
-    _, mono_colors, mono_ls, mono_markers, mono_hatches = layout_specs()
-
-    lust_dark_markers   = [*mono_markers]
-    lust_dark_ls        = [*mono_ls]
-    lust_dark_palette   = ["#A10000", "#FF7B00", "#51BFFF", "#FFEE00", "#FA62FF", "#70FFF8"]*2
-    lust_dark_hatches   = mono_hatches
-
-    prop_cycle = (
-        cycler(linestyle=lust_dark_ls) +
-        cycler(color=lust_dark_palette)
-    )
-
-    lust_dark_cmap = "hot"
-
-    lust_dark_bg = "000000"
-
-    #color scheme                                                   #julia equivalent
-    plt.rcParams["figure.facecolor"]        = lust_dark_bg           #:bg
-    # plt.rcParams["figure.edgecolor"]        = (1,1,1,1)     
-    plt.rcParams["axes.facecolor"]          = "000000"              #:bginside
-    plt.rcParams["text.color"]              = (1.0,1.0,1.0,1.0)    #:fgtext, :legendfontcolor, :legendtitlefontcolor, :titlefontcolor
-    plt.rcParams["xtick.color"]             = (1.0,1.0,1.0,1.0)    #:fgtext
-    plt.rcParams["ytick.color"]             = (1.0,1.0,1.0,1.0)    #:fgtext
-    plt.rcParams["axes.labelcolor"]         = (1.0,1.0,1.0,1.0)    #:fgtext
-    plt.rcParams["axes.edgecolor"]          = (1.0,1.0,1.0,1.0)    #:fgguide
-    plt.rcParams["legend.facecolor"]        = "inherit"         #:fglegend, :legendbackgroundcolor
-    plt.rcParams["legend.edgecolor"]        = "inherit"               #
-    plt.rcParams["axes.prop_cycle"]         = prop_cycle            #:palette, cycling through :ls
-    plt.rcParams["image.cmap"]              = lust_dark_cmap         #:colorgradient
-    plt.rcParams["axes3d.xaxis.panecolor"]  = (1,1,1,.1)            #
-    plt.rcParams["axes3d.yaxis.panecolor"]  = (1,1,1,.1)            #
-    plt.rcParams["axes3d.zaxis.panecolor"]  = (1,1,1,.1)            #
-
-
-    return lust_dark_palette, lust_dark_ls, lust_dark_markers, lust_dark_cmap, lust_dark_hatches
-
-def fink_light():
+def fink(theme:Literal["dark","light"]="dark", cycle:Literal["cycle","batch"]="cycle"):
     """
         - function defining a style in the corporate colors of the [FINK](https://fink-broker.org/) collaboration
+        - does so by overriding `tre()`
 
         Parameters
         ----------
+            - `theme`
+                - `Literal`, optional
+                - the theme to use
+                - options are
+                    - `"dark"`
+                    - `"light"`
+                - the default is `"dark"`
+            - `cycle`
+                - `Literal`, optional
+                - mode to use for cycling through linestyles, markers, hatches, etc.
+                - options are
+                    - `"cycle"`
+                        - will cycle through the linestyles 
+                        - every line consecutive line, marker, hatch, etc. will have a unique style
+                    - `"batch"`
+                        - will batch similar linestyles together
+                        - consecutive lines, markes, hatches, etc. will have the same style
 
         Raises
         ------
 
         Returns
         -------
-            - `fink_palette`
+            - `colorway`
                 - `np.ndarray`
                 - contains color palette used to cycle through when plotting
-            - `fink_ls`
+            - `ls`
                 - `np.ndarray`
                 - contains linestyles used to cycle through when plotting
-            - `fink_markers`
+            - `markers`
                 - `np.ndarray`
                 - contains markers used to cycle through when plotting
-            - `fink_cmap`
+            - `cmap`
                 - `string`
                 - colormap used in the style
-            - `fink_hatches`
+            - `hatches`
                 - `np.ndarray`
-                - hatches used in style
+                - contains hatches used to cycle through when plotting
 
         Dependencies
         ------------
-            - `cycler`
-            - `matplotlib` 
-            - `numpy`
 
         Comments
         --------
     """
 
-    mono_colors, _, mono_ls, mono_markers, mono_hatches = layout_specs()
+    #override some colors
+    if theme == "dark":
+        cmap        = "fink_r"
+        colorway    = ["#15284F", "#3C8DFF", "#D5D5D3", "#F5622E"][1:][::-1]*2
+    elif theme == "light":
+        cmap        = "fink"
+        colorway    = ["#15284F", "#3C8DFF", "#D5D5D3", "#F5622E"]*2
+    else:
+        raise ValueError("invalid `theme`")
 
-    fink_markers   = ["o", "+", "x", "^"]
-    fink_ls        = ["-", "--", "-.", ":"]
-    fink_palette   = ["#15284F", "#3C8DFF", "#D5D5D3", "#F5622E"]
-    fink_hatches   = ["/","\\","o","*"]
+    #use `tre` as template but override some settings
+    colorway, ls, markers, cmap, hatches = tre(theme, cycle, colorway_override=colorway, cmap_override=cmap)
 
-    prop_cycle = (
-        cycler(linestyle=fink_ls) +
-        cycler(color=fink_palette)
-    )
-
-    fink_cmap = "fink"
-
-    fink_bg = "FFFFFF"
-
-    #color scheme                                               #julia equivalent
-    plt.rcParams["figure.facecolor"]        = fink_bg      #:bg
-    # plt.rcParams["figure.edgecolor"]      = (0,0,0,1)     
-    plt.rcParams["axes.facecolor"]          = "FFFFFF"          #:bginside
-    plt.rcParams["text.color"]              = (0,0,0,1)         #:fgtext, :legendfontcolor, :legendtitlefontcolor, :titlefontcolor
-    plt.rcParams["xtick.color"]             = (0,0,0,1)         #:fgtext
-    plt.rcParams["ytick.color"]             = (0,0,0,1)         #:fgtext
-    plt.rcParams["axes.labelcolor"]         = (0,0,0,1)         #:fgtext
-    plt.rcParams["axes.edgecolor"]          = (0,0,0,1)         #:fgguide
-    plt.rcParams["legend.facecolor"]        = "inherit"         #:fglegend, :legendbackgroundcolor
-    plt.rcParams["legend.edgecolor"]        = "inherit"               #
-    plt.rcParams["axes.prop_cycle"]         = prop_cycle        #:palette, cycling through :ls
-    plt.rcParams["image.cmap"]              = fink_cmap    #:colorgradient
-    plt.rcParams["axes3d.xaxis.panecolor"]  = (1,1,1,.9)        #
-    plt.rcParams["axes3d.yaxis.panecolor"]  = (1,1,1,.9)        #
-    plt.rcParams["axes3d.zaxis.panecolor"]  = (1,1,1,.9)        #
-
-    return fink_palette, fink_ls, fink_markers, fink_cmap, fink_hatches
-
-def fink_dark():
-    """
-        - function defining a style in the corporate colors of the [FINK](https://fink-broker.org/) collaboration
-
-        Parameters
-        ----------
-
-        Raises
-        ------
-
-        Returns
-        -------
-            - `fink_palette`
-                - `np.ndarray`
-                - contains color palette used to cycle through when plotting
-            - `fink_ls`
-                - `np.ndarray`
-                - contains linestyles used to cycle through when plotting
-            - `fink_markers`
-                - `np.ndarray`
-                - contains markers used to cycle through when plotting
-            - `fink_cmap`
-                - `string`
-                - colormap used in the style
-            - `fink_hatches`
-                - `np.ndarray`
-                - hatches used in style
-
-        Dependencies
-        ------------
-            - `cycler`
-            - `matplotlib` 
-            - `numpy`
-
-        Comments
-        --------
-    """
-
-    _, mono_colors, mono_ls, mono_markers, mono_hatches = layout_specs()
-
-    fink_markers   = ["o", "+", "x", "^"]
-    fink_ls        = ["-", "--", "-.", ":"][:-1]
-    fink_palette   = ["#15284F", "#3C8DFF", "#D5D5D3", "#F5622E"][1:][::-1]
-    fink_hatches   = ["/","\\","o","*"]
-
-    prop_cycle = (
-        cycler(linestyle=fink_ls) +
-        cycler(color=fink_palette)
-    )
-
-    fink_cmap = "fink_r"
-
-    fink_bg = "000000"
-
-    #color scheme                                               #julia equivalent
-    plt.rcParams["figure.facecolor"]        = fink_bg      #:bg
-    # plt.rcParams["figure.edgecolor"]      = (0,0,0,1)     
-    plt.rcParams["axes.facecolor"]          = "000000"          #:bginside
-    plt.rcParams["text.color"]              = (1.0,1.0,1.0,1.0) #:fgtext, :legendfontcolor, :legendtitlefontcolor, :titlefontcolor
-    plt.rcParams["xtick.color"]             = (1.0,1.0,1.0,1.0) #:fgtext
-    plt.rcParams["ytick.color"]             = (1.0,1.0,1.0,1.0) #:fgtext
-    plt.rcParams["axes.labelcolor"]         = (1.0,1.0,1.0,1.0) #:fgtext
-    plt.rcParams["axes.edgecolor"]          = (1.0,1.0,1.0,1.0) #:fgguide
-    plt.rcParams["legend.facecolor"]        = "inherit"         #:fglegend, :legendbackgroundcolor
-    plt.rcParams["legend.edgecolor"]        = "inherit"               #
-    plt.rcParams["axes.prop_cycle"]         = prop_cycle        #:palette, cycling through :ls
-    plt.rcParams["image.cmap"]              = fink_cmap         #:colorgradient
-    plt.rcParams["axes3d.xaxis.panecolor"]  = (1,1,1,.1)        #
-    plt.rcParams["axes3d.yaxis.panecolor"]  = (1,1,1,.1)        #
-    plt.rcParams["axes3d.zaxis.panecolor"]  = (1,1,1,.1)        #
-
-    return fink_palette, fink_ls, fink_markers, fink_cmap, fink_hatches
-
+    return colorway, ls, markers, cmap, hatches

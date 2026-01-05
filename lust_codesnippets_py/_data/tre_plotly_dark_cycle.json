@@ -1,0 +1,367 @@
+{
+  "data": {
+    "histogram": [
+      {
+        "marker": {
+          "pattern": {
+            "shape": "/"
+          }
+        }
+      },
+      {
+        "marker": {
+          "pattern": {
+            "shape": "\\"
+          }
+        }
+      },
+      {
+        "marker": {
+          "pattern": {
+            "shape": "|"
+          }
+        }
+      },
+      {
+        "marker": {
+          "pattern": {
+            "shape": "-"
+          }
+        }
+      },
+      {
+        "marker": {
+          "pattern": {
+            "shape": "/"
+          }
+        }
+      },
+      {
+        "marker": {
+          "pattern": {
+            "shape": "\\"
+          }
+        }
+      },
+      {
+        "marker": {
+          "pattern": {
+            "shape": "|"
+          }
+        }
+      },
+      {
+        "marker": {
+          "pattern": {
+            "shape": "-"
+          }
+        }
+      },
+      {
+        "marker": {
+          "pattern": {
+            "shape": "/"
+          }
+        }
+      },
+      {
+        "marker": {
+          "pattern": {
+            "shape": "\\"
+          }
+        }
+      },
+      {
+        "marker": {
+          "pattern": {
+            "shape": "|"
+          }
+        }
+      },
+      {
+        "marker": {
+          "pattern": {
+            "shape": "-"
+          }
+        }
+      },
+      {
+        "marker": {
+          "pattern": {
+            "shape": "/"
+          }
+        }
+      },
+      {
+        "marker": {
+          "pattern": {
+            "shape": "\\"
+          }
+        }
+      },
+      {
+        "marker": {
+          "pattern": {
+            "shape": "|"
+          }
+        }
+      },
+      {
+        "marker": {
+          "pattern": {
+            "shape": "-"
+          }
+        }
+      }
+    ],
+    "scatter": [
+      {
+        "line": {
+          "width": 5,
+          "dash": "solid"
+        },
+        "marker": {
+          "symbol": "circle",
+          "size": 15
+        }
+      },
+      {
+        "line": {
+          "width": 5,
+          "dash": "dash"
+        },
+        "marker": {
+          "symbol": "square",
+          "size": 15
+        }
+      },
+      {
+        "line": {
+          "width": 5,
+          "dash": "dot"
+        },
+        "marker": {
+          "symbol": "triangle-up",
+          "size": 15
+        }
+      },
+      {
+        "line": {
+          "width": 5,
+          "dash": "dashdot"
+        },
+        "marker": {
+          "symbol": "triangle-down",
+          "size": 15
+        }
+      },
+      {
+        "line": {
+          "width": 5,
+          "dash": "solid"
+        },
+        "marker": {
+          "symbol": "circle",
+          "size": 15
+        }
+      },
+      {
+        "line": {
+          "width": 5,
+          "dash": "dash"
+        },
+        "marker": {
+          "symbol": "square",
+          "size": 15
+        }
+      },
+      {
+        "line": {
+          "width": 5,
+          "dash": "dot"
+        },
+        "marker": {
+          "symbol": "triangle-up",
+          "size": 15
+        }
+      },
+      {
+        "line": {
+          "width": 5,
+          "dash": "dashdot"
+        },
+        "marker": {
+          "symbol": "triangle-down",
+          "size": 15
+        }
+      },
+      {
+        "line": {
+          "width": 5,
+          "dash": "solid"
+        },
+        "marker": {
+          "symbol": "circle",
+          "size": 15
+        }
+      },
+      {
+        "line": {
+          "width": 5,
+          "dash": "dash"
+        },
+        "marker": {
+          "symbol": "square",
+          "size": 15
+        }
+      },
+      {
+        "line": {
+          "width": 5,
+          "dash": "dot"
+        },
+        "marker": {
+          "symbol": "triangle-up",
+          "size": 15
+        }
+      },
+      {
+        "line": {
+          "width": 5,
+          "dash": "dashdot"
+        },
+        "marker": {
+          "symbol": "triangle-down",
+          "size": 15
+        }
+      },
+      {
+        "line": {
+          "width": 5,
+          "dash": "solid"
+        },
+        "marker": {
+          "symbol": "circle",
+          "size": 15
+        }
+      },
+      {
+        "line": {
+          "width": 5,
+          "dash": "dash"
+        },
+        "marker": {
+          "symbol": "square",
+          "size": 15
+        }
+      },
+      {
+        "line": {
+          "width": 5,
+          "dash": "dot"
+        },
+        "marker": {
+          "symbol": "triangle-up",
+          "size": 15
+        }
+      },
+      {
+        "line": {
+          "width": 5,
+          "dash": "dashdot"
+        },
+        "marker": {
+          "symbol": "triangle-down",
+          "size": 15
+        }
+      }
+    ]
+  },
+  "layout": {
+    "xaxis": {
+      "visible": true,
+      "showline": true,
+      "zeroline": false,
+      "automargin": true,
+      "gridcolor": "#72727255",
+      "color": "#ffffffff",
+      "linecolor": "#ffffffff"
+    },
+    "colorway": [
+      "#ffffffff",
+      "#9c9c9cff",
+      "#535353ff",
+      "#c80000ff",
+      "#ffffffff",
+      "#9c9c9cff",
+      "#535353ff",
+      "#c80000ff",
+      "#ffffffff",
+      "#9c9c9cff",
+      "#535353ff",
+      "#c80000ff",
+      "#ffffffff",
+      "#9c9c9cff",
+      "#535353ff",
+      "#c80000ff"
+    ],
+    "colorscale": {
+      "sequential": "hot",
+      "diverging": [
+        [
+          0,
+          "#000000"
+        ],
+        [
+          0.5,
+          "#f7f7f7"
+        ],
+        [
+          1,
+          "#b40426"
+        ]
+      ],
+      "sequentialminus": "hot"
+    },
+    "font": {
+      "color": "#ffffffff",
+      "size": 16
+    },
+    "coloraxis": {
+      "colorbar": {
+        "outlinewidth": 5
+      }
+    },
+    "scene": {
+      "zaxis": {
+        "visible": true,
+        "showline": true,
+        "zeroline": false,
+        "gridcolor": "#72727255",
+        "color": "#ffffffff",
+        "linecolor": "#ffffffff"
+      }
+    },
+    "yaxis": {
+      "visible": true,
+      "showline": true,
+      "zeroline": false,
+      "automargin": true,
+      "gridcolor": "#72727255",
+      "color": "#ffffffff",
+      "linecolor": "#ffffffff"
+    },
+    "plot_bgcolor": "#2C2C2C44",
+    "paper_bgcolor": "#000000ff",
+    "margin": {
+      "t": 0,
+      "b": 10,
+      "r": 0,
+      "l": 100
+    },
+    "legend": {
+      "bgcolor": "#0000001c",
+      "itemwidth": 80
+    }
+  }
+}
