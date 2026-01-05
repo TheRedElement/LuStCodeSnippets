@@ -1,0 +1,355 @@
+{
+  "data": {
+    "histogram": [
+      {
+        "marker": {
+          "pattern": {
+            "shape": "/"
+          }
+        }
+      },
+      {
+        "marker": {
+          "pattern": {
+            "shape": "\\"
+          }
+        }
+      },
+      {
+        "marker": {
+          "pattern": {
+            "shape": "|"
+          }
+        }
+      },
+      {
+        "marker": {
+          "pattern": {
+            "shape": "-"
+          }
+        }
+      },
+      {
+        "marker": {
+          "pattern": {
+            "shape": "/"
+          }
+        }
+      },
+      {
+        "marker": {
+          "pattern": {
+            "shape": "\\"
+          }
+        }
+      },
+      {
+        "marker": {
+          "pattern": {
+            "shape": "|"
+          }
+        }
+      },
+      {
+        "marker": {
+          "pattern": {
+            "shape": "-"
+          }
+        }
+      },
+      {
+        "marker": {
+          "pattern": {
+            "shape": "/"
+          }
+        }
+      },
+      {
+        "marker": {
+          "pattern": {
+            "shape": "\\"
+          }
+        }
+      },
+      {
+        "marker": {
+          "pattern": {
+            "shape": "|"
+          }
+        }
+      },
+      {
+        "marker": {
+          "pattern": {
+            "shape": "-"
+          }
+        }
+      },
+      {
+        "marker": {
+          "pattern": {
+            "shape": "/"
+          }
+        }
+      },
+      {
+        "marker": {
+          "pattern": {
+            "shape": "\\"
+          }
+        }
+      },
+      {
+        "marker": {
+          "pattern": {
+            "shape": "|"
+          }
+        }
+      },
+      {
+        "marker": {
+          "pattern": {
+            "shape": "-"
+          }
+        }
+      }
+    ],
+    "scatter": [
+      {
+        "line": {
+          "width": 5,
+          "dash": "solid"
+        },
+        "marker": {
+          "symbol": "circle",
+          "size": 15
+        }
+      },
+      {
+        "line": {
+          "width": 5,
+          "dash": "dash"
+        },
+        "marker": {
+          "symbol": "square",
+          "size": 15
+        }
+      },
+      {
+        "line": {
+          "width": 5,
+          "dash": "dot"
+        },
+        "marker": {
+          "symbol": "triangle-up",
+          "size": 15
+        }
+      },
+      {
+        "line": {
+          "width": 5,
+          "dash": "dashdot"
+        },
+        "marker": {
+          "symbol": "triangle-down",
+          "size": 15
+        }
+      },
+      {
+        "line": {
+          "width": 5,
+          "dash": "solid"
+        },
+        "marker": {
+          "symbol": "circle",
+          "size": 15
+        }
+      },
+      {
+        "line": {
+          "width": 5,
+          "dash": "dash"
+        },
+        "marker": {
+          "symbol": "square",
+          "size": 15
+        }
+      },
+      {
+        "line": {
+          "width": 5,
+          "dash": "dot"
+        },
+        "marker": {
+          "symbol": "triangle-up",
+          "size": 15
+        }
+      },
+      {
+        "line": {
+          "width": 5,
+          "dash": "dashdot"
+        },
+        "marker": {
+          "symbol": "triangle-down",
+          "size": 15
+        }
+      },
+      {
+        "line": {
+          "width": 5,
+          "dash": "solid"
+        },
+        "marker": {
+          "symbol": "circle",
+          "size": 15
+        }
+      },
+      {
+        "line": {
+          "width": 5,
+          "dash": "dash"
+        },
+        "marker": {
+          "symbol": "square",
+          "size": 15
+        }
+      },
+      {
+        "line": {
+          "width": 5,
+          "dash": "dot"
+        },
+        "marker": {
+          "symbol": "triangle-up",
+          "size": 15
+        }
+      },
+      {
+        "line": {
+          "width": 5,
+          "dash": "dashdot"
+        },
+        "marker": {
+          "symbol": "triangle-down",
+          "size": 15
+        }
+      },
+      {
+        "line": {
+          "width": 5,
+          "dash": "solid"
+        },
+        "marker": {
+          "symbol": "circle",
+          "size": 15
+        }
+      },
+      {
+        "line": {
+          "width": 5,
+          "dash": "dash"
+        },
+        "marker": {
+          "symbol": "square",
+          "size": 15
+        }
+      },
+      {
+        "line": {
+          "width": 5,
+          "dash": "dot"
+        },
+        "marker": {
+          "symbol": "triangle-up",
+          "size": 15
+        }
+      },
+      {
+        "line": {
+          "width": 5,
+          "dash": "dashdot"
+        },
+        "marker": {
+          "symbol": "triangle-down",
+          "size": 15
+        }
+      }
+    ]
+  },
+  "layout": {
+    "xaxis": {
+      "visible": true,
+      "showline": true,
+      "zeroline": false,
+      "automargin": true,
+      "gridcolor": "#95959554",
+      "color": "#000000ff",
+      "linecolor": "#000000ff"
+    },
+    "colorway": [
+      "#a10000ff",
+      "#000000ff",
+      "#444444ff",
+      "#929292ff"
+    ],
+    "colorscale": {
+      "sequential": "plasma",
+      "diverging": [
+        [
+          0,
+          "#000000"
+        ],
+        [
+          0.5,
+          "#f7f7f7"
+        ],
+        [
+          1,
+          "#b40426"
+        ]
+      ],
+      "sequentialminus": "plasma"
+    },
+    "font": {
+      "color": "#000000ff",
+      "size": 16
+    },
+    "coloraxis": {
+      "colorbar": {
+        "outlinewidth": 5
+      }
+    },
+    "scene": {
+      "zaxis": {
+        "visible": true,
+        "showline": true,
+        "zeroline": false,
+        "gridcolor": "#95959554",
+        "color": "#000000ff",
+        "linecolor": "#000000ff"
+      }
+    },
+    "yaxis": {
+      "visible": true,
+      "showline": true,
+      "zeroline": false,
+      "automargin": true,
+      "gridcolor": "#95959554",
+      "color": "#000000ff",
+      "linecolor": "#000000ff"
+    },
+    "plot_bgcolor": "#ffffffbb",
+    "paper_bgcolor": "#ffffffff",
+    "margin": {
+      "t": 0,
+      "b": 10,
+      "r": 0,
+      "l": 100
+    },
+    "legend": {
+      "bgcolor": "#ffffff1c",
+      "itemwidth": 80
+    }
+  }
+}

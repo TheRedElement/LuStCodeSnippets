@@ -31,6 +31,6 @@ def get_passband_specs() -> pl.DataFrame:
             - markers and colors for `mission=="lsst"` taken from https://github.com/lsst/tutorial-notebooks/blob/main/DP0.2/08_Truth_Tables.ipynb
     """
     curdir = os.path.dirname(os.path.realpath(__file__)) +"/"
-    df = pl.read_csv(f"{curdir}../../data/passband_specs.csv")
+    df = pl.read_csv(f"{curdir}../_data/passband_specs.csv")
     
     return df
