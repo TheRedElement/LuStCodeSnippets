@@ -180,17 +180,18 @@ Using the style can be done as follows:
     * html
         * copy [tre_dark.css](./styles/tre_dark.css) and/or [tre_light.css](./styles/tre_light.css) into your project
         * import by calling `<link rel="stylesheet" href=path2tre_dark.css>` and `<link rel="stylesheet" href=path2tre_light.css>`
+        * alternatively you can directly fetch the style from the raw github content: [https://raw.githubusercontent.com/TheRedElement/LuStCodeSnippets/refs/heads/dev/styles/tre_plotly_dark.json](https://raw.githubusercontent.com/TheRedElement/LuStCodeSnippets/refs/heads/dev/styles/tre_plotly_dark.json)
     * [matplotlib](https://matplotlib.org/)
         * no need to copy anything
         * simply
-            1. import the plotting style `from lust_codesnippets_py.styles import plot_styles as alstps`
-            2. load the respective style `palette, ls, markers, cmap, hatches = alstps.tre_dark()`
+            1. import the plotting style `from lust_codesnippets_py.styles import matplotlib_styles as alstms`
+            2. load the respective style `colorway, ls, markers, cmap, hatches = alstms.tre("dark")`
     * [Plotly (python)](https://plotly.com/python/)
         * no need to copy anything
         * simply
             1. [install](#installation) the package
             2. import the plotting style `from lust_codesnippets_py.styles import plotly_style as alstps`
-            3. load the respective style `alstps.tre("dark")`
+            3. load the respective style `colorway, ls, markers, cmap, hatches = alstps.tre("dark")`
     * [Plotly (java script)](https://plotly.com/javascript/)
         1. you can directly fetch the style from the raw github content: [https://raw.githubusercontent.com/TheRedElement/LuStCodeSnippets/refs/heads/dev/styles/tre_plotly_dark.json](https://raw.githubusercontent.com/TheRedElement/LuStCodeSnippets/refs/heads/dev/styles/tre_plotly_dark.json)
         2. this can be done via a simple `fetch(...).then(res => res.json()).then(json => {let treTemplate = json; <some other code>})`
