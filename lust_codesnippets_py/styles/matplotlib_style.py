@@ -55,6 +55,7 @@ def tre(
                     - `"batch"`
                         - will batch similar linestyles together
                         - consecutive lines, markes, hatches, etc. will have the same style
+                - the default is `"cycle"`
             - `colorway_override`
                 - `List[str]`, optional
                 - override of the default tre colorway (colorway = palette)
@@ -125,8 +126,8 @@ def tre(
     cmap     = style["colors"]["c_plot_cmap"][theme] if cmap_override is None else cmap_override
     colorway = style["colors"]["c_plot_colorway"][theme] if colorway_override is None else colorway_override
     hatches  = style["hatches"][cycle]
-    ls       = style["linestyles"][cycle][:len(colorway)]
-    markers  = style["markers"][cycle]
+    ls       = style["line"]["dash"][cycle][:len(colorway)]
+    markers  = style["marker"]["symbol"][cycle]
 
     #create prop cycle
     prop_cycle = (
@@ -144,7 +145,7 @@ def tre(
     plt.rcParams["text.usetex"]             = True
 
     ##fontsizes
-    plt.rcParams["font.size"]               = 16
+    plt.rcParams["font.size"]               = style["fontsizes"]["fs_plot_body"]["value"]
     plt.rcParams["figure.titlesize"]        = "large"
     plt.rcParams["axes.titlesize"]          = "large"
     plt.rcParams["axes.labelsize"]          = "medium"
@@ -154,32 +155,36 @@ def tre(
     plt.rcParams["legend.fontsize"]         = "small"
 
     ##frame layout
-    plt.rcParams["figure.figsize"]          = (9.0,5.0)
+    plt.rcParams["figure.figsize"]          = (style["figure"]["width"]/100, style["figure"]["height"]/100)
     plt.rcParams["figure.dpi"]              = 180
 
     ##grid layout
-    plt.rcParams["axes.grid"]               = True
+    plt.rcParams["axes.grid"]               = style["axes"]["xaxis"]["showgrid"] | style["axes"]["yaxis"]["showgrid"]
     plt.rcParams["axes.grid.which"]         = "major"
-    plt.rcParams["axes.spines.top"]         = False
-    plt.rcParams["axes.spines.right"]       = False
-    plt.rcParams["grid.alpha"]              = 0.3
-    plt.rcParams["xtick.direction"]         = "in" 
-    plt.rcParams["xtick.minor.visible"]     = True
-    plt.rcParams["ytick.direction"]         = "in" 
-    plt.rcParams["ytick.minor.visible"]     = True
+    spines = ["top","bottom","left","right"]
+    for spine in spines:
+        if spine in style["axes"]["xaxis"]["spines"]+style["axes"]["yaxis"]["spines"]:
+            plt.rcParams[f"axes.spines.{spine}"]   = True 
+        else:
+            plt.rcParams[f"axes.spines.{spine}"]   = False
+    
+    plt.rcParams["grid.alpha"]              = mcolors.to_rgba(style["colors"]["c_plot_grid"][theme])[-1]
+    plt.rcParams["grid.color"]              = style["colors"]["c_plot_grid"][theme]
+    plt.rcParams["xtick.direction"]         = style["axes"]["xaxis"]["ticks"].replace("side", "")
+    plt.rcParams["xtick.minor.visible"]     = "minor" in style["axes"]["xaxis"].keys()
+    plt.rcParams["ytick.direction"]         = style["axes"]["yaxis"]["ticks"].replace("side", "")
+    plt.rcParams["ytick.minor.visible"]     = "minor" in style["axes"]["xaxis"].keys()
 
     ##marker and line defaults
-    plt.rcParams["errorbar.capsize"]        = 3
-    plt.rcParams["lines.linewidth"]         = 2
-    plt.rcParams["lines.linewidth"]         = 2
-    plt.rcParams["lines.linestyle"]         = "-"
-    plt.rcParams["lines.markersize"]        = 4
-    plt.rcParams["patch.linewidth"]         = 2
-    plt.rcParams["patch.linewidth"]         = 2
-    plt.rcParams["scatter.marker"]          = "o"
+    plt.rcParams["errorbar.capsize"]        = max(style["errorbars"]["error_x"]["width"], style["errorbars"]["error_y"]["width"])
+    plt.rcParams["lines.linewidth"]         = style["line"]["width"]
+    plt.rcParams["lines.linestyle"]         = style["line"]["dash"][cycle][0]
+    plt.rcParams["lines.markersize"]        = style["marker"]["size"]
+    plt.rcParams["patch.linewidth"]         = style["line"]["width"]
+    plt.rcParams["scatter.marker"]          = style["marker"]["symbol"][cycle][0]
 
     ##legend
-    plt.rcParams["legend.framealpha"]       = 0.2
+    plt.rcParams["legend.framealpha"]       = mcolors.to_rgba(style["colors"]["c_plot_legendbg"][theme])[-1]
 
     ##saving
     plt.rcParams["savefig.transparent"]     = False
@@ -195,7 +200,7 @@ def tre(
     plt.rcParams["axes.labelcolor"]         = style["colors"]["c_body_text"][theme]
     plt.rcParams["axes.edgecolor"]          = style["colors"]["c_body_text"][theme]
     plt.rcParams["legend.facecolor"]        = style["colors"]["c_plot_legendbg"][theme]
-    plt.rcParams["legend.edgecolor"]        = style["colors"]["c_plot_legendbg"][theme]
+    plt.rcParams["legend.edgecolor"]        = style["colors"]["c_plot_legendborder"][theme]
     plt.rcParams["axes.prop_cycle"]         = prop_cycle
     plt.rcParams["image.cmap"]              = cmap
     plt.rcParams["axes3d.xaxis.panecolor"]  = style["colors"]["c_plot_pane"][theme]
@@ -227,6 +232,7 @@ def lust(theme:Literal["dark","light"]="dark", cycle:Literal["cycle","batch"]="c
                     - `"batch"`
                         - will batch similar linestyles together
                         - consecutive lines, markes, hatches, etc. will have the same style
+                - the default is `"cycle"`
 
         Raises
         ------
@@ -296,6 +302,7 @@ def fink(theme:Literal["dark","light"]="dark", cycle:Literal["cycle","batch"]="c
                     - `"batch"`
                         - will batch similar linestyles together
                         - consecutive lines, markes, hatches, etc. will have the same style
+                - the default is `"cycle"`
 
         Raises
         ------

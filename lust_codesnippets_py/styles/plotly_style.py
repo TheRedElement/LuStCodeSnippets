@@ -41,6 +41,7 @@ def tre(theme:Literal["dark","light"]="dark", cycle:Literal["cycle","batch"]="cy
                     - `"batch"`
                         - will batch similar linestyles together
                         - consecutive lines, markes, hatches, etc. will have the same style
+                - the default is `"cycle"`
             - `colorway_override`
                 - `List[str]`, optional
                 - override of the default tre colorway (colorway = palette)
@@ -164,6 +165,7 @@ def lust(theme:Literal["dark","light"]="dark", cycle:Literal["cycle","batch"]="c
                     - `"batch"`
                         - will batch similar linestyles together
                         - consecutive lines, markes, hatches, etc. will have the same style
+                - the default is `"cycle"`
 
         Raises
         ------
@@ -230,6 +232,7 @@ def fink(theme:Literal["dark","light"]="dark", cycle:Literal["cycle","batch"]="c
                     - `"batch"`
                         - will batch similar linestyles together
                         - consecutive lines, markes, hatches, etc. will have the same style
+                - the default is `"cycle"`
 
         Raises
         ------

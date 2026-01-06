@@ -1,599 +1,702 @@
 {
-  "comments": {
+    "comments": {
+        "axes": {
+            "schema": "follow the plotly schema (add additional entries if necessary)"
+        },
+        "colors": {
+            "naming": "c_<class>_[parameter]",
+            "notes": [
+                "c_main = accent color",
+                "c_bg = primary color",
+                "c_body_text = secondary color"
+            ]
+        },
+        "figure": {
+            "schema": "follow the plotly schema (add additional entries if necessary)"
+        },
+        "fontsizes": {
+            "naming": "fs_<class>_[parameter]",
+            "notes": [
+                "use rem for outer world (top-lever containers)",
+                "use em for inner world (any children i.e., lists, headers, ...)"
+            ]
+        },
+        "line": {
+            "schema": "follow the plotly schema (add additional entries if necessary)"
+        },
+        "marker": {
+            "schema": "follow the plotly schema (add additional entries if necessary)"
+        }
+    },
+    "axes": {
+        "coloraxis": {
+            "colorbar": {
+                "outlinewidth": 5
+            }
+        },
+        "xaxis": {
+            "automargin": true,
+            "minor": {
+                "ticks": "inside"
+            },
+            "showgrid": true,
+            "showline": true,
+            "spines": [
+                "bottom"
+            ],
+            "ticks": "inside",
+            "visible": true,
+            "zeroline": false
+        },
+        "yaxis": {
+            "automargin": true,
+            "minor": {
+                "ticks": "inside"
+            },
+            "showgrid": true,
+            "showline": true,
+            "spines": [
+                "left"
+            ],
+            "ticks": "inside",
+            "visible": true,
+            "zeroline": false
+        },
+        "zaxis": {
+            "automargin": true,
+            "minor": {
+                "ticks": "inside"
+            },
+            "showgrid": true,
+            "showline": true,
+            "spines": [
+                "left"
+            ],
+            "ticks": "inside",
+            "visible": true,
+            "zeroline": false
+        }
+    },
     "colors": {
-      "naming": "c_<class>_[parameter]",
-      "notes": [
-        "c_main = accent color",
-        "c_bg = primary color",
-        "c_body_text = secondary color"
-      ]
+        "c_main": {
+            "context": [
+                "all"
+            ],
+            "dark": "#c80000ff",
+            "light": "#a10000ff"
+        },
+        "c_bg": {
+            "context": [
+                "all"
+            ],
+            "dark": "#000000ff",
+            "light": "#ffffffff"
+        },
+        "c_body_text": {
+            "context": [
+                "all"
+            ],
+            "dark": "#ffffffff",
+            "light": "#000000ff"
+        },
+        "c_tabrow_bg": {
+            "context": [
+                "css",
+                "latex"
+            ],
+            "dark": "#5f5f5fff",
+            "light": "#9a9a9aff"
+        },
+        "c_tabrow_hover": {
+            "context": [
+                "css",
+                "latex"
+            ],
+            "dark": "#a10000ff",
+            "light": "#c10000ff"
+        },
+        "c_tabborder": {
+            "context": [
+                "css",
+                "latex"
+            ],
+            "dark": "#ffffffff",
+            "light": "#000000ff"
+        },
+        "c_footnote_text": {
+            "context": [
+                "css",
+                "latex"
+            ],
+            "dark": "#c0c0c0ff",
+            "light": "#444444ff"
+        },
+        "c_footnote_box": {
+            "context": [
+                "css",
+                "latex"
+            ],
+            "dark": "#000000ff",
+            "light": "#ffffffff"
+        },
+        "c_footnote_boxshadow": {
+            "context": [
+                "css",
+                "latex"
+            ],
+            "dark": "#bebebeff",
+            "light": "#2b2b2bff"
+        },
+        "c_blockquote_border": {
+            "context": [
+                "css",
+                "latex"
+            ],
+            "dark": "#a10000ff",
+            "light": "#c10000ff"
+        },
+        "c_blockquote_bg": {
+            "context": [
+                "css",
+                "latex"
+            ],
+            "dark": "#aaaaaaff",
+            "light": "#5e5e5eff"
+        },
+        "c_blockquote_text": {
+            "context": [
+                "css",
+                "latex"
+            ],
+            "dark": "#000000ff",
+            "light": "#ffffffff"
+        },
+        "c_link_text": {
+            "context": [
+                "css",
+                "latex"
+            ],
+            "dark": "#c80000ff",
+            "light": "#a10000ff"
+        },
+        "c_link_visited": {
+            "context": [
+                "css",
+                "latex"
+            ],
+            "dark": "#a10000ff",
+            "light": "#c10000ff"
+        },
+        "c_link_hover": {
+            "context": [
+                "css",
+                "latex"
+            ],
+            "dark": "#ff0000ff",
+            "light": "#ff0000ff"
+        },
+        "c_link_active": {
+            "context": [
+                "css",
+                "latex"
+            ],
+            "dark": "#ff0000ff",
+            "light": "#ff0000ff"
+        },
+        "c_list1_text": {
+            "context": [
+                "css",
+                "latex"
+            ],
+            "dark": "#ffffffff",
+            "light": "#000000ff"
+        },
+        "c_list2_text": {
+            "context": [
+                "css",
+                "latex"
+            ],
+            "dark": "#ffffffff",
+            "light": "#000000ff"
+        },
+        "c_caption_bg": {
+            "context": [
+                "css",
+                "latex"
+            ],
+            "dark": "#000000ff",
+            "light": "#ffffffff"
+        },
+        "c_caption_text": {
+            "context": [
+                "css",
+                "latex"
+            ],
+            "dark": "#ffffffff",
+            "light": "#000000ff"
+        },
+        "c_comment_ls": {
+            "context": [
+                "css",
+                "latex"
+            ],
+            "dark": "#ff6969ff",
+            "light": "#8d0000ff"
+        },
+        "c_todo_ls": {
+            "context": [
+                "css",
+                "latex"
+            ],
+            "dark": "#ff9100ff",
+            "light": "#ff9100ff"
+        },
+        "c_plot_pane": {
+            "context": [
+                "matplotlib"
+            ],
+            "dark": "#2C2C2C44",
+            "light": "#ffffffbb"
+        },
+        "c_plot_legendbg": {
+            "context": [
+                "matplotlib",
+                "julia"
+            ],
+            "dark": "#FFFFFF1D",
+            "light": "#0000000f"
+        },
+        "c_plot_legendborder": {
+            "context": [
+                "matplotlib",
+                "julia"
+            ],
+            "dark": "#FFFFFF1d",
+            "light": "#0000000f"
+        },
+        "c_plot_grid": {
+            "context": [
+                "matplotlib",
+                "plotly"
+            ],
+            "dark": "#72727255",
+            "light": "#95959554"
+        },
+        "c_plot_colorway": {
+            "context": [
+                "matplotlib",
+                "plotly"
+            ],
+            "dark": [
+                "#ffffffff",
+                "#9c9c9cff",
+                "#535353ff",
+                "#c80000ff",
+                "#ffffffff",
+                "#9c9c9cff",
+                "#535353ff",
+                "#c80000ff",
+                "#ffffffff",
+                "#9c9c9cff",
+                "#535353ff",
+                "#c80000ff",
+                "#ffffffff",
+                "#9c9c9cff",
+                "#535353ff",
+                "#c80000ff"
+            ],
+            "light": [
+                "#000000ff",
+                "#444444ff",
+                "#929292ff",
+                "#a10000ff",
+                "#000000ff",
+                "#444444ff",
+                "#929292ff",
+                "#a10000ff",
+                "#000000ff",
+                "#444444ff",
+                "#929292ff",
+                "#a10000ff",
+                "#000000ff",
+                "#444444ff",
+                "#929292ff",
+                "#a10000ff"
+            ]
+        },
+        "c_plot_c0": {
+            "context": [
+                "matplotlib",
+                "julia",
+                "plotly"
+            ],
+            "dark": "#c80000ff",
+            "light": "#a10000ff"
+        },
+        "c_plot_c1": {
+            "context": [
+                "matplotlib",
+                "julia",
+                "plotly"
+            ],
+            "dark": "#ffffffff",
+            "light": "#000000ff"
+        },
+        "c_plot_c2": {
+            "context": [
+                "matplotlib",
+                "julia",
+                "plotly"
+            ],
+            "dark": "#9c9c9cff",
+            "light": "#444444ff"
+        },
+        "c_plot_c3": {
+            "context": [
+                "matplotlib",
+                "julia",
+                "plotly"
+            ],
+            "dark": "#535353ff",
+            "light": "#929292ff"
+        },
+        "c_plot_cmap": {
+            "context": [
+                "matplotlib",
+                "julia",
+                "plotly"
+            ],
+            "dark": "hot",
+            "light": "hot_r"
+        },
+        "c_future": {
+            "context": [
+                "latex"
+            ],
+            "dark": "#b4b4b4ff",
+            "light": "#b4b4b4ff"
+        },
+        "c_bibcolor_ls": {
+            "context": [
+                "latex",
+                "css"
+            ],
+            "dark": "#a80000ff",
+            "light": "#780000ff"
+        },
+        "c_code_bg": {
+            "context": [
+                "latex",
+                "css"
+            ],
+            "dark": "#1e1e1eff",
+            "light": "#d6d6d6ff"
+        },
+        "c_code_constant": {
+            "context": [
+                "latex",
+                "css"
+            ],
+            "dark": "#569cd6ff",
+            "light": "#569cd6ff"
+        },
+        "c_code_comment": {
+            "context": [
+                "latex",
+                "css"
+            ],
+            "dark": "#6a9955ff",
+            "light": "#6a9955ff"
+        },
+        "c_code_string": {
+            "context": [
+                "latex",
+                "css"
+            ],
+            "dark": "#d16969ff",
+            "light": "#d16969ff"
+        },
+        "c_code_numeric": {
+            "context": [
+                "latex",
+                "css"
+            ],
+            "dark": "#b5cea8ff",
+            "light": "#b5cea8ff"
+        },
+        "c_code_keyword": {
+            "context": [
+                "latex",
+                "css"
+            ],
+            "dark": "#569cd6ff",
+            "light": "#569cd6ff"
+        },
+        "c_tikz_nodeoutline": {
+            "context": [
+                "latex"
+            ],
+            "dark": "#333333ff",
+            "light": "#ccccccff"
+        },
+        "c_tikz_nodebg": {
+            "context": [
+                "latex"
+            ],
+            "dark": "#000000ff",
+            "light": "#ffffffff"
+        },
+        "c_tikz_arrow": {
+            "context": [
+                "latex"
+            ],
+            "dark": "#808080ff",
+            "light": "#808080ff"
+        },
+        "c_poster_sectnode": {
+            "context": [
+                "latex",
+                "css"
+            ],
+            "dark": "#4d4d4dff",
+            "light": "#4d4d4dff"
+        },
+        "c_poster_mainnode": {
+            "context": [
+                "latex",
+                "css"
+            ],
+            "dark": "#c10000ff",
+            "light": "#a10000ff"
+        },
+        "c_todo_titlepage": {
+            "context": [
+                "latex"
+            ],
+            "dark": "#ffff00ff",
+            "light": "#ffff00ff"
+        },
+        "c_todo_all": {
+            "context": [
+                "latex"
+            ],
+            "dark": "#00ffffff",
+            "light": "#00ffffff"
+        },
+        "c_math_minbetween": {
+            "context": [
+                "latex"
+            ],
+            "dark": "#b2b2b2ff",
+            "light": "#b2b2b2ff"
+        }
+    },
+    "errorbars": {
+        "error_x": {
+            "thickness": 3,
+            "visible": false,
+            "width": 5
+        },
+        "error_y": {
+            "thickness": 3,
+            "visible": false,
+            "width": 5
+        }
     },
     "fontsizes": {
-      "naming": "fs_<class>_[parameter]",
-      "notes": [
-        "use rem for outer world (top-lever containers)",
-        "use em for inner world (any children i.e., lists, headers, ...)"
-      ]
+        "fs_h1": {
+            "context": [
+                "css"
+            ],
+            "value": "1.5em"
+        },
+        "fs_h2": {
+            "context": [
+                "css"
+            ],
+            "value": "1.3em"
+        },
+        "fs_h3": {
+            "context": [
+                "css"
+            ],
+            "value": "1.1em"
+        },
+        "fs_h4": {
+            "context": [
+                "css"
+            ],
+            "value": "1.0em"
+        },
+        "fs_footnote_text": {
+            "context": [
+                "css"
+            ],
+            "value": "0.8em"
+        },
+        "fs_blockquote_text": {
+            "context": [
+                "css"
+            ],
+            "value": "1.2em"
+        },
+        "fs_list1_text": {
+            "context": [
+                "css"
+            ],
+            "value": "1em"
+        },
+        "fs_list2_text": {
+            "context": [
+                "css"
+            ],
+            "value": "1em"
+        },
+        "fs_plot_body": {
+            "context": [
+                "matplotlib",
+                "plotly"
+            ],
+            "value": 16
+        }
+    },
+    "figure": {
+        "autosize": false,
+        "width": 900,
+        "margin": {
+            "b": 10,
+            "l": 0,
+            "r": 0,
+            "t": 0
+        },
+        "height": 500,
+        "scale": 1
+    },
+    "hatches": {
+        "cycle": [
+            "/",
+            "\\",
+            "|",
+            "-",
+            "/",
+            "\\",
+            "|",
+            "-",
+            "/",
+            "\\",
+            "|",
+            "-",
+            "/",
+            "\\",
+            "|",
+            "-"
+        ],
+        "batch": [
+            "/",
+            "/",
+            "/",
+            "/",
+            "\\",
+            "\\",
+            "\\",
+            "\\",
+            "|",
+            "|",
+            "|",
+            "|",
+            "-",
+            "-",
+            "-",
+            "-"
+        ],
+        "special": "star"
+    },
+    "legend": {
+        "itemwidth": 80,
+        "borderwidth": 2
+    },
+    "line": {
+        "dash": {
+            "cycle": [
+                "solid",
+                "dashed",
+                "dotted",
+                "dashdot",
+                "solid",
+                "dashed",
+                "dotted",
+                "dashdot",
+                "solid",
+                "dashed",
+                "dotted",
+                "dashdot",
+                "solid",
+                "dashed",
+                "dotted",
+                "dashdot"
+            ],
+            "batch": [
+                "solid",
+                "solid",
+                "solid",
+                "solid",
+                "dashed",
+                "dashed",
+                "dashed",
+                "dashed",
+                "dotted",
+                "dotted",
+                "dotted",
+                "dotted",
+                "dashdot",
+                "dashdot",
+                "dashdot",
+                "dashdot"
+            ],
+            "special": "solid"
+        },
+        "width": 5
+    },
+    "marker": {
+        "size": 15,
+        "symbol": {
+            "cycle": [
+                "o",
+                "s",
+                "^",
+                "v",
+                "o",
+                "s",
+                "^",
+                "v",
+                "o",
+                "s",
+                "^",
+                "v",
+                "o",
+                "s",
+                "^",
+                "v"
+            ],
+            "batch": [
+                "o",
+                "o",
+                "o",
+                "o",
+                "s",
+                "s",
+                "s",
+                "s",
+                "^",
+                "^",
+                "^",
+                "^",
+                "v",
+                "v",
+                "v",
+                "v"
+            ],
+            "special": "*"
+        }
     }
-  },
-  "colors": {
-    "c_main": {
-      "context": [
-        "all"
-      ],
-      "dark": "#c80000ff",
-      "light": "#a10000ff"
-    },
-    "c_bg": {
-      "context": [
-        "all"
-      ],
-      "dark": "#000000ff",
-      "light": "#ffffffff"
-    },
-    "c_body_text": {
-      "context": [
-        "all"
-      ],
-      "dark": "#ffffffff",
-      "light": "#000000ff"
-    },
-    "c_tabrow_bg": {
-      "context": [
-        "css",
-        "latex"
-      ],
-      "dark": "#5f5f5fff",
-      "light": "#9a9a9aff"
-    },
-    "c_tabrow_hover": {
-      "context": [
-        "css",
-        "latex"
-      ],
-      "dark": "#a10000ff",
-      "light": "#c10000ff"
-    },
-    "c_tabborder": {
-      "context": [
-        "css",
-        "latex"
-      ],
-      "dark": "#ffffffff",
-      "light": "#000000ff"
-    },
-    "c_footnote_text": {
-      "context": [
-        "css",
-        "latex"
-      ],
-      "dark": "#c0c0c0ff",
-      "light": "#444444ff"
-    },
-    "c_footnote_box": {
-      "context": [
-        "css",
-        "latex"
-      ],
-      "dark": "#000000ff",
-      "light": "#ffffffff"
-    },
-    "c_footnote_boxshadow": {
-      "context": [
-        "css",
-        "latex"
-      ],
-      "dark": "#bebebeff",
-      "light": "#2b2b2bff"
-    },
-    "c_blockquote_border": {
-      "context": [
-        "css",
-        "latex"
-      ],
-      "dark": "#a10000ff",
-      "light": "#c10000ff"
-    },
-    "c_blockquote_bg": {
-      "context": [
-        "css",
-        "latex"
-      ],
-      "dark": "#aaaaaaff",
-      "light": "#5e5e5eff"
-    },
-    "c_blockquote_text": {
-      "context": [
-        "css",
-        "latex"
-      ],
-      "dark": "#000000ff",
-      "light": "#ffffffff"
-    },
-    "c_link_text": {
-      "context": [
-        "css",
-        "latex"
-      ],
-      "dark": "#c80000ff",
-      "light": "#a10000ff"
-    },
-    "c_link_visited": {
-      "context": [
-        "css",
-        "latex"
-      ],
-      "dark": "#a10000ff",
-      "light": "#c10000ff"
-    },
-    "c_link_hover": {
-      "context": [
-        "css",
-        "latex"
-      ],
-      "dark": "#ff0000ff",
-      "light": "#ff0000ff"
-    },
-    "c_link_active": {
-      "context": [
-        "css",
-        "latex"
-      ],
-      "dark": "#ff0000ff",
-      "light": "#ff0000ff"
-    },
-    "c_list1_text": {
-      "context": [
-        "css",
-        "latex"
-      ],
-      "dark": "#ffffffff",
-      "light": "#000000ff"
-    },
-    "c_list2_text": {
-      "context": [
-        "css",
-        "latex"
-      ],
-      "dark": "#ffffffff",
-      "light": "#000000ff"
-    },
-    "c_caption_bg": {
-      "context": [
-        "css",
-        "latex"
-      ],
-      "dark": "#000000ff",
-      "light": "#ffffffff"
-    },
-    "c_caption_text": {
-      "context": [
-        "css",
-        "latex"
-      ],
-      "dark": "#ffffffff",
-      "light": "#000000ff"
-    },
-    "c_comment_ls": {
-      "context": [
-        "css",
-        "latex"
-      ],
-      "dark": "#ff6969ff",
-      "light": "#8d0000ff"
-    },
-    "c_todo_ls": {
-      "context": [
-        "css",
-        "latex"
-      ],
-      "dark": "#ff9100ff",
-      "light": "#ff9100ff"
-    },
-    "c_plot_pane": {
-      "context": [
-        "matplotlib"
-      ],
-      "dark": "#2C2C2C44",
-      "light": "#ffffffbb"
-    },
-    "c_plot_legendbg": {
-      "context": [
-        "matplotlib",
-        "julia"
-      ],
-      "dark": "#0000001c",
-      "light": "#ffffff1c"
-    },
-    "c_plot_grid": {
-      "context": [
-        "matplotlib",
-        "plotly"
-      ],
-      "dark": "#72727255",
-      "light": "#95959554"
-    },
-    "c_plot_colorway": {
-      "context": [
-        "matplotlib",
-        "plotly"
-      ],
-      "dark": [
-        "#ffffffff",
-        "#9c9c9cff",
-        "#535353ff",
-        "#c80000ff",
-        "#ffffffff",
-        "#9c9c9cff",
-        "#535353ff",
-        "#c80000ff",
-        "#ffffffff",
-        "#9c9c9cff",
-        "#535353ff",
-        "#c80000ff",
-        "#ffffffff",
-        "#9c9c9cff",
-        "#535353ff",
-        "#c80000ff"
-      ],
-      "light": [
-        "#000000ff",
-        "#444444ff",
-        "#929292ff",
-        "#a10000ff",
-        "#000000ff",
-        "#444444ff",
-        "#929292ff",
-        "#a10000ff",
-        "#000000ff",
-        "#444444ff",
-        "#929292ff",
-        "#a10000ff",
-        "#000000ff",
-        "#444444ff",
-        "#929292ff",
-        "#a10000ff"
-      ]
-    },
-    "c_plot_c0": {
-      "context": [
-        "matplotlib",
-        "julia",
-        "plotly"
-      ],
-      "dark": "#c80000ff",
-      "light": "#a10000ff"
-    },
-    "c_plot_c1": {
-      "context": [
-        "matplotlib",
-        "julia",
-        "plotly"
-      ],
-      "dark": "#ffffffff",
-      "light": "#000000ff"
-    },
-    "c_plot_c2": {
-      "context": [
-        "matplotlib",
-        "julia",
-        "plotly"
-      ],
-      "dark": "#9c9c9cff",
-      "light": "#444444ff"
-    },
-    "c_plot_c3": {
-      "context": [
-        "matplotlib",
-        "julia",
-        "plotly"
-      ],
-      "dark": "#535353ff",
-      "light": "#929292ff"
-    },
-    "c_plot_cmap": {
-      "context": [
-        "matplotlib",
-        "julia",
-        "plotly"
-      ],
-      "dark": "hot",
-      "light": "hot_r"
-    },
-    "c_future": {
-      "context": [
-        "latex"
-      ],
-      "dark": "#b4b4b4ff",
-      "light": "#b4b4b4ff"
-    },
-    "c_bibcolor_ls": {
-      "context": [
-        "latex",
-        "css"
-      ],
-      "dark": "#a80000ff",
-      "light": "#780000ff"
-    },
-    "c_code_bg": {
-      "context": [
-        "latex",
-        "css"
-      ],
-      "dark": "#1e1e1eff",
-      "light": "#d6d6d6ff"
-    },
-    "c_code_constant": {
-      "context": [
-        "latex",
-        "css"
-      ],
-      "dark": "#569cd6ff",
-      "light": "#569cd6ff"
-    },
-    "c_code_comment": {
-      "context": [
-        "latex",
-        "css"
-      ],
-      "dark": "#6a9955ff",
-      "light": "#6a9955ff"
-    },
-    "c_code_string": {
-      "context": [
-        "latex",
-        "css"
-      ],
-      "dark": "#d16969ff",
-      "light": "#d16969ff"
-    },
-    "c_code_numeric": {
-      "context": [
-        "latex",
-        "css"
-      ],
-      "dark": "#b5cea8ff",
-      "light": "#b5cea8ff"
-    },
-    "c_code_keyword": {
-      "context": [
-        "latex",
-        "css"
-      ],
-      "dark": "#569cd6ff",
-      "light": "#569cd6ff"
-    },
-    "c_tikz_nodeoutline": {
-      "context": [
-        "latex"
-      ],
-      "dark": "#333333ff",
-      "light": "#ccccccff"
-    },
-    "c_tikz_nodebg": {
-      "context": [
-        "latex"
-      ],
-      "dark": "#000000ff",
-      "light": "#ffffffff"
-    },
-    "c_tikz_arrow": {
-      "context": [
-        "latex"
-      ],
-      "dark": "#808080ff",
-      "light": "#808080ff"
-    },
-    "c_poster_sectnode": {
-      "context": [
-        "latex",
-        "css"
-      ],
-      "dark": "#4d4d4dff",
-      "light": "#4d4d4dff"
-    },
-    "c_poster_mainnode": {
-      "context": [
-        "latex",
-        "css"
-      ],
-      "dark": "#c10000ff",
-      "light": "#a10000ff"
-    },
-    "c_todo_titlepage": {
-      "context": [
-        "latex"
-      ],
-      "dark": "#ffff00ff",
-      "light": "#ffff00ff"
-    },
-    "c_todo_all": {
-      "context": [
-        "latex"
-      ],
-      "dark": "#00ffffff",
-      "light": "#00ffffff"
-    },
-    "c_math_minbetween": {
-      "context": [
-        "latex"
-      ],
-      "dark": "#b2b2b2ff",
-      "light": "#b2b2b2ff"
-    }
-  },
-  "fontsizes": {
-    "fs_h1": {
-      "context": [
-        "css"
-      ],
-      "value": "1.5em"
-    },
-    "fs_h2": {
-      "context": [
-        "css"
-      ],
-      "value": "1.3em"
-    },
-    "fs_h3": {
-      "context": [
-        "css"
-      ],
-      "value": "1.1em"
-    },
-    "fs_h4": {
-      "context": [
-        "css"
-      ],
-      "value": "1.0em"
-    },
-    "fs_footnote_text": {
-      "context": [
-        "css"
-      ],
-      "value": "0.8em"
-    },
-    "fs_blockquote_text": {
-      "context": [
-        "css"
-      ],
-      "value": "1.2em"
-    },
-    "fs_list1_text": {
-      "context": [
-        "css"
-      ],
-      "value": "1em"
-    },
-    "fs_list2_text": {
-      "context": [
-        "css"
-      ],
-      "value": "1em"
-    },
-    "fs_plot_body": {
-      "context": [
-        "matplotlib",
-        "plotly"
-      ],
-      "value": 16
-    }
-  },
-  "linestyles": {
-    "cycle": [
-      "solid",
-      "dashed",
-      "dotted",
-      "dashdot",
-      "solid",
-      "dashed",
-      "dotted",
-      "dashdot",
-      "solid",
-      "dashed",
-      "dotted",
-      "dashdot",
-      "solid",
-      "dashed",
-      "dotted",
-      "dashdot"
-    ],
-    "batch": [
-      "solid",
-      "solid",
-      "solid",
-      "solid",
-      "dashed",
-      "dashed",
-      "dashed",
-      "dashed",
-      "dotted",
-      "dotted",
-      "dotted",
-      "dotted",
-      "dashdot",
-      "dashdot",
-      "dashdot",
-      "dashdot"
-    ],
-    "special": "solid"
-  },
-  "markers": {
-    "cycle": [
-      "o",
-      "s",
-      "^",
-      "v",
-      "o",
-      "s",
-      "^",
-      "v",
-      "o",
-      "s",
-      "^",
-      "v",
-      "o",
-      "s",
-      "^",
-      "v"
-    ],
-    "batch": [
-      "o",
-      "o",
-      "o",
-      "o",
-      "s",
-      "s",
-      "s",
-      "s",
-      "^",
-      "^",
-      "^",
-      "^",
-      "v",
-      "v",
-      "v",
-      "v"
-    ],
-    "special": "*"
-  },
-  "hatches": {
-    "cycle": [
-      "/",
-      "\\",
-      "|",
-      "-",
-      "/",
-      "\\",
-      "|",
-      "-",
-      "/",
-      "\\",
-      "|",
-      "-",
-      "/",
-      "\\",
-      "|",
-      "-"
-    ],
-    "batch": [
-      "/",
-      "/",
-      "/",
-      "/",
-      "\\",
-      "\\",
-      "\\",
-      "\\",
-      "|",
-      "|",
-      "|",
-      "|",
-      "-",
-      "-",
-      "-",
-      "-"
-    ],
-    "special": "star"
-  }
 }

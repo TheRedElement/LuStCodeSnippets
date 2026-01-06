@@ -1,5 +1,8 @@
 {
     "comments": {
+        "axes": {
+            "schema": "follow the plotly schema (add additional entries if necessary)"
+        },
         "colors": {
             "naming": "c_<class>_[parameter]",
             "notes": [
@@ -8,12 +11,70 @@
                 "c_body_text = secondary color"
             ]
         },
+        "figure": {
+            "schema": "follow the plotly schema (add additional entries if necessary)"
+        },        
         "fontsizes": {
             "naming": "fs_<class>_[parameter]",
             "notes": [
                 "use rem for outer world (top-lever containers)",
                 "use em for inner world (any children i.e., lists, headers, ...)"
             ]
+        },
+        "line": {
+            "schema": "follow the plotly schema (add additional entries if necessary)"
+        },
+        "marker": {
+            "schema": "follow the plotly schema (add additional entries if necessary)"
+        }
+    },
+    "axes": {
+        "coloraxis": {
+            "colorbar": {
+                "outlinewidth": 5
+            }
+        },
+        "xaxis": {
+            "automargin": true,
+            "minor": {
+                "ticks": "inside"
+            },
+            "showgrid": true,
+            "showline": true,
+            "spines": [
+                "bottom"
+            ],
+            "ticks": "inside",
+            "visible": true,
+            "zeroline": false
+        },
+        "yaxis": {
+            "automargin": true,
+            "minor": {
+                "ticks": "inside"
+            },
+            "showgrid": true,
+            "showline": true,
+            "spines": [
+                "left"
+            ],
+            "ticks": "inside",
+            "visible": true,
+            "zeroline": false
+        },
+        "zaxis": {
+            "automargin": true,
+            "minor": {
+                "ticks": "inside"
+            },
+            "showgrid": true,
+            "showline": true,
+            "spines": [
+                "left"
+            ],
+            "ticks": "inside",
+            "visible": true,
+            "zeroline": false
         }
     },
     "colors": {
@@ -202,8 +263,16 @@
                 "matplotlib",
                 "julia"
             ],
-            "dark": "#0000001c",
-            "light": "#ffffff1c"
+            "dark": "#FFFFFF1D",
+            "light": "#0000000f"
+        },
+        "c_plot_legendborder": {
+            "context": [
+                "matplotlib",
+                "julia"
+            ],
+            "dark": "#FFFFFF1d",
+            "light": "#0000000f"
         },
         "c_plot_grid": {
             "context": [
@@ -381,6 +450,18 @@
             "light": "#b2b2b2ff"
         }
     },
+    "errorbars": {
+        "error_x": {
+            "thickness": 3,
+            "visible": false,
+            "width": 5
+        },        
+        "error_y": {
+            "thickness": 3,
+            "visible": false,
+            "width": 5
+        }        
+    },
     "fontsizes": {
         "fs_h1": {
             "context":["css"],
@@ -419,83 +500,17 @@
             "value":16
         }
     },
-    "linestyles": {
-        "cycle": [
-            "solid",
-            "dash",
-            "dot",
-            "dashdot",
-            "solid",
-            "dash",
-            "dot",
-            "dashdot",
-            "solid",
-            "dash",
-            "dot",
-            "dashdot",
-            "solid",
-            "dash",
-            "dot",
-            "dashdot"
-        ],
-        "batch": [
-            "solid",
-            "solid",
-            "solid",
-            "solid",
-            "dash",
-            "dash",
-            "dash",
-            "dash",
-            "dot",
-            "dot",
-            "dot",
-            "dot",
-            "dashdot",
-            "dashdot",
-            "dashdot",
-            "dashdot"
-        ],
-        "special": "solid"
-    },
-    "markers": {
-        "cycle": [
-            "circle",
-            "square",
-            "triangle-up",
-            "triangle-down",
-            "circle",
-            "square",
-            "triangle-up",
-            "triangle-down",
-            "circle",
-            "square",
-            "triangle-up",
-            "triangle-down",
-            "circle",
-            "square",
-            "triangle-up",
-            "triangle-down"
-        ],
-        "batch": [
-            "circle",
-            "circle",
-            "circle",
-            "circle",
-            "square",
-            "square",
-            "square",
-            "square",
-            "triangle-up",
-            "triangle-up",
-            "triangle-up",
-            "triangle-up",
-            "triangle-down",
-            "triangle-down",
-            "triangle-down",
-            "triangle-down"
-        ],
-        "special": "star"
+    "figure": {
+        "autosize":false,
+        "width": 900,
+        "margin": {
+            "b": 10,
+            "l": 0,
+            "r": 0,
+            "t": 0
+        },
+        "height": 500,
+        "scale": 1
     },
     "hatches": {
         "cycle": [
@@ -535,5 +550,93 @@
             "-"
         ],
         "special": "star"
+    },
+    "legend": {
+        "itemwidth": 80,
+        "borderwidth": 2
+    },
+    "line": {
+        "dash": {
+            "cycle": [
+                "solid",
+                "dash",
+                "dot",
+                "dashdot",
+                "solid",
+                "dash",
+                "dot",
+                "dashdot",
+                "solid",
+                "dash",
+                "dot",
+                "dashdot",
+                "solid",
+                "dash",
+                "dot",
+                "dashdot"
+            ],
+            "batch": [
+                "solid",
+                "solid",
+                "solid",
+                "solid",
+                "dash",
+                "dash",
+                "dash",
+                "dash",
+                "dot",
+                "dot",
+                "dot",
+                "dot",
+                "dashdot",
+                "dashdot",
+                "dashdot",
+                "dashdot"
+            ],
+            "special": "solid"
+        },
+        "width": 5
+    },
+    "marker": {
+        "size": 15,
+        "symbol": {
+            "cycle": [
+                "circle",
+                "square",
+                "triangle-up",
+                "triangle-down",
+                "circle",
+                "square",
+                "triangle-up",
+                "triangle-down",
+                "circle",
+                "square",
+                "triangle-up",
+                "triangle-down",
+                "circle",
+                "square",
+                "triangle-up",
+                "triangle-down"
+            ],
+            "batch": [
+                "circle",
+                "circle",
+                "circle",
+                "circle",
+                "square",
+                "square",
+                "square",
+                "square",
+                "triangle-up",
+                "triangle-up",
+                "triangle-up",
+                "triangle-up",
+                "triangle-down",
+                "triangle-down",
+                "triangle-down",
+                "triangle-down"
+            ],
+            "special": "star"
+        }
     }
 }

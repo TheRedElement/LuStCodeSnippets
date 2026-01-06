@@ -71,7 +71,7 @@
                 
             for (const theme of ["dark","light"]) {
                 // fetch(`../tre_plotly_${theme}.json`)
-                fetch(`https://raw.githubusercontent.com/TheRedElement/LuStCodeSnippets/refs/heads/dev/styles/tre_plotly_${theme}.json`)
+                fetch(`https://raw.githubusercontent.com/TheRedElement/LuStCodeSnippets/refs/heads/dev/styles/tre_plotly_${theme}_cycle.json`)
                     .then(res => res.json())
                     .then(json => {
                         let treTemplate = json;

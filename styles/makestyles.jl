@@ -41,13 +41,69 @@ function hex2rgba_string(hex)
     return "rgba($(float(rgba.r)),$(float(rgba.g)),$(float(rgba.b)),$(float(rgba.alpha)))"
 end
 
+"""
+    - function to check the context provided in the json style sheet
+    - used to filter for specific applications (i.e. get all colors relevant for css)
 
+    Parameters
+    ----------
+        - `contexts`
+            - `Vector{String}`
+            - the context to check for
+        - `context_json`
+            - `Vector{Any}`
+            - the context specified in the json style sheet
+    
+    Raises
+    ------
+
+    Returns
+    -------
+        - `flag`
+            - `Bool`
+            - if any of the desired `contexts` are specified in the json style sheet
+
+    Dependencies
+    ------------
+
+    Comments
+    --------
+"""
 function check_context(
     contexts::Vector{String}, context_json::Vector{Any},
     )::Bool
-    return any(in.(contexts, Ref(context_json))) #only use css context
+    return any(in.(contexts, Ref(context_json)))
 end
 
+"""
+    - function to generate a css style sheet from `./tre.json`
+
+    Parameters
+    ----------
+        - `theme`
+            - `String`, optional
+            - the theme to generate
+            - will be used to query color information from the `./tre.json`
+            - the default is `"dark"`
+        - `indent`
+            - `Int`, optional
+            - indentations to use in the generated style sheet
+            - the default is `4`
+
+    
+    Raises
+    ------
+
+    Returns
+    -------
+
+    Dependencies
+    ------------
+        - `JSON`
+
+    Comments
+    --------
+"""
 function make_css(
     theme::String="dark",
     indent::Int=4,
@@ -101,6 +157,30 @@ function make_css(
     close(f)
 end
 
+"""
+    - function to generate a latex style (.sty) sheet from `./tre.json`
+
+    Parameters
+    ----------
+        - `indent`
+            - `Int`, optional
+            - indentations to use in the generated style sheet
+            - the default is `4`
+
+    
+    Raises
+    ------
+
+    Returns
+    -------
+
+    Dependencies
+    ------------
+        - `JSON`
+
+    Comments
+    --------
+"""
 function make_latexcolors(
     indent::Int=4,
     )
@@ -181,10 +261,115 @@ function make_latexcolors(
     close(f)
 end
 
+"""
+    - function to generate a plotly style sheet (.json) from `./tre.json`
+
+    Parameters
+    ----------
+        - `indent`
+            - `Int`, optional
+            - indentations to use in the generated style sheet
+            - the default is `4`
+
+    
+    Raises
+    ------
+
+    Returns
+    -------
+
+    Dependencies
+    ------------
+        - `JSON`
+
+    Comments
+    --------
+        - will generate files in several locations
+            - to make sure the style is accessible also from installed modules
+            - all files follow the naming convention tre_matplotlib.json
+            - essentially just copies of `./tre.json` but with substitutions to follow matplotlib naming conventions
+"""
+function make_matplotlib(
+    indent::Int=4,
+    )
+    #read style
+    style = JSON.parsefile("tre.json")
+
+    #modification to comply with matplotlib names
+    style["line"]["dash"] = Dict(k => replace.(v,
+        r"^dash$"=>"dashed", 
+        r"^dot$"=>"dotted", 
+        r"^dasheddotted$"=>"dashdotted",
+        ) for (k,v) in style["line"]["dash"]
+    )
+    style["marker"]["symbol"] = Dict(k => replace.(v,
+            r"^circle$"=>"o",
+            r"^square$"=>"s",
+            r"^triangle-up$"=>"^",
+            r"^triangle-down$"=>"v",
+            r"^star$"=>"*",
+        ) for (k,v) in style["marker"]["symbol"]
+    )
+
+    #save in style in locations where it is needed to be accessible upon module import
+    for location in [
+            "./",                               #this directory for organization #this directory to be accessible for javascript
+            "../lust_codesnippets_py/_data/"    #python package
+        ]    
+        open(joinpath(location, "./tre_matplotlib.json"), "w") do f
+            JSON.print(f, style, indent)
+        end
+    end
+end
+
+"""
+    - function to generate a plotly style sheet (.json) from `./tre.json`
+
+    Parameters
+    ----------
+        - `theme`
+            - `String`, optional
+            - the theme to generate
+            - will be used to query color information from the `./tre.json`
+            - the default is `"dark"`    
+        - `cycle`
+            - `String`, optional
+            - mode to use for cycling through linestyles, markers, hatches, etc.
+            - options are
+                - `"cycle"`
+                    - will cycle through the linestyles 
+                    - every line consecutive line, marker, hatch, etc. will have a unique style
+                - `"batch"`
+                    - will batch similar linestyles together
+                    - consecutive lines, markes, hatches, etc. will have the same style
+            - the default is `"cycle"`
+        - `indent`
+            - `Int`, optional
+            - indentations to use in the generated style sheet
+            - the default is `4`
+
+    
+    Raises
+    ------
+
+    Returns
+    -------
+
+    Dependencies
+    ------------
+        - `JSON`
+
+    Comments
+    --------
+        - will generate files in several locations
+            - to make sure the style is accessible also from installed modules
+            - all files follow the naming convention tre_plotly_<theme>_<cycle>.json
+        - generated style can be used with javascript and python
+"""
 function make_plotly(
     theme::String="dark",
     cycle::String="cycle",
-    indent::Int=2,
+    indent::Int=4,
     )
     #read style
     style = JSON.parsefile("tre.json")
@@ -205,21 +390,24 @@ function make_plotly(
             "scatter" => [
                 Dict(
                     "line" => Dict(
-                        "width" => 5,
-                        "dash" => style["linestyles"][cycle][i],
+                        "width" => style["line"]["width"],
+                        "dash" => style["line"]["dash"][cycle][i],
                     ),
                     "marker" => Dict(
-                        "size" => 15,
-                        "symbol" => style["markers"][cycle][i],
-                    )
-                ) for i in range(1, min(length(style["linestyles"][cycle]),length(style["markers"][cycle])))
+                        "size" => style["marker"]["size"],
+                        "symbol" => style["marker"]["symbol"][cycle][i],
+                    ),
+                    "error_x" => style["errorbars"]["error_x"],
+                    "error_y" => style["errorbars"]["error_y"],
+                ) for i in range(1, min(length(style["line"]["dash"][cycle]),length(style["marker"]["symbol"][cycle])))
             ],            
         ),
         "layout" => Dict(
             #sorted alphabetically
+            "autosize" => style["figure"]["autosize"],
             "coloraxis" => Dict(
                 "colorbar" => Dict(
-                    "outlinewidth" => 5,
+                    "outlinewidth" => style["axes"]["coloraxis"]["colorbar"]["outlinewidth"],
                 )
             ),
             "colorscale" => Dict(   #not working in js
@@ -232,50 +420,61 @@ function make_plotly(
                 ],
             ),
             "colorway" => style["colors"]["c_plot_colorway"][theme],
-            # [
-            #     style["colors"]["c_plot_c0"][theme],
-            #     style["colors"]["c_plot_c1"][theme],
-            #     style["colors"]["c_plot_c2"][theme],
-            #     style["colors"]["c_plot_c3"][theme],
-            # ],
             "font" => Dict(
                 "color" => style["colors"]["c_body_text"][theme],
                 "size" => style["fontsizes"]["fs_plot_body"]["value"],
             ),
             "legend" => Dict(
-                "itemwidth" => 80,
+                "itemwidth" => style["legend"]["itemwidth"],
                 "bgcolor" => style["colors"]["c_plot_legendbg"][theme],
-            ),            
-            "margin" => Dict("t" =>0, "b" =>10, "l" =>100, "r" =>0),
+                "bordercolor" => style["colors"]["c_plot_legendborder"][theme],
+            ),
+            "height" => style["figure"]["height"],
+            "margin" => style["figure"]["margin"],
             "paper_bgcolor" => style["colors"]["c_bg"][theme],
             "plot_bgcolor" => style["colors"]["c_plot_pane"][theme],
             "scene" => Dict(
                 "zaxis" => Dict(
-                    "visible" => true,
-                    "showline" => true,
-                    "zeroline" => false,
                     "color" => style["colors"]["c_body_text"][theme],
-                    "linecolor" => style["colors"]["c_body_text"][theme],
                     "gridcolor" => style["colors"]["c_plot_grid"][theme],
+                    "linecolor" => style["colors"]["c_body_text"][theme],
+                    "showgrid" => style["axes"]["xaxis"]["showgrid"],
+                    "showline" => style["axes"]["xaxis"]["showline"],
+                    "ticks" => "inside",
+                    "visible" => style["axes"]["xaxis"]["visible"],
+                    "zeroline" => style["axes"]["xaxis"]["zeroline"],
                 ),                  
             ),
+            "width" => style["figure"]["width"],
             "xaxis" => Dict(
-                "visible" => true,
-                "showline" => true,
-                "zeroline" => false,
-                "automargin" => true,
+                "automargin" => style["axes"]["xaxis"]["automargin"],
                 "color" => style["colors"]["c_body_text"][theme],
-                "linecolor" => style["colors"]["c_body_text"][theme],
                 "gridcolor" => style["colors"]["c_plot_grid"][theme],
+                "linecolor" => style["colors"]["c_body_text"][theme],
+                "minor" => Dict(
+                    "ticks" => "inside",
+                ),
+                "showgrid" => style["axes"]["xaxis"]["showgrid"],
+                "showline" => style["axes"]["xaxis"]["showline"],
+                "side" => style["axes"]["xaxis"]["spines"][1],
+                "ticks" => "inside",
+                "visible" => style["axes"]["xaxis"]["visible"],
+                "zeroline" => style["axes"]["xaxis"]["zeroline"],
             ),
             "yaxis" => Dict(
-                "visible" => true,
-                "showline" => true,
-                "zeroline" => false,
-                "automargin" => true,
+                "automargin" => style["axes"]["yaxis"]["automargin"],
                 "color" => style["colors"]["c_body_text"][theme],
-                "linecolor" => style["colors"]["c_body_text"][theme],
                 "gridcolor" => style["colors"]["c_plot_grid"][theme],
+                "linecolor" => style["colors"]["c_body_text"][theme],
+                "minor" => Dict(
+                    "ticks" => "inside",
+                ),
+                "showgrid" => style["axes"]["yaxis"]["showgrid"],
+                "showline" => style["axes"]["yaxis"]["showline"],
+                "side" => style["axes"]["yaxis"]["spines"][1],
+                "ticks" => "inside",
+                "visible" => style["axes"]["yaxis"]["visible"],
+                "zeroline" => style["axes"]["yaxis"]["zeroline"],
             ),
         )
     )
@@ -291,43 +490,11 @@ function make_plotly(
     end
 end
 
-function make_matplotlib(
-    indent::Int=2,
-    )
-    #read style
-    style = JSON.parsefile("tre.json")
-
-    #modification to comply with matplotlib names
-    style["linestyles"] = Dict(k => replace.(v,
-        r"^dash$"=>"dashed", 
-        r"^dot$"=>"dotted", 
-        r"^dasheddotted$"=>"dashdotted",
-        ) for (k,v) in style["linestyles"]
-    )
-    style["markers"] = Dict(k => replace.(v,
-            r"^circle$"=>"o",
-            r"^square$"=>"s",
-            r"^triangle-up$"=>"^",
-            r"^triangle-down$"=>"v",
-            r"^star$"=>"*",
-        ) for (k,v) in style["markers"]
-    )
-
-    #save in style in locations where it is needed to be accessible upon module import
-    for location in [
-            "./",                               #this directory for organization #this directory to be accessible for javascript
-            "../lust_codesnippets_py/_data/"    #python package
-        ]    
-        open(joinpath(location, "./tre_matplotlib.json"), "w") do f
-            JSON.print(f, style, indent)
-        end
-    end
-end
 
 #%%main
 themes = ["dark", "light"]
 cycles = ["cycle", "batch"]
-# make_latexcolors()
+make_latexcolors()
 make_matplotlib()
 for theme in themes
     make_css(theme)

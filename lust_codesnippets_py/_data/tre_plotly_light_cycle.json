@@ -1,367 +1,545 @@
 {
-  "data": {
-    "histogram": [
-      {
-        "marker": {
-          "pattern": {
-            "shape": "/"
-          }
-        }
-      },
-      {
-        "marker": {
-          "pattern": {
-            "shape": "\\"
-          }
-        }
-      },
-      {
-        "marker": {
-          "pattern": {
-            "shape": "|"
-          }
-        }
-      },
-      {
-        "marker": {
-          "pattern": {
-            "shape": "-"
-          }
-        }
-      },
-      {
-        "marker": {
-          "pattern": {
-            "shape": "/"
-          }
-        }
-      },
-      {
-        "marker": {
-          "pattern": {
-            "shape": "\\"
-          }
-        }
-      },
-      {
-        "marker": {
-          "pattern": {
-            "shape": "|"
-          }
-        }
-      },
-      {
-        "marker": {
-          "pattern": {
-            "shape": "-"
-          }
-        }
-      },
-      {
-        "marker": {
-          "pattern": {
-            "shape": "/"
-          }
-        }
-      },
-      {
-        "marker": {
-          "pattern": {
-            "shape": "\\"
-          }
-        }
-      },
-      {
-        "marker": {
-          "pattern": {
-            "shape": "|"
-          }
-        }
-      },
-      {
-        "marker": {
-          "pattern": {
-            "shape": "-"
-          }
-        }
-      },
-      {
-        "marker": {
-          "pattern": {
-            "shape": "/"
-          }
-        }
-      },
-      {
-        "marker": {
-          "pattern": {
-            "shape": "\\"
-          }
-        }
-      },
-      {
-        "marker": {
-          "pattern": {
-            "shape": "|"
-          }
-        }
-      },
-      {
-        "marker": {
-          "pattern": {
-            "shape": "-"
-          }
-        }
-      }
-    ],
-    "scatter": [
-      {
-        "line": {
-          "width": 5,
-          "dash": "solid"
-        },
-        "marker": {
-          "symbol": "circle",
-          "size": 15
-        }
-      },
-      {
-        "line": {
-          "width": 5,
-          "dash": "dash"
-        },
-        "marker": {
-          "symbol": "square",
-          "size": 15
-        }
-      },
-      {
-        "line": {
-          "width": 5,
-          "dash": "dot"
-        },
-        "marker": {
-          "symbol": "triangle-up",
-          "size": 15
-        }
-      },
-      {
-        "line": {
-          "width": 5,
-          "dash": "dashdot"
-        },
-        "marker": {
-          "symbol": "triangle-down",
-          "size": 15
-        }
-      },
-      {
-        "line": {
-          "width": 5,
-          "dash": "solid"
-        },
-        "marker": {
-          "symbol": "circle",
-          "size": 15
-        }
-      },
-      {
-        "line": {
-          "width": 5,
-          "dash": "dash"
-        },
-        "marker": {
-          "symbol": "square",
-          "size": 15
-        }
-      },
-      {
-        "line": {
-          "width": 5,
-          "dash": "dot"
-        },
-        "marker": {
-          "symbol": "triangle-up",
-          "size": 15
-        }
-      },
-      {
-        "line": {
-          "width": 5,
-          "dash": "dashdot"
-        },
-        "marker": {
-          "symbol": "triangle-down",
-          "size": 15
-        }
-      },
-      {
-        "line": {
-          "width": 5,
-          "dash": "solid"
-        },
-        "marker": {
-          "symbol": "circle",
-          "size": 15
-        }
-      },
-      {
-        "line": {
-          "width": 5,
-          "dash": "dash"
-        },
-        "marker": {
-          "symbol": "square",
-          "size": 15
-        }
-      },
-      {
-        "line": {
-          "width": 5,
-          "dash": "dot"
-        },
-        "marker": {
-          "symbol": "triangle-up",
-          "size": 15
-        }
-      },
-      {
-        "line": {
-          "width": 5,
-          "dash": "dashdot"
-        },
-        "marker": {
-          "symbol": "triangle-down",
-          "size": 15
-        }
-      },
-      {
-        "line": {
-          "width": 5,
-          "dash": "solid"
-        },
-        "marker": {
-          "symbol": "circle",
-          "size": 15
-        }
-      },
-      {
-        "line": {
-          "width": 5,
-          "dash": "dash"
-        },
-        "marker": {
-          "symbol": "square",
-          "size": 15
-        }
-      },
-      {
-        "line": {
-          "width": 5,
-          "dash": "dot"
-        },
-        "marker": {
-          "symbol": "triangle-up",
-          "size": 15
-        }
-      },
-      {
-        "line": {
-          "width": 5,
-          "dash": "dashdot"
-        },
-        "marker": {
-          "symbol": "triangle-down",
-          "size": 15
-        }
-      }
-    ]
-  },
-  "layout": {
-    "xaxis": {
-      "visible": true,
-      "showline": true,
-      "zeroline": false,
-      "automargin": true,
-      "gridcolor": "#95959554",
-      "color": "#000000ff",
-      "linecolor": "#000000ff"
-    },
-    "colorway": [
-      "#000000ff",
-      "#444444ff",
-      "#929292ff",
-      "#a10000ff",
-      "#000000ff",
-      "#444444ff",
-      "#929292ff",
-      "#a10000ff",
-      "#000000ff",
-      "#444444ff",
-      "#929292ff",
-      "#a10000ff",
-      "#000000ff",
-      "#444444ff",
-      "#929292ff",
-      "#a10000ff"
-    ],
-    "colorscale": {
-      "sequential": "hot_r",
-      "diverging": [
-        [
-          0,
-          "#000000"
+    "data": {
+        "histogram": [
+            {
+                "marker": {
+                    "pattern": {
+                        "shape": "/"
+                    }
+                }
+            },
+            {
+                "marker": {
+                    "pattern": {
+                        "shape": "\\"
+                    }
+                }
+            },
+            {
+                "marker": {
+                    "pattern": {
+                        "shape": "|"
+                    }
+                }
+            },
+            {
+                "marker": {
+                    "pattern": {
+                        "shape": "-"
+                    }
+                }
+            },
+            {
+                "marker": {
+                    "pattern": {
+                        "shape": "/"
+                    }
+                }
+            },
+            {
+                "marker": {
+                    "pattern": {
+                        "shape": "\\"
+                    }
+                }
+            },
+            {
+                "marker": {
+                    "pattern": {
+                        "shape": "|"
+                    }
+                }
+            },
+            {
+                "marker": {
+                    "pattern": {
+                        "shape": "-"
+                    }
+                }
+            },
+            {
+                "marker": {
+                    "pattern": {
+                        "shape": "/"
+                    }
+                }
+            },
+            {
+                "marker": {
+                    "pattern": {
+                        "shape": "\\"
+                    }
+                }
+            },
+            {
+                "marker": {
+                    "pattern": {
+                        "shape": "|"
+                    }
+                }
+            },
+            {
+                "marker": {
+                    "pattern": {
+                        "shape": "-"
+                    }
+                }
+            },
+            {
+                "marker": {
+                    "pattern": {
+                        "shape": "/"
+                    }
+                }
+            },
+            {
+                "marker": {
+                    "pattern": {
+                        "shape": "\\"
+                    }
+                }
+            },
+            {
+                "marker": {
+                    "pattern": {
+                        "shape": "|"
+                    }
+                }
+            },
+            {
+                "marker": {
+                    "pattern": {
+                        "shape": "-"
+                    }
+                }
+            }
         ],
-        [
-          0.5,
-          "#f7f7f7"
-        ],
-        [
-          1,
-          "#b40426"
+        "scatter": [
+            {
+                "line": {
+                    "width": 5,
+                    "dash": "solid"
+                },
+                "error_y": {
+                    "thickness": 3,
+                    "visible": false,
+                    "width": 5
+                },
+                "error_x": {
+                    "thickness": 3,
+                    "visible": false,
+                    "width": 5
+                },
+                "marker": {
+                    "symbol": "circle",
+                    "size": 15
+                }
+            },
+            {
+                "line": {
+                    "width": 5,
+                    "dash": "dash"
+                },
+                "error_y": {
+                    "thickness": 3,
+                    "visible": false,
+                    "width": 5
+                },
+                "error_x": {
+                    "thickness": 3,
+                    "visible": false,
+                    "width": 5
+                },
+                "marker": {
+                    "symbol": "square",
+                    "size": 15
+                }
+            },
+            {
+                "line": {
+                    "width": 5,
+                    "dash": "dot"
+                },
+                "error_y": {
+                    "thickness": 3,
+                    "visible": false,
+                    "width": 5
+                },
+                "error_x": {
+                    "thickness": 3,
+                    "visible": false,
+                    "width": 5
+                },
+                "marker": {
+                    "symbol": "triangle-up",
+                    "size": 15
+                }
+            },
+            {
+                "line": {
+                    "width": 5,
+                    "dash": "dashdot"
+                },
+                "error_y": {
+                    "thickness": 3,
+                    "visible": false,
+                    "width": 5
+                },
+                "error_x": {
+                    "thickness": 3,
+                    "visible": false,
+                    "width": 5
+                },
+                "marker": {
+                    "symbol": "triangle-down",
+                    "size": 15
+                }
+            },
+            {
+                "line": {
+                    "width": 5,
+                    "dash": "solid"
+                },
+                "error_y": {
+                    "thickness": 3,
+                    "visible": false,
+                    "width": 5
+                },
+                "error_x": {
+                    "thickness": 3,
+                    "visible": false,
+                    "width": 5
+                },
+                "marker": {
+                    "symbol": "circle",
+                    "size": 15
+                }
+            },
+            {
+                "line": {
+                    "width": 5,
+                    "dash": "dash"
+                },
+                "error_y": {
+                    "thickness": 3,
+                    "visible": false,
+                    "width": 5
+                },
+                "error_x": {
+                    "thickness": 3,
+                    "visible": false,
+                    "width": 5
+                },
+                "marker": {
+                    "symbol": "square",
+                    "size": 15
+                }
+            },
+            {
+                "line": {
+                    "width": 5,
+                    "dash": "dot"
+                },
+                "error_y": {
+                    "thickness": 3,
+                    "visible": false,
+                    "width": 5
+                },
+                "error_x": {
+                    "thickness": 3,
+                    "visible": false,
+                    "width": 5
+                },
+                "marker": {
+                    "symbol": "triangle-up",
+                    "size": 15
+                }
+            },
+            {
+                "line": {
+                    "width": 5,
+                    "dash": "dashdot"
+                },
+                "error_y": {
+                    "thickness": 3,
+                    "visible": false,
+                    "width": 5
+                },
+                "error_x": {
+                    "thickness": 3,
+                    "visible": false,
+                    "width": 5
+                },
+                "marker": {
+                    "symbol": "triangle-down",
+                    "size": 15
+                }
+            },
+            {
+                "line": {
+                    "width": 5,
+                    "dash": "solid"
+                },
+                "error_y": {
+                    "thickness": 3,
+                    "visible": false,
+                    "width": 5
+                },
+                "error_x": {
+                    "thickness": 3,
+                    "visible": false,
+                    "width": 5
+                },
+                "marker": {
+                    "symbol": "circle",
+                    "size": 15
+                }
+            },
+            {
+                "line": {
+                    "width": 5,
+                    "dash": "dash"
+                },
+                "error_y": {
+                    "thickness": 3,
+                    "visible": false,
+                    "width": 5
+                },
+                "error_x": {
+                    "thickness": 3,
+                    "visible": false,
+                    "width": 5
+                },
+                "marker": {
+                    "symbol": "square",
+                    "size": 15
+                }
+            },
+            {
+                "line": {
+                    "width": 5,
+                    "dash": "dot"
+                },
+                "error_y": {
+                    "thickness": 3,
+                    "visible": false,
+                    "width": 5
+                },
+                "error_x": {
+                    "thickness": 3,
+                    "visible": false,
+                    "width": 5
+                },
+                "marker": {
+                    "symbol": "triangle-up",
+                    "size": 15
+                }
+            },
+            {
+                "line": {
+                    "width": 5,
+                    "dash": "dashdot"
+                },
+                "error_y": {
+                    "thickness": 3,
+                    "visible": false,
+                    "width": 5
+                },
+                "error_x": {
+                    "thickness": 3,
+                    "visible": false,
+                    "width": 5
+                },
+                "marker": {
+                    "symbol": "triangle-down",
+                    "size": 15
+                }
+            },
+            {
+                "line": {
+                    "width": 5,
+                    "dash": "solid"
+                },
+                "error_y": {
+                    "thickness": 3,
+                    "visible": false,
+                    "width": 5
+                },
+                "error_x": {
+                    "thickness": 3,
+                    "visible": false,
+                    "width": 5
+                },
+                "marker": {
+                    "symbol": "circle",
+                    "size": 15
+                }
+            },
+            {
+                "line": {
+                    "width": 5,
+                    "dash": "dash"
+                },
+                "error_y": {
+                    "thickness": 3,
+                    "visible": false,
+                    "width": 5
+                },
+                "error_x": {
+                    "thickness": 3,
+                    "visible": false,
+                    "width": 5
+                },
+                "marker": {
+                    "symbol": "square",
+                    "size": 15
+                }
+            },
+            {
+                "line": {
+                    "width": 5,
+                    "dash": "dot"
+                },
+                "error_y": {
+                    "thickness": 3,
+                    "visible": false,
+                    "width": 5
+                },
+                "error_x": {
+                    "thickness": 3,
+                    "visible": false,
+                    "width": 5
+                },
+                "marker": {
+                    "symbol": "triangle-up",
+                    "size": 15
+                }
+            },
+            {
+                "line": {
+                    "width": 5,
+                    "dash": "dashdot"
+                },
+                "error_y": {
+                    "thickness": 3,
+                    "visible": false,
+                    "width": 5
+                },
+                "error_x": {
+                    "thickness": 3,
+                    "visible": false,
+                    "width": 5
+                },
+                "marker": {
+                    "symbol": "triangle-down",
+                    "size": 15
+                }
+            }
         ]
-      ],
-      "sequentialminus": "hot_r"
     },
-    "font": {
-      "color": "#000000ff",
-      "size": 16
-    },
-    "coloraxis": {
-      "colorbar": {
-        "outlinewidth": 5
-      }
-    },
-    "scene": {
-      "zaxis": {
-        "visible": true,
-        "showline": true,
-        "zeroline": false,
-        "gridcolor": "#95959554",
-        "color": "#000000ff",
-        "linecolor": "#000000ff"
-      }
-    },
-    "yaxis": {
-      "visible": true,
-      "showline": true,
-      "zeroline": false,
-      "automargin": true,
-      "gridcolor": "#95959554",
-      "color": "#000000ff",
-      "linecolor": "#000000ff"
-    },
-    "plot_bgcolor": "#ffffffbb",
-    "paper_bgcolor": "#ffffffff",
-    "margin": {
-      "t": 0,
-      "b": 10,
-      "r": 0,
-      "l": 100
-    },
-    "legend": {
-      "bgcolor": "#ffffff1c",
-      "itemwidth": 80
+    "layout": {
+        "xaxis": {
+            "showline": true,
+            "gridcolor": "#95959554",
+            "minor": {
+                "ticks": "inside"
+            },
+            "visible": true,
+            "automargin": true,
+            "showgrid": true,
+            "linecolor": "#000000ff",
+            "zeroline": false,
+            "side": "bottom",
+            "color": "#000000ff",
+            "ticks": "inside"
+        },
+        "colorway": [
+            "#000000ff",
+            "#444444ff",
+            "#929292ff",
+            "#a10000ff",
+            "#000000ff",
+            "#444444ff",
+            "#929292ff",
+            "#a10000ff",
+            "#000000ff",
+            "#444444ff",
+            "#929292ff",
+            "#a10000ff",
+            "#000000ff",
+            "#444444ff",
+            "#929292ff",
+            "#a10000ff"
+        ],
+        "colorscale": {
+            "sequential": "hot_r",
+            "diverging": [
+                [
+                    0,
+                    "#000000"
+                ],
+                [
+                    0.5,
+                    "#f7f7f7"
+                ],
+                [
+                    1,
+                    "#b40426"
+                ]
+            ],
+            "sequentialminus": "hot_r"
+        },
+        "height": 500,
+        "font": {
+            "color": "#000000ff",
+            "size": 16
+        },
+        "coloraxis": {
+            "colorbar": {
+                "outlinewidth": 5
+            }
+        },
+        "scene": {
+            "zaxis": {
+                "visible": true,
+                "showline": true,
+                "gridcolor": "#95959554",
+                "zeroline": false,
+                "color": "#000000ff",
+                "showgrid": true,
+                "linecolor": "#000000ff",
+                "ticks": "inside"
+            }
+        },
+        "width": 900,
+        "yaxis": {
+            "showline": true,
+            "gridcolor": "#95959554",
+            "minor": {
+                "ticks": "inside"
+            },
+            "visible": true,
+            "automargin": true,
+            "showgrid": true,
+            "linecolor": "#000000ff",
+            "zeroline": false,
+            "side": "left",
+            "color": "#000000ff",
+            "ticks": "inside"
+        },
+        "plot_bgcolor": "#ffffffbb",
+        "paper_bgcolor": "#ffffffff",
+        "autosize": false,
+        "margin": {
+            "b": 10,
+            "l": 0,
+            "r": 0,
+            "t": 0
+        },
+        "legend": {
+            "bgcolor": "#0000000f",
+            "bordercolor": "#0000000f",
+            "itemwidth": 80
+        }
     }
-  }
 }
