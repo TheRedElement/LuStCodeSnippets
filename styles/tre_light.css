@@ -51,6 +51,12 @@
 
 /* ################################################################## */
 /* GLOBAL DEFAULTS */
+* {
+    /* applies to all elements */
+    scrollbar-width: auto;
+    scrollbar-color:  var(--c_body_text) color-mix(in srgb, var(--c_bg) 80%, var(--c_body_text) 20%);
+}
+
 html, body {
     background-color: var(--c_bg);
     color: var(--c_body_text);
@@ -152,18 +158,26 @@ nav ul {
 margin-bottom: 0.3em;
 }
 .nav-item .nav-subitem {
-    position: absolute; /* not in layout */
-    top: 100%;
-    left: 0;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
+    /* settings to hide layout */
+    /* position: absolute; */
+    /* visibility: hidden; */
+    /* opacity: 1; */
     transform: translateY(10px);
+    /* top: 100%; */
+    /* settings to show layout */
+    position: inherit;
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+    /* general settings */
+    margin-left: 1em;
+    display: block;
+    pointer-events: none;
     font-size: 0.8em;
     transition:
         opacity 200ms ease,
         transform 200ms ease,
-        visibility 0s linear 200ms;
+        visibility 200ms linear 200ms;
 }
 .nav-item:hover .nav-subitem,
 .nav-item.active .nav-subitem {
@@ -250,13 +264,13 @@ figure {
     display: inline-block;
     overflow: hidden;
     counter-increment: fig;
+    width: fit-content;
+    margin: 0 auto;    
 }
-figure img,
-figure iframe {
+figure :where(img, iframe, div.plotly-jsonplot) {
     width: 100%;    /* because always wrapped in figure */
     height: auto;
-    display: block;
-    margin: 0 auto;
+    overflow: hidden;
 }
 figure figcaption {
     width: 100%;
@@ -320,7 +334,24 @@ blockquote {
 }
 
 /* ################################################################## */
-/* CUSTOM BUILDING BLOCKS */
+/* INTERACTIVE ELEMENTS */
+/* user input */
+select, input, textarea, button {
+    background-color: var(--c_bg);
+    color: var(--c_body_text);
+    border-radius: 5px;
+}
+button {
+    font-weight: bold;
+}
+button:active {
+    background-color: color-mix(in srgb, var(--c_bg) 70%, var(--c_body_text) 30%);
+}
+button:hover {
+    cursor: pointer;
+    background-color: color-mix(in srgb, var(--c_bg) 80%, var(--c_body_text) 20%);
+}
+
 /* download button */
 a.download {
     outline: 0px;
@@ -341,6 +372,92 @@ a.download:hover::before {
     content: "\1F847 Download";
 }
 
+/* tooltips */
+.tooltip {
+    /* base style for tooltips */
+    color: var(--c_body_text);
+    /* hide info */
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    /* box positioning */
+    z-index: 1000;
+    bottom: 125%; /* above the hovered element */
+    left: 50%;
+    transform: translateX(-50%);
+    /* text styling */
+    font-size: 1rem;
+    font-weight: normal;
+    overflow-wrap: break-word;
+    
+    /* box styling */
+    width: max(100%, 15rem);
+    /* height: min(auto, 5em); */
+    height: 5em;
+    border-radius: 4px;
+    background-color: color-mix(in srgb, var(--c_bg), var(--c_body_text) 20%);
+    padding: 0.4em 0.5em;
+    overflow-y: scroll;
+
+    /* text styling */
+    white-space: pre;
+
+    /* smoothing effects */
+    transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease;
+}
+
+/* input error-highlights */
+@keyframes flash-bg {
+    0%   { background-color: transparent; }
+    20%  { background-color: color-mix(in srgb, var(--c_main) 50%, var(--c_body_text) 50%); }
+    40%  { background-color: transparent; }
+    60%  { background-color: color-mix(in srgb, var(--c_main) 50%, var(--c_body_text) 50%); }
+    100% { background-color: transparent; }
+}
+.error-highlight {
+    animation: flash-bg 0.8s ease-in-out;
+}
+
+/* ################################################################## */
+/* CUSTOM BUILDING BLOCKS */
+/* glossary and bibliography */
+tre-glossary:before {
+    content: "Glossary";
+    display: block;
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+}
+tre-glossary .head {
+    display: block;
+    font-weight: bold;
+}
+tre-glossary .body {
+    display: block;
+    margin-left: 1em;
+    width: 85vw;
+    overflow-wrap: break-word;
+}
+tre-gls,
+tre-cite {
+    position: relative;   
+}
+:where(tre-gls-hover,tre-bib-hover).tooltip {
+    /* inherits from .tooltip */
+    overflow-x: hidden;
+    white-space: normal;
+}
+tre-gls:hover tre-gls-hover,
+tre-cite:hover tre-bib-hover {
+    display: block;
+    visibility: visible;
+    opacity: 0.95;
+}
+
+/* ################################################################## */
+/* CUSTOM BUILDING BLOCKS */
 /* glossary and bibliography */
 tre-glossary:before {
     content: "Glossary";
@@ -365,30 +482,7 @@ tre-cite {
 }
 tre-gls-hover,
 tre-bib-hover {
-    color: var(--c_body_text);
-    /* hide info */
-    position: absolute;
-    visibility: hidden;
-    opacity: 0;
-    /* box positioning */
-    z-index: 100;
-    bottom: 125%; /* above the hovered element */
-    left: 50%;
-    transform: translateX(-50%);
-    /* text styling */
-    font-size: 1rem;
-    font-weight: normal;
-    overflow-wrap: break-word;
-    
-    /* box styling */
-    width: max(100%, 15rem);
-    border-radius: 4px;
-    background-color: color-mix(in srgb, var(--c_bg), var(--c_body_text) 20%);
-    padding: 0.4em 0.5em;
-    /* smoothing effects */
-    transition:
-        opacity 0.3s ease,
-        visibility 0.3s ease;
+    /* inherits from .tooltip */
 }
 tre-gls:hover tre-gls-hover,
 tre-cite:hover tre-bib-hover {
