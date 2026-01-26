@@ -500,11 +500,12 @@ tre-glossary:before {
 tre-glossary .head {
     display: block;
     font-weight: bold;
+    width: inherit;
 }
 tre-glossary .body {
     display: block;
     margin-left: 1em;
-    width: 85vw;
+    width: inherit;
     overflow-wrap: break-word;
 }
 
