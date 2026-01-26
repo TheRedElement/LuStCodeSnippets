@@ -1,10 +1,13 @@
-/* tre_$(theme).css */
+/* tre.css */
 /* load via <link rel="stylesheet" href=path2file> */
-/* contains all things related to style besides `:root {}` => filled by calling makestyles.jl*/
+/* contains all things related to style besides `:root {}`, `body.tre-light` => filled by calling makestyles.jl*/
 
 
 /* css variables (can be overridden in html or other css files) */
 :root {
+}
+/* defines colors for light mode (better than 2 files) */
+body.tre-light {
 }
 
 /* ################################################################## */
@@ -15,11 +18,12 @@
     scrollbar-color:  var(--c_body_text) color-mix(in srgb, var(--c_bg) 80%, var(--c_body_text) 20%);
 }
 
+
 html, body {
     background-color: var(--c_bg);
     color: var(--c_body_text);
     /* init counters */
-    counter-reset: fig 0 tab 0; 
+    counter-reset: fig 0 tab 0 bibindex 0;
 }
 body {
     max-width: 98%;
@@ -378,45 +382,39 @@ a.download:hover::before {
     animation: flash-bg 0.8s ease-in-out;
 }
 
-/* ################################################################## */
-/* CUSTOM BUILDING BLOCKS */
-/* glossary and bibliography */
-tre-glossary:before {
-    content: "Glossary";
-    display: block;
-    font-size: 2em;
-    font-weight: bold;
-    margin-bottom: 0.5em;
+.future {
+    /* anything that happens in the future */
+    color: color-mix(in srgb, var(--c_body_text) 60%, var(--c_bg) 40%);
 }
-tre-glossary .head {
-    display: block;
-    font-weight: bold;
+.package {
+    /* formatting for packages */
+    font-family: monospace;
 }
-tre-glossary .body {
-    display: block;
-    margin-left: 1em;
-    width: 85vw;
-    overflow-wrap: break-word;
-}
-tre-gls,
-tre-cite {
-    position: relative;   
-}
-:where(tre-gls-hover,tre-bib-hover).tooltip {
-    /* inherits from .tooltip */
-    overflow-x: hidden;
-    white-space: normal;
-}
-tre-gls:hover tre-gls-hover,
-tre-cite:hover tre-bib-hover {
-    display: block;
-    visibility: visible;
-    opacity: 0.95;
+.hidden {
+    /* hides elements from layout */
+    display: none;
 }
 
 /* ################################################################## */
 /* CUSTOM BUILDING BLOCKS */
-/* glossary and bibliography */
+/* bibliography */
+tre-bibliography a:link,
+tre-bibliography a:visited {
+    color: color-mix(in srgb, var(--c_main), var(--c_body_text) 70%);
+}
+tre-bibliography tre-bib-item {
+    display: flex;
+    margin-bottom: 0.5em;
+}
+tre-bibliography tre-bib-item::before {
+    counter-increment: bibindex;
+    content: "[" counter(bibindex) "]\00a0";
+}
+tre-bibliography tre-bib-item-body > div {
+    display: inline;
+}
+
+/* glossary */
 tre-glossary:before {
     content: "Glossary";
     display: block;
@@ -434,6 +432,8 @@ tre-glossary .body {
     width: 85vw;
     overflow-wrap: break-word;
 }
+
+/* gls, cite in text */
 tre-gls,
 tre-cite {
     position: relative;   
@@ -442,13 +442,24 @@ tre-gls-hover,
 tre-bib-hover {
     /* inherits from .tooltip */
 }
+:where(tre-gls-hover,tre-bib-hover).tooltip {
+    /* inherits from .tooltip */
+    overflow-x: hidden;
+    white-space: normal;
+}
 tre-gls:hover tre-gls-hover,
 tre-cite:hover tre-bib-hover {
-    display: block;
+    /* above element */
+    /* display: block;
     visibility: visible;
-    opacity: 0.95;
+    opacity: 0.95; */
+    /* always at the bottom */
+    position: fixed;
+    bottom: 5%;
+    left: 50vw;
+    transform: translateX(-47vw);
+    width: 90%;    
 }
-
 
 /* ################################################################## */
 /* CROSSREFERENCES */
@@ -528,28 +539,28 @@ ol ol {
 }
 /* ################################################################## */
 /* ITERATION COMMANDS */
-span.commentLS {
+.commentLS {
     color: var(--c_comment_ls);
     text-decoration: underline;
     text-decoration-style: wavy;
     font-style: italic;
 }
 
-span.commentLS::after {
+.commentLS::after {
     content: " [LS: " attr(data-comment) "]";
     text-decoration: none;
 }
 
-span.todoLS {
+.todoLS {
     color: var(--c_todo_ls);
     font-style: italic;
 }
 
-span.todoLS::before {
+.todoLS::before {
     content: "[TODO LS: ";
 }
 
-span.todoLS::after {
+.todoLS::after {
     content: "]";
 }
 

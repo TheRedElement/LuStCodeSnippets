@@ -105,54 +105,66 @@ end
     --------
 """
 function make_css(
-    theme::String="dark",
     indent::Int=4,
     )
     
     #default parameters
 
     begin #checks
-        @assert in(theme, ["dark","light"])
     end
 
     #read style
     style = JSON.parsefile("tre.json")
     
     #init css file
-    lines = [
-    ]
+    lines_root = []             #:root
+    lines_light = []            #light-mode
         
     begin #add global variables
-        push!(lines, ":root {")
-        
-        begin #colors
-            push!(lines, "$(' '^indent)/* colors */")
+        #:root
+        theme_root = "dark"
+        push!(lines_root, ":root {")
+        begin #colors (root)
+            push!(lines_root, "$(' '^indent)/* colors */")
             for color in keys(style["colors"])
                 if check_context(["all","css"], style["colors"][color]["context"])
-                    push!(lines, "$(' '^indent)--$(color): $(style["colors"][color][theme]);")
+                    push!(lines_root, "$(' '^indent)--$(color): $(style["colors"][color][theme_root]);")
                 end
             end
         end
         begin #fontsizes
-            push!(lines, "$(' '^indent)/* fontsizes */")
+            push!(lines_root, "$(' '^indent)/* fontsizes */")
             for fs in keys(style["fontsizes"])
                 if check_context(["all","css"], style["fontsizes"][fs]["context"])
-                    push!(lines, "$(' '^indent)--$(fs): $(style["fontsizes"][fs]["value"]);")
+                    push!(lines_root, "$(' '^indent)--$(fs): $(style["fontsizes"][fs]["value"]);")
                 end
             end
         end
-        push!(lines, "}\n")
+        push!(lines_root, "}\n")
+
+        #light
+        push!(lines_light, "body.tre-light {")
+        theme_light = "dark"
+        begin #colors (light)
+            push!(lines_light, "$(' '^indent)/* colors */")
+            for color in keys(style["colors"])
+                if check_context(["all","css"], style["colors"][color]["context"])
+                    push!(lines_light, "$(' '^indent)--$(color): $(style["colors"][color][theme_light]);")
+                end
+            end
+        end
+        push!(lines_light, "}\n")
     end
 
     #load template and add respective parts
     begin
         main_body = read(open("tre_template.css", "r"), String)
-        main_body = replace(main_body, ":root {\n}" => join(lines, "\n"))
-        main_body = replace(main_body, "\$(theme)" => theme)
+        main_body = replace(main_body, ":root {\n}" => join(lines_root, "\n"))
+        main_body = replace(main_body, "body.tre-light {\n}" => join(lines_light, "\n"))
     end
 
     #generate file
-    f = open("tre_$(theme).css", "w")
+    f = open("tre.css", "w")
     write(f, main_body)
     close(f)
 end
@@ -496,8 +508,8 @@ themes = ["dark", "light"]
 cycles = ["cycle", "batch"]
 make_latexcolors()
 make_matplotlib()
+make_css()
 for theme in themes
-    make_css(theme)
     for cycle in cycles
         make_plotly(theme, cycle)
     end
