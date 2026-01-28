@@ -525,16 +525,16 @@ tre-bib-hover {
 }
 tre-gls:hover tre-gls-hover,
 tre-cite:hover tre-bib-hover {
-    /* above element */
-    /* display: block;
     visibility: visible;
-    opacity: 0.95; */
+    opacity: 0.95;
+    /* above element */
+    display: block;
     /* always at the bottom */
     position: fixed;
     bottom: 5%;
     left: 50vw;
     transform: translateX(-47vw);
-    width: 90%;    
+    width: 90%;  
 }
 
 /* ################################################################## */
