@@ -11,6 +11,25 @@ from typing import List, Literal
 
 logger = logging.getLogger(__name__)
 #%%custom registered mpl elements
+#tre colormap
+jsonfile = pathlib.Path(__file__).parent / f"../_data/tre_matplotlib.json"  #to load file at runtime
+with open(jsonfile, "r", encoding='utf-8') as file:
+        
+        #read plain text for replacements
+        style = file.read()
+
+        #parse json to dict
+        style = json.loads(style)
+
+        cmap   = mcolors.LinearSegmentedColormap.from_list(name="tre", colors=style["colors"]["c_plot_cmap"]["dark"])
+        cmap_r = cmap.reversed()
+        mpl.colormaps.register(cmap, force=True)
+        mpl.colormaps.register(cmap_r, force=True)        
+        cmap   = mcolors.LinearSegmentedColormap.from_list(name="tre_light", colors=style["colors"]["c_plot_cmap"]["light"])
+        cmap_r = cmap.reversed()
+        mpl.colormaps.register(cmap, force=True)
+        mpl.colormaps.register(cmap_r, force=True)        
+
 #fink colormap
 if "fink" in plt.colormaps:
     logger.info("colormap `fink` was already registered ... overwriting existing")
@@ -123,7 +142,7 @@ def tre(
             style = json.loads(style)
 
     #returned values
-    cmap     = style["colors"]["c_plot_cmap"][theme] if cmap_override is None else cmap_override
+    cmap     = "tre" if cmap_override is None else cmap_override
     colorway = style["colors"]["c_plot_colorway"][theme] if colorway_override is None else colorway_override
     hatches  = style["hatches"][cycle]
     ls       = style["line"]["dash"][cycle][:len(colorway)]

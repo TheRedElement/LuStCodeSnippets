@@ -7,6 +7,24 @@ import plotly.io as pio
 import re
 from typing import List, Literal
 
+#%%custom elements
+#tre colorscale
+jsonfile = pathlib.Path(__file__).parent / f"../_data/tre_matplotlib.json"  #to load file at runtime
+with open(jsonfile, "r", encoding='utf-8') as file:
+    #read plain text for replacements
+    style = file.read()
+
+    #parse json to dict
+    style = json.loads(style)    
+    tre_colorscale = style["colors"]["c_plot_cmap"]["dark"]
+    tre_colorscale_light = style["colors"]["c_plot_cmap"]["light"]
+#fink colorscale
+fink_colorscale = [
+    [0.0, "#15284F"],
+    # [0.5, "#3C8DFF"],
+    [0.5, "#D5D5D3"],
+    [1.0, "#F5622E"],
+]
 #%%definitions
 def tre(theme:Literal["dark","light"]="dark", cycle:Literal["cycle","batch"]="cycle",
     colorway_override:List[str]=None, cmap_override:str=None,
@@ -124,7 +142,10 @@ def tre(theme:Literal["dark","light"]="dark", cycle:Literal["cycle","batch"]="cy
 
     #overrides for variations
     if colorway_override is not None: style["layout"]["colorway"] = colorway_override
-    if cmap_override is not None: style["layout"]["colorscale"]["sequential"] = cmap_override
+    if cmap_override is not None:
+        style["layout"]["colorscale"]["sequential"] = cmap_override
+        style["data"]["heatmap"][0]["colorscale"] = cmap_override
+        style["data"]["surface"][0]["colorscale"] = cmap_override
     themename = f"tre_{theme}_{cycle}" if themename_override is None else themename_override
 
     #returned values
@@ -263,20 +284,10 @@ def fink(theme:Literal["dark","light"]="dark", cycle:Literal["cycle","batch"]="c
     """    
     #override some colors
     if theme == "dark":
-        cmap        = [
-            [0.0, "#15284F"],
-            # [0.5, "#3C8DFF"],
-            [0.5, "#D5D5D3"],
-            [1.0, "#F5622E"],
-        ][::-1]
+        cmap        = fink_colorscale
         colorway    = ["#15284F", "#3C8DFF", "#D5D5D3", "#F5622E"][1:][::-1]*2
     elif theme == "light":
-        cmap        = [
-            [0.0, "#15284F"],
-            # [0.5, "#3C8DFF"],
-            [0.5, "#D5D5D3"],
-            [1.0, "#F5622E"],
-        ]
+        cmap        = fink_colorscale
         colorway    = ["#15284F", "#3C8DFF", "#D5D5D3", "#F5622E"]*2
     else:
         raise ValueError("invalid `theme`")

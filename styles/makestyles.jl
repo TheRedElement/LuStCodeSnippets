@@ -412,7 +412,17 @@ function make_plotly(
                     "error_x" => style["errorbars"]["error_x"],
                     "error_y" => style["errorbars"]["error_y"],
                 ) for i in range(1, min(length(style["line"]["dash"][cycle]),length(style["marker"]["symbol"][cycle])))
-            ],            
+            ],
+            "heatmap" => [
+                Dict(
+                    "colorscale" => style["colors"]["c_plot_cmap"][theme],
+                ),
+            ],
+            "surface" => [
+                Dict(
+                    "colorscale" => style["colors"]["c_plot_cmap"][theme],
+                ),
+            ],
         ),
         "layout" => Dict(
             #sorted alphabetically
@@ -425,11 +435,7 @@ function make_plotly(
             "colorscale" => Dict(   #not working in js
                 "sequential" => style["colors"]["c_plot_cmap"][theme],
                 "sequentialminus" => style["colors"]["c_plot_cmap"][theme],
-                "diverging" => [
-                    [0, "#000000"],
-                    [0.5, "#f7f7f7"],
-                    [1, "#b40426"]
-                ],
+                "diverging" => style["colors"]["c_plot_cmap"][theme],
             ),
             "colorway" => style["colors"]["c_plot_colorway"][theme],
             "font" => Dict(
