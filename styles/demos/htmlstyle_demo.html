@@ -1,91 +1,255 @@
 <!DOCTYPE html>
 <head>
-    <link rel="stylesheet" href="../tre_dark.css">
-    <link rel="stylesheet" href="../tre_light.css">
+    <link rel="stylesheet" href="../tre.css">
+    <!-- <link rel="stylesheet" href="../tre_light.css"> -->
     <style>
         /* overwrites */
         :root {
-            /* --c_bg: #444444 */
+            --c_primary1: #f8cfc9;      /* brand color; headers, links, key UI elements */
+            --c_secondary1: #374c4e;    /* support for primary; cards, highlights */
+            --c_secondary2: #2C4B53;    /* support for primary; cards, highlights */
+            --c_accent: #a10000;        /* used sparingly; call-to-action, buttons, alerts */
+            --c_neutral1: #162128;      /* backgrounds and text; white, black, gray */
+            --c_neutral2: #BBC8CE;      /* backgrounds and text; white, black, gray */
+            
+            --c_primary: var(--c_primary1);
+            /* --c_primary-hover: */
+            --c_bg: var(--c_neutral1);
+            --c_body_text: var(--c_neutral2);
+            /* --c_text-muted: */
+            /* --c_border: */
+            /* --c_success: */
+            /* --c_warning: */
+            /* --c_error: */
+        }
+        
+        html, body {
+            height: 100%;
+            width: 100%;
+        }
+        body {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            grid-template-rows: auto 1fr;
+            grid-template-areas: 
+                "author main"
+                "nav main"
+            ;
+            gap: 1%;
+            overflow-y: hidden;
+        }
+
+        aside {
+            grid-area: author;
+            height: auto;
+            background-color: var(--c_bg);
+            padding: 2%;
+        }
+        nav {
+            grid-area: nav;
+            height: 100%;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+        main {
+            display: grid;
+            max-height: 100%;
+            grid-template-rows: 1fr;
+            grid-area: main;
+            overflow-y: hidden;
+            /* outline: 3px solid red; */
+        }
+
+        .container {
+            display: grid;
+            max-height: auto;
+            padding: 2%;
+            grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+            grid-auto-rows: 1fr;
+            gap: 10px;
+            overflow-x: hidden;
+            overflow-y: scroll;
+            /* outline: 3px solid red; */
+        }
+        .card {
+            display: grid;
+            height: auto;
+            padding: 2%;
+            gap: 4px;
+            grid-template-columns: 1fr;
+            grid-auto-rows: max-content;
+            justify-content: center;
+            background-color: var(--c_secondary1);
+            color: var(--c_neutral2);
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px var(--c_neutral2);
+        }
+        .card:hover {
+            /* box-shadow: 0px 0px 20px 0px var(--c_neutral2); */
+            transform: translateY(-5px);
+        }
+        .card .card {
+            display: block;
+            width: auto;
+            background-color: var(--c_secondary2);
+            box-shadow: 0px 0px 5px 0px var(--c_neutral2);
+            transform: none;
+        }
+        .card h1 {
+            height: max-content;
+        }
+        a {
+            color: var(--c_primary1);
+        }
+        button {
+            width: 100%;
+            height: max-content;
+            background-color: var(--c_accent);
+        }
+        figure.icon {
+            /* background-color: #ffffff; */
+            filter: drop-shadow(0px 0px 5px #ffffff);
+        }
+        figure.icon img {
+            clip-path: circle(45%);
         }
     </style>
 </head>
 <body>
-    <h1>H1</h1>
-    <h2>H2</h2>
-    <h3>H3</h3>
-    <h4>H4</h4>
-    <p>
-        paragraph with some <a href=https://raw.githubusercontent.com/TheRedElement/LStein/9b1dec4615b561c89c397c9f4d3701dbfd129a37/gfx/lstein_logo.svg>link</a>.
-        Annotated text<span class="footnote" data-note="this is a footnote"></span>.
-        More annotated text<span class="footnote" data-note="another footnote"></span>.
-    </p>
-    <ul>
-        <li><span class="commentLS" data-comment="the comment">commented text</span></li>
-        <li><span class="todoLS">some ToDo</span></li>
-    </ul>
-    <figure>
-        <img src="https://raw.githubusercontent.com/TheRedElement/LStein/9b1dec4615b561c89c397c9f4d3701dbfd129a37/gfx/lstein_logo.svg" style="background-color: #000000ff;">
-        <figcaption>
-            caption.
-        </figcaption>
-    </figure>
-
-    <table>
-        <caption>table caption</caption>
-        <thead>
-            <th>Col1</th>
-            <th>Col2</th>
-            <th>Col3</th>
-        </thead>
-        <tbody>
-            <tr>
-            <td>C11</td>
-            <td>C12</td>
-            <td>C13</td>
-            </tr>
-            <tr>
-            <td>C21</td>
-            <td>C22</td>
-            <td>C23</td>
-            </tr>
-        </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="100">
-                table notes
-                </td>
-            </tr>
-        </tfoot>
-    </table>
-    
-    <blockquote>
-        Blockquote
-    </blockquote>
-    
-    <ul>
-        <li>item 1</li>
-        <ul>
-            <li>item 1.1</li>
-            <ul>
-                <li>item 1.1.1</li>
+    <aside id="author">
+        <address class="card">
+            <figure class="icon">
+                <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
+                    width="100%">
+            </figure>
+            <ul class="contact">
+                <li>email</li>
+                <li>website</li>
+                <li>youtube</li>
             </ul>
+        </address>
+    </aside>
+    <nav>
+        <ul>
+            <li>Page 1</li>
+            <li>Page 2</li>
+            <li>Page 3</li>
         </ul>
-    </ul>
-    <ol>
-        <li>item 1</li>
-        <ol>
-            <li>item 1.1</li>
-            <ol>
-                <li>item 1.1.1</li>
-                <li>item 1.1.2</li>
-            </ol>
-            <li>item 1.2</li>
-            <ol>
-                <li>item 1.2.1</li>
-                <li>item 1.2.2</li>
-            </ol>
-        </ol>
-        <li>item 2</li>
-    </ol>
-    
+    </nav>
+    <main>
+        <div class="container">
+            <article class="card">
+                <h1>Header</h1>
+                <div class="card">
+                    <p>
+                        paragraph with some <a href=https://raw.githubusercontent.com/TheRedElement/LStein/9b1dec4615b561c89c397c9f4d3701dbfd129a37/gfx/lstein_logo.svg>link</a>.
+                        Annotated text<span class="footnote" data-note="this is a footnote"></span>.
+                        More annotated text<span class="footnote" data-note="another footnote"></span>.
+                    </p>
+                    <p>
+                        Some paragraph 2 with a <a href="lukassteinwender.com">link</a>
+                        coianvoe vcianv vioavn ivcoanvoineovn cvia
+                        aiovnovne vianvopenv cvapvnpoien 
+                    </p>
+                </div>
+                <button>Button</button>
+            </article>
+            <article class="card">
+                <h1>Header</h1>
+                <div class="card">
+                    <table>
+                        <caption>table caption</caption>
+                        <thead>
+                            <th>Col1</th>
+                            <th>Col2</th>
+                            <th>Col3</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                            <td>C11</td>
+                            <td>C12</td>
+                            <td>C13</td>
+                            </tr>
+                            <tr>
+                            <td>C21</td>
+                            <td>C22</td>
+                            <td>C23</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="100">
+                                table notes
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <button>Button</button>
+            </article>
+            <article class="card">
+                <h1>Header</h1>
+                <div class="card">
+                    <ul>
+                        <li><span class="commentLS" data-comment="the comment">commented text</span></li>
+                        <li><span class="todoLS">some ToDo</span></li>
+                    </ul>
+                </div>
+                <button>Button</button>
+            </article>
+            <article class="card">
+                <h1>Header</h1>
+                <div class="card">
+                    <figure>
+                        <img src="https://raw.githubusercontent.com/TheRedElement/LStein/9b1dec4615b561c89c397c9f4d3701dbfd129a37/gfx/lstein_logo.svg" style="background-color: #000000ff;">
+                        <figcaption>
+                            caption.
+                        </figcaption>
+                    </figure>
+                </div>
+                <button>Button</button>
+            </article>
+            <article class="card">
+                <h1>H1</h1>
+                <h2>H2</h2>
+                <h3>H3</h3>
+                <h4>H4</h4>
+            </article>
+            <article class="card">
+                <blockquote>
+                    Blockquote
+                </blockquote>
+            </article>
+            <article class="card">
+                <ul>
+                    <li>item 1</li>
+                    <ul>
+                        <li>item 1.1</li>
+                        <ul>
+                            <li>item 1.1.1</li>
+                        </ul>
+                    </ul>
+                </ul>
+            </article>
+            <article class="card">
+                <ol>
+                    <li>item 1</li>
+                    <ol>
+                        <li>item 1.1</li>
+                        <ol>
+                            <li>item 1.1.1</li>
+                            <li>item 1.1.2</li>
+                        </ol>
+                        <li>item 1.2</li>
+                        <ol>
+                            <li>item 1.2.1</li>
+                            <li>item 1.2.2</li>
+                        </ol>
+                    </ol>
+                    <li>item 2</li>
+                </ol>
+            </article>
+        </div>
+    </main>
 </body>
