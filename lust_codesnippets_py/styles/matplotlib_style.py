@@ -196,10 +196,10 @@ def tre(
 
     ##marker and line defaults
     plt.rcParams["errorbar.capsize"]        = max(style["errorbars"]["error_x"]["width"], style["errorbars"]["error_y"]["width"])
-    plt.rcParams["lines.linewidth"]         = style["line"]["width"]
+    plt.rcParams["lines.linewidth"]         = style["line"]["matplotlib"]["width"]
     plt.rcParams["lines.linestyle"]         = style["line"]["dash"][cycle][0]
-    plt.rcParams["lines.markersize"]        = style["marker"]["size"]
-    plt.rcParams["patch.linewidth"]         = style["line"]["width"]
+    plt.rcParams["lines.markersize"]        = style["marker"]["matplotlib"]["size"]
+    plt.rcParams["patch.linewidth"]         = style["line"]["matplotlib"]["width"]
     plt.rcParams["scatter.marker"]          = style["marker"]["symbol"][cycle][0]
 
     ##legend
@@ -211,20 +211,22 @@ def tre(
     plt.rcParams["savefig.dpi"]             = 180
 
     ##colors
-    plt.rcParams["figure.facecolor"]        = style["colors"]["c_bg"][theme]
     plt.rcParams["axes.facecolor"]          = style["colors"]["c_plot_pane"][theme]
-    plt.rcParams["text.color"]              = style["colors"]["c_body_text"][theme]
-    plt.rcParams["xtick.color"]             = style["colors"]["c_body_text"][theme]
-    plt.rcParams["ytick.color"]             = style["colors"]["c_body_text"][theme]
     plt.rcParams["axes.labelcolor"]         = style["colors"]["c_body_text"][theme]
-    plt.rcParams["axes.edgecolor"]          = style["colors"]["c_body_text"][theme]
-    plt.rcParams["legend.facecolor"]        = style["colors"]["c_plot_legendbg"][theme]
-    plt.rcParams["legend.edgecolor"]        = style["colors"]["c_plot_legendborder"][theme]
     plt.rcParams["axes.prop_cycle"]         = prop_cycle
-    plt.rcParams["image.cmap"]              = cmap
+    plt.rcParams["axes.edgecolor"]          = style["colors"]["c_body_text"][theme]
     plt.rcParams["axes3d.xaxis.panecolor"]  = style["colors"]["c_plot_pane"][theme]
     plt.rcParams["axes3d.yaxis.panecolor"]  = style["colors"]["c_plot_pane"][theme]
     plt.rcParams["axes3d.zaxis.panecolor"]  = style["colors"]["c_plot_pane"][theme]
+    plt.rcParams["figure.facecolor"]        = style["colors"]["c_bg"][theme]
+    plt.rcParams["image.cmap"]              = cmap
+    plt.rcParams["legend.facecolor"]        = style["colors"]["c_plot_legendbg"][theme]
+    plt.rcParams["legend.edgecolor"]        = style["colors"]["c_plot_legendborder"][theme]
+    plt.rcParams["scatter.edgecolors"]      = "none"
+    plt.rcParams["text.color"]              = style["colors"]["c_body_text"][theme]
+    plt.rcParams["xtick.color"]             = style["colors"]["c_body_text"][theme]
+    plt.rcParams["ytick.color"]             = style["colors"]["c_body_text"][theme]
+
 
     return colorway, ls, markers, cmap, hatches
 

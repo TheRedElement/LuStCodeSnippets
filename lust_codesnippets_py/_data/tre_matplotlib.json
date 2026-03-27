@@ -22,10 +22,18 @@
             ]
         },
         "line": {
-            "schema": "follow the plotly schema (add additional entries if necessary)"
+            "schema": "follow the plotly schema (add additional entries if necessary)",
+            "notes": [
+                "to override the plotly-default, add an additional `key: dict` pair (i.e., `'matplotlib': {'width':5}`)",
+                "overrides are always the last few entries of the parent dict"
+            ]
         },
         "marker": {
-            "schema": "follow the plotly schema (add additional entries if necessary)"
+            "schema": "follow the plotly schema (add additional entries if necessary)",
+            "notes": [
+                "to override the plotly-default, add an additional `key: dict` pair (i.e., `'matplotlib': {'width':5}`)",
+                "overrides are always the last few entries of the parent dict"
+            ]
         }
     },
     "axes": {
@@ -719,7 +727,10 @@
             ],
             "special": "solid"
         },
-        "width": 5
+        "width": 5,
+        "matplotlib": {
+            "width": 3
+        }
     },
     "marker": {
         "size": 15,
@@ -761,6 +772,9 @@
                 "v"
             ],
             "special": "*"
+        },
+        "matplotlib": {
+            "size": 8
         }
     }
 }
