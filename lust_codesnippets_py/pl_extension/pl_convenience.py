@@ -170,64 +170,65 @@ def get_edges(
     unique:bool=True,
     lb:float=-np.inf, ub:float=+np.inf,
     ) -> np.ndarray:
-    """
-        - function to generate edges from a `pl.Categorical` column
-        - will extract edges by
-            - splitting labels with `","` as separator
-            - stripping parentheses (`"(",")","[","]")`
-            - converting numbers to `np.float64`
+    """returns edges for a `pl.Categorical` column
 
-        Parameters
-        ----------
-            - `s`
-                - `pl.Series`
-                - input series to extract edges of
-                - has to be of dtype `pl.Categorical`
-                - has to have been generated from one of
-                    - `pl.Expr().cut()` with default labels
-                    - `plc.cut()`
-            - `unique`
-                - `bool`, optional
-                - whether to return the unique edges
-                - useful for aggregated columns/statistics
-                - the default is `True`
-                    - returns unique edges
-            - `lb`
-                - `float`, optional
-                - lower bound to use instead of `-np.inf`
-                - the default is `-np.inf`
-                    - no change in the lower bound
-            - `ub`
-                - `float`, optional
-                - upper bound to use instead of `np.inf`
-                - the default is `np.inf`
-                    - no change in the upper bound
+    - function to generate edges from a `pl.Categorical` column
+    - will extract edges by
+        - splitting labels with `","` as separator
+        - stripping parentheses (`"(",")","[","]")`
+        - converting numbers to `np.float64`
+    - especially useful in combination with
+        - `plc.cut()`
+        - `pl.Expr.cut()` (with default labels)
+        - `plt.stairs()`
+    - empty bins will lead to a wrong number of edges!
+    - you might have to remove `None` values of `s` before applying `get_edges()`
 
-        Raises
-        ------
-            - `AssertionError`
-                - if `s` has a wrong dtype
+    Parameters
+        - `s`
+            - `pl.Series`
+            - input series to extract edges of
+            - has to be of dtype `pl.Categorical`
+            - has to have been generated from one of
+                - `pl.Expr().cut()` with default labels
+                - `plc.cut()`
+        - `unique`
+            - `bool`, optional
+            - whether to return the unique edges
+            - useful for aggregated columns/statistics
+            - the default is `True`
+                - returns unique edges
+        - `lb`
+            - `float`, optional
+            - lower bound to use instead of `-np.inf`
+            - the default is `-np.inf`
+                - no change in the lower bound
+        - `ub`
+            - `float`, optional
+            - upper bound to use instead of `np.inf`
+            - the default is `np.inf`
+                - no change in the upper bound
 
-        Returns
-        -------
-            - `edges`
-                - `np.ndarray`
-                - edges associated with `s`
+    Raises
+        - `AssertionError`
+            - if `s` has a wrong dtype
+            - is `s` contains `None`
+                - will lead to issues when concatenating edges
 
-        Dependencies
-        ------------
-            - `numpy`
-            - `polars`
-            - `re`
+    Returns
+        - `edges`
+            - `np.ndarray`
+            - edges associated with `s`
 
-        Comments
-        --------
-            - especially useful in combination with `plt.stairs()`
-            - empty bins will lead to a wrong number of edges!
+    Dependencies
+        - `numpy`
+        - `polars`
+        - `re`
     """
     
     #cehcks
     assert s.dtype==pl.Categorical, "`s` has to be a `pl.Categorical` column resulting from `plc.cut()` or `pl.Expr.cut()` (with default labels)"
+    assert s.null_count() == 0, "remove all `None` values in `s` before applying `plc.get_edges()` (call `s.drop_nulls()`)"
 
     #split labels to obtain edges
     edges = np.concatenate(s
