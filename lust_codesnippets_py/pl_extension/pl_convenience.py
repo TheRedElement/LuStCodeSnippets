@@ -151,6 +151,7 @@ def cut(
                 - `bool`, optional
                 - whether to include empty bins
                     - will be included as rows filled with `None` besides column with name `alias`
+                - only works if `df` is a `pl.DataFrame`
                 - the default is `False`
                     - will drop bins that are empty
             - `**cut_kwargs`
@@ -174,6 +175,8 @@ def cut(
         --------
     """
 
+    #checks
+
     #default parameters
     if isinstance(col, str): col = pl.col(col)
     if isinstance(breaks, int): breaks = np.linspace(df.select(col).to_numpy().min(), df.select(col).to_numpy().max(), breaks)  #generate `breaks` breaks spanning the range of `col`
@@ -196,9 +199,12 @@ def cut(
     )
 
     #add missing labels if requested
-    if (len(labs) != len(df_cut[alias].unique()))  & include_empty:
-        missing = set(labs) ^ set(df_cut[alias].unique())
-        df_cut = append(df_cut, pl.DataFrame(data=[m for m in missing], schema={alias:pl.Categorical}))
+    if include_empty:
+        assert isinstance(df, pl.DataFrame), "`df` has to be a `pl.DataFrame` if `include_empty == True`"
+
+        if (len(labs) != len(df_cut[alias].unique())):
+            missing = set(labs) ^ set(df_cut[alias].unique())
+            df_cut = append(df_cut, pl.DataFrame(data=[m for m in missing], schema={alias:pl.Categorical}))
 
     return df_cut
 
