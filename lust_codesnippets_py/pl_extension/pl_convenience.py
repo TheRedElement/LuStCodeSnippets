@@ -71,6 +71,43 @@ def append(
     df = pl.concat([df1,df2])
     return df
 
+def columns(
+    df:Union[pl.DataFrame,pl.LazyFrame],
+    sort:bool=True
+    ) -> List[str]:
+    """returns columns of `df`
+
+    - convenience function to return columns no matter if `df` is a `pl.LazyFrame` or not
+
+    Parameters
+        - `df`
+            - `pl.DataFrame`, `pl.LazyFrame`
+            - the data frame to extract columns of
+        - `sort`
+            - `bool`, optional
+            - whether to sort the returned columns
+            - the default is `True`
+
+    Raises
+
+    Returns
+        - `cols`
+            - `List[str]`
+            - columns of `df`
+
+    Dependencies
+        - `polars`
+    """
+
+    if isinstance(df, pl.LazyFrame):
+        cols = df.collect_schema().names()
+    else:
+        cols = df.columns
+    
+    cols = sorted(cols) if sort else cols
+
+    return cols
+
 def cut(
     df:Union[pl.DataFrame,pl.LazyFrame],
     col:Union[pl.Expr,str], breaks:Union[List[float],int],
