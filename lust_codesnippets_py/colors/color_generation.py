@@ -10,6 +10,7 @@ Classes
 
 Functions
     - `generate_categorical_cmap()` -- generates a custom (categorical) colormap
+    - `generate_colors()` -- generates a custom (categorical) colormap
 
 Other Objects
 """

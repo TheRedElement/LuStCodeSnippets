@@ -28,7 +28,11 @@ To do so, navigate inside the directory of where you cloned this submodule to an
 
 ## TODO
 - [LuStCodeSnippets_sh](./LuStCodeSnippets_sh/)
-    - [ ] update docstrings to enable calling `--help` 
+    - [ ] update docstrings to enable calling `--help`
+- [matplotlib_extension/corner.py](./lust_codesnippets_py/matplotlib_extension/corner.py)
+    - [ ] add tutorial
+- [/colors/](./lust_codesnippets_py/colors/)
+    - [ ] add tutorials
 
 ## Project Workflow
 * uses `dev-feature` workflow (my simplification of `GitHub Flow`)
