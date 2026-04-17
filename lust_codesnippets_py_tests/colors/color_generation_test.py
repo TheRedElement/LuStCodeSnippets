@@ -80,7 +80,7 @@ class Test_generate_colors:
     #assert
     def test_output(self, action):
         colors, colors_true = action
-        assert True
+        assert np.all(colors == colors_true)
 
     def test_outshape(self, action):
         colors, colors_true = action
