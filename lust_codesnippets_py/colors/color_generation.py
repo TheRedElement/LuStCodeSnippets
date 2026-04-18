@@ -149,4 +149,5 @@ def generate_colors(
     divnorm = mcolors.TwoSlopeNorm(vmin=vmin, vcenter=vcenter, vmax=vmax)
     colors = plt.get_cmap(cmap, ncolors)
     colors = colors(divnorm(np.unique(classes_int)))
+    colors = [mcolors.rgb2hex(c) for c in colors]   #convert to hex
     return colors
