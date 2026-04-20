@@ -52,21 +52,9 @@ class Test_generate_colors:
     
     @pytest.fixture(
         params=[
-            ([0,1,2,3,4], None, None, None, "plasma", np.array([[0.050383, 0.029803, 0.527975, 1.      ],
-                [0.494877, 0.01199 , 0.657865, 1.      ],
-                [0.798216, 0.280197, 0.469538, 1.      ],
-                [0.973416, 0.585761, 0.25154 , 1.      ],
-                [0.940015, 0.975158, 0.131326, 1.      ]])
-            ),
-            ([0,0,1,3,3], 1, 5, 2, "plasma", np.array([[0.050383, 0.029803, 0.527975, 1.      ],
-                [0.050383, 0.029803, 0.527975, 1.      ],
-                [0.798216, 0.280197, 0.469538, 1.      ]])
-            ),
-            (4, None, None, None, "plasma", np.array([[0.050383, 0.029803, 0.527975, 1.      ],
-                [0.050383, 0.029803, 0.527975, 1.      ],
-                [0.050383, 0.029803, 0.527975, 1.      ],
-                [0.050383, 0.029803, 0.527975, 1.      ]])
-            ),
+            ([0,1,2,3,4], None, None, None, "plasma", ['#0d0887', '#7e03a8', '#cc4778', '#f89540', '#f0f921']),
+            ([0,0,1,3,3], 1, 5, 2, "plasma", ['#0d0887', '#0d0887', '#cc4778']),
+            (4, None, None, None, "plasma", ['#0d0887', '#0d0887', '#0d0887', '#0d0887']),
         ]
     )
     def action(self, request):
@@ -80,13 +68,13 @@ class Test_generate_colors:
     #assert
     def test_output(self, action):
         colors, colors_true = action
-        assert np.all(colors == colors_true)
+        assert colors == colors_true
 
     def test_outshape(self, action):
         colors, colors_true = action
-        assert colors.shape[1] == 4
+        assert np.all(isinstance(c, str) for c in colors)
 
     def test_outtypes(self, action):
         colors, colors_true = action
-        assert isinstance(colors, (np.ndarray))
+        assert isinstance(colors, (list))
 

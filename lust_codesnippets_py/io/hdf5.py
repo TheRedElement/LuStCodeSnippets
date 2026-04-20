@@ -1,37 +1,41 @@
+"""routines for interactions with `hdf5` files
 
+Exceptions
+
+Classes
+
+Functions
+    - `tree()` -- prints `hdf5` file structure in tree-format 
+
+Other Objects
+"""
 #%%imports
 import h5py
 from typing import Union
 
 #%%definitions
 def tree(f:Union[h5py.File,str]):
-    """
-        - function to print the tree of a hdf5 file
-        - can only deal with hdf5 files of following structure
-            - file[groups][datasets]
+    """prints structure of `f` in tree-format
 
-        Parameters
-        ----------
-            - `f`
-                - `h5py.File`, `str`
-                - file to show the tree of
-                - if `h5py.File`
-                    will use that file
-                - if `str`
-                    - will attempt to open the file, display the tree and close the file
-        
-        Raises
-        ------
+    - function to print the tree of a hdf5 file
+    - can only deal with hdf5 files of following structure
+        - file[groups][datasets]
 
-        Returns
-        -------
+    Parameters
+        - `f`
+            - `h5py.File`, `str`
+            - file to show the tree of
+            - if `h5py.File`
+                will use that file
+            - if `str`
+                - will attempt to open the file, display the tree and close the file
+    
+    Raises
 
-        Dependencies
-        ------------
-            - `h5py`
-        
-        Comments
-        --------
+    Returns
+
+    Dependencies
+        - `h5py`
 
     """
     #open file if necessary
