@@ -1,4 +1,4 @@
-"""routines for table rading and creation
+"""routines for table reading and creation
 
 Exceptions
 
