@@ -36,6 +36,7 @@ publish_latex () {
             - `outdir`
                 - str, kwarg, optional
                 - output directory to use for the publishable version
+                - has to end in a slash (`/`)
                 - the default is `outdir=submission/`
         
         Example
@@ -80,7 +81,6 @@ publish_latex () {
             "${infile} ${outfile}" \
             "outdir=${kwargs[outdir]}"
 
-
         #extract figures
         ##get all `\includegraphics[...]{...}` with contents`
         ##extract contents from `{...}`
@@ -95,33 +95,31 @@ publish_latex () {
         # printf "%s\n" "${figures[@]}"
 
         #init submission directory
-        mkdir -p ${outdir};
-
-
+        mkdir -p ${kwargs[outdir]};
 
         #init submittable file
-        cp "${infile}.tex" "${outdir}${outfile}.tex";
+        cp "${infile}.tex" "${kwargs[outdir]}${outfile}.tex";
 
         #include bib-refs
-        cp bib-refs.bib "${outdir}/bib-refs.bib"
-        cp elsarticle-harv.bst "${outdir}/elsarticle-harv.bst"
+        cp bib-refs.bib "${kwargs[outdir]}/bib-refs.bib"
+        cp elsarticle-harv.bst "${kwargs[outdir]}/elsarticle-harv.bst"
 
         #include glossary
-        sed -i '/\input{glossary}/r glossary.tex' "${outdir}${outfile}.tex";
-        sed -i -E '/\\input\{glossary\}/d' "${outdir}${outfile}.tex";
+        sed -i '/\input{glossary}/r glossary.tex' "${kwargs[outdir]}${outfile}.tex";
+        sed -i -E '/\\input\{glossary\}/d' "${kwargs[outdir]}${outfile}.tex";
 
         #remove all comments
-        sed -i -E '/^\s*%/d' "${outdir}${outfile}.tex";                 #deletes commented lines (also indented ones)
-        sed -i -E 's/(^|[^\\])%.*$/\1/' "${outdir}${outfile}.tex";      #deletes line from (non-escaped) comment symbol onward #`\1` adds back matched prefix to not delete that character
+        sed -i -E '/^\s*%/d' "${kwargs[outdir]}${outfile}.tex";                 #deletes commented lines (also indented ones)
+        sed -i -E 's/(^|[^\\])%.*$/\1/' "${kwargs[outdir]}${outfile}.tex";      #deletes line from (non-escaped) comment symbol onward #`\1` adds back matched prefix to not delete that character
 
         #rename figures
         for ((i=0; i<${#figures}; i++)); do
-            cp "gfx/${figures[i]}" "./${outdir}/fig$((i+0))_${figures[i]}";
-            sed -i -E "s/gfx\/${figures[i]}/fig$((i+0))_${figures[i]}/" "${outdir}${outfile}.tex";
+            cp "gfx/${figures[i]}" "./${kwargs[outdir]}/fig$((i+0))_${figures[i]}";
+            sed -i -E "s/gfx\/${figures[i]}/fig$((i+0))_${figures[i]}/" "${kwargs[outdir]}${outfile}.tex";
         done
 
         #only operate in outdir (do not touch original directory)
-        cd ${outdir}
+        cd "${kwargs[outdir]}"
 
         #compile (4x to ensure `autonum`, `cleveref`, etc. resolve correctly)
         pdflatex -interaction=nonstopmode "${outfile}.tex"  #1st pass (creates `.aux` for bibtex + glossary files)
@@ -143,5 +141,4 @@ publish_latex () {
         cd -
 
     fi
-
 }
