@@ -19,12 +19,12 @@ publish_latex () {
             - remove unnecessary auxiliary files
             - zip the contents of `${outdir}` to have an archive for publication
 
-        
+
         Usage
         ```bash
         publish_latex <infile> <outfile> [outdir=<outdir>]
         ```
-        
+
         Parameters
             - `infile`
                 - str
@@ -38,15 +38,15 @@ publish_latex () {
                 - output directory to use for the publishable version
                 - has to end in a slash (`/`)
                 - the default is `outdir=submission/`
-        
+
         Example
         ```bash
         publish_latex LStein Steinwender2026_LStein outdir=submission/
         ```
-        
+
         Output
         ```bash
-        ```    
+        ```
     '
 
     ################
@@ -128,17 +128,23 @@ publish_latex () {
         pdflatex -interaction=nonstopmode "${outfile}.tex"  #2nd pass (incorporates bibliography + glossary)
         pdflatex -interaction=nonstopmode "${outfile}.tex"  #3rd pass (fix cross-references, cleveref, etc.)
 
-        #remove unnecessary auxiliary files
-        # rm -f *.acn *.acr *.alg *.aux *.bbl *.bcf *.blg *.glg *.glo *.gls *.ist *.log *.out *.spl *.toc
-        rm -f *.acn *.acr *.alg *.aux *.bcf *.blg *.fdb_latexmk *.fls *.glg *.glo *.gls *.ist *.log *.out *.spl *.toc     #keep `.bbl` for arxiv
-        # rm -f "${outfile}.pdf"      #for arxiv
 
+                #remove unnecessary auxiliary files
+        # rm -f *.bbl
+        rm -f *.acn *.acr *.alg *.aux *.bcf *.blg *.fdb_latexmk *.fls *.glg *.glo *.gls *.ist *.log *.out *.spl *.toc     #keep `.bbl` for arxiv
+
+        #for journal
+        #-----------
         #zip latex source
         rm "${outfile}_LatexSource.zip"
-        zip -r "${outfile}_LatexSource" .
+        zip -r "${outfile}_LatexSource" *.bib *.bst *.tex fig*_*.*
+
+        #for arxiv
+        #---------
+        rm ax.tar
+        tar -cvvf ax.tar *.tex *.bst *.bbl fig*_*.*  #compress for upload to arxiv (only upload files that are necessary for compilation)
 
         #go back to previous directory
         cd -
-
     fi
 }
