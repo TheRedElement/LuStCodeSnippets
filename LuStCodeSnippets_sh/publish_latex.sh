@@ -1,5 +1,4 @@
 #!/bin/bash
-
 #%%definitions
 publish_latex () {
 
@@ -102,7 +101,10 @@ publish_latex () {
 
         #include bib-refs
         cp bib-refs.bib "${kwargs[outdir]}/bib-refs.bib"
-        cp elsarticle-harv.bst "${kwargs[outdir]}/elsarticle-harv.bst"
+        cp *.bst "${kwargs[outdir]}/"
+
+        #include latex class
+        cp *.cls "${kwargs[outdir]}/"
 
         #include glossary
         sed -i '/\input{glossary}/r glossary.tex' "${kwargs[outdir]}${outfile}.tex";
@@ -137,12 +139,12 @@ publish_latex () {
         #-----------
         #zip latex source
         rm "${outfile}_LatexSource.zip"
-        zip -r "${outfile}_LatexSource" *.bib *.bst *.tex fig*_*.*
+        zip -r "${outfile}_LatexSource" *.bib *.bst *.cls *.tex fig*_*.*
 
         #for arxiv
         #---------
         rm ax.tar
-        tar -cvvf ax.tar *.tex *.bst *.bbl fig*_*.*  #compress for upload to arxiv (only upload files that are necessary for compilation)
+        tar -cvvf ax.tar *.tex *.bst *.bbl *.cls fig*_*.*  #compress for upload to arxiv (only upload files that are necessary for compilation)
 
         #go back to previous directory
         cd -
