@@ -57,13 +57,13 @@ def generate_categorical_cmap(
 
     #create custom color map
 
-    #divide 
+    #divide
     npercolor = res//(len(colors))
 
     #template colormap
     viridis = plt.get_cmap("viridis", res)
     custom_colors = viridis(np.linspace(0, 1, res))
-    
+
     #adjust colors
     for idx, c in enumerate(colors):
         #convert to RGBA tuple if named color is passed
@@ -75,7 +75,7 @@ def generate_categorical_cmap(
     return cmap
 
 def generate_colors(
-    classes:Union[int,list,np.ndarray], 
+    classes:Union[int,list,np.ndarray],
     vmin:float=None, vmax:float=None, vcenter:float=None,
     cmap:Union[str,mcolors.Colormap]="plasma"
     ) -> np.ndarray:
@@ -143,7 +143,7 @@ def generate_colors(
             vmax = np.unique(classes).shape[0]
     if vcenter is None:
         vcenter = (vmin+vmax)/2
-    ncolors = np.unique(classes).shape[0]
+    ncolors = np.unique(classes_int).shape[0]
 
     #generate colors
     divnorm = mcolors.TwoSlopeNorm(vmin=vmin, vcenter=vcenter, vmax=vmax)

@@ -8,7 +8,7 @@ import numpy as np
 
 #%%tests
 class Test_generate_categorical_cmap:
-    
+
     @pytest.fixture(
         params=[
             (["r","g","b"], 5, np.array([[1. , 0. , 0. , 1. ],
@@ -49,12 +49,12 @@ class Test_generate_categorical_cmap:
 
 
 class Test_generate_colors:
-    
+
     @pytest.fixture(
         params=[
             ([0,1,2,3,4], None, None, None, "plasma", ['#0d0887', '#7e03a8', '#cc4778', '#f89540', '#f0f921']),
             ([0,0,1,3,3], 1, 5, 2, "plasma", ['#0d0887', '#0d0887', '#cc4778']),
-            (4, None, None, None, "plasma", ['#0d0887', '#0d0887', '#0d0887', '#0d0887']),
+            (4, None, None, None, "plasma", ['#0d0887', '#9c179e', '#ed7953', '#f0f921']),
         ]
     )
     def action(self, request):
