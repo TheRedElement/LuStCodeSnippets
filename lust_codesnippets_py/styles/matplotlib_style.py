@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 #tre colormap
 jsonfile = pathlib.Path(__file__).parent / f"../_data/tre_matplotlib.json"  #to load file at runtime
 with open(jsonfile, "r", encoding='utf-8') as file:
-        
+
         #read plain text for replacements
         style = file.read()
 
@@ -24,11 +24,11 @@ with open(jsonfile, "r", encoding='utf-8') as file:
         cmap   = mcolors.LinearSegmentedColormap.from_list(name="tre", colors=style["colors"]["c_plot_cmap"]["dark"])
         cmap_r = cmap.reversed()
         mpl.colormaps.register(cmap, force=True)
-        mpl.colormaps.register(cmap_r, force=True)        
+        mpl.colormaps.register(cmap_r, force=True)
         cmap   = mcolors.LinearSegmentedColormap.from_list(name="tre_light", colors=style["colors"]["c_plot_cmap"]["light"])
         cmap_r = cmap.reversed()
         mpl.colormaps.register(cmap, force=True)
-        mpl.colormaps.register(cmap_r, force=True)        
+        mpl.colormaps.register(cmap_r, force=True)
 
 #fink colormap
 if "fink" in plt.colormaps:
@@ -69,7 +69,7 @@ def tre(
                 - mode to use for cycling through linestyles, markers, hatches, etc.
                 - options are
                     - `"cycle"`
-                        - will cycle through the linestyles 
+                        - will cycle through the linestyles
                         - every line consecutive line, marker, hatch, etc. will have a unique style
                     - `"batch"`
                         - will batch similar linestyles together
@@ -95,7 +95,7 @@ def tre(
         Raises
         ------
             - `AssertionError`
-                - if some arguments don't comply with supported options 
+                - if some arguments don't comply with supported options
 
         Returns
         -------
@@ -119,7 +119,7 @@ def tre(
         ------------
             - `cycler`
             - `json`
-            - `matplotlib` 
+            - `matplotlib`
             - `pathlib`
             - `typing`
 
@@ -128,13 +128,13 @@ def tre(
     """
 
     #preliminary checks
-    assert theme in ["dark","light"], f"`theme` has to be one of `'dark'`, `'light'` but got {theme}" 
-    assert cycle in ["cycle","batch"], f"`cycle` has to be one of `'cycle'`, `'batch'` but got {cycle}" 
+    assert theme in ["dark","light"], f"`theme` has to be one of `'dark'`, `'light'` but got {theme}"
+    assert cycle in ["cycle","batch"], f"`cycle` has to be one of `'cycle'`, `'batch'` but got {cycle}"
 
     #load style from json
     jsonfile = pathlib.Path(__file__).parent / f"../_data/tre_matplotlib.json"  #to load file at runtime
     with open(jsonfile, "r", encoding='utf-8') as file:
-            
+
             #read plain text for replacements
             style = file.read()
 
@@ -183,10 +183,10 @@ def tre(
     spines = ["top","bottom","left","right"]
     for spine in spines:
         if spine in style["axes"]["xaxis"]["spines"]+style["axes"]["yaxis"]["spines"]:
-            plt.rcParams[f"axes.spines.{spine}"]   = True 
+            plt.rcParams[f"axes.spines.{spine}"]   = True
         else:
             plt.rcParams[f"axes.spines.{spine}"]   = False
-    
+
     plt.rcParams["grid.alpha"]              = mcolors.to_rgba(style["colors"]["c_plot_grid"][theme])[-1]
     plt.rcParams["grid.color"]              = style["colors"]["c_plot_grid"][theme]
     plt.rcParams["xtick.direction"]         = style["axes"]["xaxis"]["ticks"].replace("side", "")
@@ -248,7 +248,7 @@ def lust(theme:Literal["dark","light"]="dark", cycle:Literal["cycle","batch"]="c
                 - mode to use for cycling through linestyles, markers, hatches, etc.
                 - options are
                     - `"cycle"`
-                        - will cycle through the linestyles 
+                        - will cycle through the linestyles
                         - every line consecutive line, marker, hatch, etc. will have a unique style
                     - `"batch"`
                         - will batch similar linestyles together
@@ -286,14 +286,14 @@ def lust(theme:Literal["dark","light"]="dark", cycle:Literal["cycle","batch"]="c
     #override some colors
     if theme == "dark":
         cmap        = "hot_r"
-        colorway    = ["#A10000", "#FF7B00", "#51BFFF", "#CFC100", "#B500BB", "#009E69"]*2
+        colorway    = ["#A10000", "#51BFFF", "#FF7B00", "#B500BB", "#CFC100", "#009E69"]*2
     elif theme == "light":
         cmap        = "hot"
-        colorway    = ["#A10000", "#FF7B00", "#51BFFF", "#CFC100", "#B500BB", "#009E69"]*2
+        colorway    = ["#A10000", "#51BFFF", "#FF7B00", "#B500BB", "#CFC100", "#009E69"]*2
     else:
         raise ValueError("invalid `theme`")
-    
-    
+
+
     #use `tre` as template but override some settings
     colorway, ls, markers, cmap, hatches = tre(theme, cycle, colorway_override=colorway, cmap_override=cmap)
 
@@ -318,7 +318,7 @@ def fink(theme:Literal["dark","light"]="dark", cycle:Literal["cycle","batch"]="c
                 - mode to use for cycling through linestyles, markers, hatches, etc.
                 - options are
                     - `"cycle"`
-                        - will cycle through the linestyles 
+                        - will cycle through the linestyles
                         - every line consecutive line, marker, hatch, etc. will have a unique style
                     - `"batch"`
                         - will batch similar linestyles together
