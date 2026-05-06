@@ -285,10 +285,10 @@ def lust(theme:Literal["dark","light"]="dark", cycle:Literal["cycle","batch"]="c
 
     #override some colors
     if theme == "dark":
-        cmap        = "hot_r"
+        cmap        = "coolwarm_r"
         colorway    = ["#A10000", "#51BFFF", "#FF7B00", "#B500BB", "#CFC100", "#009E69"]*2
     elif theme == "light":
-        cmap        = "hot"
+        cmap        = "coolwarm"
         colorway    = ["#A10000", "#51BFFF", "#FF7B00", "#B500BB", "#CFC100", "#009E69"]*2
     else:
         raise ValueError("invalid `theme`")
