@@ -271,16 +271,16 @@
                 "matplotlib",
                 "julia"
             ],
-            "dark": "#FFFFFF1D",
-            "light": "#0000000f"
+            "dark": "#FFFFFF00",
+            "light": "#00000000"
         },
         "c_plot_legendborder": {
             "context": [
                 "matplotlib",
                 "julia"
             ],
-            "dark": "#FFFFFF1d",
-            "light": "#0000000f"
+            "dark": "#FFFFFF00",
+            "light": "#00000000"
         },
         "c_plot_grid": {
             "context": [
@@ -684,8 +684,13 @@
         "special": "star"
     },
     "legend": {
+        "borderwidth": 2,
         "itemwidth": 80,
-        "borderwidth": 2
+        "orientation": "h",
+        "x": 0.5,
+        "xanchor": "center",
+        "y": 1.05,
+        "yanchor": "bottom"
     },
     "line": {
         "dash": {

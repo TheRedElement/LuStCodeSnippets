@@ -639,9 +639,14 @@
             "t": 0
         },
         "legend": {
-            "bgcolor": "#FFFFFF1D",
-            "bordercolor": "#FFFFFF1d",
-            "itemwidth": 80
+            "itemwidth": 80,
+            "xanchor": "center",
+            "y": 1.05,
+            "yanchor": "bottom",
+            "x": 0.5,
+            "orientation": "h",
+            "bordercolor": "#FFFFFF00",
+            "bgcolor": "#FFFFFF00"
         }
     }
 }
