@@ -187,7 +187,7 @@ count_quota() {
             return 0
     fi
 
-    echo $"called count_inode" \
+    echo $"called count_quota" \
         "${args[@]}"
 
     for d in ${args[@]}; do
