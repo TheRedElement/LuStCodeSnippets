@@ -2,41 +2,36 @@
 
 agent_forwarding () {
     local help='
-        - function to setup agent forwarding whenever using ssh
+        sets up agent forwarding whenever using ssh
+
         - will make sure that the ssh keys below are forwarded to the remote server
+        - whenever ssh into some remote server call the following to use the forwarded ssh key
+        ```bash
+        ssh -A <user>@host
+        ```
+        - to test if the forwarding (for github) is setup correctly use
+        ```bash
+        ssh -A <user>@host ssh -T git@github.com
+        ```
 
         Usage
-        -----
             ```bash
         	agent_forwarding
         	```
 
         Parameters
-        ----------
 
         Example
-        -------
         	```bash
         	agent_forwarding
         	```
 
         Output
-        ------
         	```
         	Agent pid <some process id>
         	Identity added: <path/to/your/private/key>
         	```
 
-        Comments
-        --------
-        	- whenever ssh into some remote server call the following to use the forwarded ssh key
-        	```bash
-        	ssh -A <user>@host
-        	```
-        	- to test if the forwarding (for github) is setup correctly use
-        	```bash
-        	ssh -A <user>@host ssh -T git@github.com
-        	```
     '
 
     ################
@@ -59,15 +54,16 @@ agent_forwarding () {
     #default values for positional args
     if [[ "${args[0]}" == "--help" ]]; then
         echo "$help"
-    else
-        ###############
-        #FUNCTION BODY#
-        ###############
-
-        echo "Setting up agent forwarding for github"
-        eval "$(ssh-agent -s)"
-        ssh-add ~/.ssh/github	#forward github sshkey
+        return 0
     fi
+
+    ###############
+    #FUNCTION BODY#
+    ###############
+
+    echo "Setting up agent forwarding for github"
+    eval "$(ssh-agent -s)"
+    ssh-add ~/.ssh/github	#forward github sshkey
 }
 
 calc () {
@@ -75,13 +71,11 @@ calc () {
         - function to run calculations with precision point
 
         Usage
-        -----
             ```bash
         	calc "<mexpr>" "scale"
         	```
 
         Parameters
-        ----------
            - $1 (`mexpr`)
                - `expression`
                - math expression to evaluate
@@ -92,21 +86,16 @@ calc () {
         			- 2 decimals
 
         Example
-        -------
         	```bash
         	calc 3/5 2
             calc "1/(8*2)" 3
         	```
 
         Output
-        ------
         	```bash
         	.75
             .062
         	```
-
-        Comments
-        --------
     '
 
     ################
@@ -132,22 +121,22 @@ calc () {
 
     if [[ "${args[0]}" == "--help" ]]; then
         echo "$help"
-    else
-        ###############
-        #FUNCTION BODY#
-        ###############
-
-	    echo "scale=$scale; $mexpr" | bc
+        return 0
     fi
+    ###############
+    #FUNCTION BODY#
+    ###############
+
+    echo "scale=$scale; $mexpr" | bc
 }
 
-count_inode() {
+count_quota() {
     local help='
-        - function description
+        - displays quota information for a set of directories
 
         Usage
         ```bash
-        count_inode dir1 dir2 ...
+        count_quota dir1 dir2 ...
         ```
 
         Parameters
@@ -158,14 +147,14 @@ count_inode() {
 
         Example
         ```bash
-        count_inode .[a-z]*/    #counts all dot-directories
-        count_inode [^.]*/      #counts all non-dot-directories
+        count_quota.[a-z]*/    #counts all dot-directories
+        count_quota[^.]*/      #counts all non-dot-directories
         ```
 
         Output
         ```bash
-        dir1: <number of files>
-        dir2: <number of files>
+        dir1: <number of files>; <disk usage>
+        dir2: <number of files>; <disk usage>
         ...
         ```
     '
