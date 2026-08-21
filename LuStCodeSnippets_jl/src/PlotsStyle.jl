@@ -1,42 +1,21 @@
 """
 
-    defines styles for `Plots.jl`
+    defines custom styles for `Plots.jl`
 
 
-    Functions
-        - [`include_themes`](@ref) -- exposes custom themes to `Plots.jl` interface
+- resources
+    - https://docs.juliaplots.org/latest/api/
+    - https://docs.juliaplots.org/latest/generated/supported/
+- `clorant"rgba(...)"` is compatible across all backends!
+- prefer the functions over the themes
+    - gives you more freedom to customize quickly
 
-    Comments
-        - for the following themes `[:lust_light_mono,:lust_dark_mono,:tre_dark,:tre_light]`
-            - make sure to call `ls=mono_ls[i]` in line plots
-            - `i` is the index of the plotted series in order
-        - make sure to call `marker=markers_mono[i]` in scatter plots
-            - `i` is the index of the plotted series in order
-        - resources
-            - https://docs.juliaplots.org/latest/api/
-            - https://docs.juliaplots.org/latest/generated/supported/
-        - always use `clorant"rgba(...)"` when specifying new style
-            - other specifications are not compatible across all backends!
+Functions
+- [`tre`](@ref) -- TheRedElement base style
+- [`include_themes`](@ref) -- exposes custom themes to `Plots.jl` interface
 
-    Examples
-        - see [PlotStyleLuSt_demo.jl](./../demos/styles/PlotStyleLuSt_demo.jl)
-        - loading the styles
-```julia
-    using Plots
-    using LuStCodeSnippets_jl: PlotStyleLuSt
-    PlotStyleLuSt.include_themes()
-
-    #choose your theme
-    # theme(:lust_dark)
-    # theme(:lust_light)
-    # theme(:lust_light_mono)
-    # theme(:lust_dark_mono)
-    theme(:tre_dark)
-    # theme(:tre_light)
-```
-```julia
-
-```
+Examples
+- see [PlotsStyle.jl](../tutorials/PlotsStyle.jl)
 
 """
 module PlotsStyle
@@ -67,6 +46,71 @@ export include_themes
 const DATA_DIR = get_datapath()
 
 #%%definitions
+"""
+
+    function tre(;
+        theme::Symbol=:dark, cycle::Symbol=:cycle,
+        colorway_override::Union{Nothing,AbstractVector}=nothing,
+        cmap_override::Union{Nothing,AbstractMatrix,PlotUtils.ContinuousColorGradient,Symbol}=nothing,
+        )::Tuple{Vector,Vector{Symbol},Vector{Symbol},PlotUtils.ContinuousColorGradient,Vector{Symbol}}
+
+applies the TheRedElement base style to `Plots.jl` in the current session
+
+- used as template for other style variations
+- draws from `../_data/tre_PlotsJl.json` which is defined via `/styles/tre.json`
+
+# Arguments
+- `theme`
+    - the theme to use
+    - options are
+        - `:dark`
+        - `:light`
+- `cycle`
+    - mode to use for cycling through linestyles, markers, hatches, etc.
+    - options are
+        - `:cycle`
+            - will cycle through the linestyles
+            - every line consecutive line, marker, hatch, etc. will have a unique style
+        - `:batch`
+            - will batch similar linestyles together
+            - consecutive lines, markes, hatches, etc. will have the same style
+- `colorway_override`
+    - override of the default tre colorway (colorway = palette)
+    - vector elements have to be some valid form of `Plots.jl` color definition
+        - I recommend hex representation
+    - used to make quick customization to the coloration of a plot
+    - used in downstream style variations (i.e., `lust()`)
+- `cmap_override`
+    - override of the default tre cmap (cmap = colorscale)
+    - used to make quick customization to the coloration of a plot
+    - used in downstream style variations (i.e., `lust()`)
+
+See also
+- [`lust`](@ref)
+
+## Returns
+- `colorway`
+    - color palette used to cycle through when plotting
+- `ls`
+    - linestyles used to cycle through when plotting
+- `markers`
+    - markers used to cycle through when plotting
+- `cmap`
+    - colormap used in the style
+- `hatches`
+    - hatches used to cycle through when plotting
+
+# Extended help
+## Raises
+- `AssertionError`
+    - if some arguments don't comply with supported options
+
+## Dependencies
+- [`JSON`](@ref)
+- [`Logging`](@ref)
+- [`Plots`](@ref)
+- [`PlotUtils`](@ref)
+"""
 function tre(;
     theme::Symbol=:dark, cycle::Symbol=:cycle,
     colorway_override::Union{Nothing,AbstractVector}=nothing,
