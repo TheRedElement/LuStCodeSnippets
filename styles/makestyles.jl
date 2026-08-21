@@ -5,28 +5,22 @@ using JSON
 
 #%%definitions
 """
-    - function to convert `s` from snake_case to `camelCase`
+    snake2camel(
+        s::String
+        )::String
 
-    Parameters
-    ----------
-        - `s`
-            - `String`
-            - string to be converted
-    
-    Raises
-    ------
+converts `s` from snake_case to `camelCase`
 
-    Returns
-    -------
-        - `s_camel`
-            - `String`
-            - converted version of `s`
+# Arguments
+- `s`
+    - `String`
+    - string to be converted
 
-    Dependencies
-    ------------
+# Returns
+- `s_camel`
+    - `String`
+    - converted version of `s`
 
-    Comments
-    --------
 """
 function snake2camel(
     s::String
@@ -36,38 +30,35 @@ function snake2camel(
     s_camel = replace(s, (underscores.=>uppercase.(initials))...)
     return s_camel
 end
+"""converts hex to a julia rgb string"""
 function hex2rgba_string(hex)
     rgba = parse(RGBA, hex)
     return "rgba($(float(rgba.r)),$(float(rgba.g)),$(float(rgba.b)),$(float(rgba.alpha)))"
 end
 
 """
-    - function to check the context provided in the json style sheet
-    - used to filter for specific applications (i.e. get all colors relevant for css)
+    check_context(
+        contexts::Vector{String}, context_json::Vector{Any},
+        )::Bool
 
-    Parameters
-    ----------
-        - `contexts`
-            - `Vector{String}`
-            - the context to check for
-        - `context_json`
-            - `Vector{Any}`
-            - the context specified in the json style sheet
-    
-    Raises
-    ------
+checks the context provided in the json style sheet
 
-    Returns
-    -------
-        - `flag`
-            - `Bool`
-            - if any of the desired `contexts` are specified in the json style sheet
+- used to filter for specific applications (i.e. get all colors relevant for css)
 
-    Dependencies
-    ------------
+See also
+- [`make_css`](@ref)
+- [`make_latexcolors`](@ref)
 
-    Comments
-    --------
+# Arguments
+- `contexts`
+    - the context to check for
+- `context_json`
+    - the context specified in the json style sheet
+
+# Returns
+- `flag`
+    - `Bool`
+    - if any of the desired `contexts` are specified in the json style sheet
 """
 function check_context(
     contexts::Vector{String}, context_json::Vector{Any},
@@ -76,38 +67,30 @@ function check_context(
 end
 
 """
-    - function to generate a css style sheet from `./tre.json`
+    make_css(
+        indent::Int=4,
+        )
 
-    Parameters
-    ----------
-        - `theme`
-            - `String`, optional
-            - the theme to generate
-            - will be used to query color information from the `./tre.json`
-            - the default is `"dark"`
-        - `indent`
-            - `Int`, optional
-            - indentations to use in the generated style sheet
-            - the default is `4`
+generates a css style sheet from `./tre.json`
 
-    
-    Raises
-    ------
+# Arguments
+- `theme`
+    - the theme to generate
+    - will be used to query color information from the `./tre.json`
+- `indent`
+    - indentations to use in the generated style sheet
 
-    Returns
-    -------
 
-    Dependencies
-    ------------
-        - `JSON`
+# Extended help
 
-    Comments
-    --------
+## Dependencies
+- [`JSON.parsefile`](@ref)
+
 """
 function make_css(
     indent::Int=4,
     )
-    
+
     #default parameters
 
     begin #checks
@@ -115,11 +98,11 @@ function make_css(
 
     #read style
     style = JSON.parsefile("tre.json")
-    
+
     #init css file
     lines_root = []             #:root
     lines_light = []            #light-mode
-        
+
     begin #add global variables
         #:root
         theme_root = "dark"
@@ -170,36 +153,28 @@ function make_css(
 end
 
 """
-    - function to generate a latex style (.sty) sheet from `./tre.json`
+    make_latexcolors(
+        indent::Int=4,
+        )
 
-    Parameters
-    ----------
-        - `indent`
-            - `Int`, optional
-            - indentations to use in the generated style sheet
-            - the default is `4`
+generates a latex style (.sty) sheet from `./tre.json`
 
-    
-    Raises
-    ------
+# Arguments
+- `indent`
+    - indentations to use in the generated style sheet
 
-    Returns
-    -------
+# Extended help
 
-    Dependencies
-    ------------
-        - `JSON`
-
-    Comments
-    --------
+## Dependencies
+- [`JSON.parsefile`](@ref)
 """
 function make_latexcolors(
     indent::Int=4,
     )
-    
+
     #read style
     style = JSON.parsefile("tre.json")
-    
+
     begin #define file head
         head = """
         %Template by Steinwender Lukas
@@ -240,7 +215,7 @@ function make_latexcolors(
 
         %==============================================================
         \\ifthenelse{\\equal{\\usetheme}{light}}\
-        """        
+        """
     end
 
     #generate css file lines
@@ -267,39 +242,32 @@ function make_latexcolors(
         end
         push!(lines, "}")
     end
-    
+
     f = open("TRE.sty", "w")
     write(f, join(lines, "\n"))
     close(f)
 end
 
 """
-    - function to generate a plotly style sheet (.json) from `./tre.json`
+    make_matplotlib(
+        indent::Int=4,
+        )
 
-    Parameters
-    ----------
-        - `indent`
-            - `Int`, optional
-            - indentations to use in the generated style sheet
-            - the default is `4`
+generates a matplotib style sheet template (.json) from `./tre.json`
 
-    
-    Raises
-    ------
+- will generate files in several locations
+    - to make sure the style is accessible also from installed modules
+    - all files follow the naming convention tre_matplotlib.json
+    - essentially just copies of `./tre.json` but with substitutions to follow matplotlib naming conventions
 
-    Returns
-    -------
+# Arguments
+- `indent`
+    - indentations to use in the generated style sheet
 
-    Dependencies
-    ------------
-        - `JSON`
+# Extended help
 
-    Comments
-    --------
-        - will generate files in several locations
-            - to make sure the style is accessible also from installed modules
-            - all files follow the naming convention tre_matplotlib.json
-            - essentially just copies of `./tre.json` but with substitutions to follow matplotlib naming conventions
+## Dependencies
+- [`JSON.parsefile`](@ref)
 """
 function make_matplotlib(
     indent::Int=4,
@@ -309,8 +277,8 @@ function make_matplotlib(
 
     #modification to comply with matplotlib names
     style["line"]["dash"] = Dict(k => replace.(v,
-        r"^dash$"=>"dashed", 
-        r"^dot$"=>"dotted", 
+        r"^dash$"=>"dashed",
+        r"^dot$"=>"dotted",
         r"^dasheddotted$"=>"dashdotted",
         ) for (k,v) in style["line"]["dash"]
     )
@@ -327,7 +295,7 @@ function make_matplotlib(
     for location in [
             "./",                               #this directory for organization #this directory to be accessible for javascript
             "../lust_codesnippets_py/_data/"    #python package
-        ]    
+        ]
         open(joinpath(location, "./tre_matplotlib.json"), "w") do f
             JSON.print(f, style, indent)
         end
@@ -335,48 +303,39 @@ function make_matplotlib(
 end
 
 """
-    - function to generate a plotly style sheet (.json) from `./tre.json`
+    make_plotly(
+        theme::String="dark",
+        cycle::String="cycle",
+        indent::Int=4,
+        )
 
-    Parameters
-    ----------
-        - `theme`
-            - `String`, optional
-            - the theme to generate
-            - will be used to query color information from the `./tre.json`
-            - the default is `"dark"`    
-        - `cycle`
-            - `String`, optional
-            - mode to use for cycling through linestyles, markers, hatches, etc.
-            - options are
-                - `"cycle"`
-                    - will cycle through the linestyles 
-                    - every line consecutive line, marker, hatch, etc. will have a unique style
-                - `"batch"`
-                    - will batch similar linestyles together
-                    - consecutive lines, markes, hatches, etc. will have the same style
-            - the default is `"cycle"`
-        - `indent`
-            - `Int`, optional
-            - indentations to use in the generated style sheet
-            - the default is `4`
+generates a plotly style sheet (.json) from `./tre.json`
 
-    
-    Raises
-    ------
+- will generate files in several locations
+    - to make sure the style is accessible also from installed modules
+    - all files follow the naming convention tre_plotly_<theme>_<cycle>.json
+- generated style can be used with javascript and python
 
-    Returns
-    -------
+# Arguments
+- `theme`
+    - the theme to generate
+    - will be used to query color information from the `./tre.json`
+- `cycle`
+    - mode to use for cycling through linestyles, markers, hatches, etc.
+    - options are
+        - `"cycle"`
+            - will cycle through the linestyles
+            - every line consecutive line, marker, hatch, etc. will have a unique style
+        - `"batch"`
+            - will batch similar linestyles together
+            - consecutive lines, markes, hatches, etc. will have the same style
+- `indent`
+    - indentations to use in the generated style sheet
 
-    Dependencies
-    ------------
-        - `JSON`
+# Extended help
 
-    Comments
-    --------
-        - will generate files in several locations
-            - to make sure the style is accessible also from installed modules
-            - all files follow the naming convention tre_plotly_<theme>_<cycle>.json
-        - generated style can be used with javascript and python
+## Dependencies
+- [`JSON.parsefile`](@ref)
 """
 function make_plotly(
     theme::String="dark",
@@ -466,7 +425,7 @@ function make_plotly(
                     "ticks" => "inside",
                     "visible" => style["axes"]["xaxis"]["visible"],
                     "zeroline" => style["axes"]["xaxis"]["zeroline"],
-                ),                  
+                ),
             ),
             "width" => style["figure"]["width"],
             "xaxis" => Dict(
@@ -506,9 +465,46 @@ function make_plotly(
     for location in [
             "./",                               #this directory for organization #this directory to be accessible for javascript
             "../lust_codesnippets_py/_data/"    #python package
-        ]    
+        ]
         open(joinpath(location, "./tre_plotly_$(theme)_$(cycle).json"), "w") do f
             JSON.print(f, data, indent)
+        end
+    end
+end
+
+
+"""
+
+generates a `Plots.jl` style sheet template (.json) from `./tre.json`
+
+- will generate files in several locations
+    - to make sure the style is accessible also from installed modules
+    - all files follow the naming convention tre_PlotsJl.json
+    - essentially just copies of `./tre.json` but with substitutions to follow `Plots.jl` naming conventions
+
+# Arguments
+- `indent`
+    - indentations to use in the generated style sheet
+
+# Extended help
+
+## Dependencies
+- [`JSON.parsefile`](@ref)
+"""
+function make_julia_plots(
+    indent::Int=4,
+    )
+    #read style
+    style = JSON.parsefile("tre.json")
+
+
+    #save in style in locations where it is needed to be accessible upon module import
+    for location in [
+            "./",                               #this directory
+            "../LuStCodeSnippets_jl/_data/"     #julia package
+        ]
+        open(joinpath(location, "./tre_PlotsJl.json"), "w") do f
+            JSON.print(f, style, indent)
         end
     end
 end
@@ -517,9 +513,10 @@ end
 #%%main
 themes = ["dark", "light"]
 cycles = ["cycle", "batch"]
+make_css()
+make_julia_plots()
 make_latexcolors()
 make_matplotlib()
-make_css()
 for theme in themes
     for cycle in cycles
         make_plotly(theme, cycle)
