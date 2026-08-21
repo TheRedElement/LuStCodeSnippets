@@ -48,6 +48,7 @@ using JSON
 using Logging
 using Plots
 using PlotThemes
+using PlotUtils
 
 #import for extending
 
@@ -69,8 +70,8 @@ const DATA_DIR = get_datapath()
 function tre(;
     theme::Symbol=:dark, cycle::Symbol=:cycle,
     colorway_override::Union{Nothing,AbstractVector}=nothing,
-    cmap_override::Union{Nothing,AbstractMatrix}=nothing,
-    )
+    cmap_override::Union{Nothing,AbstractMatrix,PlotUtils.ContinuousColorGradient,Symbol}=nothing,
+    )::Tuple{Vector,Vector{Symbol},Vector{Symbol},PlotUtils.ContinuousColorGradient,Vector{Symbol}}
 
 
     @assert in(theme, [:dark,:light]) "`theme` has to be one of `:dark`, `:light` but got $(theme)"
@@ -79,13 +80,24 @@ function tre(;
     #load style from json
     style = JSON.parsefile(joinpath(DATA_DIR, "tre_PlotsJl.json"))
 
-    #returned values
-    cmap::Matrix{Any} = isnothing(cmap_override) ? hcat(style[:colors][:c_plot_cmap][theme]...) : cmap_override
-    cgrad_lcs = cgrad(cmap[2,:], cmap[1,:])
-    colorway::Vector{String} = isnothing(colorway_override) ? style[:colors][:c_plot_colorway][theme] : colorway_override
-    hatches = Symbol.(style[:hatches][cycle])
-    ls = Symbol.(style[:line][:dash][cycle][1:length(colorway)])
-    markers = Symbol.(style[:marker][:symbol][cycle])
+    begin #deal with overrides
+        if isnothing(cmap_override)
+            cmap = hcat(style[:colors][:c_plot_cmap][theme]...)
+            cgrad_lcs = cgrad(cmap[2,:], cmap[1,:])
+        elseif isa(cmap_override, Matrix)
+            cmap = cmap_override
+            cgrad_lcs = cgrad(cmap[2,:], cmap[1,:])
+        elseif isa(cmap_override, PlotUtils.ContinuousColorGradient)
+            cgrad_lcs = cmap_override
+        elseif isa(cmap_override, Symbol)
+            cgrad_lcs = cgrad(cmap_override)
+        end
+
+        colorway::Vector{String} = isnothing(colorway_override) ? style[:colors][:c_plot_colorway][theme] : colorway_override
+        hatches = Symbol.(style[:hatches][cycle])
+        ls = Symbol.(style[:line][:dash][cycle][1:length(colorway)])
+        markers = Symbol.(style[:marker][:symbol][cycle])
+    end
 
     @debug cgrad_lcs typeof(cgrad_lcs)
     @debug colorway typeof(colorway)
@@ -134,7 +146,6 @@ function tre(;
     end
     begin #series defaults
         default(
-            # marker=:auto,
             linewidth=2,
             markersize=4,
             markerstrokewidth=0,
@@ -163,14 +174,20 @@ function tre(;
         )
     end
 
-    return colorway, ls, markers, cmap, hatches
+    return colorway, ls, markers, cgrad_lcs, hatches
 end
 
 
+"""
 
+    exposes custom themes to `Plots.jl` interface
+"""
+function include_themes()
+    PlotThemes.add_theme(:tre_dark, _tre_dark)
+    PlotThemes.add_theme(:tre_light, _tre_light)
+end
 
-#######################################
-#custom styles
+#%%themes
 begin #specify layout, sizes, ...
     layout_specs = Dict([
         #fontsizes
@@ -233,12 +250,8 @@ begin #specify layout, sizes, ...
 end
 
 begin #tre_dark
-
     #add changes to `layout_specs`
     layout_specs_tre_dark = copy(layout_specs)
-    # layout_specs_tre_dark[:ls] = mono_ls
-    # layout_specs_tre_dark[:ls] = :auto
-    # layout_specs_tre_dark[:markershape] = markershape_mono
 
     const tre_dark_palette = [colorant"rgb(161,0,0)", mono_colors_dark[end:-1:1]...]
 
@@ -263,7 +276,6 @@ begin #tre_dark
 end
 
 begin #tre_light
-
     #add changes to `layout_specs`
     layout_specs_tre_light = copy(layout_specs)
     # layout_specs_tre_light[:ls] = mono_ls
@@ -293,15 +305,6 @@ begin #tre_light
     const _tre_light = PlotTheme(merge(color_scheme, layout_specs_tre_light))
 end
 
-
-"""
-
-    exposes custom themes to `Plots.jl` interface
-"""
-function include_themes()
-    PlotThemes.add_theme(:tre_dark, _tre_dark)
-    PlotThemes.add_theme(:tre_light, _tre_light)
-end
 
 end #module
 

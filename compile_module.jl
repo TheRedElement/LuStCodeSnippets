@@ -4,7 +4,7 @@ using TOML
 using UUIDs
 
 #add missing packages
-# Pkg.add("Logging")
+Pkg.add("PlotUtils")
 
 #module
 include("./LuStCodeSnippets_jl/src/LuStCodeSnippets.jl")
