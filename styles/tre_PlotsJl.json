@@ -743,20 +743,20 @@
             "cycle": [
                 "circle",
                 "square",
-                "triangle-up",
-                "triangle-down",
+                "utriangle",
+                "dtriangle",
                 "circle",
                 "square",
-                "triangle-up",
-                "triangle-down",
+                "utriangle",
+                "dtriangle",
                 "circle",
                 "square",
-                "triangle-up",
-                "triangle-down",
+                "utriangle",
+                "dtriangle",
                 "circle",
                 "square",
-                "triangle-up",
-                "triangle-down"
+                "utriangle",
+                "dtriangle"
             ],
             "batch": [
                 "circle",
@@ -767,16 +767,16 @@
                 "square",
                 "square",
                 "square",
-                "triangle-up",
-                "triangle-up",
-                "triangle-up",
-                "triangle-up",
-                "triangle-down",
-                "triangle-down",
-                "triangle-down",
-                "triangle-down"
+                "utriangle",
+                "utriangle",
+                "utriangle",
+                "utriangle",
+                "dtriangle",
+                "dtriangle",
+                "dtriangle",
+                "dtriangle"
             ],
-            "special": "star"
+            "special": "star5"
         },
         "matplotlib": {
             "size": 8

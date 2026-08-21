@@ -153,6 +153,55 @@ function make_css(
 end
 
 """
+
+generates a `Plots.jl` style sheet template (.json) from `./tre.json`
+
+- will generate files in several locations
+    - to make sure the style is accessible also from installed modules
+    - all files follow the naming convention tre_PlotsJl.json
+    - essentially just copies of `./tre.json` but with substitutions to follow `Plots.jl` naming conventions
+
+# Arguments
+- `indent`
+    - indentations to use in the generated style sheet
+
+# Extended help
+
+## Dependencies
+- [`JSON.parsefile`](@ref)
+"""
+function make_plots_jl(
+    indent::Int=4,
+    )
+    #read style
+    style = JSON.parsefile("tre.json")
+
+
+    #modification to comply with Plots.jl names
+    style["marker"]["symbol"] = Dict(k => replace.(v,
+            r"^triangle-up$"=>"utriangle",
+            r"^triangle-down$"=>"dtriangle",
+            r"^star$"=>"star5",
+        ) for (k,v) in style["marker"]["symbol"]
+    )
+    # style["hatches"] = Dict(k => replace.(v,
+    #         "\\"=>"\\\\",
+    #     ) for (k,v) in style["hatches"]
+    # )
+
+
+    #save in style in locations where it is needed to be accessible upon module import
+    for location in [
+            "./",                               #this directory
+            "../LuStCodeSnippets_jl/_data/"     #julia package
+        ]
+        open(joinpath(location, "./tre_PlotsJl.json"), "w") do f
+            JSON.print(f, style, indent)
+        end
+    end
+end
+
+"""
     make_latexcolors(
         indent::Int=4,
         )
@@ -473,48 +522,13 @@ function make_plotly(
 end
 
 
-"""
-
-generates a `Plots.jl` style sheet template (.json) from `./tre.json`
-
-- will generate files in several locations
-    - to make sure the style is accessible also from installed modules
-    - all files follow the naming convention tre_PlotsJl.json
-    - essentially just copies of `./tre.json` but with substitutions to follow `Plots.jl` naming conventions
-
-# Arguments
-- `indent`
-    - indentations to use in the generated style sheet
-
-# Extended help
-
-## Dependencies
-- [`JSON.parsefile`](@ref)
-"""
-function make_julia_plots(
-    indent::Int=4,
-    )
-    #read style
-    style = JSON.parsefile("tre.json")
-
-
-    #save in style in locations where it is needed to be accessible upon module import
-    for location in [
-            "./",                               #this directory
-            "../LuStCodeSnippets_jl/_data/"     #julia package
-        ]
-        open(joinpath(location, "./tre_PlotsJl.json"), "w") do f
-            JSON.print(f, style, indent)
-        end
-    end
-end
 
 
 #%%main
 themes = ["dark", "light"]
 cycles = ["cycle", "batch"]
 make_css()
-make_julia_plots()
+make_plots_jl()
 make_latexcolors()
 make_matplotlib()
 for theme in themes

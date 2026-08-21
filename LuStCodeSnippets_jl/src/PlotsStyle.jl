@@ -68,7 +68,8 @@ const DATA_DIR = get_datapath()
 #%%definitions
 function tre(;
     theme::Symbol=:dark, cycle::Symbol=:cycle,
-    colorway_override::Union{Nothing,AbstractArray}=nothing, cmap_override=false,
+    colorway_override::Union{Nothing,AbstractVector}=nothing,
+    cmap_override::Union{Nothing,AbstractMatrix}=nothing,
     )
 
 
@@ -79,9 +80,18 @@ function tre(;
     style = JSON.parsefile(joinpath(DATA_DIR, "tre_PlotsJl.json"))
 
     #returned values
-    # cmap =
-    colorway = isnothing(colorway_override) ? style[:colors][:c_plot_colorway][theme] : colorway_override
-    @info colorway typeof(colorway)
+    cmap::Matrix{Any} = isnothing(cmap_override) ? hcat(style[:colors][:c_plot_cmap][theme]...) : cmap_override
+    cgrad_lcs = cgrad(cmap[2,:], cmap[1,:])
+    colorway::Vector{String} = isnothing(colorway_override) ? style[:colors][:c_plot_colorway][theme] : colorway_override
+    hatches = Symbol.(style[:hatches][cycle])
+    ls = Symbol.(style[:line][:dash][cycle][1:length(colorway)])
+    markers = Symbol.(style[:marker][:symbol][cycle])
+
+    @debug cgrad_lcs typeof(cgrad_lcs)
+    @debug colorway typeof(colorway)
+    @debug hatches
+    @debug ls
+    @debug markers
 
     begin #layout
         default(
@@ -107,8 +117,6 @@ function tre(;
             legend=:outertop,
             legendtitlefonthalign=:hcenter,
             legend_font_halign=:hcenter,
-            background_color_legend=nothing,
-            foreground_color_legend=nothing,
             # legend_columns=3,
         )
     end
@@ -131,8 +139,31 @@ function tre(;
             markersize=4,
             markerstrokewidth=0,
             ls=:solid,
+            markershape=:none,
         )
     end
+
+    begin #colors
+        default(
+            bg=style[:colors][:c_bg][theme],
+            bginside=style[:colors][:c_bg][theme],
+            fg=style[:colors][:c_body_text][theme],
+            fgtext=style[:colors][:c_body_text][theme],
+            fgguide=style[:colors][:c_body_text][theme],
+            legendfontcolor=style[:colors][:c_body_text][theme],
+            legendtitlefontcolor=style[:colors][:c_body_text][theme],
+            background_color_legend=nothing,
+            foreground_color_legend=nothing,
+            titlefontcolor=style[:colors][:c_body_text][theme],
+        )
+        default(
+            color_palette=colorway,     #force cycling of these colors
+            # color_palette=cgrad_lcs,    #keep sampling unique colors trying to spread them out
+            # cmap=cgrad_lcs,             #NOTE: also overrides `color_palette`!!
+        )
+    end
+
+    return colorway, ls, markers, cmap, hatches
 end
 
 

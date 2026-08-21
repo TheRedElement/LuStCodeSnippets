@@ -12,9 +12,16 @@ gr()
 
 
 #%%definitions
-function testplot()::Plots.Plot
+function testplot(;
+    colorway::Union{Nothing,Vector{Any}}=nothing,
+    ls::Union{Symbol,Vector{Symbol}}=:auto,
+    markers::Union{Symbol,Vector{Symbol}}=:auto,
+    cmap::Union{Symbol,Matrix{Any}}=:auto,
+    hatches::Union{Symbol,Vector{Symbol}}=:x,
+    )::Plots.Plot
+
     #lineplot
-    p1 = plot((1:9) .+ (1:10)', xlabel="X", ylabel="Y", seriestype=:line, ls=PlotsStyle.mono_ls, alpha=1)#, linecolor=PlotsStyle.mono_colors)
+    p1 = plot((1:9) .+ (1:10)', xlabel="X", ylabel="Y", seriestype=:line, ls=ls, alpha=1)#, linecolor=PlotsStyle.mono_colors)
     vline!(p1, [2,4,6]; color=1, alpha=.2, label="")
     plot!(p1, legendtitle="LEGTIT", legend_columns=5)
 
@@ -29,11 +36,11 @@ function testplot()::Plots.Plot
 
     #scatter
     s1 = plot(randn(15), randn(15), zcolor=log.(rand(15) .+ 1), seriestype=:scatter, cmap=:coolwarm, colorbar_title="test")
-    plot!(s1, randn(15,6), randn(15,6), seriestype=:scatter, m=PlotsStyle.mono_markers)
+    plot!(s1, randn(15,6), randn(15,6), seriestype=:scatter, m=markers)
 
     #histogram
     x = randn(300)
-    hg = histogram(x; fillstyle=:x, linestyle=:dash, color=1, linecolor=1)
+    hg = histogram(x; fillstyle=hatches, linestyle=:dash, color=1, linecolor=1)
 
     #combine
     p = plot(p1, hm, p2, s1, hg;
@@ -50,8 +57,10 @@ function main()
     plots = []
 
     begin   #function based
-        PlotsStyle.tre()
-        push!(plots, testplot())
+        colorway, ls, markers, cmap, hatches = PlotsStyle.tre()
+        push!(plots, testplot(ls=ls))
+        colorway, ls, markers, cmap, hatches = PlotsStyle.tre(theme=:light, cycle=:batch)
+        push!(plots, testplot(; ls=ls))
     end
 
 
