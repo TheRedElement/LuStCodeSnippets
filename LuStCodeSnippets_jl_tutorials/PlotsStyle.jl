@@ -107,6 +107,27 @@ function main()
             hatches=hatches,
         ))
 
+        #lust
+        colorway, ls, markers, cmap, hatches = PlotsStyle.lust(
+            theme=:dark, cycle=:cycle,
+        )
+        push!(plots, testplot(;
+            colorway=colorway,
+            ls=ls, markers=markers,
+            cmap=cmap,
+            hatches=hatches,
+        ))
+        colorway, ls, markers, cmap, hatches = PlotsStyle.lust(
+            theme=:light, cycle=:batch,
+        )
+        push!(plots, testplot(;
+            colorway=colorway,
+            ls=ls, markers=markers,
+            cmap=cmap,
+            hatches=hatches,
+        ))
+
+
         #quick customizations
         colorway, ls, markers, cmap, hatches = PlotsStyle.tre(
             theme=:dark, cycle=:cycle,

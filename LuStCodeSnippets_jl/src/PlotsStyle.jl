@@ -36,11 +36,12 @@ using  LuStCodeSnippets.LcsBase.Loaders: get_datapath
 
 #%%exports
 export tre
+export lust
+export include_themes
 
 export mono_ls
 export mono_markers
 export mono_colors
-export include_themes
 
 #%%constants
 const DATA_DIR = get_datapath()
@@ -219,6 +220,31 @@ function tre(;
     end
 
     return colorway, ls, markers, cgrad_lcs, hatches
+end
+
+function lust(;
+    theme::Symbol=:dark, cycle::Symbol=:cycle,
+    )::Tuple{Vector,Vector{Symbol},Vector{Symbol},PlotUtils.ContinuousColorGradient,Vector{Symbol}}
+
+
+    #override some colors
+    if theme == :dark
+        cmap        = cgrad(:coolwarm; rev=true)
+        colorway    = ["#A10000", "#51BFFF", "#FF7B00", "#B500BB", "#CFC100", "#009E69"]
+    elseif theme == :light
+        cmap        = cgrad(:coolwarm; rev=false)
+        colorway    = ["#A10000", "#51BFFF", "#FF7B00", "#B500BB", "#CFC100", "#009E69"]
+    else
+        throw("invalid `theme` ($(theme))")
+    end
+
+
+    colorway, ls, markers, cmap, hatches = tre(;
+        theme=theme, cycle=cycle,
+        colorway_override=colorway, cmap_override=cmap
+    )
+
+    return colorway, ls, markers, cmap, hatches
 end
 
 
