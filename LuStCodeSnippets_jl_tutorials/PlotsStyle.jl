@@ -1,6 +1,9 @@
 
 #%%imports
+using Pkg
+using Logging
 using Plots
+using Revise
 
 using LuStCodeSnippets: PlotsStyle
 
@@ -13,7 +16,7 @@ function testplot()::Plots.Plot
     #lineplot
     p1 = plot((1:9) .+ (1:10)', xlabel="X", ylabel="Y", seriestype=:line, ls=PlotsStyle.mono_ls, alpha=1)#, linecolor=PlotsStyle.mono_colors)
     vline!(p1, [2,4,6]; color=1, alpha=.2, label="")
-    plot!(p1, legendtitle="LEGTIT")
+    plot!(p1, legendtitle="LEGTIT", legend_columns=5)
 
     #heatmap
     hm = heatmap(randn(50,50), xlabel="X", ylabel="Y", colorbar_title="Cbar")
@@ -53,10 +56,10 @@ function main()
 
 
     begin   #theme based
-        theme(:tre_dark)
-        push!(plots, testplot())
-        theme(:tre_light)
-        push!(plots, testplot())
+        # theme(:tre_dark)
+        # push!(plots, testplot())
+        # theme(:tre_light)
+        # push!(plots, testplot())
     end
 
     for (idx, p) in enumerate(plots)

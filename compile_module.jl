@@ -3,6 +3,9 @@ using Pkg
 using TOML
 using UUIDs
 
+#add missing packages
+# Pkg.add("Logging")
+
 #module
 include("./LuStCodeSnippets_jl/src/LuStCodeSnippets.jl")
 using .LuStCodeSnippets

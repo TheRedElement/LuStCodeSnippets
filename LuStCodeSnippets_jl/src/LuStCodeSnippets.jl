@@ -18,19 +18,43 @@ const __url__ = "https://github.com/TheRedElement/LuStCodeSnippets"
 const __credits__ = ""
 const __last_changed__ = string(Dates.today())
 
-#add submodules (make visible to parent module)
-include("./Colorings.jl")
-include("./DataFramesConvenience.jl")
-include("./PlotsStyle.jl")
 
-#load submodules (make visible to parent module)
-using .Colorings
-using .DataFramesConvenience
-using .PlotsStyle
+begin #fundamental submodules
+    include("./LcsBase/LcsBase.jl")
 
-#reexport submodules (make accesible to user)
-export Colorings
-export DataFramesConvenience
-export PlotsStyle
+    #add submodules (make visible to parent module)
+    using .LcsBase
+
+    #reexport submodules (make accesible to user)
+    export LcsBase
+end
+
+begin #submodules without intradependencies
+    #add submodules (make visible to parent module)
+    include("./Colorings.jl")
+    include("./DataFramesConvenience.jl")
+
+    #load submodules (make visible to parent module)
+    using .Colorings
+    using .DataFramesConvenience
+
+    #reexport submodules (make accesible to user)
+    export Colorings
+    export DataFramesConvenience
+end
+
+begin #submodules only dependent on `LcsBase`
+    #add submodules (make visible to parent module)
+    include("./PlotsStyle.jl")
+
+    #load submodules (make visible to parent module)
+    using .PlotsStyle
+
+    #reexport submodules (make accesible to user)
+    export PlotsStyle
+end
+
+begin #submodules relying on other modules
+end
 
 end #module

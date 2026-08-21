@@ -1,5 +1,3 @@
-
-
 """
 
     defines styles for `Plots.jl`
@@ -44,16 +42,17 @@
 module PlotsStyle
 
 #%%imports
-using JSON
-
 using Colors
 using FixedPointNumbers
+using JSON
+using Logging
 using Plots
 using PlotThemes
 
 #import for extending
 
 #intradependencies
+using  LuStCodeSnippets.LcsBase.Loaders: get_datapath
 
 #%%exports
 export tre
@@ -64,17 +63,25 @@ export mono_colors
 export include_themes
 
 #%%constants
-const DATA_DIR::String = joinpath(pkgdir(parentmodule(@__MODULE__)), "_data")
+const DATA_DIR = get_datapath()
 
 #%%definitions
 function tre(;
     theme::Symbol=:dark, cycle::Symbol=:cycle,
-    colorway_override=false, cmap_override=false,
+    colorway_override::Union{Nothing,AbstractArray}=nothing, cmap_override=false,
     )
 
 
+    @assert in(theme, [:dark,:light]) "`theme` has to be one of `:dark`, `:light` but got $(theme)"
+    @assert in(cycle, [:cycle,:batch]) "`cycle` has to be one of `:cycle`, `:batch` but got $(cycle)"
+
     #load style from json
     style = JSON.parsefile(joinpath(DATA_DIR, "tre_PlotsJl.json"))
+
+    #returned values
+    # cmap =
+    colorway = isnothing(colorway_override) ? style[:colors][:c_plot_colorway][theme] : colorway_override
+    @info colorway typeof(colorway)
 
     begin #layout
         default(
@@ -85,6 +92,45 @@ function tre(;
             right_margin=6Plots.mm,
             dpi=180,
             # framestyle=:box,
+        )
+    end
+    begin #guides
+        default(
+            grid=:true,
+            gridalpha=.3,
+            minorgrid=:true,
+            minorgridalpha=.0,
+        )
+    end
+    begin #legend
+        default(
+            legend=:outertop,
+            legendtitlefonthalign=:hcenter,
+            legend_font_halign=:hcenter,
+            background_color_legend=nothing,
+            foreground_color_legend=nothing,
+            # legend_columns=3,
+        )
+    end
+    begin #fontsizes
+        fs_base = style[:fontsizes][:fs_plot_body][:value]
+        default(
+            plot_titlefontsize=fs_base+4,
+            titlefontsize=fs_base+2,
+            guidefontsize=fs_base-2,
+            tickfontsize=fs_base-4,
+            colorbar_titlefontsize=fs_base-2,
+            legendtitlefontsize=fs_base-6,
+            legendfontsize=fs_base-6,
+        )
+    end
+    begin #series defaults
+        default(
+            # marker=:auto,
+            linewidth=2,
+            markersize=4,
+            markerstrokewidth=0,
+            ls=:solid,
         )
     end
 end
