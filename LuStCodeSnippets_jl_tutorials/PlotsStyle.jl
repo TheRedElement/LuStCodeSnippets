@@ -107,6 +107,26 @@ function main()
             hatches=hatches,
         ))
 
+        #fink
+        colorway, ls, markers, cmap, hatches = PlotsStyle.fink(
+            theme=:dark, cycle=:cycle,
+        )
+        push!(plots, testplot(;
+            colorway=colorway,
+            ls=ls, markers=markers,
+            cmap=cmap,
+            hatches=hatches,
+        ))
+        colorway, ls, markers, cmap, hatches = PlotsStyle.fink(
+            theme=:light, cycle=:batch,
+        )
+        push!(plots, testplot(;
+            colorway=colorway,
+            ls=ls, markers=markers,
+            cmap=cmap,
+            hatches=hatches,
+        ))
+
         #lust
         colorway, ls, markers, cmap, hatches = PlotsStyle.lust(
             theme=:dark, cycle=:cycle,

@@ -36,6 +36,7 @@ using  LuStCodeSnippets.LcsBase.Loaders: get_datapath
 
 #%%exports
 export tre
+export fink
 export lust
 export include_themes
 
@@ -87,6 +88,7 @@ applies the TheRedElement base style to `Plots.jl` in the current session
     - used in downstream style variations (i.e., `lust()`)
 
 See also
+- [`fink`](@ref)
 - [`lust`](@ref)
 
 ## Returns
@@ -222,10 +224,138 @@ function tre(;
     return colorway, ls, markers, cgrad_lcs, hatches
 end
 
-function lust(;
+"""
+    function fink(;
+        theme::Symbol=:dark, cycle::Symbol=:cycle,
+        )::Tuple{Vector,Vector{Symbol},Vector{Symbol},PlotUtils.ContinuousColorGradient,Vector{Symbol}}
+
+applies style of the [FINK collaboration](https://fink-broker.org) to `Plots.jl` in the current session
+
+- derived from [`tre`](@ref)
+
+# Arguments
+- `theme`
+    - the theme to use
+    - options are
+        - `:dark`
+        - `:light`
+- `cycle`
+    - mode to use for cycling through linestyles, markers, hatches, etc.
+    - options are
+        - `:cycle`
+            - will cycle through the linestyles
+            - every line consecutive line, marker, hatch, etc. will have a unique style
+        - `:batch`
+            - will batch similar linestyles together
+            - consecutive lines, markes, hatches, etc. will have the same style
+
+See also
+- [`tre`](@ref)
+
+## Returns
+- `colorway`
+    - color palette used to cycle through when plotting
+- `ls`
+    - linestyles used to cycle through when plotting
+- `markers`
+    - markers used to cycle through when plotting
+- `cmap`
+    - colormap used in the style
+- `hatches`
+    - hatches used to cycle through when plotting
+
+# Extended help
+
+## Dependencies
+- [`Plots`](@ref)
+- [`PlotUtils`](@ref)
+"""
+function fink(;
     theme::Symbol=:dark, cycle::Symbol=:cycle,
     )::Tuple{Vector,Vector{Symbol},Vector{Symbol},PlotUtils.ContinuousColorGradient,Vector{Symbol}}
 
+    #override some colors
+    fink_colors = [
+        "#15284F",
+        "#3C8DFF",
+        "#D5D5D3",
+        "#F5622E",
+    ]
+    if theme == :dark
+        cmap = cgrad(
+            fink_colors[[1,3,4]],
+            [0.0, 0.5, 1.0];
+            rev=true,
+        )
+        colorway = reverse(fink_colors[2:end])
+    elseif theme == :light
+        cmap = cgrad(
+            fink_colors[[1,3,4]],
+            [0.0, 0.5, 1.0];
+            rev=false,
+        )
+        colorway = fink_colors
+    else
+        throw("invalid `theme` ($(theme))")
+    end
+
+    colorway, ls, markers, cmap, hatches = tre(;
+        theme=theme, cycle=cycle,
+        colorway_override=colorway, cmap_override=cmap
+    )
+
+    return colorway, ls, markers, cmap, hatches
+end
+
+"""
+    function lust(;
+        theme::Symbol=:dark, cycle::Symbol=:cycle,
+        )::Tuple{Vector,Vector{Symbol},Vector{Symbol},PlotUtils.ContinuousColorGradient,Vector{Symbol}}
+
+applies the LuSt style to `Plots.jl` in the current session
+
+- derived from [`tre`](@ref)
+
+# Arguments
+- `theme`
+    - the theme to use
+    - options are
+        - `:dark`
+        - `:light`
+- `cycle`
+    - mode to use for cycling through linestyles, markers, hatches, etc.
+    - options are
+        - `:cycle`
+            - will cycle through the linestyles
+            - every line consecutive line, marker, hatch, etc. will have a unique style
+        - `:batch`
+            - will batch similar linestyles together
+            - consecutive lines, markes, hatches, etc. will have the same style
+
+See also
+- [`tre`](@ref)
+
+## Returns
+- `colorway`
+    - color palette used to cycle through when plotting
+- `ls`
+    - linestyles used to cycle through when plotting
+- `markers`
+    - markers used to cycle through when plotting
+- `cmap`
+    - colormap used in the style
+- `hatches`
+    - hatches used to cycle through when plotting
+
+# Extended help
+
+## Dependencies
+- [`Plots`](@ref)
+- [`PlotUtils`](@ref)
+"""
+function lust(;
+    theme::Symbol=:dark, cycle::Symbol=:cycle,
+    )::Tuple{Vector,Vector{Symbol},Vector{Symbol},PlotUtils.ContinuousColorGradient,Vector{Symbol}}
 
     #override some colors
     if theme == :dark
@@ -237,7 +367,6 @@ function lust(;
     else
         throw("invalid `theme` ($(theme))")
     end
-
 
     colorway, ls, markers, cmap, hatches = tre(;
         theme=theme, cycle=cycle,
