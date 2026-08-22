@@ -33,14 +33,17 @@ begin #submodules without intradependencies
     #add submodules (make visible to parent module)
     include("./Colorings.jl")
     include("./DataFramesConvenience.jl")
+    include("./PlotsExtension.jl")
 
     #load submodules (make visible to parent module)
     using .Colorings
     using .DataFramesConvenience
+    using .PlotsExtension
 
     #reexport submodules (make accesible to user)
     export Colorings
     export DataFramesConvenience
+    export PlotsExtension
 end
 
 begin #submodules only dependent on `LcsBase`

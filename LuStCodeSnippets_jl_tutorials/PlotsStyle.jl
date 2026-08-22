@@ -5,14 +5,19 @@ using Logging
 using Plots
 using Revise
 
-# Pkg.remove("LuStCodeSnippets")
+Pkg.resolve()
+# Pkg.rm("LuStCodeSnippets")
 # Pkg.dev("./LuStCodeSnippets_jl")
 
 using LuStCodeSnippets: PlotsStyle
+using LuStCodeSnippets: PlotsExtension
 
 PlotsStyle.include_themes()
-gr()
+# gr()
+pgfplotsx()
 
+#%%constants
+GFX_PATH::String = joinpath(@__DIR__, "../gfx/")
 
 #%%definitions
 """
@@ -77,7 +82,7 @@ function testplot(;
     )
 
     #combine
-    p = plot(p1, hm, p2, s1, hg;
+    p = plot(p1, #hm, p2, s1, hg;
         layout=@layout[ [a ; b] [c ; d] ; e],
         title="TITLE", plot_title="Suptitle",
         size=(1200,1200)
@@ -106,6 +111,9 @@ function main()
             cmap=cmap,
             hatches=hatches,
         ))
+        # savefig(plots[1], joinpath(GFX_PATH, "temp_PlotsJl_tre.svg"))
+        PlotsExtension.save_latex(plots[2], joinpath(GFX_PATH, "temp_PlotsJl_tre.tex"))
+        return
 
         #fink
         colorway, ls, markers, cmap, hatches = PlotsStyle.fink(
@@ -173,7 +181,7 @@ function main()
 
     for (idx, p) in enumerate(plots)
         display(p)
-        savefig(p, joinpath(@__DIR__, "../gfx/temp_PlotsJl_$(idx).svg"))
+        savefig(p, joinpath(GFX_PATH, "temp_PlotsJl_$(idx).svg"))
     end
 end
 

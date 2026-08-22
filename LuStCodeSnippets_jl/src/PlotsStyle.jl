@@ -1,7 +1,6 @@
 """
 
-    defines custom styles for `Plots.jl`
-
+defines custom styles for `Plots.jl`
 
 - resources
     - https://docs.juliaplots.org/latest/api/
@@ -39,6 +38,7 @@ export tre
 export fink
 export lust
 export include_themes
+export stratify_color
 
 export mono_ls
 export mono_markers
@@ -109,6 +109,7 @@ See also
     - if some arguments don't comply with supported options
 
 ## Dependencies
+- [`stratify_color`](@ref)
 - [`JSON`](@ref)
 - [`Logging`](@ref)
 - [`Plots`](@ref)
@@ -203,16 +204,16 @@ function tre(;
 
     begin #colors
         default(
-            bg=style[:colors][:c_bg][theme],
-            bginside=style[:colors][:c_bg][theme],
-            fg=style[:colors][:c_body_text][theme],
-            fgtext=style[:colors][:c_body_text][theme],
-            fgguide=style[:colors][:c_body_text][theme],
-            legendfontcolor=style[:colors][:c_body_text][theme],
-            legendtitlefontcolor=style[:colors][:c_body_text][theme],
+            bg=stratify_color(style[:colors][:c_bg][theme]),
+            bginside=stratify_color(style[:colors][:c_bg][theme]),
+            fg=stratify_color(style[:colors][:c_body_text][theme]),
+            fgtext=stratify_color(style[:colors][:c_body_text][theme]),
+            fgguide=stratify_color(style[:colors][:c_body_text][theme]),
+            legendfontcolor=stratify_color(style[:colors][:c_body_text][theme]),
+            legendtitlefontcolor=stratify_color(style[:colors][:c_body_text][theme]),
             background_color_legend=nothing,
             foreground_color_legend=nothing,
-            titlefontcolor=style[:colors][:c_body_text][theme],
+            titlefontcolor=stratify_color(style[:colors][:c_body_text][theme]),
         )
         default(
             color_palette=colorway,     #force cycling of these colors
@@ -267,6 +268,7 @@ See also
 # Extended help
 
 ## Dependencies
+- [`tre`](@ref)
 - [`Plots`](@ref)
 - [`PlotUtils`](@ref)
 """
@@ -350,6 +352,7 @@ See also
 # Extended help
 
 ## Dependencies
+- [`tre`](@ref)
 - [`Plots`](@ref)
 - [`PlotUtils`](@ref)
 """
@@ -376,7 +379,6 @@ function lust(;
     return colorway, ls, markers, cmap, hatches
 end
 
-
 """
 
     exposes custom themes to `Plots.jl` interface
@@ -384,6 +386,35 @@ end
 function include_themes()
     PlotThemes.add_theme(:tre_dark, _tre_dark)
     PlotThemes.add_theme(:tre_light, _tre_light)
+end
+
+"""
+    stratify_color(c::String)::RGB
+
+stratifies a given color to make sure it is recognised in arbitrary backends
+
+See also
+- [`tre`](@ref)
+- [`Colors.parse`](@ref)
+- [`Colors.convert`](@ref)
+
+# Arguments
+- `c`
+    - string representation of some color
+    - has to be recognised by `Colors.jl`
+
+# Returns
+- `c_rgb`
+    - stratified version of `c`
+
+# Extended help
+
+## Dependencies
+- [`Colors.parse`](@ref)
+- [`Colors.convert`](@ref)
+"""
+function stratify_color(c::String)::RGB
+    return convert(RGB, parse(Colorant, c))
 end
 
 #%%themes
