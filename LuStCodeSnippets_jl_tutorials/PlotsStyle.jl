@@ -82,8 +82,9 @@ function testplot(;
     )
 
     #combine
-    p = plot(p1, #hm, p2, s1, hg;
-        layout=@layout[ [a ; b] [c ; d] ; e],
+    # p = plot(p1, hm, p2, s1, hg;
+    p = plot(p1, s1,
+        # layout=@layout[ [a ; b] [c ; d] ; e],
         title="TITLE", plot_title="Suptitle",
         size=(1200,1200)
     )
@@ -111,9 +112,6 @@ function main()
             cmap=cmap,
             hatches=hatches,
         ))
-        # savefig(plots[1], joinpath(GFX_PATH, "temp_PlotsJl_tre.svg"))
-        PlotsExtension.save_latex(plots[2], joinpath(GFX_PATH, "temp_PlotsJl_tre.tex"))
-        return
 
         #fink
         colorway, ls, markers, cmap, hatches = PlotsStyle.fink(
@@ -179,9 +177,13 @@ function main()
         push!(plots, testplot())
     end
 
-    for (idx, p) in enumerate(plots)
-        display(p)
-        savefig(p, joinpath(GFX_PATH, "temp_PlotsJl_$(idx).svg"))
+    for (idx, p) in enumerate(plots[1:2])
+        if backend_name() == :pgfplotsx
+            PlotsExtension.save_latex(plots[idx], joinpath(GFX_PATH, "temp_PlotsJl_$(idx).tex"))
+        else
+            savefig(p, joinpath(GFX_PATH, "temp_PlotsJl_$(idx).svg"))
+            display(p)
+        end
     end
 end
 

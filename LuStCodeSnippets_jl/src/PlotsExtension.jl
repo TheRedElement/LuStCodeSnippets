@@ -30,7 +30,6 @@ export save_latex
 function save_latex(
     p::Plots.Plot,
     fname::String;
-    width="\\linewidth", height="0.3\\paperheight",
     )
 
     @assert backend_name() == :pgfplotsx "only supported for `pgfplotsx` backend but got $(backend_name())"
@@ -45,14 +44,17 @@ function save_latex(
     begin #replacements to make latex-native
         #read and replace
         f = open(fname, "r")
-        content = read(f, String)
-        content = replace(content,
-            r",\swidth=\{[^\}]+"=>", width={\\linewidth",
+        lines = readlines(f)
+        lines = replace.(lines,
+            r"^%\s(.+)$"=>s"\1",
+        )
+        lines = replace.(lines,
+            "Recommended preamble"=>"% Recommended preamble",
         )
         close(f)
         #override old file
         f = open(fname, "w")
-        write(f, content)
+        write(f, join(lines, "\n"))
         close(f)
     end
 
