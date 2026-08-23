@@ -13,7 +13,7 @@ using LuStCodeSnippets: PlotsStyle
 using LuStCodeSnippets: PlotsExtension
 
 PlotsStyle.include_themes()
-# gr()
+gr()
 pgfplotsx()
 
 #%%constants
@@ -82,9 +82,9 @@ function testplot(;
     )
 
     #combine
-    # p = plot(p1, hm, p2, s1, hg;
-    p = plot(p1, s1,
-        # layout=@layout[ [a ; b] [c ; d] ; e],
+    p = plot(p1, hm, p2, s1, hg;
+    # p = plot(p1, s1,
+        layout=@layout[ [a ; b] [c ; d] ; e],
         title="TITLE", plot_title="Suptitle",
         size=(1200,1200)
     )
@@ -177,9 +177,11 @@ function main()
         push!(plots, testplot())
     end
 
-    for (idx, p) in enumerate(plots[1:2])
+    for (idx, p) in enumerate(plots[1:end])
         if backend_name() == :pgfplotsx
-            PlotsExtension.save_latex(plots[idx], joinpath(GFX_PATH, "temp_PlotsJl_$(idx).tex"))
+            PlotsExtension.save_latex(plots[idx], joinpath(GFX_PATH, "temp_PlotsJl_$(idx).tikz");
+                thickness_scaling=2.0,
+            )
         else
             savefig(p, joinpath(GFX_PATH, "temp_PlotsJl_$(idx).svg"))
             display(p)

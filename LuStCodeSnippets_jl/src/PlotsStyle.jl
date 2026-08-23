@@ -204,16 +204,27 @@ function tre(;
 
     begin #colors
         default(
-            bg=stratify_color(style[:colors][:c_bg][theme]),
-            bginside=stratify_color(style[:colors][:c_bg][theme]),
-            fg=stratify_color(style[:colors][:c_body_text][theme]),
-            fgtext=stratify_color(style[:colors][:c_body_text][theme]),
-            fgguide=stratify_color(style[:colors][:c_body_text][theme]),
-            legendfontcolor=stratify_color(style[:colors][:c_body_text][theme]),
-            legendtitlefontcolor=stratify_color(style[:colors][:c_body_text][theme]),
-            background_color_legend=nothing,
-            foreground_color_legend=nothing,
+            #plot
+            background_color=stratify_color(style[:colors][:c_bg][theme]),
+            background_color_outside=:match,
+            foreground_color=stratify_color(style[:colors][:c_body_text][theme]),
+            #subplot
+            background_color_subplot=:match,
+            background_color_inside=:match,
+            foreground_color_subplot=:match,
+            foreground_color_title=:match,
             titlefontcolor=stratify_color(style[:colors][:c_body_text][theme]),
+            ##legend
+            legend_font_color=:match,
+            legend_title_font_color=:match,
+            legend_foreground_color=nothing,
+            legend_background_color=nothing,
+            #axis
+            foreground_color_axis=:match,
+            foreground_color_border=:match,
+            foreground_color_grid=:match,   #adjusted with gridalpha
+            foreground_color_guide=:match,
+            foreground_color_text=:match,
         )
         default(
             color_palette=colorway,     #force cycling of these colors
