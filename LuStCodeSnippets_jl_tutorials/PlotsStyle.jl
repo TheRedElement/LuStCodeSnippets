@@ -14,7 +14,7 @@ using LuStCodeSnippets: PlotsExtension
 
 PlotsStyle.include_themes()
 gr()
-pgfplotsx()
+# pgfplotsx()
 
 #%%constants
 GFX_PATH::String = joinpath(@__DIR__, "../gfx/")
@@ -106,14 +106,8 @@ function main()
     end
 
     for (idx, p) in enumerate(plots[1:end])
-        if backend_name() == :pgfplotsx
-            PlotsExtension.save_latex(plots[idx], joinpath(GFX_PATH, "temp_PlotsJl_$(idx).tikz");
-                thickness_scaling=2.0,
-            )
-        else
-            savefig(p, joinpath(GFX_PATH, "temp_PlotsJl_$(idx).svg"))
-            display(p)
-        end
+        savefig(p, joinpath(GFX_PATH, "PlotsStyle_$(idx).svg"))
+        display(p)
     end
 end
 

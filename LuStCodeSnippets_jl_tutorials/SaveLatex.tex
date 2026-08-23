@@ -1,0 +1,36 @@
+\documentclass{article}
+
+
+\usepackage{graphicx}	% Including figure files
+\usepackage{amsmath}	% Advanced maths commands
+\usepackage{lipsum}
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usepackage{tikzscale}
+\usepackage{xcolor}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{backgrounds}
+\usetikzlibrary{intersections}
+\usepgfplotslibrary{groupplots}
+\usepgfplotslibrary{fillbetween}
+\usepgfplotslibrary{patchplots}
+\pgfplotsset{compat=1.18}
+
+\pagecolor{black!30}
+
+\begin{document}
+\lipsum[3][1-5]
+
+\begin{figure}
+    \centering
+    \resizebox{\linewidth}{!}{
+        \input{../gfx/PlotsExtension_save_latex.tikz}
+    }
+    \caption{
+        Demo for the use of \texttt{save\_latex} output in a document.
+    }
+    \label{fig-SaveLatex}
+\end{figure}
+
+
+\end{document}
