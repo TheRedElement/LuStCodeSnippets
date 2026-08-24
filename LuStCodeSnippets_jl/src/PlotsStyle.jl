@@ -126,7 +126,9 @@ function tre(;
     @assert in(cycle, [:cycle,:batch]) "`cycle` has to be one of `:cycle`, `:batch` but got $(cycle)"
 
     #load style from json
-    style = JSON.parsefile(joinpath(DATA_DIR, "tre_PlotsJl.json"))
+    style = JSON.parsefile(joinpath(DATA_DIR, "tre_PlotsJl.json");
+        dicttype=Dict{Symbol,Any},
+    )
 
     begin #deal with overrides
         if isnothing(cmap_override)
