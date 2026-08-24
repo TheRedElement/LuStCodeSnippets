@@ -1,22 +1,19 @@
 \documentclass{article}
 
-
-\usepackage{graphicx}	% Including figure files
-\usepackage{amsmath}	% Advanced maths commands
+%packages for this specific example
+\usepackage{amsmath}
+\usepackage{graphicx}
 \usepackage{lipsum}
-\usepackage{pgfplots}
-\usepackage{tikz}
-\usepackage{tikzscale}
 \usepackage{xcolor}
-\usetikzlibrary{arrows.meta}
-\usetikzlibrary{backgrounds}
-\usetikzlibrary{intersections}
-\usepgfplotslibrary{groupplots}
+\pagecolor{black!30}
+
+%required to make `PlotsExtension.save_latex()` work
+\usepackage{tikz}
+\usepackage{pgfplots}
 \usepgfplotslibrary{fillbetween}
 \usepgfplotslibrary{patchplots}
 \pgfplotsset{compat=1.18}
 
-\pagecolor{black!30}
 
 \begin{document}
 \lipsum[3][1-5]
