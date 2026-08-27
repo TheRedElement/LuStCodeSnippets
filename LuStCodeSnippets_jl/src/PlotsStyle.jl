@@ -156,7 +156,7 @@ function tre(;
     @debug markers
 
     begin #layout
-        default(
+        Plots.default(
             size=(900,500),
             top_margin=6Plots.mm,
             bottom_margin=6Plots.mm,
@@ -167,7 +167,7 @@ function tre(;
         )
     end
     begin #guides
-        default(
+        Plots.default(
             grid=:true,
             gridalpha=.3,
             minorgrid=:true,
@@ -175,7 +175,7 @@ function tre(;
         )
     end
     begin #legend
-        default(
+        Plots.default(
             legend=:outertop,
             legendtitlefonthalign=:hcenter,
             legend_font_halign=:hcenter,
@@ -184,7 +184,7 @@ function tre(;
     end
     begin #fontsizes
         fs_base = style[:fontsizes][:fs_plot_body][:value]
-        default(
+        Plots.default(
             plot_titlefontsize=fs_base+4,
             titlefontsize=fs_base+2,
             guidefontsize=fs_base-2,
@@ -195,17 +195,18 @@ function tre(;
         )
     end
     begin #series defaults
-        default(
+        Plots.default(
             linewidth=2,
             markersize=4,
-            markerstrokewidth=0,
+            markerstrokewidth=2,    #same as linewidth to show errorbars
+            markerstrokealpha=0.0,  #no marker outline
             ls=:solid,
             markershape=:none,
         )
     end
 
     begin #colors
-        default(
+        Plots.default(
             #plot
             background_color=stratify_color(style[:colors][:c_bg][theme]),
             background_color_outside=:match,
@@ -228,7 +229,7 @@ function tre(;
             foreground_color_guide=:match,
             foreground_color_text=:match,
         )
-        default(
+        Plots.default(
             color_palette=colorway,     #force cycling of these colors
             # color_palette=cgrad_lcs,    #keep sampling unique colors trying to spread them out
             # cmap=cgrad_lcs,             #NOTE: also overrides `color_palette`!!
