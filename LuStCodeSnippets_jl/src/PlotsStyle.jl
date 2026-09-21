@@ -164,6 +164,7 @@ function tre(;
             right_margin=6Plots.mm,
             dpi=180,
             # framestyle=:box,
+            fontfamily="Computer Modern",   #default for latex
         )
     end
     begin #guides
