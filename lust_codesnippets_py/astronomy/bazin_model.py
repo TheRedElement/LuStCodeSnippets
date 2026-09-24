@@ -68,7 +68,7 @@ class Bazin2011:
     def __init__(self,
         c:float, a:float,
         tau_fall:float, tau_rise:float,
-        t0:float, t_peak:float=None,
+        t0:float, t_peak:float|None=None,
         ):
         """instantiates the model
 
@@ -153,7 +153,7 @@ class Bazin2011:
         t0 = t_peak - tau_rise*np.log(tau_fall/tau_rise - 1)
 
         return t0
-    
+
     def bazin_t_peak(self,
         t0:float,
         tau_fall:float, tau_rise:float,
@@ -188,7 +188,7 @@ class Bazin2011:
 
         t_peak = t0 + tau_rise*np.log(tau_fall/tau_rise - 1)
 
-        return t_peak                 
+        return t_peak
 
     def predict(self,
         t:float,
@@ -244,19 +244,19 @@ class BazinModel:
 
     def __init__(self,
         ):
-        """constructor for redback model fitter
+        """constructor for bazin model fitter
 
         Parameters
 
         Raises
 
         Returns
-        
+
         """
-        
+
         pass
 
-    def bazin_chi2(self, 
+    def bazin_chi2(self,
         params:Tuple[float],
         t:float,
         f:float, f_e:float,
@@ -275,7 +275,7 @@ class BazinModel:
         f_pred = BM.predict(t)          #prediction
         chi2_e = np.nansum(((f - f_pred) / f_e)**2)    #error
         return chi2_e
-    
+
     def fit(self,
         x:np.ndarray, y:np.ndarray,
         y_e:np.ndarray,
@@ -313,7 +313,7 @@ class BazinModel:
             - `plot_result`
                 - `bool`, optional
                 - whether to plot the fit result
-        
+
         Raises
 
         Returns
