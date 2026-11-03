@@ -110,6 +110,83 @@ rm_gitignored() {
     git check-ignore *.* | xargs -r rm -v
 }
 
+rm_submodule() {
+    local help='
+        removes a git submodule
+
+        Usage
+        ```bash
+        rm_submodule <submodule_path>
+        ```
+
+        Parameters
+        - $1 (`submodule_path`)
+            - `string`
+            - path to the submodule to remove
+
+        Example
+        ```bash
+        ```
+
+        Output
+        ```bash
+        ```
+    '
+
+    ################
+    #DEAL WITH ARGS#
+    ################
+    declare -a args=()  #positional args via array
+    declare -A kwargs=( #emulate named kwargs via associative array
+        #no kwargs
+    )
+    for arg in "$@"; do
+        if [[ "$arg" == *=* ]]; then    #check if arg contains an `=` (kwargs)
+            key="${arg%%=*}"            #name (before `=`)
+            val="${arg#*=}"             #value (after `=`)
+            kwargs[$key]="$val"         #override default
+        else                            #interpret as positional
+            args+=("$arg")
+        fi
+    done
+
+    #default values for positional args
+    local submodule_path="${args[0]}"
+
+    if [[ "${args[0]}" == "--help" ]]; then
+        echo "$help"
+        return 0
+    fi
+
+    ###############
+    #FUNCTION BODY#
+    ###############
+
+    echo $"called rm_submodule" \
+        "${submodule_path} ${do_commit}"
+
+
+    #check if enough arguments are provided
+    if [ -z "$submodule_path" ]; then
+        echo "not enough arguments: rm_submodule <submodule_path>"
+        return 1
+    fi
+
+    #ask user to confirm
+    read -p "Remove submodule at '$submodule_path'? [y/N]: " confirm
+    if [[ ! "$confirm" =~ ^[Yy]$ ]]; then
+        echo "Aborted."
+        return 1
+    fi
+    echo "Removing submodule at '$submodule_path'..."
+
+    git submodule deinit -f "${submodule_path}"	#clear out the submodule
+    git rm -f "${submodule_path}"				#remove from tracking
+    rm -rf ".git/modules/${submodule_path}"		#remove from `.git`
+    git commit -m "removed submodule ${submodule_path}" #track
+    return 0
+}
+
 unlink_submodule() {
     local help='
         unliks a git submodule
@@ -184,26 +261,27 @@ unlink_submodule() {
     fi
     echo "Unlinking submodule at '$submodule_path'..."
 
-    #remove submodule entry from .gitmodules
-    git config -f .gitmodules --remove-section "submodule.$submodule_path"
+    #backup copy to paste later as non-submodule
+    cp -a "${submodule_path}" /tmp/submodule-backup
 
-    #remove submodule entry from .git/config
-    git config -f .git/config --remove-section "submodule.$submodule_path"
+    #remove submodule from git tracking
+    git rm -f "${submodule_path}"
 
-    #unstage the submodule
-    git rm --cached "$submodule_path"
+    #remove submodule from `.git`
+    rm -rf ".git/modules${submodule_path}"
 
-    #delete the submodule's .git directory if it exists
-    rm -rf "$submodule_path/.git"
+    #paste as non-submodule
+    cp -a /tmp/submodule-backup "${submodule_path}"
 
     #optionally add and commit the result
     if [ "$do_commit" = true ]; then
         git add "$submodule_path"
         git commit -m "Convert submodule '$submodule_path' to regular directory"
-        echo "Submodule '$submodule_path' has been unlinked and committed as a regular directory."
+        echo "submodule '$submodule_path' has been unlinked and committed as a regular directory."
     else
-        echo "Submodule '$submodule_path' has been unlinked. Add and commit manually if needed."
+        echo "submodule '$submodule_path' has been unlinked. add and commit manually if needed."
     fi
+    return 0
 }
 
 
