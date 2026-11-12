@@ -46,6 +46,7 @@ export mono_colors
 
 #%%constants
 const DATA_DIR = get_datapath()
+const local_logger = Logging.SimpleLogger(Logging.Warn)
 
 #%%definitions
 """
@@ -149,11 +150,13 @@ function tre(;
         markers = Symbol.(style[:marker][:symbol][cycle])
     end
 
-    @debug cgrad_lcs typeof(cgrad_lcs)
-    @debug colorway typeof(colorway)
-    @debug hatches
-    @debug ls
-    @debug markers
+    with_logger(local_logger) do
+        @debug cgrad_lcs typeof(cgrad_lcs)
+        @debug colorway typeof(colorway)
+        @debug hatches
+        @debug ls
+        @debug markers
+    end
 
     begin #layout
         Plots.default(
