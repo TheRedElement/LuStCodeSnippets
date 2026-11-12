@@ -202,7 +202,7 @@ function tre(;
         Plots.default(
             linewidth=2,
             markersize=4,
-            markerstrokewidth=2,    #same as linewidth to show errorbars
+            markerstrokewidth=0,    #set to same as linewidth to show errorbars
             markerstrokealpha=0.0,  #no marker outline
             ls=:solid,
             markershape=:none,
